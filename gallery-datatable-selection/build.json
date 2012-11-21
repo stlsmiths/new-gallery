@@ -1,0 +1,10 @@
+{
+    "name": "gallery-datatable-selection",
+    "builds": {
+        "gallery-datatable-selection": {
+            "jsfiles": [
+                "datatable-selection.js"
+            ]
+        }
+    }
+}
