@@ -117,15 +117,18 @@ Y.PaginatorModel = Y.Base.create('paginatorModel', Y.Model,[],{
         var nipp = this.get('itemsPerPage'),
             ni   = this.get('totalItems');
 
-    //    if ( ni && nipp && ni > 0 && nipp > 0 ) {
         if ( nipp &&  nipp > 0 ) {
             np = Math.floor( ni / nipp );
             if ( ni % nipp > 0 ) np++;
             if(ni === 0) np = 1;
 
-            //this.set('totalPages',np);
             this._npages = np;
-           // this.set('page',1);
+
+            // If the current page is greater than the page count,
+            //   then set page to first ...
+            if(np < this.get('page') )
+                this.set('page',1);
+
             return true;
         }
         return false;
