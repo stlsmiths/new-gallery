@@ -17,8 +17,8 @@
          height:     '450px',
          sortBy:     [{lastName:'asc'}, {grade:-1}],
          paginator:  new PaginatorView({
-            model: 		new PaginatorModel({itemsPerPage:50, page:3}),
-            container:	'#pagContA'
+            model:      new PaginatorModel({itemsPerPage:50, page:3}),
+            container:  '#pagContA'
          }),
          resizePaginator: true
      });
@@ -79,14 +79,10 @@
  Basic "client-side" sorting is supported in this method (limited to one sort key at a time).
  Implementers may override this method for more complex sorting needs.
 
- @module datatable
+ @module gallery-datatable-paginator
  @class Y.DataTable.Paginator
- @extensionfor DataTable
- @extends Y.DataTable
- @version 1.0.1
+ @extends DataTable
  @since 3.6.0
- @author Todd Smith
-
  **/
 function DtPaginator() {}
 
@@ -146,7 +142,7 @@ DtPaginator.ATTRS = {
      * @beta
      */
     paginationState: {
-        valueFn: '_defPagState',
+        valueFn: null, //'_defPagState',
         setter:  '_setPagState',
         getter:  '_getPagState'
     },
@@ -340,18 +336,27 @@ Y.mix( DtPaginator.prototype, {
         // Clear up the listeners that were defined ...
 
         Y.Array.each( this._evtHandlesPag,function(item){
-            if (!item) return;
-            if(Y.Lang.isArray(item))
+            if (!item) {
+                return;
+            }
+
+            if(Y.Lang.isArray(item)) {
                 Y.Array.each(item,function(si){
                     si.detach();
                 });
-            else
+            } else {
                 item.detach();
+            }
+
         });
 
         // and clean-up the Arrays created
         this._mlistArray = null;
         this._evtHandlesPag = null;
+
+        // And delete the static properties set
+        delete this.pagModel;
+        delete this.paginator;
 
     },
 
@@ -370,15 +375,14 @@ Y.mix( DtPaginator.prototype, {
      *      @param {Integer} pag_state.indexStart Starting index returned from server response
      *      @param {Integer} pag_state.numRecs Count of records returned from the response
      *  @public
-     *  @returns nothing
+     *  @return nothing
      */
     processPageRequest: function(page_no, pag_state) {
         var rdata = this._mlistArray || [],
             pagv  = this.get('paginator'),
             pagm  = pagv.get('model'),
-            rpp   = pagm.get('itemsPerPage');
-
-        var istart, iend, nitem;
+            rpp   = pagm.get('itemsPerPage'),
+            istart, iend, url_obj, prop_istart, prop_ipp, rqst_str;
         //
         //  Get paginator indices
         //
@@ -388,9 +392,8 @@ Y.mix( DtPaginator.prototype, {
         } else {
             // usually here on first pass thru, when paginator initiates ...
             istart = ( page_no - 1 ) * rpp;
-            iend = istart + rpp;
+            iend = istart + rpp - 1;
             iend = ( rdata && iend > rdata.length ) ? rdata.length : iend;
-            nitem = iend - istart + 1;
         }
 
         //
@@ -400,20 +403,20 @@ Y.mix( DtPaginator.prototype, {
         //
         if ( this._pagDataSrc !== 'local' ) {
 
-            var url_obj     = {},
-                prop_istart = this._srvPagMapObj('itemIndexStart'),
-                prop_nitems = this._srvPagMapObj('totalItems'),
-                prop_ipp    = this._srvPagMapObj('itemsPerPage');
+            url_obj     = {},
+            prop_istart = this._srvPagMapObj('itemIndexStart'),
+//DELETE
+            prop_ipp    = this._srvPagMapObj('itemsPerPage');
 
-            url_obj[prop_istart] = istart;
-            url_obj[prop_ipp]    = rpp;
-            url_obj['sortBy']    = Y.JSON.stringify( this.get('sortBy') || {} ) || null;
+            url_obj[prop_istart] = istart;      // itemIndexStart
+            url_obj[prop_ipp]    = rpp;         // itemsPerPage
+            url_obj.sortBy       = Y.JSON.stringify( this.get('sortBy') || {} ) || null;
 
             // mix-in the model ATTRS with the url_obj
             url_obj = Y.mix(url_obj,this.pagModel.getAttrs(true));
 
             // sometimes 'page' isn't included in getAttrs, make sure it is ...
-            url_obj['page']  = this.pagModel.get('page');
+            url_obj.page  = this.pagModel.get('page');
 
         }
 
@@ -431,7 +434,7 @@ Y.mix( DtPaginator.prototype, {
                 // fire off a request to DataSource, mixing in as the request string
                 //  with ATTR `requestStringTemplate` with the "url_obj" map
 
-                var rqst_str = this.get('requestStringTemplate') || '';
+                rqst_str = this.get('requestStringTemplate') || '';
 
                 this.paginatorDSRequest( Y.Lang.sub(rqst_str,url_obj) );
 
@@ -441,7 +444,7 @@ Y.mix( DtPaginator.prototype, {
 
                 // fire off a ModelSync.REST load "read" request, note that it mixes
                 //   the ModelList ATTRS with 'url_obj' in creating the request
-                //this.data.load(url_obj);
+
                 this.paginatorMLRequest(url_obj);
 
                 break;
@@ -514,8 +517,10 @@ Y.mix( DtPaginator.prototype, {
      * @public
      */
     paginatorLocalRequest: function(page_no,istart,iend) {
-        var rdata = this._mlistArray || [];
-        var data_new = rdata.slice(istart,iend);
+        var rdata = this._mlistArray || [],
+            data_new;
+
+        data_new = rdata.slice(istart,iend+1);
         this.data.reset( data_new, {silent:true} );
         this.syncUI();
     },
@@ -532,7 +537,9 @@ Y.mix( DtPaginator.prototype, {
      * @public
      */
     resizePaginator: function() {
-        if ( this.get('paginatorResize') !== true )  return;
+        if ( this.get('paginatorResize') !== true )  {
+            return;
+        }
 
         //TODO:  this is a total HACK, should figure a better way than Y.later ...
         Y.later( 25, this, function(){ this._syncPaginatorSize(); } );
@@ -544,7 +551,7 @@ Y.mix( DtPaginator.prototype, {
      * @method resetLocalData
      * @param {Array|ModelList} data Data to be reset to ... either as a JS Array or a Y.ModelList
      * @public
-     * @returns this
+     * @return this
      * @chainable
      */
     resetLocalData: function(data){
@@ -574,20 +581,24 @@ Y.mix( DtPaginator.prototype, {
      * @public
      */
     paginatorSortLocalData: function(){
-        var rdata  = this._mlistArray,
-            sortBy = this.get('sortBy');
+        var rdata  = [], //this._mlistArray,
+            sortBy = this.get('sortBy'),
+            sortObj,sortKey,sortDir;
 
         if(Y.Lang.isArray(sortBy)) {
-            var sortObj = sortBy[0],
-                sortKey = Y.Object.keys(sortObj)[0],
-                sortDir = sortObj[sortKey];
+
+            Y.Array.each(this._mlistArray, function(r){ rdata.push(r); });
+
+            sortObj = sortBy[0],
+            sortKey = Y.Object.keys(sortObj)[0],
+            sortDir = sortObj[sortKey];
 
         //
         //  Server-based sorting, sort prior to sending response back
         //  (supports String, Number and Date sorting ...)
         //
             rdata.sort(function(a,b){
-                var rtn;
+                var rtn,atime,btime;
                 if(Y.Lang.isString(a[sortKey])) {
 
                     rtn = ( a[sortKey]<b[sortKey] ) ? -sortDir : sortDir;
@@ -596,9 +607,12 @@ Y.mix( DtPaginator.prototype, {
 
                     rtn = (a[sortKey]-b[sortKey]<0) ? -sortDir : sortDir;
 
-                } else if( a[sortKey].getTime ){
+                } else if(Y.Lang.isDate(a[sortKey]) ){
 
-                    rtn = ((a[sortKey].getTime() - b[sortKey].getTime())<0) ? -sortDir : sortDir;
+                    //rtn = ((a[sortKey].getTime() - b[sortKey].getTime())<0) ? -sortDir : sortDir;
+                    atime = a[sortKey], //.getTime(),
+                    btime = b[sortKey]; //.getTime();
+                    rtn = (sortDir === -1) ? (btime - atime) : (atime - btime);
 
                 }
                 return rtn;
@@ -641,19 +655,21 @@ Y.mix( DtPaginator.prototype, {
      */
     addLocalData: function(o,pgIndex) {
         var data  = (o && o.model && o.model.toJSON) ? o.model.toJSON() : null,
-            mdata, newData;
+            mdata, newData, first, second;
 
         if (data) {
-            if(data.id) delete data.id;
+            if(data.id) {
+                delete data.id;
+            }
 
             mdata = this._mlistArray;
             newData = [];
 
-            if(pgIndex === 0)
+            if(pgIndex === 0){
                 newData = newData.concat(data,mdata);
-            else {
-                var first = mdata.slice(0,pgIndex);
-                var second = mdata.slice(pgIndex)
+            } else {
+                first = mdata.slice(0,pgIndex);
+                second = mdata.slice(pgIndex);
                 newData = newData.concat(first,data,second);
             }
 
@@ -676,10 +692,11 @@ Y.mix( DtPaginator.prototype, {
      * @public
      */
     removeLocalData: function(o, pgIndex) {
-        var data  = (o && o.model && o.model.toJSON) ? o.model.toJSON() : null;
+        var data  = (o && o.model && o.model.toJSON) ? o.model.toJSON() : null,
+            mdata = [];
 
         if(data && pgIndex !== null ) {
-            var mdata = this._mlistArray;
+            mdata = this._mlistArray;
             mdata.splice(pgIndex,1);
             this.resetLocalData(mdata);
         }
@@ -735,7 +752,9 @@ Y.mix( DtPaginator.prototype, {
      * @private
      */
     _afterSyncUI: function(){
-        if ( !this._pagDataSrc) this._afterDataReset({});
+        if ( !this._pagDataSrc ) {
+            this._afterDataReset({});
+        }
     },
 
 
@@ -757,7 +776,9 @@ Y.mix( DtPaginator.prototype, {
      * @private
      */
     _afterDataReset: function(o){
-        if(this._pagDataSrc !== null) return;
+        if(this._pagDataSrc !== null) {
+            return;
+        }
 
         var localPagDataSrc = '';
 
@@ -767,16 +788,21 @@ Y.mix( DtPaginator.prototype, {
     // ----
 
         // For no DS and a ModelSync.REST with "url" static property ===>> ModelList
-        if ( !this.datasource && this.data.url && this._pagDataSrc === null )
+        if ( !this.datasource && this.data.url && this._pagDataSrc === null ) {
+
             localPagDataSrc = 'mlist';
 
+        } else if ( this.datasource && !this.data.url && this._pagDataSrc === null ) {
+
         // or With a DS defined and no "url" static property of the Data  ===>> DataSource
-        else if ( this.datasource && !this.data.url && this._pagDataSrc === null )
             localPagDataSrc = 'ds';
 
+        } else {
+
         // ... or finally, assume "local" data
-        else
             localPagDataSrc = 'local';
+
+        }
 
     // ----
     //  Step 2. Define listeners for the specific data provider, either ModelSync.REST
@@ -793,10 +819,11 @@ Y.mix( DtPaginator.prototype, {
                 this._evtHandlesPag.push( this.data.after( "response", this._afterMLResponse, this) );
                // this.data.after( "response", this._afterMLResponse, this)
 
-                if( /client/i.test(this.get('paginationSource')) )
+                if( /client/i.test(this.get('paginationSource')) ){
                     this._pagDataSrc = 'local';
-                else
+                } else {
                     this._pagDataSrc = 'mlist';
+                }
 
                 break;
 
@@ -804,10 +831,11 @@ Y.mix( DtPaginator.prototype, {
                 this._evtHandlesPag.push( this.datasource.get('datasource').after("response", Y.bind(this._afterDSResponse,this) ) );
                 //this.datasource.get('datasource').after("response", Y.bind(this._afterDSResponse,this) )
 
-                if( /client/i.test(this.get('paginationSource')) )
+                if( /client/i.test(this.get('paginationSource')) ) {
                     this._pagDataSrc = 'local';
-                else
+                } else {
                     this._pagDataSrc = 'ds';
+                }
 
                 break;
 
@@ -839,14 +867,17 @@ Y.mix( DtPaginator.prototype, {
 
         // Use the passed in argument only if it exists and is Array or ML, otherwise
         //   just use the current "data" setting
-        if(o && (Y.Lang.isArray(o) || o instanceof Y.ModelList) )
+        if(o && (Y.Lang.isArray(o) || o instanceof Y.ModelList) ) {
             mdata = o;
+        }
 
         this._pagDataSrc = 'local';     // reset this, in case it wasn't already
         //
         //   Store the full local data in property _mlistArray (as an array)
         //
         this.resetLocalData(mdata);
+
+        this._set('paginationState',this._defPagState());
     },
 
 
@@ -861,10 +892,11 @@ Y.mix( DtPaginator.prototype, {
             index        = o.index || null,
             pgIndex      = (index!==null) ? pgIndexStart + index : null;
 
-        if(this._pagDataSrc === 'local')
+        if(this._pagDataSrc === 'local') {
             this.addLocalData(o,pgIndex);
-        else
+        } else {
             this.addRemoteData(o,pgIndex);
+        }
 
         this.fire('afterDataAdd',{
             oPayload:   o,
@@ -896,10 +928,11 @@ Y.mix( DtPaginator.prototype, {
             index        = o.index || null,
             pgIndex      = (index !== null) ? pgIndexStart + index : null;
 
-        if(this._pagDataSrc === 'local')
+        if(this._pagDataSrc === 'local'){
             this.removeLocalData(o,pgIndex);
-        else
+        } else {
             this.removeRemoteData(o,pgIndex);
+        }
 
         this.fire('afterDataRemove',{
             oPayload:   o,
@@ -933,7 +966,9 @@ Y.mix( DtPaginator.prototype, {
      * @private
      */
     _afterSortPaginator: function() {
-        if(!this._pagDataSrc) return;
+        if(!this._pagDataSrc) {
+            return;
+        }
 
         switch(this._pagDataSrc) {
 
@@ -966,7 +1001,7 @@ Y.mix( DtPaginator.prototype, {
      */
     _afterRemoteResponse: function(o,rsource){
         var resp          = ( rsource === 'ds') ? o.response : o,
-            totalItemProp = this.get('serverPaginationMap')['totalItems'] || null,
+            totalItemProp = this.get('serverPaginationMap').totalItems || null,
             respItemTotal = (totalItemProp && resp.meta && resp.meta[totalItemProp] !== undefined) ? resp.meta[totalItemProp]: null;
 
         // Process through the "response", checking the "totalItems" returned
@@ -1069,12 +1104,14 @@ Y.mix( DtPaginator.prototype, {
      *  width of the underlying DT.
      *
      * @method _syncPaginatorSize
-     * @returns Boolean if success
+     * @return Boolean if success
      * @private
      */
     _syncPaginatorSize: function() {
         var tblCont = this.get('boundingBox').one('table');
-        if ( !tblCont ) return false;
+        if ( !tblCont ) {
+            return false;
+        }
 
         this.paginator.get('container').setStyle('width',tblCont.getComputedStyle('width'));
         this.fire('paginatorResize');
@@ -1110,8 +1147,13 @@ Y.mix( DtPaginator.prototype, {
 
         dir   = dir || 'to';
 
-        if ( rprop && dir == 'to' && rprop.toServer )   rprop = rprop.toServer;
-        if ( rprop && dir != 'to' && rprop.fromServer ) rprop = rprop.fromServer;
+        if ( rprop && dir === 'to' && rprop.toServer )   {
+            rprop = rprop.toServer;
+        }
+
+        if ( rprop && dir !== 'to' && rprop.fromServer ) {
+            rprop = rprop.fromServer;
+        }
 
         return rprop;
     },
@@ -1158,6 +1200,7 @@ Y.mix( DtPaginator.prototype, {
         if ( this.get('paginator') && this.get('paginator').model ) {
             rtn = this.get('paginator').model.getAttrs();
             rtn.sortBy = this.get('sortBy');
+            rtn.itemIndexEnd = this.get('paginator').model.get('itemIndexEnd');
         }
         return rtn;
     },
@@ -1169,9 +1212,13 @@ Y.mix( DtPaginator.prototype, {
      * @private
      */
     _getPagState: function(){
+        if(!this.get('paginator')) {
+            return null;
+        }
         var rtn = (this.pagModel) ? this.pagModel.getAttrs(true) : {};
         delete rtn.initialized;
         rtn.sortBy = this.get('sortBy');
+        rtn.itemIndexEnd = this.get('paginator').model.get('itemIndexEnd');
         return rtn;
     },
 
@@ -1183,12 +1230,21 @@ Y.mix( DtPaginator.prototype, {
      * @private
      */
     _setPagState: function(val) {
-        if ( val.initialized !== undefined )
-            delete val.initialized;
-        if ( val.sortBy !== undefined )
-            this.set('sortBy',val.sortBy);
+        if(!this.get('paginator')) {
+            return null;
+        }
 
-        if ( this.pagModel ) this.pagModel.setAttrs(val);
+        if ( val.initialized !== undefined ){
+            delete val.initialized;
+        }
+
+        if ( val.sortBy !== undefined ){
+            this.set('sortBy',val.sortBy);
+        }
+
+        if ( this.pagModel ) {
+            this.pagModel.setAttrs(val);
+        }
         return val;
     },
 
@@ -1203,7 +1259,9 @@ Y.mix( DtPaginator.prototype, {
      * @private
      */
     _setPaginator : function(val){
-        if ( !val ) return;
+        if ( !val ) {
+            return;
+        }
         this.paginator = val;
         this.initializer();
         return val;
@@ -1219,8 +1277,9 @@ Y.mix( DtPaginator.prototype, {
      * @private
      */
     _notifyRender: function() {
-        if ( this.get('paginatorResize') === true )
+        if ( this.get('paginatorResize') === true ) {
             this.resizePaginator();
+        }
         this.fire('render');
     }
 
