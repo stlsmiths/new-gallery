@@ -3,6 +3,13 @@ YUI.add('module-tests-pagview', function(Y) {
     var suite = new Y.Test.Suite('gallery-paginator-view'),
         Assert = Y.Test.Assert;
 
+    // a blocking sleep function ... easier than Y.later or timeout crap
+    function sleep(msecs){
+        var tstart = new Date().getTime();
+        while( new Date().getTime() < tstart + msecs );
+        return;
+    }
+
 //
 // Paginator Model tests
 //
@@ -26,7 +33,7 @@ YUI.add('module-tests-pagview', function(Y) {
         },
 
         'listeners are set' : function(){
-            Assert.areSame( 3, this.m._subscr.length, "Didn't find 3 listeners" )
+            Assert.areSame( 3, this.m._subscr.length, "Didn't find 3 listeners" );
         },
 
         'check ATTR defaults values' : function(){
@@ -181,6 +188,8 @@ YUI.add('module-tests-pagview', function(Y) {
         },
 
         'check ATTR defaults values' : function(){
+
+            Assert.areSame('',this.v._myClassName());
             Assert.isNull( this.v.get('model'), "Default for Model is not null" );
             //Assert.isNull( this.v.get('container'), "Default for container is not null" );
 
@@ -324,6 +333,34 @@ YUI.add('module-tests-pagview', function(Y) {
         },
 
 
+        'check for zero items, or negative page requests' : function(){
+
+        },
+
+        'check for paginator-bar function, itemsPerPage change, inputPage change' : function(){
+
+        },
+
+        'check for zero items, or negative page requests' : function(){
+            var css_pcont = 'yui3-pagview-container',
+                css_active = 'yui3-pagview-link-page-active',
+                css_disabled = 'yui3-pagview-disabled';
+
+            this.v.render();
+            this.m.set('totalItems',0);
+
+            var pcont = Y.one('.'+css_pcont);
+            //pcont.one('a[data-pglink="first"]').simulate('click');
+
+            Assert.areSame( 1, this.m.get('page'), 'Model page should be 1');
+            Assert.areSame( 1, +pcont.one('a.'+css_active).getHTML(), "active page link should be 1, but disabled" );
+            Assert.isTrue( pcont.one('a.'+css_active).hasClass(css_disabled), "active page 1 link is not disabled" );
+            Assert.isTrue( pcont.one('a[data-pglink="first"]').hasClass(css_disabled), "first link should be disabled" );
+            Assert.isTrue( pcont.one('a[data-pglink="1"]').hasClass(css_disabled), "Page 1 link should be disabled" );
+            Assert.isTrue( pcont.one('a[data-pglink="next"]').hasClass(css_disabled), "next link should be disabled" );
+
+        },
+
         'Check destroy and destruction' : function(){
             this.v.destroy(true);
             Assert.isNull( this.v._subscr, "destroy should kill all listeners" );
@@ -414,10 +451,310 @@ YUI.add('module-tests-pagview', function(Y) {
             Assert.isTrue( pcont.one('a[data-pglink="1"]').hasClass(css_active), "current page link should be 1" );
             Assert.areSame( "1", pcont.one('a.'+css_active).getHTML(), "check 'active page link' css on page 1" );
 
+        }
+
+    }));
+
+    suite.add(new Y.Test.Case({
+        name: 'Gallery Paginator-View : PaginatorView bar example functional',
+
+        setUp : function () {
+
+            this.m = new Y.PaginatorModel({totalItems:500, itemsPerPage:25, page:1});
+            this.v = new Y.PaginatorView({
+                model:  this.m,
+                container:          '#pagBarACont',
+                paginatorTemplate:  Y.one('#tmpl-bar-A').getHTML(),
+                pageOptions:        [ 10, 25, 50, 100, 'All' ]
+            });
+
+        },
+
+        tearDown : function () {
+            delete this.v;
+            delete this.m;
+        },
+
+        'check a paginator bar example - startup and IMG clicks' : function(){
+
+            var pagBar = this.v;
+            this.v.render();
+
+            var css_pcont = 'yui3-pagview-bar',
+                css_disabled = 'yui3-pagview-disabled',
+                css_inppage = 'yui3-pagview-input-page',
+                css_rpp = 'yui3-pagview-select-rowsperpage',
+                pcont = this.v.get('container');
+
+            Assert.areSame( 1, this.m.get('page'), 'page should be 1');
+            Assert.areSame( 500, this.m.get('totalItems'), 'totalItems should be 500');
+            Assert.areSame( 20, this.m.get('totalPages'), 'totalPages should be 20');
+            Assert.isTrue( pcont.one('img[data-pglink="first"]').hasClass(css_disabled),'first disabled' );
+            Assert.isTrue( pcont.one('img[data-pglink="prev"]').hasClass(css_disabled),'prev disabled' );
+            Assert.isFalse( pcont.one('img[data-pglink="next"]').hasClass(css_disabled),'next disabled' );
+            Assert.isFalse( pcont.one('img[data-pglink="last"]').hasClass(css_disabled),'last disabled' );
+
+            // change page by clicking next IMG ...
+            pcont.one('img[data-pglink="next"]').simulate('click');
+            Assert.areSame( 2, this.m.get('page'), 'page should be 2');
+            Assert.isFalse( pcont.one('img[data-pglink="first"]').hasClass(css_disabled),'first enabled' );
+            Assert.isFalse( pcont.one('img[data-pglink="prev"]').hasClass(css_disabled),'prev enabled' );
+            Assert.isFalse( pcont.one('img[data-pglink="next"]').hasClass(css_disabled),'next enabled' );
+            Assert.isFalse( pcont.one('img[data-pglink="last"]').hasClass(css_disabled),'last enabled' );
+
+            // change page by clicking first IMG ...
+            pcont.one('img[data-pglink="first"]').simulate('click');
+            Assert.areSame( 1, this.m.get('page'), 'page should be 1');
+            Assert.isTrue( pcont.one('img[data-pglink="first"]').hasClass(css_disabled),'first disabled' );
+            Assert.isTrue( pcont.one('img[data-pglink="prev"]').hasClass(css_disabled),'prev disabled' );
+            Assert.isFalse( pcont.one('img[data-pglink="next"]').hasClass(css_disabled),'next enabled' );
+            Assert.isFalse( pcont.one('img[data-pglink="last"]').hasClass(css_disabled),'last enabled' );
+
+            // change page by clicking last IMG ...
+            pcont.one('img[data-pglink="last"]').simulate('click');
+            Assert.areSame( 20, this.m.get('page'), 'page should be 1');
+            Assert.isFalse( pcont.one('img[data-pglink="first"]').hasClass(css_disabled),'first disabled' );
+            Assert.isFalse( pcont.one('img[data-pglink="prev"]').hasClass(css_disabled),'prev disabled' );
+            Assert.isTrue( pcont.one('img[data-pglink="next"]').hasClass(css_disabled),'next enabled' );
+            Assert.isTrue( pcont.one('img[data-pglink="last"]').hasClass(css_disabled),'last enabled' );
+
+        },
+
+        'paginator bar example - page changes via INPUT box' : function(){
+
+            var pagBar = this.v;
+            this.v.render();
+
+            var css_pcont = 'yui3-pagview-bar',
+                css_disabled = 'yui3-pagview-disabled',
+                css_inppage = 'yui3-pagview-input-page',
+                css_rpp = 'yui3-pagview-select-rowsperpage',
+                pcont = this.v.get('container');
+
+            Assert.areSame( 1, this.m.get('page'), 'page should be 1');
+            Assert.areSame( 500, this.m.get('totalItems'), 'totalItems should be 500');
+            Assert.areSame( 20, this.m.get('totalPages'), 'totalPages should be 20');
+            Assert.isTrue( pcont.one('img[data-pglink="first"]').hasClass(css_disabled),'first disabled' );
+            Assert.isTrue( pcont.one('img[data-pglink="prev"]').hasClass(css_disabled),'prev disabled' );
+            Assert.isFalse( pcont.one('img[data-pglink="next"]').hasClass(css_disabled),'next disabled' );
+            Assert.isFalse( pcont.one('img[data-pglink="last"]').hasClass(css_disabled),'last disabled' );
+
+            // change page by updating INPUT text box ...
+            var input = pcont.one('input.'+css_inppage);
+            input.set('value',4);
+            input.simulate("change");
+
+            Assert.areSame( 4, this.m.get('page'), 'page should be 4');
+            Assert.isFalse( pcont.one('img[data-pglink="first"]').hasClass(css_disabled),'first enabled' );
+            Assert.isFalse( pcont.one('img[data-pglink="prev"]').hasClass(css_disabled),'prev enabled' );
+            Assert.isFalse( pcont.one('img[data-pglink="next"]').hasClass(css_disabled),'next enabled' );
+            Assert.isFalse( pcont.one('img[data-pglink="last"]').hasClass(css_disabled),'last enabled' );
+
+            // try and put bad value in input box ...
+            input.set('value',700);
+            pcont.one('input.'+css_inppage).simulate("change");
+            input.simulate("change");
+
+            Assert.areSame( 1, this.m.get('page'), 'page should be 1');
+
         },
 
 
+        'paginator bar example - changes rows per page SELECT' : function(){
+
+            var pagBar = this.v;
+            this.v.render();
+
+            var css_pcont = 'yui3-pagview-bar',
+                css_disabled = 'yui3-pagview-disabled',
+                css_inppage = 'yui3-pagview-input-page',
+                css_rpp = 'yui3-pagview-select-rowsperpage',
+                pcont = this.v.get('container');
+
+            Assert.areSame( 1, this.m.get('page'), 'page should be 1');
+            Assert.areSame( 500, this.m.get('totalItems'), 'totalItems should be 500');
+            Assert.areSame( 20, this.m.get('totalPages'), 'totalPages should be 20');
+            Assert.isTrue( pcont.one('img[data-pglink="first"]').hasClass(css_disabled),'first disabled' );
+            Assert.isTrue( pcont.one('img[data-pglink="prev"]').hasClass(css_disabled),'prev disabled' );
+            Assert.isFalse( pcont.one('img[data-pglink="next"]').hasClass(css_disabled),'next disabled' );
+            Assert.isFalse( pcont.one('img[data-pglink="last"]').hasClass(css_disabled),'last disabled' );
+
+            // change itemsPerPage via SELECT box in bar ...
+            var select = pcont.one('select.'+css_rpp);
+            select.set('selectedIndex',2);
+          //  select.set('value',"50");
+          //  select.simulate('change');
+          //  select.simulate('select');
+
+            //TODO: This is a hack, to get around "selecting" items in SELECT box within unit tests !!
+            this.m.set('itemsPerPage',50);
+
+            sleep(300);
+
+            Assert.areSame( 50, this.m.get('itemsPerPage'), 'itemsPerPage should change to 50');
+            Assert.areSame( 10, this.m.get('totalPages'), 'totalPages should change to 10');
+            this.m.set('page',1);
+
+            Assert.areSame( 1, pagBar.model.get('page'), 'after itemsPerPAge change, page should be 1');
+            Assert.isTrue( pcont.one('img[data-pglink="first"]').hasClass(css_disabled),'first disabled' );
+            Assert.isTrue( pcont.one('img[data-pglink="prev"]').hasClass(css_disabled), 'prev disabled' );
+            Assert.isFalse( pcont.one('img[data-pglink="next"]').hasClass(css_disabled),'next disabled' );
+            Assert.isFalse( pcont.one('img[data-pglink="last"]').hasClass(css_disabled),'last disabled' );
+
+
+            // use SELECT to choose 'all' records
+            /*
+            TODO:  Had to remove this, don't know how to change items in SELECT within unit tests
+            select.set('selectedIndex',4);
+            select.simulate('change');
+            sleep(300);
+            console.log(select.get('value'));
+
+            Assert.areSame( 1, this.m.get('totalPages'), 'totalPages should change to 1');
+            Assert.areSame( 1, this.m.get('pages'), 'pages should change to 10');
+            Assert.areSame( 500, this.m.get('itemsPerPage'), 'itemsPerPage should change to 500');
+             */
+
+
+        // set totalitems to zero
+            pagBar.model.set('totalItems',0);
+            Assert.areSame( 0, pagBar.model.get('totalItems'), 'totalItems should be 0');
+            Assert.areSame( 1, pagBar.model.get('totalPages'), 'totalPages should be 1');
+
+
+         // reset the paginator ...
+            this.m.setAttrs(
+                {
+                    totalItems:500, page:1, itemsPerPage:25
+
+                }
+            );
+
+            sleep(300);
+            Assert.areSame( 1, this.m.get('page'), 'page should be 1');
+            Assert.areSame( 500, this.m.get('totalItems'), 'totalItems should be 500');
+            Assert.areSame( 20, this.m.get('totalPages'), 'totalPages should be 20');
+            Assert.isTrue( pcont.one('img[data-pglink="first"]').hasClass(css_disabled),'first disabled' );
+            Assert.isTrue( pcont.one('img[data-pglink="prev"]').hasClass(css_disabled),'prev disabled' );
+            Assert.isFalse( pcont.one('img[data-pglink="next"]').hasClass(css_disabled),'next disabled' );
+            Assert.isFalse( pcont.one('img[data-pglink="last"]').hasClass(css_disabled),'last disabled' );
+        }
+
+
+
     }));
+
+/*
+       new Y.PaginatorView({
+        model:          pmodel,
+        container:      '#pagDefBCont',
+        maxPageLinks:   5
+    }).render();
+
+     */
+
+    suite.add(new Y.Test.Case({
+        name: 'Gallery Paginator-View : PaginatorView basic C example functional',
+
+        setUp : function () {
+
+            this.m = new Y.PaginatorModel({totalItems:500, itemsPerPage:25, page:1});
+            this.v = new Y.PaginatorView({
+                model:  this.m,
+                container:          '#pagBasicCCont',
+                paginatorTemplate:  '#tmpl-basic-C',
+                maxPageLinks:       5,
+                pageOptions:        [ 10, 25, 137 ],
+                pageLinkTemplate:  '<a href="#" data-pglink="{page}" class="{pageLinkClass}"  title="Rows {pageStartIndex} to {pageEndIndex}">{page}</a>'
+            });
+
+        },
+
+        tearDown : function () {
+            delete this.v;
+            delete this.m;
+        },
+
+        'check a basic C example' : function(){
+
+            this.v.render();
+
+            var css_pcont = 'yui3-pagview-container',
+                css_disabled = 'yui3-pagview-disabled',
+                css_inppage = 'yui3-pagview-input-page',
+                css_rpp = 'yui3-pagview-select-rowsperpage',
+                pcont = this.v.get('container'); //.one('.'+css_pcont);
+
+            this.m.set('page',1);
+            Assert.areSame( 1, this.m.get('page'), 'page should be 1');
+            Assert.areSame( 500, this.m.get('totalItems'), 'totalItems should be 500');
+            Assert.areSame( 20, this.m.get('totalPages'), 'totalPages should be 20');
+            Assert.isTrue( pcont.one('a[data-pglink="first"]').hasClass(css_disabled),'first disabled' );
+            Assert.isTrue( pcont.one('a[data-pglink="prev"]').hasClass(css_disabled),'prev disabled' );
+            Assert.isFalse( pcont.one('a[data-pglink="next"]').hasClass(css_disabled),'next disabled' );
+            Assert.isFalse( pcont.one('a[data-pglink="last"]').hasClass(css_disabled),'last disabled' );
+
+            // change page by clicking next IMG ...
+            pcont.one('a[data-pglink="next"]').simulate('click');
+            Assert.areSame( 2, this.m.get('page'), 'page should be 2');
+            Assert.isFalse( pcont.one('a[data-pglink="first"]').hasClass(css_disabled),'first enabled' );
+            Assert.isFalse( pcont.one('a[data-pglink="prev"]').hasClass(css_disabled),'prev enabled' );
+            Assert.isFalse( pcont.one('a[data-pglink="next"]').hasClass(css_disabled),'next enabled' );
+            Assert.isFalse( pcont.one('a[data-pglink="last"]').hasClass(css_disabled),'last enabled' );
+
+            // change page by clicking last IMG ...
+            pcont.one('a[data-pglink="last"]').simulate('click');
+            Assert.areSame( 20, this.m.get('page'), 'page should be 1');
+            Assert.isFalse( pcont.one('a[data-pglink="first"]').hasClass(css_disabled),'first disabled' );
+            Assert.isFalse( pcont.one('a[data-pglink="prev"]').hasClass(css_disabled),'prev disabled' );
+            Assert.isTrue( pcont.one('a[data-pglink="next"]').hasClass(css_disabled),'next enabled' );
+            Assert.isTrue( pcont.one('a[data-pglink="last"]').hasClass(css_disabled),'last enabled' );
+
+            // change page by clicking first IMG ...
+            pcont.one('a[data-pglink="first"]').simulate('click');
+            Assert.areSame( 1, this.m.get('page'), 'page should be 1');
+            Assert.isTrue( pcont.one('a[data-pglink="first"]').hasClass(css_disabled),'first disabled' );
+            Assert.isTrue( pcont.one('a[data-pglink="prev"]').hasClass(css_disabled),'prev disabled' );
+            Assert.isFalse( pcont.one('a[data-pglink="next"]').hasClass(css_disabled),'next enabled' );
+            Assert.isFalse( pcont.one('a[data-pglink="last"]').hasClass(css_disabled),'last enabled' );
+
+            // change page by updating INPUT text box ...
+            //pcont.one('a[data-pglink="first"]').simulate('click');
+            this.m.set('page',4);
+            Assert.areSame( 4, this.m.get('page'), 'page should be 4');
+            Assert.isFalse( pcont.one('a[data-pglink="first"]').hasClass(css_disabled),'first enabled' );
+            Assert.isFalse( pcont.one('a[data-pglink="prev"]').hasClass(css_disabled),'prev enabled' );
+            Assert.isFalse( pcont.one('a[data-pglink="next"]').hasClass(css_disabled),'next enabled' );
+            Assert.isFalse( pcont.one('a[data-pglink="last"]').hasClass(css_disabled),'last enabled' );
+
+
+        // set totalitems to zero
+            this.m.set('totalItems',0);
+            Assert.areSame( 0, this.m.get('totalItems'), 'totalItems should be 0');
+            Assert.areSame( 1, this.m.get('totalPages'), 'totalPages should be 1');
+
+
+         // reset the paginator ...
+            this.m.setAttrs(
+                {
+                    totalItems:500, page:1, itemsPerPage:25
+
+                }
+            );
+
+            sleep(300);
+            Assert.areSame( 1, this.m.get('page'), 'page should be 1');
+            Assert.areSame( 500, this.m.get('totalItems'), 'totalItems should be 500');
+            Assert.areSame( 20, this.m.get('totalPages'), 'totalPages should be 20');
+            Assert.isTrue( pcont.one('a[data-pglink="first"]').hasClass(css_disabled),'first disabled' );
+            Assert.isTrue( pcont.one('a[data-pglink="prev"]').hasClass(css_disabled),'prev disabled' );
+            Assert.isFalse( pcont.one('a[data-pglink="next"]').hasClass(css_disabled),'next disabled' );
+            Assert.isFalse( pcont.one('a[data-pglink="last"]').hasClass(css_disabled),'last disabled' );
+
+        }
+
+    }));
+
 
     Y.Test.Runner.add(suite);
 
