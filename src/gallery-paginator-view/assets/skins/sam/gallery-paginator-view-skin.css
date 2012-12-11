@@ -15,11 +15,12 @@
     width: 35px;
 }
 .yui3-pagview-bar {
-/*    background: -moz-linear-gradient(center top , transparent 40%, rgba(0, 0, 0, 0.21)) repeat-x scroll 0 0 #FFFFFF;  */
-    background: -moz-linear-gradient(top,transparent 40%,rgba(0, 0, 0, 0.21));
-    background: -ms-linear-gradient(transparent 40%,rgba(0, 0, 0, 0.21));
-    background: -o-linear-gradient(transparent 40%,rgba(0, 0, 0, 0.21));
-    background: linear-gradient(transparent 40%,rgba(0, 0, 0, 0.21));
+    background-image: -webkit-linear-gradient(transparent 40%,rgba(0, 0, 0, 0.21));
+    background-image: -moz-linear-gradient(top,transparent 40%,rgba(0, 0, 0, 0.21));
+    background-image: -ms-linear-gradient(transparent 40%,rgba(0, 0, 0, 0.21));
+    background-image: -o-linear-gradient(transparent 40%,rgba(0, 0, 0, 0.21));
+    background-image: linear-gradient(transparent 40%,rgba(0, 0, 0, 0.21));
+
     border: 1px solid #CBCBCB;
     vertical-align: middle;
 }
@@ -46,8 +47,3 @@
     text-align: center;
     width: 15px;
 }
-/*
-#yui3-css-stamp.skin-sam-gallery-paginator-view {
-    display: none;
-}
-*/
