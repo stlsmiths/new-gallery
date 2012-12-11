@@ -164,6 +164,143 @@ YUI.add('module-tests-dtpag', function(Y) {
     }
 
 
+
+
+    function remoteDSTableMap(cobj) {
+    //
+    //  Make some sample data
+    //
+        var rdata = makeData(cobj.nrec,cobj.nchars);
+
+    //-----------
+    //  Create a Function DS to process the local data and SIMULATE a remote request
+    //    This DS uses the "rdata" created above as the total dataset to base
+    //    page requests upon.
+    //-----------
+        var myDS = new Y.DataSource.Function({
+
+            source: function(requestString, oSelf) {
+                var resp    = {},
+                    qs      = Y.QueryString.parse(requestString.replace(/\?/,'')),
+                    sortBy  = (qs && qs.sortBy) ? Y.JSON.parse(qs.sortBy) : null,
+                    ldata   = oSelf.get('arrayData'),
+                    nrecs   = ldata.length;
+
+                /*
+                 mapping:
+                      page :        currentPage
+                      totalItems :  numRecords
+                      itemsPerPage: pageItemCount
+                 */
+                //
+                //  For an "empty response", send back a null Results and totalItems as zero
+                //
+                if (qs.empty) {
+                    resp.numRecords = 0;
+                    resp.Results = [];
+                } else {
+                //
+                //  Pre-process the "sortBy" querystring parameter BEFORE returning the results
+                //
+                    if(Y.Lang.isArray(sortBy)) {
+                        var sortObj = sortBy[0],
+                            sortKey = Y.Object.keys(sortObj)[0],
+                            sortDir = sortObj[sortKey];
+                    //
+                    //  Server-based sorting, sort prior to sending response back
+                    //  (supports String, Number and Date sorting ...)
+                    //
+                        ldata.sort(function(a,b){
+                            var rtn;
+                            if(Y.Lang.isString(a[sortKey])) {
+
+                                rtn = ( a[sortKey]<b[sortKey] ) ? -sortDir : sortDir;
+
+                            } else if(Y.Lang.isNumber(a[sortKey])){
+
+                                rtn = (a[sortKey]-b[sortKey]<0) ? -sortDir : sortDir;
+
+                            } else if( Y.Lang.isDate(a[sortKey]) ){
+
+                                rtn = ((a[sortKey]-b[sortKey])<0) ? -sortDir : sortDir;
+
+                            }
+                            return rtn;
+                        });
+                    }
+
+                    //
+                    //  Total array of dataset is now sorted,
+                    //      return just a slice for the provided current "page" data
+                    //
+                    var startIndex  = (qs.currentPage-1)*qs.pageItemCount,
+                        endIndex    = startIndex + qs.pageItemCount - 1;
+
+                    resp.numRecords = nrecs;
+                    resp.Results    = ldata.slice(startIndex,endIndex+1);
+                }
+
+                return resp;
+            }
+        });
+
+        //
+        // add an ATTR to the DS to get the array data in ...
+        //
+        myDS.addAttr('arrayData',{});
+        myDS.set('arrayData',rdata);
+
+    //
+    // Setup JSONSchema parsing for the response data
+    //   Note: "metaFields" are REQUIRED to be defined to
+    //         work with remote pagination
+    //
+        myDS.plug( Y.Plugin.DataSourceJSONSchema, {
+            schema: {
+                resultListLocator: "Results",
+                resultFields: [ "dint" , "dflt", "dtxt", "ddate" ],
+                metaFields: {
+                    currentPage:   "currentPage",
+                    pageItemCount: "pageItemCount",
+                    numRecords:    "numRecords"
+                }
+            }
+        });
+
+
+    //-----------
+    //   Create the DataTable .... setup the paginator,
+    //     configure for "remote" requests, because the Function DS
+    //     mimics a remote XHR request
+    //-----------
+        var dt_conf = {
+            columns : [
+                'dint', 'dflt', 'dtxt',
+                { key:'ddate',
+                  formatter: function(o){
+                      return Y.DataType.Date.format(o.value,{format:"%m/%d/%Y"});
+                  }
+                }
+            ]
+        };
+
+        var myDT = new Y.DataTable(Y.merge(cobj.dtconf,dt_conf));
+
+        // plugin the DS, render the DT and request page 1 ...
+        myDT.plug(Y.Plugin.DataTableDataSource, {
+            datasource: myDS
+        });
+
+        myDT.render("#dtable");
+
+        return myDT;
+    }
+
+
+
+
+
+
     // cobj.nrec  =  # of records
     // cobj.nchars = max # of chars in dtxt field
     // cobj.dtconf = config obj for DT
@@ -728,7 +865,9 @@ YUI.add('module-tests-dtpag', function(Y) {
             Assert.areSame( 3840.9, lrec.get('dflt'), "last record dflt is incorrect" );
             Assert.areSame( 'W', lrec.get('dtxt'), "last record dtxt is incorrect" );
 
-        },
+        }
+/*  REMOVE THESE TEST UNTIL 'gallery-paginator-view' is live on CDN !!!
+ ,
 
         'check text sorting (dtxt column) - Page 3' : function() {
 
@@ -786,15 +925,16 @@ YUI.add('module-tests-dtpag', function(Y) {
             Assert.areSame( 'Q', lrec.get('dtxt'), "last record dtxt is incorrect" );
 
         }
-
+*/
     }));
 
+/*
 
 //
-// DataSource Pagination - DataSource pagination, via function DS
+// DataSource Pagination - DataSource pagination, via function DS including sorting
 //
     suite.add(new Y.Test.Case({
-        name: 'Gallery DataTable-Paginator : remote (server-side) pagination via Function DS',
+        name: 'Gallery DataTable-Paginator : remote (server-side) pagination via Function DS incl sorting',
 
         setUp : function () {
 
@@ -982,7 +1122,238 @@ YUI.add('module-tests-dtpag', function(Y) {
             Assert.areSame( 9540.9, lrec.get('dflt'), "last record dflt is incorrect" );
             Assert.areSame( 'Q', lrec.get('dtxt'), "last record dtxt is incorrect" );
 
+        },
+
+        'check empty response, paginator disable' : function() {
+            var css_pcont = 'yui3-pagview-container',
+                css_disabled = 'yui3-pagview-disabled',
+                pcont = Y.one('.'+css_pcont);
+
+            var emptyFlag = false;
+            this.dt.paginatorDSRequest = function(rqst) {
+                if(emptyFlag)
+                    rqst += "&empty=true";
+                this.datasource.load({ request: rqst });
+            };
+
+            this.dt.processPageRequest(1);
+
+            // move to page 4
+            this.p.get('container').one('a[data-pglink="4"]').simulate('click');
+            Assert.areSame( 4, this.m.get('page'), "expected page 4" );
+
+            // set empty flag, and move to page 3
+            emptyFlag = true;
+            this.p.get('container').one('a[data-pglink="3"]').simulate('click');
+
+            function sleep(msecs){
+                var tstart = new Date().getTime();
+                while( new Date().getTime() < tstart + msecs );
+                return;
+            }
+
+            sleep(200);
+            Assert.areSame( 0, this.m.get('totalItems'), "expected totalItems 0" );
+            Assert.areSame( 1, this.m.get('page'), "expected page 1" );
+            Assert.areSame( 1, this.m.get('totalPages'), "expected totalPages 1" );
+            emptyFlag = false;
+            this.dt.processPageRequest(2);
+            sleep(200);
+            Assert.areSame( 100, this.m.get('totalItems'), "expected totalItems 100" );
+            Assert.areSame( 1, this.m.get('page'), "expected page 2" );
+            Assert.areSame( 5, this.m.get('totalPages'), "expected totalPages 5" );
+
+
         }
+
+
+    }));
+
+
+//
+// DataSource Pagination - DataSource pagination, via function DS with serverPaginationMap
+//
+    suite.add(new Y.Test.Case({
+        name: 'Gallery DataTable-Paginator : remote (server-side) pag via Function DS with serverPaginationMap',
+
+        setUp : function () {
+
+            var lobj = {
+
+                nrec:  100,
+                nchars: 5,
+
+                dtconf: {
+                    sortable: true,
+                    paginator: new Y.PaginatorView({
+                        model:      new Y.PaginatorModel({ itemsPerPage: 20 }),
+                        container:  '#pagCont'
+                    }),
+
+                //
+                // "maps" Paginator.Model attributes to server querystring / returned response ...
+                //
+                    serverPaginationMap: {
+                        page :        'currentPage',
+                        totalItems :  'numRecords',
+                        itemsPerPage: 'pageItemCount'
+                    },
+
+                    //
+                    //  Configure for "remote" requests (so it uses DS to process page requests),
+                    //    and setup the DS request querystring
+                    //
+                    paginationSource: 'remote',
+                    requestStringTemplate: "?currentPage={currentPage}&pageItemCount={pageItemCount}&sortBy={sortBy}"
+                }
+
+            };
+
+            this.dt = remoteDSTableMap(lobj);
+
+            this.p  = this.dt.get('paginator');
+            this.m  = this.dt.pagModel;
+
+        },
+
+        tearDown : function () {
+            if(this.dt){
+                this.dt.destroy();
+                delete this.dt;
+            }
+        },
+
+        'check DT pagination setup' : function() {
+            Assert.isInstanceOf( Y.PaginatorView, this.p, "Paginator property is not a PaginatorView instance" );
+            Assert.isInstanceOf( Y.PaginatorModel, this.m, "pagModel property is not a PaginatorModel instance" );
+
+            this.dt.processPageRequest(1);
+
+            Assert.areSame( 100, this.m.get('totalItems') );
+            Assert.areSame( 20, this.m.get('itemsPerPage') );
+            Assert.areSame( 5, this.m.get('totalPages') );
+            Assert.areSame( 1, this.m.get('page') );
+
+        },
+
+        'check page 1 stats' : function() {
+            this.dt.processPageRequest(1);
+
+            var ipp  = this.m.get('itemsPerPage'),
+                frec = this.dt.getRecord(0),
+                lrec = this.dt.getRecord( this.dt.data.size()-1 );
+
+            // check first record ...
+            Assert.areSame( 1, frec.get('dint'), "first record dint is incorrect" );
+            Assert.areSame( 990.9, frec.get('dflt'), "first record dint is incorrect" );
+            Assert.areSame( 'Z', frec.get('dtxt'), "first record dtxt is incorrect" );
+
+            // check last record ...
+            Assert.areSame( ipp, lrec.get('dint'), "last record dint is incorrect" );
+            Assert.areSame( 3804.46, lrec.get('dflt'), "last record dflt is incorrect" );
+            Assert.areSame( 'WWWWW', lrec.get('dtxt'), "last record dtxt is incorrect" );
+
+            Assert.areSame( 0, this.m.get('itemIndexStart'), "itemIndexStart incorrect" );
+            Assert.areSame( ipp-1, this.m.get('itemIndexEnd'), "itemIndexEnd incorrect" );
+
+            var ps = this.dt.get('paginationState');
+            //Assert.areSame( {}, this.dt.get('paginationState') );
+
+        },
+
+        'check page 4 stats' : function() {
+
+            // Go to Page 4 ...
+            this.dt.processPageRequest(1);
+
+
+            this.p.get('container').one('a[data-pglink="4"]').simulate('click');
+            Assert.areSame( 4, this.m.get('page'), "expected page 4" );
+
+            var ipp  = this.m.get('itemsPerPage'),
+                frec = this.dt.getRecord(0),
+                lrec = this.dt.getRecord(ipp-1);
+
+
+            // check first record ...
+            Assert.areSame( 61, frec.get('dint'), "first record dint is incorrect" );
+            Assert.areSame( 12390.9, frec.get('dflt'), "first record dflt is incorrect" );
+            Assert.areSame( 'N', frec.get('dtxt'), "first record dtxt is incorrect" );
+
+            // check last record ...
+            Assert.areSame( 80, lrec.get('dint'), "last record dint is incorrect" );
+            Assert.areSame( 15204.46, lrec.get('dflt'), "last record dflt is incorrect" );
+            Assert.areSame( 'KKKKK', lrec.get('dtxt'), "last record dtxt is incorrect" );
+
+            Assert.areSame( 60, this.m.get('itemIndexStart'), "itemIndexStart incorrect" );
+            Assert.areSame( 60+ipp-1, this.m.get('itemIndexEnd'), "itemIndexEnd incorrect" );
+
+        },
+
+        'check float sorting (dflt column) - Page 1' : function() {
+
+            this.dt.processPageRequest(1);
+
+            this.dt.set('sortBy',{dflt:'asc'} );
+
+            var ipp  = this.m.get('itemsPerPage'),
+                frec = this.dt.getRecord(0),
+                lrec = this.dt.getRecord( this.dt.data.size()-1 );
+
+            // check first record ...
+            Assert.areSame( 5, frec.get('dint'), "first record dint is incorrect" );
+            Assert.areSame( 954.46, frec.get('dflt'), "first record dflt is incorrect" );
+            Assert.areSame( 'ZZZZZ', frec.get('dtxt'), "first record dtxt is incorrect" );
+
+            // check last record ...
+            Assert.areSame( 16, lrec.get('dint'), "last record dint is incorrect" );
+            Assert.areSame( 3840.9, lrec.get('dflt'), "last record dflt is incorrect" );
+            Assert.areSame( 'W', lrec.get('dtxt'), "last record dtxt is incorrect" );
+
+        },
+
+        'check empty response, paginator disable' : function() {
+            var css_pcont = 'yui3-pagview-container',
+                css_disabled = 'yui3-pagview-disabled',
+                pcont = Y.one('.'+css_pcont);
+
+            var emptyFlag = false;
+            this.dt.paginatorDSRequest = function(rqst) {
+                if(emptyFlag)
+                    rqst += "&empty=true";
+                this.datasource.load({ request: rqst });
+            };
+
+            this.dt.processPageRequest(1);
+
+            // move to page 4
+            this.p.get('container').one('a[data-pglink="4"]').simulate('click');
+            Assert.areSame( 4, this.m.get('page'), "expected page 4" );
+
+            // set empty flag, and move to page 3
+            emptyFlag = true;
+            this.p.get('container').one('a[data-pglink="3"]').simulate('click');
+
+            function sleep(msecs){
+                var tstart = new Date().getTime();
+                while( new Date().getTime() < tstart + msecs );
+                return;
+            }
+
+            sleep(200);
+            Assert.areSame( 0, this.m.get('totalItems'), "expected totalItems 0" );
+            Assert.areSame( 1, this.m.get('page'), "expected page 1" );
+            Assert.areSame( 1, this.m.get('totalPages'), "expected totalPages 1" );
+            emptyFlag = false;
+            this.dt.processPageRequest(2);
+            sleep(200);
+            Assert.areSame( 100, this.m.get('totalItems'), "expected totalItems 100" );
+            Assert.areSame( 1, this.m.get('page'), "expected page 2" );
+            Assert.areSame( 5, this.m.get('totalPages'), "expected totalPages 5" );
+
+
+        }
+
 
     }));
 
@@ -1181,7 +1552,7 @@ YUI.add('module-tests-dtpag', function(Y) {
         }
 
     }));
-
+*/
 
     Y.Test.Runner.add(suite);
 

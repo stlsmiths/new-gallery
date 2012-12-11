@@ -197,7 +197,7 @@ DtPaginator.ATTRS = {
      *
      * @attribute paginationSource
      * @type String
-     * @default null
+     * @default 'client'
      */
     paginationSource: {
         value:      'client',
@@ -378,11 +378,12 @@ Y.mix( DtPaginator.prototype, {
      *  @return nothing
      */
     processPageRequest: function(page_no, pag_state) {
-        var rdata = this._mlistArray || [],
+        var rdata = this._mlistArray,
             pagv  = this.get('paginator'),
             pagm  = pagv.get('model'),
             rpp   = pagm.get('itemsPerPage'),
-            istart, iend, url_obj, prop_istart, prop_ipp, rqst_str;
+            sortby= this.get('sortBy') || {},
+            istart, iend, url_obj, prop_istart, prop_ipp, prop_iend, prop_page, rqst_str;
         //
         //  Get paginator indices
         //
@@ -397,28 +398,24 @@ Y.mix( DtPaginator.prototype, {
         }
 
         //
-        //  For SERVER based pagination, store the translated replacement object
-        //  for the remote request converted from `serverPaginationMap` to
-        //  a "normalized" format
+        //  Store the translated replacement object for the request converted
+        //  from `serverPaginationMap` (or defaults if none) to a "normalized" format
         //
-        if ( this._pagDataSrc !== 'local' ) {
 
-            url_obj     = {},
-            prop_istart = this._srvPagMapObj('itemIndexStart'),
-//DELETE
-            prop_ipp    = this._srvPagMapObj('itemsPerPage');
+        url_obj     = {},
+        prop_istart = this._srvPagMapObj('itemIndexStart'),
+        prop_ipp    = this._srvPagMapObj('itemsPerPage');
+        prop_page   = this._srvPagMapObj('page');
+        prop_iend   = this._srvPagMapObj('itemIndexEnd');
 
-            url_obj[prop_istart] = istart;      // itemIndexStart
-            url_obj[prop_ipp]    = rpp;         // itemsPerPage
-            url_obj.sortBy       = Y.JSON.stringify( this.get('sortBy') || {} ) || null;
+        url_obj[prop_page]   = page_no;      // page
+        url_obj[prop_istart] = istart;      // itemIndexStart
+        url_obj[prop_iend]   = iend;        // itemIndexEnd
+        url_obj[prop_ipp]    = rpp;         // itemsPerPage
+        url_obj.sortBy       = Y.JSON.stringify( sortby );
 
-            // mix-in the model ATTRS with the url_obj
-            url_obj = Y.mix(url_obj,this.pagModel.getAttrs(true));
-
-            // sometimes 'page' isn't included in getAttrs, make sure it is ...
-            url_obj.page  = this.pagModel.get('page');
-
-        }
+        // mix-in the model ATTRS with the url_obj
+        url_obj = Y.merge(this.get('paginationState'), url_obj);
 
         //
         //  This is the main guts of retrieving the records,
@@ -435,7 +432,6 @@ Y.mix( DtPaginator.prototype, {
                 //  with ATTR `requestStringTemplate` with the "url_obj" map
 
                 rqst_str = this.get('requestStringTemplate') || '';
-
                 this.paginatorDSRequest( Y.Lang.sub(rqst_str,url_obj) );
 
                 break;
@@ -451,12 +447,14 @@ Y.mix( DtPaginator.prototype, {
 
             case 'local':
 
-                this.paginatorLocalRequest(page_no,istart,iend);
+                //this.paginatorLocalRequest(page_no,istart,iend);
+                this.paginatorLocalRequest(url_obj);
+
 
         }
 
         this.resizePaginator();
-        this.fire('pageUpdate',{ state:pag_state, view:pagv });
+        this.fire('pageUpdate',{ state:pag_state, view:pagv, urlObj: url_obj });
     },
 
     /**
@@ -503,7 +501,9 @@ Y.mix( DtPaginator.prototype, {
      * @public
      */
     paginatorDSRequest: function(requestString) {
-        this.datasource.load({ request: requestString });
+        this.datasource.load({
+            request: requestString
+        });
     },
 
     /**
@@ -511,13 +511,15 @@ Y.mix( DtPaginator.prototype, {
      * takes care of slicing and resetting the "local data" array and re-syncing the DataTable.
      *
      * @method paginatorLocalRequest
-     * @param {Number} page_no Page number requested
-     * @param {Number} istart Calculated starting index for this page number
-     * @param {Number} iend Calculated ending index for this page number
+     * @param {Object} url_obj
+     *  @param {Number} itemIndexStart Calculated ending index for this page number
+     *  @param {Number} itemIndexEnd Calculated ending index for this page number
      * @public
      */
-    paginatorLocalRequest: function(page_no,istart,iend) {
-        var rdata = this._mlistArray || [],
+    paginatorLocalRequest: function(url_obj) {
+        var istart = url_obj.itemIndexStart,
+            iend   = url_obj.itemIndexEnd,
+            rdata = this._mlistArray || [],
             data_new;
 
         data_new = rdata.slice(istart,iend+1);
@@ -1041,7 +1043,6 @@ Y.mix( DtPaginator.prototype, {
      * @private
      */
     _afterDSResponse: function(e) {
-        //Y.log('afterDSResponse ...');
         this._afterRemoteResponse(e,'ds');
     },
 
@@ -1062,7 +1063,6 @@ Y.mix( DtPaginator.prototype, {
      * @private
      */
     _afterMLResponse: function(resp){
-        //Y.log('afterMLResponse ...');
         this._afterRemoteResponse(resp,'mlist');
     },
 
@@ -1077,7 +1077,7 @@ Y.mix( DtPaginator.prototype, {
     _pageChangeListener: function(o){
         var newPage = +o.newVal || 1;
         newPage = this.pagModel.get('page');
-        this.processPageRequest(newPage, this.pagModel.getAttrs(true));
+        this.processPageRequest(newPage, this.get('paginationState'));
     },
 
     /**
@@ -1103,17 +1103,20 @@ Y.mix( DtPaginator.prototype, {
      * Method to adjust the CSS width of the paginator container and set it to the
      *  width of the underlying DT.
      *
+     * Reworked this to reset width to "yui3-datatable-columns", i.e. the THEAD element for
+     *  both scrollable and non-scrollable to get around a 2px mismatch.
+     *
      * @method _syncPaginatorSize
      * @return Boolean if success
      * @private
      */
     _syncPaginatorSize: function() {
-        var tblCont = this.get('boundingBox').one('table');
-        if ( !tblCont ) {
+        var tblCols = this.get('boundingBox').one('.'+this.getClassName('columns'));
+        if ( !tblCols ) {
             return false;
         }
 
-        this.paginator.get('container').setStyle('width',tblCont.getComputedStyle('width'));
+        this.paginator.get('container').setStyle('width',tblCols.getComputedStyle('width'));
         this.fire('paginatorResize');
         return true;
     },
@@ -1167,10 +1170,11 @@ Y.mix( DtPaginator.prototype, {
      */
     _defPagMap: function() {
         return    {
+            page:           'page',
             totalItems:     'totalItems',
             itemsPerPage:   'itemsPerPage',
-            page:           'page',
-            itemIndexStart: 'itemIndexStart'
+            itemIndexStart: 'itemIndexStart',
+            itemIndexEnd:   'itemIndexEnd'
         };
     },
 
@@ -1198,9 +1202,9 @@ Y.mix( DtPaginator.prototype, {
     _defPagState: function(){
         var rtn = {};
         if ( this.get('paginator') && this.get('paginator').model ) {
-            rtn = this.get('paginator').model.getAttrs();
+            rtn = this.get('paginator').model.getAttrs(['page','totalItems','itemsPerPage','itemIndexStart','itemIndexEnd','totalPages']);
+            //rtn = this.get('paginator').model.getAttrs();
             rtn.sortBy = this.get('sortBy');
-            rtn.itemIndexEnd = this.get('paginator').model.get('itemIndexEnd');
         }
         return rtn;
     },
@@ -1215,10 +1219,9 @@ Y.mix( DtPaginator.prototype, {
         if(!this.get('paginator')) {
             return null;
         }
-        var rtn = (this.pagModel) ? this.pagModel.getAttrs(true) : {};
-        delete rtn.initialized;
+        var rtn = (this.pagModel) ? this.pagModel.getAttrs(['page','totalItems','itemsPerPage','itemIndexStart','itemIndexEnd','totalPages']) : {};
+    //        var rtn = (this.pagModel) ? this.pagModel.getAttrs(true) : {};
         rtn.sortBy = this.get('sortBy');
-        rtn.itemIndexEnd = this.get('paginator').model.get('itemIndexEnd');
         return rtn;
     },
 
