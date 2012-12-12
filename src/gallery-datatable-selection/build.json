@@ -1,0 +1,11 @@
+{
+    "name": "gallery-datatable-selection",
+    "builds": {
+        "gallery-datatable-selection": {
+            "skinnable": "true",
+            "jsfiles": [
+                "datatable-selection.js"
+            ]
+        }
+    }
+}
