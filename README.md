@@ -6,5 +6,5 @@ In the process of moving my old YUI Gallery modules (http://yuilibrary.com/galle
 As of December 2012, the following are now the current deployments to YUI Gallery;
 * gallery-paginator-view
 * gallery-datatable-paginator
-
+* gallery-datatable-selection
 

@@ -500,12 +500,12 @@ YUI.add( 'module-tests', function(Y){
 
             // select row index 0
             this.dt.set('selectionMode','cell');
+            this.dt.set('selectionMulti',true);
             trows.item(0).all('td').item(0).simulate('click');  // cell content 100
 
             var cprop = ( Y.UA.os.search('macintosh') === 0 ) ? 'metaKey' : 'ctrlKey';
             cobj[cprop] = true;
 
-/*
             trows.item(2).all('td').item(2).simulate('click',cobj);  // cell content Name C
 
             var selrows = this.dt.get('selectedRows');
@@ -517,10 +517,12 @@ YUI.add( 'module-tests', function(Y){
             Assert.areSame( 'Name C', seltds[1].td.getHTML(),  'selectedCells should be array of two');
 
         // now sort by 'tdate' field
-
+/*
             ths.item(3).simulate('click');
             selrows = this.dt.get('selectedRows');
             Assert.areSame( 2, selrows.length,  'selectedRows should be array of two');
+            Assert.areSame( 2, selrows[0].recordIndex, 'selectedRows[0] recordindex should be 2');
+            Assert.areSame( 1, selrows[1].recordIndex, 'selectedRows[0] recordindex should be 1');
 */
 
 
