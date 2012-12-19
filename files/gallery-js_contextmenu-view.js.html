@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>gallery-js&#x2F;contextmenu-view.js</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/Y.Calendar.JumpNavView.html">Y.Calendar.JumpNavView</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.ContextMenuView.html">Y.ContextMenuView</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.CheckboxSelect.html">Y.DataTable.CheckboxSelect</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.Formatters.html">Y.DataTable.Formatters</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.Paginator.html">Y.DataTable.Paginator</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.Selection.html">Y.DataTable.Selection</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.FooterView.html">Y.FooterView</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.PaginatorModel.html">Y.PaginatorModel</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.PaginatorView.html">Y.PaginatorView</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.Plugin.Calendar.JumpNav.html">Y.Plugin.Calendar.JumpNav</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/contextmenu.html">contextmenu</a></li>
+            
+                <li><a href="..&#x2F;modules/DataTable.html">DataTable</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable.html">datatable</a></li>
+            
+                <li><a href="..&#x2F;modules/FooterView.html">FooterView</a></li>
+            
+                <li><a href="..&#x2F;modules/formatters.html">formatters</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-paginator.html">gallery-datatable-paginator</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-selection.html">gallery-datatable-selection</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-paginator-view.html">gallery-paginator-view</a></li>
+            
+                <li><a href="..&#x2F;modules/Selection.html">Selection</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: gallery-js&#x2F;contextmenu-view.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;**
+ This module includes a Y.View class extension that attaches to an existing &quot;trigger&quot; Node and uses event delegation to listen
+ for &quot;contextmenu&quot; requests (i.e. right-click). When the context menu is invoked, a Y.Overlay object is rendered and displayed
+ that includes user-defined menu items that are related to the context where the menu was invoked.
+
+ This view utilizes several attributes and fires several events that users can listen to in order to take specific actions based
+ on the &quot;trigger target&quot; node.
+
+ Please refer to the [trigger](#attr_trigger) ATTRIBUTE for more description of the target.node and target.trigger.
+
+ #####Usage
+ To configure a bare-bones basic contextmenu, you need to provide the &#x60;trigger&#x60; and &#x60;menuItems&#x60; attributes as;
+
+     var cmenu = new Y.ContextMenuView({
+        trigger: {
+            node:   Y.one(&quot;.myExistingContainer&quot;),
+            target:  &#x27;li&#x27;
+        },
+        menuItems: [ &quot;Add&quot;, &quot;Edit&quot;, &quot;Delete&quot; ]
+    });
+
+ The &#x60;menuItems&#x60; can be simple entries or Objects, if they are Objects the &quot;label&quot; property will be used to fill the visible Menu (See [menuItems](#attr_menuItems)).
+
+ #####Attributes &#x2F; Events
+ An implementer is typically interested in listening to the following ATTRIBUTE &quot;change&quot; events;
+ &lt;ul&gt;
+   &lt;li&gt;&#x60;selectedMenuChange&#x60; : which fires when a contextmenu choice is clicked (see &lt;a href=&quot;#attr_selectedMenu&quot;&gt;selectedMenu&lt;&#x2F;a&gt;)&lt;&#x2F;li&gt;
+   &lt;li&gt;&#x60;contextTargetChange&#x60;: which fires when the user &quot;right-clicks&quot; on the target.node (see &lt;a href=&quot;#attr_contextTarget&quot;&gt;contextTarget&lt;&#x2F;a&gt;)&lt;&#x2F;li&gt;
+ &lt;&#x2F;ul&gt;
+
+ Additionally please refer to the [Events](#events) section for more information on available events.
+
+ @module contextmenu
+ @class Y.ContextMenuView
+ @constructor
+ **&#x2F;
+Y.ContextMenuView = Y.Base.create(&#x27;contextmenu&#x27;, Y.View, [],{
+
+    &#x2F;**
+     * Y.View&#x27;s events static property, where we define a &quot;click&quot; listener on Nodes in the
+     * container that are the MenuItem nodes.                    *
+     * @property events
+     * @type {Object}
+     * @public
+     *&#x2F;
+    events:{
+        &#x27;.yui3-contextmenu-menuitem&#x27; :{
+            click: &#x27;_selectMenuItem&#x27;
+        }
+    },
+
+    &#x2F;**
+     * Default HTML template for the container&#x27;s content         *
+     * @property template
+     * @type {String}
+     * @default &#x27;&lt;div class=&quot;yui3-contextmenu-overlay&quot;&gt;&lt;&#x2F;div&gt;&#x27;
+     * @public
+     *&#x2F;
+    template: &#x27;&lt;div class=&quot;yui3-contextmenu-overlay&quot;&gt;&lt;&#x2F;div&gt;&#x27;,
+
+    &#x2F;**
+     * A placeholder to hold subscriber EventHandles so they can be destroyed properly
+     * @property _subscr
+     * @type {Array}
+     * @default null
+     * @protected
+     *&#x2F;
+    _subscr: null,
+
+    &#x2F;&#x2F;_subscrTarget:null,
+
+    &#x2F;**
+     * Sets an increment that the Overlay box will be positioned relative to the e.target &quot;x-coordinate&quot;
+     * @property _overlayDX
+     * @type {Integer}
+     * @default 5
+     * @protected
+     *&#x2F;
+    _overlayDX: null,
+
+    &#x2F;**
+     * Sets an increment that the Overlay box will be positioned relative to the e.target &quot;y-coordinate&quot;
+     * @property _overlayDY
+     * @type {Integer}
+     * @default 11
+     * @protected
+     *&#x2F;
+    _overlayDY: null,
+
+    &#x2F;**
+     * Initializer where we define initial handlers to invoke this view and to hide the Overlay
+     * @method initializer
+     * @protected
+     *&#x2F;
+    initializer: function(){
+        var triggerC = this.get(&#x27;trigger&#x27;)[&#x27;node&#x27;],
+            triggerT = this.get(&#x27;trigger&#x27;)[&#x27;target&#x27;];
+
+        this._subscr = [];
+        this._subscr.push( triggerC.delegate(&quot;contextmenu&quot;,this._onContextMenu, triggerT, this) );
+
+        this._subscr.push( this.get(&#x27;overlay&#x27;).on(&quot;mouseleave&quot;,this.hideOverlay, this) );
+
+        this._overlayDX = 5;
+        this._overlayDY = 11;
+
+        return this;
+    },
+
+    &#x2F;**
+     * Clean up listeners and destroys the Overlay
+     * @method destructor
+     * @protected
+     *&#x2F;
+    destructor: function(){
+        Y.Array.each( this._subscr, function(item){
+            item.detach();
+        });
+        this._subscr = null;
+
+        if(this._subscrTarget) {
+            this._subscrTarget.detach();
+            this._subscrTarget = null;
+        }
+
+        if(this.get(&#x27;overlay&#x27;))
+            this.get(&#x27;overlay&#x27;).destroy();
+    },
+
+    &#x2F;**
+     *
+     * @method render
+     * @protected
+     * @returns this
+     * @chainable
+     *&#x2F;
+    render: function(){
+
+        return this;
+    },
+
+    &#x2F;**
+     * Method that hides the Overlay for this contextmenu and fires the &#x60;contextMenuHide&#x60; event
+     * @method hideOverlay
+     * @public
+     *&#x2F;
+    hideOverlay: function(){
+        if(!this.get(&#x27;overlay&#x27;)) return;
+        this.fire(&#x27;contextMenuHide&#x27;);
+        this.get(&#x27;overlay&#x27;).hide();
+        &#x2F;&#x2F;if(this._subscrTarget) this._subscrTarget.detach();
+    },
+
+    &#x2F;**
+     * Default value setter for attribute &#x60;overlay&#x60;, creates a Y.Overlay widget to display the menu within
+     *
+     * @method _valOverlay
+     * @return {Y.Overlay}
+     * @private
+     *&#x2F;
+    _valOverlay: function(){
+        var cont  = this.get(&#x27;container&#x27;) || null,
+            mtmpl = this.get(&#x27;menuItemTemplate&#x27;),
+            mitems = this.get(&#x27;menuItems&#x27;) || [];
+
+        if(!cont) return false;
+
+        cont.empty();
+
+        var overlay = new Y.Overlay({
+          srcNode: cont,
+          visible: false,
+          zIndex: 99,
+          constrain: true
+        });
+
+        var bodyHTML = &quot;&quot;;
+
+        Y.Array.each( mitems, function(item,index){
+            var menu = Y.Lang.sub(mtmpl,{
+                menuClass:   item.className || &quot;yui3-contextmenu-menuitem&quot;,
+                menuIndex:   index,
+                menuContent: (Y.Lang.isString(item)) ? item : item.label || &quot;unknown&quot;
+            });
+            bodyHTML += menu;
+        });
+
+        overlay.set(&#x27;bodyContent&#x27;,bodyHTML);
+        overlay.render();
+
+        return overlay;
+    },
+
+    &#x2F;**
+     * Handler for right-click event (actually &quot;contextmenu&quot; event) on &#x60;trigger.node&#x60;.
+     * @method _onContextMenu
+     * @param {EventTarget} e Y.Event target object created when &quot;context&quot; menu fires
+     * @private
+     *&#x2F;
+    _onContextMenu: function(e){
+        e.preventDefault();
+        this._clearDOMSelection();
+
+        &#x2F;&#x2F;
+        &#x2F;&#x2F; Store the context &quot;trigger&quot; selection, who invoked the contextMenu
+        &#x2F;&#x2F;
+        var contextTar = e.currentTarget;
+        this._set(&#x27;contextTarget&#x27;, contextTar );
+
+        &#x2F;&#x2F;
+        &#x2F;&#x2F; Position and display the Overlay for the menu
+        &#x2F;&#x2F;
+        this.get(&#x27;overlay&#x27;).set(&quot;xy&quot;, [e.pageX + this._overlayDX, e.pageY  + this._overlayDY] );
+        &#x2F;&#x2F;this.get(&#x27;overlay&#x27;).focus();
+        this.get(&#x27;overlay&#x27;).show();
+
+        &#x2F;&#x2F;this._subscrTarget = contextTar.on(&quot;mouseleave&quot;,this.hideOverlay, this);
+
+        this.fire(&quot;contextMenuShow&quot;,e);
+    },
+
+    &#x2F;**
+     * Fired after the &quot;contextmenu&quot; event is initiated and the Menu has been positioned and displayed
+     * @event contextMenuShow
+     * @param {EventTarget} e
+     *&#x2F;
+
+
+    &#x2F;**
+     * Process a &quot;click&quot; event on the Content Menu&#x27;s Overlay menuItems
+     *
+     * @method _selectMenuItem
+     * @param {EventTarget} e
+     * @private
+     *&#x2F;
+    _selectMenuItem: function(e){
+        var tar = e.target,
+            menuData = +(tar.getData(&#x27;cmenu&#x27;)),
+            menuItems = this.get(&#x27;menuItems&#x27;);
+
+        if ( menuItems &amp;&amp;  menuItems.length&gt;0 )
+            this._set(&#x27;selectedMenu&#x27;, {
+                evt:e,
+                menuItem:menuItems[menuData],
+                menuIndex:menuData
+            });
+
+        this.hideOverlay();
+        this.fire(&quot;contextMenuHide&quot;,e);
+        this.fire(&quot;select&quot;,e);
+    },
+
+	&#x2F;**
+	 * Fires when a selection is &quot;clicked&quot; from within the pop-up menu
+	 * (a better approach is to listen on attribute [selectedMenu](#attr_selectedMenu) for &quot;change&quot;)
+	 *
+	 * @event select
+	 * @param {EventTarget} e
+	 **&#x2F;
+
+    &#x2F;**
+     * Fired after a Menu choice has been selected from the ContexMenu and the menu has been hidden
+     * @event contextMenuHide
+     * @param {EventTarget} e
+     *&#x2F;
+
+    &#x2F;**
+     * Helper method to clear DOM &quot;selected&quot; text or ranges
+     * @method _clearDOMSelection
+     * @private
+     *&#x2F;
+    _clearDOMSelection: function(){
+        var sel = (Y.config.win.getSelection) ? Y.config.win.getSelection() : (Y.config.doc.selection) ? Y.config.doc.selection : null;
+        if ( sel &amp;&amp; sel.empty ) sel.empty();    &#x2F;&#x2F; works on chrome
+        if ( sel &amp;&amp; sel.removeAllRanges ) sel.removeAllRanges();    &#x2F;&#x2F; works on FireFox
+    }
+
+},{
+   ATTRS:{
+
+       &#x2F;**
+        * Container Node where the menu&#x27;s Overlay will be rendered into.  If not provided, the
+        * default will create a container from the [template](#property_template) setting.
+        *
+        * This is usually only set when the user has a specific Overlay container design they
+        * wish to utilize.
+        *
+        * @attribute container
+        * @type {Node}
+        * @default Y.Node.create(this.template)
+        *&#x2F;
+       container:{
+           valueFn:   function(){return Y.Node.create(this.template);}
+       },
+
+       &#x2F;**
+        * Defines the container element for the &quot;contextmenu&quot; event listener to attach this menu to.
+        * &lt;br&#x2F;&gt;&lt;br&#x2F;&gt;This {Object} must contain the following;&lt;br&#x2F;&gt;
+        * &lt;ul&gt;
+        *   &lt;li&gt;&#x60;node&#x60; {Node} the Node instance that will have a delegated &quot;contextmenu&quot; listener
+        attached to it&lt;&#x2F;li&gt;
+            &lt;li&gt;&#x60;target&#x60; {String} A CSS selector for the &quot;target&quot; sub-element (child of trigger.node) that will be used for the delegation and will be returned from attribute &quot;contextTarget&quot;&lt;&#x2F;li&gt;
+        * &lt;&#x2F;ul&gt;
+        *
+		*
+        * @example
+        *       &#x2F;&#x2F; This will define the trigger node (to accept right-clicks) as a DataTable&#x27;s THEAD
+        *       &#x2F;&#x2F;  element and the target as the TH nodes.
+        *       trigger : {
+        *           node:   myDataTable.get(&#x27;srcNode&#x27;).one(&#x27;thead .yui3-datatable-columns&#x27;),
+        *           target: &quot;th&quot;
+        *       }
+        *
+        *
+        * @attribute trigger
+        * @type {Object} trigger Container object to listen for &quot;contextmenu&quot; event on
+        * @type {Node} trigger.node Container node to listen on (i.e. delegation container) for &quot;contextmenu&quot;
+        * @type {String} trigger.target Container filter selector to assign target from container event
+        * @default {node:null, target:&#x27;&#x27;}
+        *&#x2F;
+       trigger: {
+           value:  {node:null, target:&#x27;&#x27;},
+           writeOnce: true
+       },
+
+       &#x2F;**
+        * Set to the returned target within the &#x60;trigger.node&#x60; container that the &quot;contextmenu&quot; event was initiated on
+        * (e.g. for a DataTable this may be a specific TR row within the table body).
+        *
+        * @attribute contextTarget
+        * @type {Node}
+        * @default null
+        * @readonly
+        *&#x2F;
+       contextTarget:{
+           value:   null,
+           readOnly: true
+       },
+
+       &#x2F;**
+        * Overrideable HTML template to use for creating each &#x60;menuItem&#x60; entry in Overlay.
+        * Must include &quot;data-cmenu&quot;
+        *
+        * @attribute menuItemTemplate
+        * @type {String}
+        * @default &#x27;&lt;div class=&quot;{menuClass}&quot; data-cmenu=&quot;{menuIndex}&quot;&gt;{menuContent}&lt;&#x2F;div&gt;&#x27;
+        *&#x2F;
+       menuItemTemplate:{
+           value: &#x27;&lt;div class=&quot;yui3-contextmenu-menuitem {menuClass}&quot; data-cmenu=&quot;{menuIndex}&quot;&gt;{menuContent}&lt;&#x2F;div&gt;&#x27;
+       },
+
+       &#x2F;**
+        * Array of &quot;menu&quot; items as either {Strings} or {Objects} to add to the Menu.
+        *
+        * When {Objects} are included, as a minimum they must include a &#x60;label&#x60; property that contains the text to display in the menu.
+        * @example
+        *	menuItems: [ &quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot; ]
+        *	menuItems: [ &quot;Insert&quot;, &quot;Update&quot;, {label:&quot;Delete&quot;, confirm:true}, &quot;... More&quot; ]
+        *	menuItems: [ {label:&quot;Foo&quot;, value:100}, {label:&quot;Bar&quot;, value:105}, {label:&quot;Baz&quot;, value:200} ]
+        *
+        * @attribute menuItems
+        * @type {Array}
+        * @default []
+        *&#x2F;
+       menuItems:{
+           value:       [],
+           validator:   Y.Lang.isArray
+       },
+
+       &#x2F;**
+        * Y.Overlay instance used to render the pop-up context menu within
+        *
+        * **Default:** See [_valOverlay](#method__valOverlay)
+        * @attribute overlay
+        * @type Y.Overlay
+        *&#x2F;
+       overlay: {
+           valueFn:     &#x27;_valOverlay&#x27;,
+           writeOnce:   true,
+           validator:   function(v){ return v instanceof Y.Overlay;}
+       },
+
+       &#x2F;**
+        * Set to the &quot;selected&quot; item from the pop-up Overlay menu when clicked by user, where this
+        * attribute is set to an object containing the EventTarget of the selection and the resulting
+        * menuitem and menuindex that corresponds to the selection.
+        *
+        * This is set by the method [_selectMenuItem](#method__selectMenuItem).
+        *
+        * Set to an {Object} with the following properties;
+        *   &lt;ul&gt;
+        *   &lt;li&gt;&#x60;evt&#x60; Event target from &quot;click&quot; selection within displayed Overlay&lt;&#x2F;li&gt;
+        *   &lt;li&gt;&#x60;menuItem&#x60; Menuitem object entry selected from &#x60;menuItems&#x60; array&lt;&#x2F;li&gt;
+        *   &lt;li&gt;&#x60;menuIndex&#x60; Index of current Menuitem object within the [menuItems](#attr_menuItems) attribute array&lt;&#x2F;li&gt;
+        *   &lt;&#x2F;ul&gt;
+	    *
+	    * @example
+	    *	&#x2F;&#x2F; If the &#x27;selectedMenu&#x27; was set to the 2nd item from the following menuItems setting ...
+	    *	myCmenu.set(&#x27;menuItems&#x27;,[ {label:&quot;Foo&quot;, value:100}, {label:&quot;Bar&quot;, value:105}, {label:&quot;Baz&quot;, value:200} ]);
+	    *
+	    *	&#x2F;&#x2F; ... user clicks 2nd item,
+	    *	myCmenu.get(&#x27;selectedMenu&#x27;)
+	    *	&#x2F;&#x2F; returns {evt:&#x27;event stuff object&#x27;, menuItem:{label:&quot;Bar&quot;, value:105}, menuIndex:1 }
+        *
+        * @attribute selectedMenu
+        * @type {Object} obj
+        * @readonly
+        *&#x2F;
+       selectedMenu: {
+           value: null,
+           readOnly: true
+       }
+   }
+});
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>
