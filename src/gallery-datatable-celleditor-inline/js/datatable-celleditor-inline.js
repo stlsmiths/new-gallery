@@ -501,7 +501,7 @@ Y.DataTable.EditorOptions.inlineDate = {
     baseViewClass:  Y.DataTable.BaseCellInlineEditor,
     name:           'inlineDate',
     prepFn: function(v){
-        var dfmt =  "%m/%d/%Y"; // (this.get('dateFormat')) ? this.get('dateFormat') : "%m/%d/%Y";
+        var dfmt =  this.get('dateFormat') || "%m/%d/%Y";
         return Y.DataType.Date.format(v,{format:dfmt});
     },
 

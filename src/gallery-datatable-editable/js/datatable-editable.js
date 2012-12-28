@@ -1,17 +1,59 @@
+/**
+ A DataTable class extension that configures a DT for "editing", current deployment supports cell editing,
+ and planned near-term support for row editing.
+
+ This module is essentially a wrapper-class to setup DT for editing with the appropriate attributes and
+ listener creation / detachment.  The real guts of "datatable-editing" is in the View class definitions.
+
+ The extension primarily adds a boolean attribute "editable" that when set true establishes listeners to
+ invoke the editor on a specific TBODY element, pre-scans column definitions to locate and instantiate
+ cell editor View classes (defined in modules gallery-datatable-edit-inline and gallery-datatable-edit-popup)
+ and sets up the DT to act as a view "controller" to listen to View "saveEditor" events and make the changes
+ to the underlying dataset.
+
+ In addition to a few new attributes, this module also recognizes some new column properties to support
+ cell-editing in particular;
+    * editor
+    * editorOptions
+    * editable    {Boolean}    Flag to toggle on/off editing for the column (default: false)
+
+
+ When this module is loaded and the "editable: true" attribute is set, it attempts to economize on
+ the "instantiation cost" of creating View instances by identifying only editor Views that are required
+ based upon column definitions and/or the defaultEditor attribute.
+ (e.g. if all columns are "text" editors, only one "text" editor View is instantiated)
+
+ The module chiefly fires one event "cellEditorSave", which can be listened for to provide updating
+ of remote data back to a server (assuming a ModelList "sync" layer is NOT used).
+
+ A new class Object (Y.DataTable.EditorOptions) is added to the DataTable namespace that serves as the
+ database of the editor View configuration properties.  Each "key" (object property) within this object
+ is an entrypoint to a specific editor configuration.
+
+ FUTURE:
+ This module will be amended to add "row" editing.
+ Presently, it doesn't work well with "scrolling" datatables ... i.e. repositioning onscroll.
+
+ @module gallery-datatable-editable
+ @class Y.DataTable.Editable
+ @extends Y.DataTable
+ @author Todd Smith
+ @since 3.8.0
+ **/
 DtEditable = function(){};
 
 // Define new attributes to support editing
 DtEditable.ATTRS = {
 
     /**
-     * A flag that sets the DataTable state to allow editing (either inline or popup cell editing).
+     * A boolean flag that sets the DataTable state to allow editing (either inline or popup cell editing).
      * (Future may support row editing also)
      *
      * @attribute editable
      * @type boolean
      * @default false
      */
-    editable:{
+    editable: {
         value: false,
         validator: Y.Lang.isBoolean
     },
@@ -338,6 +380,7 @@ Y.mix( DtEditable.prototype, {
         // subscribe to some editor events ....
         //this._subscrOpenEditor.push( editor.on('valueChange', Y.bind(this._onEditorValueChange,this) ) );
         this._subscrOpenEditor.push( editor.on('editorSave', Y.bind(this._onCellEditorSave,this) ) );
+        this._subscrOpenEditor.push( editor.on('editorCancel', Y.bind(this._onCellEditorCancel,this) ) );
         this._subscrOpenEditor.push( editor.after('keyDirChange', Y.bind(this._onKeyDirChange,this) ) );
 
     /*
@@ -700,16 +743,21 @@ Y.mix( DtEditable.prototype, {
 
        //TODO: Implement "circular" mode, maybe thru an attribute to wrap col/row navigation
        if(circ) {
-           if(dir[1] === 1 && colIndex === this.get('columns').length-1 )
+
+           if(dir[1] === 1 && colIndex === this.get('columns').length-1 ) {
                ndir = [0, -this.get('columns').length+1];
-           else if(dir[1] === -1 && colIndex === 0)
+           } else if(dir[1] === -1 && colIndex === 0) {
                ndir = [0, this.get('columns').length-1];
-           else if(dir[0] === 1 && recIndex === this.data.size()-1 )
+           } else if(dir[0] === 1 && recIndex === this.data.size()-1 ) {
                ndir = [ -this.data.size()+1, 0];
-           else if(dir[0] === -1 && recIndex === 0)
+           } else if(dir[0] === -1 && recIndex === 0) {
                ndir = [ this.data.size()-1, 0];
-           if(ndir)
-            dir = ndir;
+           }
+
+           if(ndir) {
+               dir = ndir;
+           }
+
        }
 
        if(dir){
@@ -719,6 +767,45 @@ Y.mix( DtEditable.prototype, {
            }
        }
     },
+
+    /**
+     * Listener to the cell editor View's "editorCancel" event.  The editorCancel event
+     * includes a return object with keys {td,cell,oldValue}
+     *
+     * @method _onCellEditorCancel
+     * @param o {Object} Returned object from cell editor "editorCancel" event
+     * @private
+     */
+    _onCellEditorCancel: function(o){
+        if(o.cell && this._openRecord && this._openColKey) {
+            var cell   = o.cell,
+                colKey = cell.colKey || this._openColKey,
+                record = this.data.getByClientId(cell.recClientId) || this._openRecord;
+
+            this.fire('cellEditorCancel',{
+                td:         o.td,
+                cell:       cell,
+                record:     record,
+                colKey:     colKey,
+                prevVal:    o.oldValue,
+                editorName: this._openEditor.get('name')
+            });
+        }
+
+    },
+
+    /**
+     * Fired when the open Cell Editor has sent an 'editorCancel' event, typically from
+     * a user cancelling editing via ESC key or "Cancel Button"
+     * @event cellEditorCancel
+     * @param {Object} rtn Returned Object
+     *  @param {Node} td The TD Node that was edited
+     *  @param {Object} cell The cell object container for the edited cell
+     *  @param {Model} record Model instance of the record data for the edited cell
+     *  @param {String} colKey Column key (or name) of the edited cell
+     *  @param {String|Number|Date} newVal The old (last) value of the underlying data for the cell
+     *  @param {String} editorName The name attribute of the editor that updated this cell
+     */
 
     /**
      * Listener to the cell editor View's "editorSave" event, that when fired will
@@ -743,7 +830,7 @@ Y.mix( DtEditable.prototype, {
                 record.set(this._openColKey, o.newValue);
             }
 
-            this.fire('saveCellEditing',{
+            this.fire('cellEditorSave',{
                 td:         o.td,
                 cell:       cell,
                 record:     record,
@@ -758,7 +845,10 @@ Y.mix( DtEditable.prototype, {
     }
 
     /**
-     * @event saveCellEditing
+     * Event fired after a Cell Editor has sent the 'editorSave' event closing an editing session.
+     * The event signature includes pertinent data on the cell, TD, record and column that was
+     * edited along with the prior and new values for the cell.
+     * @event cellEditorSave
      * @param {Object} rtn Returned Object
      *  @param {Node} td The TD Node that was edited
      *  @param {Object} cell The cell object container for the edited cell
@@ -768,7 +858,6 @@ Y.mix( DtEditable.prototype, {
      *  @param {String|Number|Date} newVal The old (last) value of the underlying data for the cell
      *  @param {String} editorName The name attribute of the editor that updated this cell
      */
-
 
 });
 
