@@ -1,0 +1,18 @@
+{
+    "gallery-datatable-celleditor-inline": {
+        "supersedes": [
+            ""
+        ],
+        "skinnable": "true",
+        "requires": [
+            "view",
+            "base-build",
+            "event-key",
+            "calendar",
+            "autocomplete-plugin"
+        ],
+        "optional": [
+            ""
+        ]
+    }
+}
