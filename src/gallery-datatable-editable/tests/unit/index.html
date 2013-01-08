@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+    <title>gallery-datatable-editor</title>
+    <script src="/build/yui/yui.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="dtable"></div>
+<div id="logger"></div>
+
+<script src="js/test-dt-editable.js"></script>
+
+<script>
+YUI({
+    coverage: ['gallery-datatable-editable'],
+/*    modules:{
+        'module-dt-edit' : {
+            fullpath: '../module-dt-editNEW.js',
+            type:     'js',
+            requires: [ "datatable-base", "datatype" ]
+        },
+
+        'module-dt-edit-popup' : {
+            fullpath: '../module-dt-edit-popupNEW.js',
+            type:     'js',
+            requires: [ "base-build", "view", "cssbutton", 'event-outside', "overlay",
+                        "dd-plugin", "template"  ]
+        },
+
+        'module-dt-edit-inline' : {
+            fullpath: '../module-dt-edit-inlineNEW.js',
+            type:     'js',
+            requires: [ "base-build", "view", "event-mouseenter" ]
+        }
+    },  */
+    filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw'
+}).use( 'test-console', 'test', 'module-tests-dteditable',  
+        //   "handlebars",
+        //'module-dt-edit', 'module-dt-edit-inline', "module-dt-edit-popup",
+        "gallery-datatable-editable", "node-event-simulate",
+        function(Y) {
+
+    (new Y.Test.Console()).render('#logger');
+
+    Y.Test.Runner.setName('gallery-datatable-editable');
+
+    Y.Test.Runner.run();
+});
+</script>
+</body>
+</html>

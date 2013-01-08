@@ -1,3 +1,5 @@
+YUI.add('gallery-datatable-editable', function (Y, NAME) {
+
 /**
  A DataTable class extension that configures a DT for "editing", current deployment supports cell editing
  (and planned near-term support for row editing).
@@ -1184,3 +1186,19 @@ Y.Base.mix(Y.DataTable, [Y.DataTable.Editable]);
  * @since 3.8.0
  */
 Y.DataTable.EditorOptions = {};
+
+
+}, '@VERSION@', {
+    "supersedes": [
+        ""
+    ],
+    "skinnable": "true",
+    "requires": [
+        "datatable-base",
+        "node",
+        "datatype"
+    ],
+    "optional": [
+        ""
+    ]
+});

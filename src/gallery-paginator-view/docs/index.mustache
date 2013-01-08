@@ -60,7 +60,7 @@ This extension was originally developed for use with <a href="http://yuilibrary.
 A simple example that doesn't list each individual page link, but lists the current page and `linkListOffset` pages either side of the current one.
 <br/>This is most useful for situations that may involve a large number of page links that would extend off of the visual page.
 <br/>
-<b>Example:</b>
+<h5>Example:</h5>
 {{>basic-abbrev-html}}
 <script>
 YUI().use( 'node', '{{use}}', function(Y){
@@ -68,19 +68,20 @@ YUI().use( 'node', '{{use}}', function(Y){
 });
 </script>
 
-<h5>HTML</h5>
+<b>HTML</b>
 ```
 {{>basic-abbrev-html}}
 ```
 
-<h5>Code</h5>
+<b>Code</b>
 ```
 {{>basic-abbrev-js}}
 ```
 
+
 <h4>Pagination Bar</h4>
-<br/>
-<b>Example:</b>
+A "paginator bar" example is provided below, where it is styled similar to a Datatable and thus works nicely with that component.
+<h5>Example:</h5>
 {{>basic-bar-css}}
 {{>basic-bar-html}}
 <script>
@@ -88,7 +89,27 @@ YUI().use( 'node', '{{use}}', function(Y){
 {{>basic-bar-js}}
 });
 </script>
+This paginator responds to img clicks, displays an HTML hint (via "title"), allows for page number entry in an INPUT control (positioned via {inputPage} placeholder) and 
+includes a Rows per Page SELECT control (located via {selectRowsPerPage} placeholder).
 
+Note that the Paginator "updates" it's state when the "Rows per Page" is changed.
+
+<br/><br/>
+
+<b>CSS</b>
+```
+{{>basic-bar-css}}
+```
+<b>HTML</b>
+```
+{{>basic-bar-html}}
+```
+<b>Code</b>
+```
+{{>basic-bar-js}}
+```
+<br/>
+These examples are meant to provide a taste of the use of the PaginatorView, please see the Examples on the sidebar for more comprehensive applications.
 
 
 <h2 id="config">Configuration</h2>
@@ -166,7 +187,7 @@ The view extension includes all standard view attributes, plus the following att
             <td>model</td>
             <td>Y.Model instance</td>
             <td>null</td>
-            <td>Model instance for this View, that supports pagination attributes (i.e. Y.PaginatorModel).</td>
+            <td>Model instance for this View, that supports pagination attributes (i.e. Y.PaginatorModel)</td>
         </tr>
         <tr>
             <td>container</td>
@@ -178,49 +199,43 @@ The view extension includes all standard view attributes, plus the following att
             <td>paginatorTemplate</td>
             <td>HTML String | Node | HTML id</td>
             <td>See below</td>
-            <td>Defines this View's HTML contents.</td>
+            <td>Defines the HTML contents that will be inserted within the `container`</td>
         </tr>
         <tr>
             <td>pageLinkTemplate</td>
             <td>HTML String | Node | HTML id</td>
             <td>See docs</td>
-            <td>Defines this View's HTML contents.</td>
+            <td>Defines HTML content for each individual page link generated within {pageLinks}</td>
         </tr>
         <tr>
             <td>pageOptions</td>
             <td>Array</td>
             <td>See docs</td>
-            <td>Defines this View's HTML contents.</td>
+            <td>Array of "Items per Page" initially rendered in the {selectRowsPerPage} element<br/>Numeric, or 'all'</td>
         </tr>
         <tr>
             <td>pageLinkFiller</td>
             <td>String</td>
             <td>"..."</td>
-            <td>Defines this View's HTML contents.</td>
-        </tr>
-        <tr>
-            <td>paginatorTemplate</td>
-            <td>HTML String | Node | HTML id</td>
-            <td>See docs</td>
-            <td>Defines this View's HTML contents.</td>
+            <td>Visual seperator to use with "abbreviated" Page Links</td>
         </tr>
         <tr>
             <td>maxPageLinks</td>
             <td>Integer</td>
             <td>9999</td>
-            <td>Defines this View's HTML contents.</td>
+            <td>The maximum page links to display for "abbreviated" page links</td>
         </tr>
         <tr>
             <td>linkListOffset</td>
             <td>Integer</td>
             <td>1</td>
-            <td>Defines this View's HTML contents.</td>
+            <td>The number of pages either side of the current page to display with "abbreviated" page links</td>
         </tr>
         <tr>
             <td>circular</td>
             <td>Boolean</td>
             <td>false</td>
-            <td>Defines this View's HTML contents.</td>
+            <td>Flag to allow wrapping of page selections from first to last, or last to first.</td>
         </tr>
         <tr>
             <td>alwaysShowFirst</td>
@@ -240,7 +255,7 @@ The view extension includes all standard view attributes, plus the following att
 </table>
 
 
-<h4>replaceable Tokens</h4>
+<h4>Replaceable Tokens</h4>
 The PaginatorView uses the `Y.lang.sub` utility during construction of the container's HTML content.  So the View recognizes several replaceable tokens, 
 which are identified by a set a single curly braces.  Each token serves as a <i>placeholder</i> for generated content during the view rendering. 
 
@@ -277,12 +292,22 @@ Replaceable tokens include all attributes of the PaginatorModel (e.g. {page}, {t
 In addition, the following tokens can be used to replace the View's default CSS classes that are used;
 <br/>`{pagClass}, {pageLinkClass}, {inputPageClass}, {selectRPPClass}, {selectPageClass}, {inputRPPClass}`
 
+<br/><Br/>
+Construction of the HTML for the View proceeds in the following order;
+<ol>
+<li>Extract the overall `container` HTML from attribute "paginatorTemplate" </li>
+<li>Loop over all pages of current PaginatorModel replacing `{pageLinks}` with contents of attribute "pageLinkTemplate"</li>
+<li>Populate `{inputPage}` and `{selectRowsPerPage}` elements with HTML INPUT elements</li>
+<li>Replace all `{xxxxxClass}` tokens with appropriate class names</li>
+<li>Insert final HTML contents into the View's `container` element</li>
+</ol>
+
 
 <h4 id="defaults">PaginatorView HTML Defaults</h4>
 
 The default HTML for the {paginatorTemplate} is;
  ```
- <a href="#" data-pglink="first" class="{pageLinkClass}" title="First Page">First</a> |
+<a href="#" data-pglink="first" class="{pageLinkClass}" title="First Page">First</a> |
 <a href="#" data-pglink="prev" class="{pageLinkClass}" title="Prior Page">Prev</a> |
 {pageLinks}
 | <a href="#" data-pglink="next" class="{pageLinkClass}" title="Next Page">Next</a> |
@@ -295,6 +320,11 @@ and the {pageLinks} default setting is (NOTE: the {page} token within pageLinks 
 
 Please refer to the API Docs in order to review all of the details and defaults. 
 
+<h5>CSS Defaults</h5>
+
+This components creates CSS styles for the `container` and internal components prefixed with `yui3-pagview-` to elements.  
+<br/><br/>
+Please refer to the API Docs for spcifics about individual CSS component classes.
 
 
 <h2 id="events">Events</h2>

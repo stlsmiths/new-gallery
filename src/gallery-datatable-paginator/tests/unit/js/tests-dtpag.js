@@ -865,9 +865,7 @@ YUI.add('module-tests-dtpag', function(Y) {
             Assert.areSame( 3840.9, lrec.get('dflt'), "last record dflt is incorrect" );
             Assert.areSame( 'W', lrec.get('dtxt'), "last record dtxt is incorrect" );
 
-        }
-/*  REMOVE THESE TEST UNTIL 'gallery-paginator-view' is live on CDN !!!
- ,
+        },
 
         'check text sorting (dtxt column) - Page 3' : function() {
 
@@ -925,10 +923,9 @@ YUI.add('module-tests-dtpag', function(Y) {
             Assert.areSame( 'Q', lrec.get('dtxt'), "last record dtxt is incorrect" );
 
         }
-*/
+
     }));
 
-/*
 
 //
 // DataSource Pagination - DataSource pagination, via function DS including sorting
@@ -1156,6 +1153,13 @@ YUI.add('module-tests-dtpag', function(Y) {
             Assert.areSame( 0, this.m.get('totalItems'), "expected totalItems 0" );
             Assert.areSame( 1, this.m.get('page'), "expected page 1" );
             Assert.areSame( 1, this.m.get('totalPages'), "expected totalPages 1" );
+/*
+            Assert.isTrue( pcont.one('a[data-pglink="first"]').hasClass(css_disabled), "first link should be disabled" );
+            Assert.isTrue( pcont.one('a[data-pglink="prev"]').hasClass(css_disabled), "prev link should be disabled" );
+            Assert.isTrue( pcont.one('a[data-pglink="1"]').hasClass(css_disabled), "Page 1 link should be disabled" );
+            Assert.isTrue( pcont.one('a[data-pglink="next"]').hasClass(css_disabled), "next link should be disabled" );
+            Assert.isTrue( pcont.one('a[data-pglink="last"]').hasClass(css_disabled), "last link should be disabled" );
+*/
             emptyFlag = false;
             this.dt.processPageRequest(2);
             sleep(200);
@@ -1552,7 +1556,7 @@ YUI.add('module-tests-dtpag', function(Y) {
         }
 
     }));
-*/
+
 
     Y.Test.Runner.add(suite);
 
