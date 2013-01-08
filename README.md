@@ -8,3 +8,7 @@ As of January 2012, the following are now the current deployments to YUI Gallery
 * gallery-datatable-paginator
 * gallery-datatable-selection
 * gallery-datatable-editable
+* gallery-datatable-celleditor-popup
+* gallery-datatable-celleditor-inline
+
+Please see each module's HISTORY.md file within the src/ path for it's change history

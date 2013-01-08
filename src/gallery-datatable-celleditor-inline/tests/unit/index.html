@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+    <title>gallery-datatable-inline</title>
+    <script src="/build/yui/yui.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="dtable"></div>
+<div id="logger"></div>
+
+<script src="js/test-dt-inline.js"></script>
+
+<script>
+YUI({
+    coverage: ['gallery-datatable-inline'],
+ /*   modules:{
+        'module-dt-edit' : {
+            fullpath: '../module-dt-editNEW.js',
+            type:     'js',
+            requires: [ "datatable-base", "datatype" ]
+        },
+
+        'module-dt-edit-inline' : {
+            fullpath: '../module-dt-edit-inlineNEW.js',
+            type:     'js',
+            requires: [ "base-build", "view", "event-mouseenter" ]
+        }
+    },  */
+    filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw'
+}).use( 'test-console', 'test', 'module-tests-dtinline', "node-event-simulate",
+       // these were my old modules from my test system ... each has YUI.add on them
+       // 'module-dt-edit',
+       // "module-dt-edit-inline",
+        'datatable', 
+        'gallery-datatable-editable', 
+        'gallery-datatable-celleditor-inline',
+        function(Y) {
+
+    (new Y.Test.Console()).render('#logger');
+
+    Y.Test.Runner.setName('gallery-datatable-inline');
+
+    Y.Test.Runner.run();
+});
+</script>
+</body>
+</html>

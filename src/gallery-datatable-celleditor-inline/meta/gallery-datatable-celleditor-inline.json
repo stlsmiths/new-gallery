@@ -5,11 +5,10 @@
         ],
         "skinnable": "true",
         "requires": [
+            "gallery-datatable-editable",
             "view",
             "base-build",
-            "event-key",
-            "calendar",
-            "autocomplete-plugin"
+            "event-mouseenter"
         ],
         "optional": [
             ""

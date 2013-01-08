@@ -9,10 +9,10 @@
             "base-build",
             "view",
             "cssbutton",
-            "event-key",
             "event-outside",
             "overlay",
-            "calendar"
+            "dd-plugin", 
+            "template"
         ],
         "optional": [
             ""

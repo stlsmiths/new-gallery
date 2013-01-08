@@ -1,3 +1,5 @@
+YUI.add('gallery-datatable-celleditor-inline', function (Y, NAME) {
+
 /**
  A View class that serves as the BASE View class for a TD Cell "inline" editor, i.e. an editor that
  is a single INPUT node that completely overlies the TD cell.  This editor is intended to replicate
@@ -1209,3 +1211,20 @@ Y.DataTable.EditorOptions.inlineAC = {
     }
 
 };
+
+
+}, '@VERSION@', {
+    "supersedes": [
+        ""
+    ],
+    "skinnable": "true",
+    "requires": [
+        "gallery-datatable-editable",
+        "view",
+        "base-build",
+        "event-mouseenter"
+    ],
+    "optional": [
+        ""
+    ]
+});

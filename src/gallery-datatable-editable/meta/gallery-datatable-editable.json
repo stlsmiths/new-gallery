@@ -6,7 +6,6 @@
         "skinnable": "true",
         "requires": [
             "datatable-base",
-            "node",
             "datatype"
         ],
         "optional": [

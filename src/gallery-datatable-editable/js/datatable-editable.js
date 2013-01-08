@@ -300,14 +300,7 @@ Y.mix( DtEditable.prototype, {
      */
     destructor:function() {
         // detach the "editableChange" listener on the DT
-
         this.set('editable',false);
-
-        if(this._subscrEditable && this._subscrEditable.detach){
-            this._subscrEditable.detach();
-        }
-        this._subscrEditable = null;
-
         this._unbindEditable();
     },
 
@@ -318,16 +311,10 @@ Y.mix( DtEditable.prototype, {
      * @private
      */
     _bindEditable: function(){
-        //this._subscrEditable = this.on('editableChange', this._setEditableMode);
 
         Y.Do.after(this._updateAllEditableColumnsCSS,this,'syncUI');
 
         this.after('sort', this._afterEditableSort);
-
-      //  this.on('editableChange', this._setEditableMode);
-      //  this.on('defaultEditorChange', this._setDefaultEditor);
-      //  this.on('editOpenType', this._setEditOpenType)
-
     },
 
     /**
@@ -340,7 +327,8 @@ Y.mix( DtEditable.prototype, {
 
         // destroy any currently open editor
         if(this._openEditor && this._openEditor.destroy) {
-            this._openEditor.destroy({remove:true});
+            this._openEditor.destroy();
+            //this._openEditor.destroy({remove:true});
         }
 
         if(this._subscrCellEditorScrolls && Y.Lang.isArray(this._subscrCellEditorScrolls) ) {
@@ -357,7 +345,6 @@ Y.mix( DtEditable.prototype, {
         // run through all instantiated editors and destroy them
         this._destroyColumnEditors();
 
-
     },
 
     /**
@@ -372,7 +359,7 @@ Y.mix( DtEditable.prototype, {
     _bindCellEditingListeners: function(){
 
         // clear up previous listeners, if any ...
-        if(!this._subscrCellEditors) {
+        if(this._subscrCellEditors) {
             this._unbindCellEditingListeners();
         }
 
@@ -398,6 +385,10 @@ Y.mix( DtEditable.prototype, {
      * @private
      */
     _unbindCellEditingListeners: function(){
+
+        if(!this._subscrCellEditors) {
+            return;
+        }
 
         // this._subscrCellEditors
         if (this._subscrCellEditors) {
@@ -427,6 +418,7 @@ Y.mix( DtEditable.prototype, {
         if(this._yScroll && this._yScrollNode) {
             this._subscrCellEditorScrolls.push( this._yScrollNode.on('scroll', this._onScrollUpdateCellEditor, this ) );
         }
+
     },
 
 
@@ -626,6 +618,7 @@ Y.mix( DtEditable.prototype, {
                 this._destroyColumnEditors();
             //}
         }
+
     },
 
     /**
@@ -638,12 +631,12 @@ Y.mix( DtEditable.prototype, {
      * @private
      */
     _setDefaultEditor: function(v) {
-        if ( (v && Y.DataTable.EditorOptions[v]) || v === null) {
+      //  if ( (v && Y.DataTable.EditorOptions[v]) || v === null) {
+        if ( v  || v === null ) {
             if(this.get('editable')) {
                 this.set('editable',false);
                 this._set('defaultEditor',v);
                 this.set('editable',true);
-                //this._buildColumnEditors();
             }
         }
     },
@@ -681,9 +674,12 @@ Y.mix( DtEditable.prototype, {
             return;
         }
 
-        if( this._columnEditors !== {} || this._commonEditors !== {} ) {
+        if( this._columnEditors || this._commonEditors ) {
             this._destroyColumnEditors();
         }
+
+        this._commonEditors = {};
+        this._columnEditors = {};
 
         //
         //  Set the default editor, if one is defined
@@ -799,16 +795,20 @@ Y.mix( DtEditable.prototype, {
      * @private
      */
     _destroyColumnEditors: function(){
+        if( !this._columnEditors && !this._commonEditors ) {
+            return;
+        }
 
         var ces = this._getAllCellEditors();
         Y.Array.each(ces,function(ce){
             if(ce && ce.destroy) {
-                ce.destroy({remove:true});
+                ce.destroy();
+              //  ce.destroy({remove:true});
             }
         });
 
-        this._commonEditors = {};
-        this._columnEditors = {};
+        this._commonEditors = null;
+        this._columnEditors = null;
 
         // remove editing class from all editable columns ...
         Y.Array.each( this.get('columns'), function(c){
@@ -816,6 +816,7 @@ Y.mix( DtEditable.prototype, {
                 this._updateEditableColumnCSS(c.key || c.name,false);
             }
         },this);
+
     },
 
     /**

@@ -1,3 +1,5 @@
+YUI.add('gallery-datatable-celleditor-popup', function (Y, NAME) {
+
 /**
  This module defines an extension of View that includes a BASE Y.DataTable.BaseCellPopupEditor View class definition
  cell "pop-up" editor.  This view class includes an editor with HTML inserted into an Overlay widget directly over
@@ -2677,3 +2679,24 @@ Y.DataTable.EditorOptions.checkbox = {
         }
     }
 };
+
+
+}, '@VERSION@', {
+    "supersedes": [
+        ""
+    ],
+    "skinnable": "true",
+    "requires": [
+        "gallery-datatable-editable",
+        "base-build",
+        "view",
+        "cssbutton",
+        "event-outside",
+        "overlay",
+        "dd-plugin",
+        "template"
+    ],
+    "optional": [
+        ""
+    ]
+});
