@@ -1,0 +1,3677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Y.DataTable.BaseCellInlineEditor</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/Y.Calendar.JumpNavView.html">Y.Calendar.JumpNavView</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.ContextMenuView.html">Y.ContextMenuView</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.BaseCellInlineEditor.html">Y.DataTable.BaseCellInlineEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.BaseCellPopupEditor.html">Y.DataTable.BaseCellPopupEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.CheckboxSelect.html">Y.DataTable.CheckboxSelect</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.Editable.html">Y.DataTable.Editable</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.html">Y.DataTable.EditorOptions</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.autocomplete.html">Y.DataTable.EditorOptions.autocomplete</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.calendar.html">Y.DataTable.EditorOptions.calendar</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.checkbox.html">Y.DataTable.EditorOptions.checkbox</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.date.html">Y.DataTable.EditorOptions.date</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.dropdown.html">Y.DataTable.EditorOptions.dropdown</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.inline.html">Y.DataTable.EditorOptions.inline</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.inlineAC.html">Y.DataTable.EditorOptions.inlineAC</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.inlineDate.html">Y.DataTable.EditorOptions.inlineDate</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.inlineNumber.html">Y.DataTable.EditorOptions.inlineNumber</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.number.html">Y.DataTable.EditorOptions.number</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.radio.html">Y.DataTable.EditorOptions.radio</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.text.html">Y.DataTable.EditorOptions.text</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.textarea.html">Y.DataTable.EditorOptions.textarea</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.Formatters.html">Y.DataTable.Formatters</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.Paginator.html">Y.DataTable.Paginator</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.Selection.html">Y.DataTable.Selection</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.FooterView.html">Y.FooterView</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.PaginatorModel.html">Y.PaginatorModel</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.PaginatorView.html">Y.PaginatorView</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.Plugin.Calendar.JumpNav.html">Y.Plugin.Calendar.JumpNav</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/contextmenu.html">contextmenu</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable.html">datatable</a></li>
+            
+                <li><a href="..&#x2F;modules/DataTable.html">DataTable</a></li>
+            
+                <li><a href="..&#x2F;modules/FooterView.html">FooterView</a></li>
+            
+                <li><a href="..&#x2F;modules/formatters.html">formatters</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-celleditor-inline.html">gallery-datatable-celleditor-inline</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-celleditor-popup.html">gallery-datatable-celleditor-popup</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-editable.html">gallery-datatable-editable</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-paginator.html">gallery-datatable-paginator</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-selection.html">gallery-datatable-selection</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-paginator-view.html">gallery-paginator-view</a></li>
+            
+                <li><a href="..&#x2F;modules/Selection.html">Selection</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1>Y.DataTable.BaseCellInlineEditor Class</h1>
+<div class="box meta">
+    
+
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l1"><code>gallery-js&#x2F;datatable-celleditor-inline.js:1</code></a>
+        </div>
+    
+
+    
+        
+            Module: <a href="../modules/gallery-datatable-celleditor-inline.html">gallery-datatable-celleditor-inline</a>
+        
+    
+
+    
+</div>
+
+
+
+<div class="box intro">
+    <p>A View class that serves as the BASE View class for a TD Cell "inline" editor, i.e. an editor that
+is a single INPUT node that completely overlies the TD cell.  This editor is intended to replicate
+the familiar "spreadsheet" type of input.</p>
+
+<h5>Editing / Validation</h5>
+
+<p>This editor view creates a simple INPUT[type=text] control and repositions and resizes it to match the
+underlying TD, set with a z-Index to visually appear over the TD cell.</p>
+
+<p>Key listeners are provided to detect changes, prohibit invalid keystrokes (via the <a href="#attr_keyFiltering">keyFiltering</a>
+ setting) and to allow validation upon a "save" entry (keyboard RTN stroke) where a <a href="#attr_validator">validator</a> can
+be prescribed to allow/disallow changes based upon the overall "value" of the INPUT control.</p>
+
+<h5>Navigation</h5>
+
+<p>The editor provides the capability to navigate from TD cell via key listeners on the following key
+combinations;
+ * CTRL-arrow keys
+ * TAB goes to RIGHT, SHIFT-TAB goes to left
+ * ESC cancels editing
+ * RTN saves cell</p>
+
+<p>Key navigation can be disabled via the <a href="#attr_inputKeys">inputKeys</a> attribute set to <code>false</code>.</p>
+
+<p>When a "key navigation" request is received it is passed to the <a href="#attr_keyDir">keyDir</a> as a change
+in [row,col] that implementers can listen to "change" events on, to reposition and open editing on the
+new relative cell.  (NOTE: This view does not reposition, it simply fires a <code>keyDirChange</code> event.</p>
+
+<h5>Events</h5>
+
+<p>Several events are fired by this View;  which can be listened for and acted upon to achieve differing results.
+For example, the Y.DataTable.EditorOptions.inlineAC (inline autocompletion editor) listens for the
+<a href="#event_editorCreated">editorCreated</a> event and once received, it configures the autocomplete plugin onto the
+INPUT node.</p>
+
+<h5>Configuration</h5>
+
+<p>Ths Y.DataTable.BaseCellInlineEditor editor is intended to be configured by varying the configuration
+parameters (i.e. attribute and related configuration) to permit a variety of editing features.</p>
+
+<p>Since the View class permits ad-hoc attributes, the implementer can pass many properties in during instantiation
+that will become available as run-time View attributes.</p>
+
+<p>This Module includes several pre-defined editor configurations which are stored within the Y.DataTable.EditorOptions
+namespace (presently there are "inline", "inlineNumber", "inlineDate", "inlineAC").  New inline editors can be
+created and added to this namespace at runtime, and by defining the <code>BaseViewClass:Y.DataTable.BaseCellInlineEditor</code> property.</p>
+
+<p>For example, the pre-built configuration object for the <a href="Y.DataTable.EditorOptions.inlineDate.html">inlineDate</a> inline editor
+is stored as <code>Y.DataTable.EditorOptions.inlineDate</code>.</p>
+
+<p>To configure an editor on-the-fly (i.e. within a DataTable column definition) just include the configuration object options
+within DT's column <code>editorConfig</code> object, which is Y.merge'ed with the pre-built configs;</p>
+
+<pre class="code"><code class="prettyprint">   // define an 'inlineDate' editor with additional configs ...
+   { key:'date_of_claim', editor:"inlineDate", editorConfig:{ dateformat:'%Y-%m-%d'} }
+</code></pre>
+
+<p>This <code>Y.DataTable.BaseCellinlineEditor</code> class is similar to (and compatible with ) the <code>Y.DataTable.BaseCellPopupEditor</code>
+in another gallery module.  Note that since the "inline" editor uses a simple INPUT[type=text] Node instead of an
+Overlay the codeline is quite a bit simpler.</p>
+
+<h6>KNOWN ISSUES:</h6>
+
+<p><ul>
+  <li>This View doesn't work well with scrolling DT's, so I've disabled it currently.</li>
+  <li>Sometimes after a DT's <code>editable</code> ATTR is toggled true/false a "cannot read 'style'" message occurs and editing failes
+       requiring a page refresh.</li>
+  </ul></p>
+</div>
+
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+        
+        
+            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
+        
+        
+            <li class="api-class-tab events"><a href="#events">Events</a></li>
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method private">
+                                <a href="#method__bindUI">_bindUI</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__createUI">_createUI</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__defEditorCancelFn">_defEditorCancelFn</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__defEditorSaveFn">_defEditorSaveFn</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__onClick">_onClick</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__onKeyDown">_onKeyDown</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public">
+                                <a href="#method__onKeyPress">_onKeyPress</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__onMouseLeave">_onMouseLeave</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__parseStyle">_parseStyle</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__resizeCont">_resizeCont</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__setEditorXY">_setEditorXY</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__unbindUI">_unbindUI</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public">
+                                <a href="#method_cancelEditor">cancelEditor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public">
+                                <a href="#method_destructor">destructor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public">
+                                <a href="#method_hideEditor">hideEditor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public">
+                                <a href="#method_initializer">initializer</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public">
+                                <a href="#method_saveEditor">saveEditor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public">
+                                <a href="#method_showEditor">showEditor</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                        
+                            <li class="index-item property protected">
+                                <a href="#property__classInput">_classInput</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property protected">
+                                <a href="#property__inputNode">_inputNode</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property protected">
+                                <a href="#property__subscr">_subscr</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_events">events</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_template">template</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section attrs">
+                    <h3>Attributes</h3>
+
+                    <ul class="index-list attrs">
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_cell">cell</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_className">className</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_hidden">hidden</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_hideMouseLeave">hideMouseLeave</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_hostDT">hostDT</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_inputKeys">inputKeys</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_keyDir">keyDir</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_keyFiltering">keyFiltering</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_lastValue">lastValue</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_name">name</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_prepFn">prepFn</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_saveFn">saveFn</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_validator">validator</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_value">value</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_visible">visible</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_xy">xy</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events">
+                        
+                            <li class="index-item event">
+                                <a href="#event_editorCancel">editorCancel</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item event">
+                                <a href="#event_editorCreated">editorCreated</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item event">
+                                <a href="#event_editorDestroyed">editorDestroyed</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item event">
+                                <a href="#event_editorHide">editorHide</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item event">
+                                <a href="#event_editorSave">editorSave</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item event">
+                                <a href="#event_editorShow">editorShow</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__bindUI" class="method item private">
+    <h3 class="name"><code>_bindUI</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l170"><code>gallery-js&#x2F;datatable-celleditor-inline.js:170</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Adds a listener to this editor instance to reposition based on "xy" attribute changes</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__createUI" class="method item private">
+    <h3 class="name"><code>_createUI</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l401"><code>gallery-js&#x2F;datatable-celleditor-inline.js:401</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Processes the initial container for this View, sets up the HTML content
+ and creates a listener for positioning changes</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__defEditorCancelFn" class="method item private">
+    <h3 class="name"><code>_defEditorCancelFn</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l220"><code>gallery-js&#x2F;datatable-celleditor-inline.js:220</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The defaultFn for the <code>editorCancel</code> event</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__defEditorSaveFn" class="method item private">
+    <h3 class="name"><code>_defEditorSaveFn</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l209"><code>gallery-js&#x2F;datatable-celleditor-inline.js:209</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The defaultFn for the <code>editorSave</code> event</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>For editorSave event</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onClick" class="method item private">
+    <h3 class="name"><code>_onClick</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>o</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l484"><code>gallery-js&#x2F;datatable-celleditor-inline.js:484</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Listener to INPUT "click" events that will stop bubbling to the DT TD listener,
+to prevent closing editing while clicking within an INPUT.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">o</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onKeyDown" class="method item private">
+    <h3 class="name"><code>_onKeyDown</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l570"><code>gallery-js&#x2F;datatable-celleditor-inline.js:570</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Key listener for the INPUT inline editor, "keydown" is checked for non-printing key
+ strokes, navigation or ESC</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Keydown event facade</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onKeyPress" class="method item public">
+    <h3 class="name"><code>_onKeyPress</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l526"><code>gallery-js&#x2F;datatable-celleditor-inline.js:526</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Provides a method to process keypress entries and validate or prevent invalid inputs.
+This method is meant to be overrideable by implementers.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Key press event object</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onMouseLeave" class="method item private">
+    <h3 class="name"><code>_onMouseLeave</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l495"><code>gallery-js&#x2F;datatable-celleditor-inline.js:495</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Listener to mouseleave event that will hide the editor if attribute "hideMouseLeave" is true</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__parseStyle" class="method item private">
+    <h3 class="name"><code>_parseStyle</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>el</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>v</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Number | String</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l472"><code>gallery-js&#x2F;datatable-celleditor-inline.js:472</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Helper method that returns the computed CSS style for the reference node as a parsed number</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">el</code>
+                        <span class="type">Node</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Node instance to check style on</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">v</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Style name to return</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Number | String</span>:
+                    
+                    Computed style with 'px' removed
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__resizeCont" class="method item private">
+    <h3 class="name"><code>_resizeCont</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>cont</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>td</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l447"><code>gallery-js&#x2F;datatable-celleditor-inline.js:447</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Resizes the view "container" to match the dimensions of the TD cell that is
+ being edited.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">cont</code>
+                        <span class="type">Node</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The Node instance of the "container" of this view</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">td</code>
+                        <span class="type">Node</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The Node instance for the TD to match dimensions of</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__setEditorXY" class="method item private">
+    <h3 class="name"><code>_setEditorXY</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l506"><code>gallery-js&#x2F;datatable-celleditor-inline.js:506</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>This method can be used to quickly reset the current View editor's position,
+ used for scrollable DataTables.</p>
+
+<p>NOTE: Scrollable inline editing is a little "rough" right now</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The xy attribute change event facade</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__unbindUI" class="method item private">
+    <h3 class="name"><code>_unbindUI</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l195"><code>gallery-js&#x2F;datatable-celleditor-inline.js:195</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Detaches any listener handles created by this view</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_cancelEditor" class="method item public">
+    <h3 class="name"><code>cancelEditor</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l374"><code>gallery-js&#x2F;datatable-celleditor-inline.js:374</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Called when the user has requested to cancel, and abort any changes to the DT cell,
+usually signified by a keyboard ESC or "Cancel" button, etc..</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_destructor" class="method item public">
+    <h3 class="name"><code>destructor</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l151"><code>gallery-js&#x2F;datatable-celleditor-inline.js:151</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Cleans up the View after it is destroyed</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_hideEditor" class="method item public">
+    <h3 class="name"><code>hideEditor</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l348"><code>gallery-js&#x2F;datatable-celleditor-inline.js:348</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Hides the current editor View instance.  If the optional <code>hideMe</code> param is true this View will
+be temporarily "hidden" (used for scrolling DT's when the TD is scrolled off/on to the page)</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_initializer" class="method item public">
+    <h3 class="name"><code>initializer</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l139"><code>gallery-js&#x2F;datatable-celleditor-inline.js:139</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Initialize and create the View contents</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_saveEditor" class="method item public">
+    <h3 class="name"><code>saveEditor</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>val</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l295"><code>gallery-js&#x2F;datatable-celleditor-inline.js:295</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Saves the View's <code>value</code> setting (usually after keyboard RTN or other means) and fires the
+<a href="#event_editorSave">editorSave</a> event so consumers (i.e. DataTable) can make final changes to the
+Model or dataset.</p>
+
+<p>Thank you to <strong>Satyam</strong> for his guidance on configuring the event publishing, defaultFn related to this
+technique!</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">val</code>
+                        <span class="type">String | Number | Date</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Raw value setting to be saved after editing</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_showEditor" class="method item public">
+    <h3 class="name"><code>showEditor</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>td</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l231"><code>gallery-js&#x2F;datatable-celleditor-inline.js:231</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Displays the inline cell editor and positions / resizes the INPUT to
+overlay the edited TD element.</p>
+
+<p>Set the initial value for the INPUT element, after preprocessing (if reqd)</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">td</code>
+                        <span class="type">Node</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The Node instance of the TD to begin editing on</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property__classInput" class="property item protected">
+    <h3 class="name"><code>_classInput</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l117"><code>gallery-js&#x2F;datatable-celleditor-inline.js:117</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>CSS classname to identify the editor's INPUT Node</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;yui3-datatable-inline-input&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__inputNode" class="property item protected">
+    <h3 class="name"><code>_inputNode</code></h3>
+    <span class="type">Node</span>
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l127"><code>gallery-js&#x2F;datatable-celleditor-inline.js:127</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Placeholder for the created INPUT Node created within the View container</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__subscr" class="property item protected">
+    <h3 class="name"><code>_subscr</code></h3>
+    <span class="type">Array of EventHandles</span>
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l107"><code>gallery-js&#x2F;datatable-celleditor-inline.js:107</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Array of detach handles to any listeners set on this View class</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_events" class="property item">
+    <h3 class="name"><code>events</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l91"><code>gallery-js&#x2F;datatable-celleditor-inline.js:91</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Defines the View container events and listeners used within this View</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> See Code</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_template" class="property item">
+    <h3 class="name"><code>template</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l82"><code>gallery-js&#x2F;datatable-celleditor-inline.js:82</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Defines the INPUT HTML content "template" for this editor's View container</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;&lt;input type=&quot;text&quot; class=&quot;{cssInput}&quot; &#x2F;&gt;&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="attrs" class="api-class-tabpanel">
+                <h2 class="off-left">Attributes</h2>
+
+                
+                    <div id="attr_cell" class="attr item">
+    <a name="config_cell"></a> 
+    <h3 class="name"><code>cell</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l637"><code>gallery-js&#x2F;datatable-celleditor-inline.js:637</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>A cell reference object populated by the calling DataTable, contains
+the following key properties: {td,value,recClientId,colKey}</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> {}</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_className" class="attr item">
+    <a name="config_className"></a> 
+    <h3 class="name"><code>className</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l728"><code>gallery-js&#x2F;datatable-celleditor-inline.js:728</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Prescribes a CSS class name to be added to the editor's INPUT node after creation.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_hidden" class="attr item">
+    <a name="config_hidden"></a> 
+    <h3 class="name"><code>hidden</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l779"><code>gallery-js&#x2F;datatable-celleditor-inline.js:779</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Setting to check if the editor is "still open" but just hidden, created in order to support
+scrolling datatables when an editor scrolls out of open window.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_hideMouseLeave" class="attr item">
+    <a name="config_hideMouseLeave"></a> 
+    <h3 class="name"><code>hideMouseLeave</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l714"><code>gallery-js&#x2F;datatable-celleditor-inline.js:714</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>This flag dictates whether the View container is hidden when the mouse leaves
+the focus of the inline container.
+Typically we want this behavior, one example where we don't would be an
+inline autocomplete editor.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> true</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_hostDT" class="attr item">
+    <a name="config_hostDT"></a> 
+    <h3 class="name"><code>hostDT</code></h3>
+    <span class="type">Y.DataTable</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l670"><code>gallery-js&#x2F;datatable-celleditor-inline.js:670</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Maintains a reference back to the calling DataTable instance</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_inputKeys" class="attr item">
+    <a name="config_inputKeys"></a> 
+    <h3 class="name"><code>inputKeys</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l739"><code>gallery-js&#x2F;datatable-celleditor-inline.js:739</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>A flag to indicate if cell-to-cell navigation should be implemented (currently setup for CTRL-arrow
+key, TAB and Shift-TAB) capability</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> true</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_keyDir" class="attr item">
+    <a name="config_keyDir"></a> 
+    <h3 class="name"><code>keyDir</code></h3>
+    <span class="type">Array as row,col from current TD</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l751"><code>gallery-js&#x2F;datatable-celleditor-inline.js:751</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Tracks navigation changes during keyboard input as relative [row,col] changes from the currently
+active cell TD.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> []</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_keyFiltering" class="attr item">
+    <a name="config_keyFiltering"></a> 
+    <h3 class="name"><code>keyFiltering</code></h3>
+    <span class="type">RegExp | Function</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l805"><code>gallery-js&#x2F;datatable-celleditor-inline.js:805</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Provides a keystroke filtering capability to restrict input into the editing area checked during the
+"keypress" event.  This attribute is set to either a RegEx or a function that confirms if the keystroke
+was valid for this editor.  (TRUE meaning valid, FALSE meaning invalid)</p>
+
+<p>If a function is provided, the single argument is the keystroke event facade <code>e</code> and if
+the keystroke is valid it should return true, otherwise if invalid false;</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code"><code class="prettyprint"> /\d/            // for numeric digit-only input
+ /\d|\-|\./      // for floating point numeric input
+ /\d|\//         // for Date field entry in MM/DD/YYYY format
+</code></pre>
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="attr_lastValue" class="attr item">
+    <a name="config_lastValue"></a> 
+    <h3 class="name"><code>lastValue</code></h3>
+    <span class="type">String | Number | Date</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l659"><code>gallery-js&#x2F;datatable-celleditor-inline.js:659</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Value that was contained in the cell when the Editor View was displayed</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_name" class="attr item">
+    <a name="config_name"></a> 
+    <h3 class="name"><code>name</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l626"><code>gallery-js&#x2F;datatable-celleditor-inline.js:626</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Name for this View instance</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_prepFn" class="attr item">
+    <a name="config_prepFn"></a> 
+    <h3 class="name"><code>prepFn</code></h3>
+    <span class="type">Function</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l681"><code>gallery-js&#x2F;datatable-celleditor-inline.js:681</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Function to execute on the "data" contents just prior to displaying in the Editor's main view
+(i.e. typically used for pre-formatting Date information from JS to mm/dd/YYYY format)</p>
+
+<p>This function will receive one argument "value" which is the data value from the record, and
+ the function runs in Editor scope.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_saveFn" class="attr item">
+    <a name="config_saveFn"></a> 
+    <h3 class="name"><code>saveFn</code></h3>
+    <span class="type">Function</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l697"><code>gallery-js&#x2F;datatable-celleditor-inline.js:697</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Function to execute when Editing is complete, prior to "saving" the data to the Record (Model)
+This function will receive one argument "value" which is the data value from the INPUT and within
+the scope of the current View instances.</p>
+
+<p>This method is intended to be used for input validation prior to saving.  <strong>If the returned value
+is "undefined" the cancelEditor method is executed.</strong></p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_validator" class="attr item">
+    <a name="config_validator"></a> 
+    <h3 class="name"><code>validator</code></h3>
+    <span class="type">RegExp | Function</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l826"><code>gallery-js&#x2F;datatable-celleditor-inline.js:826</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Provides the capability to validate the final saved value after editing is finished.
+This attribute can be set to either a RegEx or a function, that operates on the entire
+"value" setting of the editor input (whereas <a href="#attr_keyFilter">keyFiltering</a> performs
+validation checks on each key input).</p>
+
+<p>If a function is provided, the single argument is the value setting of the editor.
+the keystroke is valid it should return true, otherwise if invalid false;</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code"><code class="prettyprint"> /\d/            // for numeric digit-only input
+ /\d|\-|\.|\+/   // for floating point numeric input
+ /\d|\//         // for Date field entry in MM/DD/YYYY format
+</code></pre>
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="attr_value" class="attr item">
+    <a name="config_value"></a> 
+    <h3 class="name"><code>value</code></h3>
+    <span class="type">String | Number | Date</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l648"><code>gallery-js&#x2F;datatable-celleditor-inline.js:648</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Value that was saved in the Editor View and returned to the record</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_visible" class="attr item">
+    <a name="config_visible"></a> 
+    <h3 class="name"><code>visible</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l766"><code>gallery-js&#x2F;datatable-celleditor-inline.js:766</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Setting for checking the visibility status of this Editor</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_xy" class="attr item">
+    <a name="config_xy"></a> 
+    <h3 class="name"><code>xy</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l794"><code>gallery-js&#x2F;datatable-celleditor-inline.js:794</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>XY coordinate position of the editor View container (INPUT)</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="events" class="api-class-tabpanel">
+                <h2 class="off-left">Events</h2>
+
+                
+                    <div id="event_editorCancel" class="events item">
+    <h3 class="name"><code>editorCancel</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l390"><code>gallery-js&#x2F;datatable-celleditor-inline.js:390</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Fired when editing is cancelled (without saving) on this cell editor</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">rtn</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Returned object</p>
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                <code class="param-name">td</code>
+                                <span class="type">Node</span>
+
+                                <div class="param-description">
+                                    <p>TD Node for the edited cell</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                <code class="param-name">cell</code>
+                                <span class="type">Object</span>
+
+                                <div class="param-description">
+                                    <p>Current cell object</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                <code class="param-name">oldValue</code>
+                                <span class="type">String | Number | Date</span>
+
+                                <div class="param-description">
+                                    <p>Data value of this cell prior to editing</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+                
+                    <div id="event_editorCreated" class="events item">
+    <h3 class="name"><code>editorCreated</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l436"><code>gallery-js&#x2F;datatable-celleditor-inline.js:436</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>View event fired when the inline editor has been initialized and ready for usage.
+This event can be listened to in order to add additional content or widgets, etc onto
+the View's container.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">rtn</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Returned object</p>
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                <code class="param-name">inputNode</code>
+                                <span class="type">Node</span>
+
+                                <div class="param-description">
+                                    <p>The created INPUT[text] node</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                <code class="param-name">container</code>
+                                <span class="type">Object</span>
+
+                                <div class="param-description">
+                                    <p>The View container</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+                
+                    <div id="event_editorDestroyed" class="events item">
+    <h3 class="name"><code>editorDestroyed</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l161"><code>gallery-js&#x2F;datatable-celleditor-inline.js:161</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Event fired when the cell editor View is destroyed.</p>
+
+<p>Implementers can listen for this event to check if any sub-components / widgets, etc.. they
+had created as part of this View need to be destroyed or listener unbound.</p>
+    </div>
+
+    
+
+
+    
+</div>
+
+                
+                    <div id="event_editorHide" class="events item">
+    <h3 class="name"><code>editorHide</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l369"><code>gallery-js&#x2F;datatable-celleditor-inline.js:369</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Fired when the active cell editor is hidden</p>
+    </div>
+
+    
+
+
+    
+</div>
+
+                
+                    <div id="event_editorSave" class="events item">
+    <h3 class="name"><code>editorSave</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l332"><code>gallery-js&#x2F;datatable-celleditor-inline.js:332</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Event that is fired when the user has finished editing the View's cell contents (signified by either
+a keyboard RTN entry or "Save" button, etc...).</p>
+
+<p>This event is intended to be the PRIMARY means for implementers to know that the editing has been
+completed and validated.  Consumers (i.e. DataTable) should listen to this event and process it's results
+to save to the Model and or dataset for the DT.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">rtn</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Returned object</p>
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                <code class="param-name">td</code>
+                                <span class="type">Node</span>
+
+                                <div class="param-description">
+                                    <p>TD Node for the edited cell</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                <code class="param-name">cell</code>
+                                <span class="type">Object</span>
+
+                                <div class="param-description">
+                                    <p>Current cell object</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                <code class="param-name">oldValue</code>
+                                <span class="type">String | Number | Date</span>
+
+                                <div class="param-description">
+                                    <p>Data value of this cell prior to editing</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                <code class="param-name">newValue</code>
+                                <span class="type">String | Number | Date</span>
+
+                                <div class="param-description">
+                                    <p>Data value of this cell after editing</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+                
+                    <div id="event_editorShow" class="events item">
+    <h3 class="name"><code>editorShow</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l281"><code>gallery-js&#x2F;datatable-celleditor-inline.js:281</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Event fired when the cell editor is displayed and becomes visible.</p>
+
+<p>Implementers may listen for this event if they have configured complex View's, that include
+other widgets or components, to update their UI upon displaying of the view.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">rtn</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Returned object</p>
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                <code class="param-name">td</code>
+                                <span class="type">Node</span>
+
+                                <div class="param-description">
+                                    <p>TD Node instance of the calling editor</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                <code class="param-name">inputNode</code>
+                                <span class="type">Node</span>
+
+                                <div class="param-description">
+                                    <p>The editor's INPUT / TEXTAREA Node</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                <code class="param-name">value</code>
+                                <span class="type">String | Number | Date</span>
+
+                                <div class="param-description">
+                                    <p>The current "value" setting</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                <code class="param-name">cell</code>
+                                <span class="type">Object</span>
+
+                                <div class="param-description">
+                                    <p>object</p>
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+                
+            </div>
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

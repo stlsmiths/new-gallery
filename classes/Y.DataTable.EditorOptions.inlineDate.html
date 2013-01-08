@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>gallery-paginator-view</title>
+    <title>Y.DataTable.EditorOptions.inlineDate</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -158,80 +158,189 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>gallery-paginator-view Module</h1>
-<div class="box clearfix meta">
+                        <h1>Y.DataTable.EditorOptions.inlineDate Class</h1>
+<div class="box meta">
     
 
     
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;gallery-js_paginator-view.js.html#l328"><code>gallery-js&#x2F;paginator-view.js:328</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l1003"><code>gallery-js&#x2F;datatable-celleditor-inline.js:1003</code></a>
         </div>
     
 
     
-        <p>Available since 3.6.0</p>
+        
+            Module: <a href="../modules/gallery-datatable-celleditor-inline.html">gallery-datatable-celleditor-inline</a>
+        
+    
+
+    
+        <p>Available since 3.8.0</p>
     
 </div>
 
 
 
 <div class="box intro">
-    <p>A Model class extension to be used to track "pagination state" of a paged set of control elements.
-For example, can be used to track the pagination status of a DataTable where the user selects limited
-portions for display, against a larger data set.</p>
+    <h3>Inline Cell Editor "inlineDate"</h3>
 
-<p>The primary tools for maintaining "page state" is through the following attributes;</p>
+<p>This View configuration is used to setup an editor referenced as "inlineDate" as a simple inline-type
+cell editor.  It is identical to the "inline" textual editor but incorporates Numeric validation prior to
+saving to the DT.</p>
 
-<ul>
-<li><code>totalItems</code> &nbsp;&nbsp;  Which represents the "Total count of items of interest" (See attribute <a href="#attr_totalItems">totalItems</a> )</li>
-<li><code>itemsPerPage</code> &nbsp;&nbsp; Which represents the "Count of items on each page" (See attribute <a href="#attr_itemsPerPage">itemsPerPage</a> )</li>
-<li><code>page</code> &nbsp;&nbsp;  The currently selected page, within all pages required that encompass the above two attributes
-(See attribute <a href="#attr_page">page</a> )</li>
-</ul>
+<h5>Basic Usage:</h5>
 
-<h4>Usage</h4>
+<pre class="code"><code class="prettyprint">    // Column definition
+    { key:'weddingDate', editor:"inlineDate" }
 
-<pre class="code"><code class="prettyprint">// setup a paginator model for 500 'foo' items, paged at 50 per page ...
-var pagModel = new Y.PaginatorModel({
-   totalItems:     500,
-   itemsPerPage:   50
-});
-pagModel.get('totalPages');  // returns 10
-
-pagModel.set('page',3);
-pagModel.getAttrs(['lastPage','page','itemIndexStart','itemIndexEnd']);
-// returns ... { lastPage:1, page:3, itemIndexStart:100, itemIndexEnd:149 }
+    // Column definition with user-specified 'dateFormat' to display Date in text box on display
+    { key:'date_of_claim', editor:"inlineDate", editorConfig:{ dateformat:'%Y-%m-%d'} }
 </code></pre>
+
+<h5>Standard Configuration</h5>
+
+<p>This inline editor creates a simple INPUT[type=text] control and positions it to match the underlying TD node.  Since
+a JS Date object isn't very pretty to display / edit in a textbox, we use a <code>prepFn</code> to preformat the Date in a
+human-readable form within the textbox.  Also a <code>saveFn</code> is defined to convert the entered data using <code>Date.parse</code>
+back to a valid JS Date prior to saving to the DT.</p>
+
+<p>The configuration {Object} for this cell editor View is predefined as;</p>
+
+<pre class="code"><code class="prettyprint">    Y.DataTable.EditorOptions.inlineDate = {
+         BaseViewClass:  Y.DataTable.BaseCellInlineEditor,
+         name:           'inlineDate',
+
+         // Define default date format string to use
+         dateFormat: "%D",
+
+         // Setup input key filtering for only digits, "-" or "/" characters
+         keyFiltering:   /\/|\d|\-/,
+
+         //  Function to call just prior to populating the INPUT text box,
+         //   so we pre-format the textbox in "human readable" format here
+         prepFn: function(v){
+             var dfmt =  this.get('dateFormat') || "%m/%d/%Y";
+             return Y.DataType.Date.format(v,{format:dfmt});
+         },
+
+         // Function to call after Date editing is complete, prior to saving to DataTable ...
+         //  i.e. converts back to "Date" format that DT expects ...
+         saveFn: function(v){
+             return Y.DataType.Date.parse(v);
+         }
+    };
+</code></pre>
+
+<p><strong>PLEASE NOTE:</strong> All other attributes from the <code>BaseViewClass</code> apply and can be included within the
+ <code>editorConfig</code> object.</p>
 </div>
 
 
 
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-        
-            <p>This module provides the following classes:</p>
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
 
-            <ul class="module-classes">
+        
+        
+        
+            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
             
-                <li class="module-class">
-                    <a href="..&#x2F;classes/Y.PaginatorModel.html">
-                        Y.PaginatorModel
-                    </a>
-                </li>
+
             
-                <li class="module-class">
-                    <a href="..&#x2F;classes/Y.PaginatorView.html">
-                        Y.PaginatorView
-                    </a>
-                </li>
+
             
-            </ul>
+                <div class="index-section attrs">
+                    <h3>Attributes</h3>
+
+                    <ul class="index-list attrs">
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_dateFormat">dateFormat</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+        </div>
+
+        
+
+        
+
+        
+            <div id="attrs" class="api-class-tabpanel">
+                <h2 class="off-left">Attributes</h2>
+
+                
+                    <div id="attr_dateFormat" class="attr item">
+    <a name="config_dateFormat"></a> 
+    <h3 class="name"><code>dateFormat</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l1059"><code>gallery-js&#x2F;datatable-celleditor-inline.js:1059</code></a>
+        
+        </p>
+
+        
+
         
     </div>
 
-    <div class="yui3-u-1-2">
+    <div class="description">
+        <p>A user-supplied Date format string to be used to display the date in the View's container.
+(Must conform with date format strings from http://yuilibrary.com/yui/docs/api/classes/Date.html#method_format,
+i.e. strftime format)</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;%D&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
         
     </div>
 </div>

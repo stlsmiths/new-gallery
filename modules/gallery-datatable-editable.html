@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>gallery-paginator-view</title>
+    <title>gallery-datatable-editable</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -158,7 +158,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>gallery-paginator-view Module</h1>
+                        <h1>gallery-datatable-editable Module</h1>
 <div class="box clearfix meta">
     
 
@@ -166,44 +166,95 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;gallery-js_paginator-view.js.html#l328"><code>gallery-js&#x2F;paginator-view.js:328</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l1175"><code>gallery-js&#x2F;datatable-editable.js:1175</code></a>
         </div>
     
 
     
-        <p>Available since 3.6.0</p>
+        <p>Available since 3.8.0</p>
     
 </div>
 
 
 
 <div class="box intro">
-    <p>A Model class extension to be used to track "pagination state" of a paged set of control elements.
-For example, can be used to track the pagination status of a DataTable where the user selects limited
-portions for display, against a larger data set.</p>
+    <p>A DataTable class extension that configures a DT for "editing", current deployment supports cell editing
+(and planned near-term support for row editing).</p>
 
-<p>The primary tools for maintaining "page state" is through the following attributes;</p>
+<p>This module is essentially a base wrapper-class to setup DT for editing with the appropriate attributes and
+listener creation / detachment.  The real guts of "datatable-editing" is in the View class definitions, within
+the gallery-datatable-celleditor-inline and gallery-datatable-celleditor-inline modules (and possibly future
+editor View class modules).</p>
 
-<ul>
-<li><code>totalItems</code> &nbsp;&nbsp;  Which represents the "Total count of items of interest" (See attribute <a href="#attr_totalItems">totalItems</a> )</li>
-<li><code>itemsPerPage</code> &nbsp;&nbsp; Which represents the "Count of items on each page" (See attribute <a href="#attr_itemsPerPage">itemsPerPage</a> )</li>
-<li><code>page</code> &nbsp;&nbsp;  The currently selected page, within all pages required that encompass the above two attributes
-(See attribute <a href="#attr_page">page</a> )</li>
-</ul>
+<h4>Functionality</h4>
 
-<h4>Usage</h4>
+<p>The module is basically intended to keep track of the editing state (via <a href="#attr_editable">editable</a> attribute) and
+housekeeping functions with regard to managing editor View instance creation, rendering and destruction.</p>
 
-<pre class="code"><code class="prettyprint">// setup a paginator model for 500 'foo' items, paged at 50 per page ...
-var pagModel = new Y.PaginatorModel({
-   totalItems:     500,
-   itemsPerPage:   50
-});
-pagModel.get('totalPages');  // returns 10
+<p>By design this module attempts to group common editor View instances wherever possible.  So for a DT with 14 columns
+all set with "inline" View classes only 1 View instance is created.
+<br/>Likewise if a DT uses 4 different "calendar" editor View types but each one as slightly different "editorConfig",
+then this module creates 4 different calendar View instances to handle the different configurations.</p>
 
-pagModel.set('page',3);
-pagModel.getAttrs(['lastPage','page','itemIndexStart','itemIndexEnd']);
-// returns ... { lastPage:1, page:3, itemIndexStart:100, itemIndexEnd:149 }
-</code></pre>
+<p>Listeners are set for the "cellEditorSave" event and saved to the active "data" setting within this module.</p>
+
+<p>Additional capability is provided for cell editing situations to add CSS classes to TD's which are added to "editable"
+columns (e.g. cursor) to indicate they are "clickable".</p>
+
+<p>This module works sortable, scrollable (y-scrolling currently) to make changes to the client-side of the DT model
+(remote updates should be provided via ModelList sync or user-defined listeners.)</p>
+
+<h4>Attributes</h4>
+
+<p>Presently three attributes are provided;
+<a href="#attr_editable">editable</a>, <a href="#attr_editOpenType">editOpenType</a> and <a href="#attr_defaultEditor">defaultEditor</a>.</p>
+
+<p>The primary ATTR is the <a href="#attr_editable">editable</a>, which is used to toggle on/off the editing state of the DT
+instance.</p>
+
+<p>The <a href="#attr_defaultEditor">defaultEditor</a> attribute is used to setup a cell editor View instance to be used on all editable columns
+that don't already have an editor assigned.</p>
+
+<h5>Column Properties</h5>
+
+<p>In addition to a few new attributes the module also recognizes some new column properties in order to support
+cell-editing in particular;</p>
+
+<table>
+<tr><th>editable</th><td>{Boolean}</td><td>Flag to indicate if column is editable (set <code>editable:false</code> to exclude an
+individual column)</td></tr>
+<tr><th>editor</th><td>{String}</td><td>Name of the defined Y.DataTable.EditorOptions View configuration for this column.</td></tr>
+<tr><th>editorConfig</th><td>{Object}</td><td>Passed to the View editor class when instantiated, and Y.merge'ed in to become View class
+attributes.</td></tr>
+</table>
+
+<p>When this module is loaded and the "editable:true" attribute is set, it attempts to economize on the "instantiation cost"
+of creating View instances by identifying only editor Views that are required based upon column definitions and/or the
+defaultEditor attribute. (e.g. if all columns are "text" editors, only one "text" editor View is instantiated)</p>
+
+<h5>... More Info</h5>
+
+<p>The module fires the event <a href="#event_cellEditorSave">cellEditorSave</a>, which can be listened for to provide updating
+of remote data back to a server (assuming a ModelList "sync" layer is NOT used).  Haven't provided the equivalent to
+YUI 2.x's "asyncSubmitter" because I think this event could easily be listened to in order to provide follow-on
+updating to remote data stores.</p>
+
+<p>A new class Object (Y.DataTable.EditorOptions) is added to the DataTable namespace that serves as the
+datastore of the editor View configuration properties.  Each "key" (object property) within this object
+is an entrypoint to a specific editor configuration, which are defined in the separate View class extensions (presently
+gallery-datatable-celleditor-inline and gallery-datatable-celleditor-popup. Please see those for specifics.)</p>
+
+<h6>KNOWN ISSUES:</h6>
+
+<p><ul>
+  <li>Works minimally with "y" scrolling, "x" scrolling still needs work.</li>
+  <li>Initial editor invocation is limited to "mouse" actions on TD only (although keyboard navigation cell-to-cell is available).</li>
+  <li>An issue arises on "datatable.destroy()" in Chrome from time to time when using inline editors, still investigating why.</li>
+  </ul></p>
+
+<h6>FUTURE:</h6>
+
+<p>This module will be amended to add support for "row" editing, if required.</p>
 </div>
 
 
@@ -216,14 +267,14 @@ pagModel.getAttrs(['lastPage','page','itemIndexStart','itemIndexEnd']);
             <ul class="module-classes">
             
                 <li class="module-class">
-                    <a href="..&#x2F;classes/Y.PaginatorModel.html">
-                        Y.PaginatorModel
+                    <a href="..&#x2F;classes/Y.DataTable.Editable.html">
+                        Y.DataTable.Editable
                     </a>
                 </li>
             
                 <li class="module-class">
-                    <a href="..&#x2F;classes/Y.PaginatorView.html">
-                        Y.PaginatorView
+                    <a href="..&#x2F;classes/Y.DataTable.EditorOptions.html">
+                        Y.DataTable.EditorOptions
                     </a>
                 </li>
             

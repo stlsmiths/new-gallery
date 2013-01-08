@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>gallery-paginator-view</title>
+    <title>Y.DataTable.EditorOptions.dropdown</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -158,80 +158,184 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>gallery-paginator-view Module</h1>
-<div class="box clearfix meta">
+                        <h1>Y.DataTable.EditorOptions.dropdown Class</h1>
+<div class="box meta">
     
 
     
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;gallery-js_paginator-view.js.html#l328"><code>gallery-js&#x2F;paginator-view.js:328</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-popup.js.html#l2350"><code>gallery-js&#x2F;datatable-celleditor-popup.js:2350</code></a>
         </div>
     
 
     
-        <p>Available since 3.6.0</p>
+        
+            Module: <a href="../modules/gallery-datatable-celleditor-popup.html">gallery-datatable-celleditor-popup</a>
+        
+    
+
+    
+        <p>Available since 3.8.0</p>
     
 </div>
 
 
 
 <div class="box intro">
-    <p>A Model class extension to be used to track "pagination state" of a paged set of control elements.
-For example, can be used to track the pagination status of a DataTable where the user selects limited
-portions for display, against a larger data set.</p>
+    <h3>Popup Cell Editor "dropdown"</h3>
 
-<p>The primary tools for maintaining "page state" is through the following attributes;</p>
+<p>This View configuration is used to create a popup cell editor containing a single SELECT control within
+the Overlay.</p>
 
-<ul>
-<li><code>totalItems</code> &nbsp;&nbsp;  Which represents the "Total count of items of interest" (See attribute <a href="#attr_totalItems">totalItems</a> )</li>
-<li><code>itemsPerPage</code> &nbsp;&nbsp; Which represents the "Count of items on each page" (See attribute <a href="#attr_itemsPerPage">itemsPerPage</a> )</li>
-<li><code>page</code> &nbsp;&nbsp;  The currently selected page, within all pages required that encompass the above two attributes
-(See attribute <a href="#attr_page">page</a> )</li>
-</ul>
+<p><em>Synonyms for this editor include "select" and "combobox".</em></p>
 
-<h4>Usage</h4>
+<h5>Basic Usage</h5>
 
-<pre class="code"><code class="prettyprint">// setup a paginator model for 500 'foo' items, paged at 50 per page ...
-var pagModel = new Y.PaginatorModel({
-   totalItems:     500,
-   itemsPerPage:   50
-});
-pagModel.get('totalPages');  // returns 10
+<pre class="code"><code class="prettyprint">   // Column definition ... simple Array data
+   { key:"inTheForest", editor:"dropdown",
+     editorConfig:{ dropdownOptions:[ "lions", "tigers", "bears", "oh my!" ] }
+   }
 
-pagModel.set('page',3);
-pagModel.getAttrs(['lastPage','page','itemIndexStart','itemIndexEnd']);
-// returns ... { lastPage:1, page:3, itemIndexStart:100, itemIndexEnd:149 }
+   // Column definition ... options via Object type data
+   { key:"color", formatter:"custom", formatConfig:stypesObj,
+     editor:"select", editorConfig:{
+        selectOptions:{ 0:'Red', 1:'Green', 2:'Fuschia', 3:'Blue' }
+     }
+   }
+
+   // Column definition ... options via Array of Objects, non-trivial!
+   { key:"firstTopping", editor:"dropdown",
+     editorConfig:{
+       dropdownOptions:[
+          {controlUnit:'a7',  descr:'Pepperoni'},    {controlUnit:'f3', descr:'Anchovies'},
+          {controlUnit:'b114',descr:'Extra Cheese'}, {controlUnit:'7', descr:'Mushrooms'}
+        ],
+       templateObject:{ propValue:'controlUnit', propText:'descr' }
+     }
+   }
 </code></pre>
+
+<h5>Standard Configuration</h5>
+
+<p>This editor creates a SELECT element within the popup Editor View container positioned directly over the TD element
+and populated via a Template (default Template.Micro, optionally Handlebars or other).  The "options" are set via
+the "dropdownOptions" (or selectOptions, comboboxOptions) setting and can be either Array based or an Object hash.</p>
+
+<p>The configuration {Object} for this cell editor View is predefined as;</p>
+
+<pre class="code"><code class="prettyprint">   Y.DataTable.EditorOptions.dropdown = {
+       BaseViewClass:  Y.DataTable.BaseCellPopupEditor,
+       name:           'dropdown',    // OR 'select' or 'combobox'
+
+       // Define the template for the SELECT and OPTIONS ...
+       templateObject: {
+
+           // Template Handlebars version ...
+           // NOTE: This editor currently uses Handlebars only, intend to use Template.Micro
+           //       but need to get this template micro http://yuilibrary.com/projects/yui3/ticket/2533040 fixed
+        //   html: '&lt;select class="myselect"&gt;'
+        //       + ''
+        //       + '&lt;/select&gt;'
+
+           // Template Micro version ...
+           html: '&lt;select class="myselect"&gt;'
+               + '&lt;% Y.Array.each( data.options, function(r){ %&gt;'
+               + '&lt;option value="&lt;%= r.value %&gt;" &lt;% (r.title) ? \'title="r.title"\' :  %&gt;&gt;&lt;%= r.text %&gt;&lt;/option&gt;'
+               + '&lt;% },this); %&gt;'
+               + '&lt;/select&gt;'
+
+       },
+
+       // Listeners applied to this cell editor's View instance ...
+       after: {
+
+           //--------
+           //  After the editor view instance is created,
+           //    set a "change" listener on the SELECT element
+           //--------
+           editorCreated: function(){
+               var cbox = this.overlay.get('contentBox');
+
+               this._subscr.push(
+                   cbox.delegate('change',function(e){
+                       var val = e.currentTarget.get('value');
+
+                       if(this._isZeroOr(val)) {
+                           this.saveEditor(val);
+                       }
+
+                   },'select', this)
+               );
+           },
+
+           //--------
+           //  After the editor is displayed,
+           //    update the currently selected OPTION based on the o.value
+           //--------
+           editorShow : function(o){
+               var sel   = this.overlay.get('contentBox').one('.myselect'),
+                   sopts = sel.get('options'),
+                   val   = o.value || this.get('value'),
+                   sopt;
+
+               sopts.some(function(n){
+                   if(n &amp;&amp; n.get('value') == val) {  // not a === check, to account for mixed vars
+                       sopt = n;
+                       return true;
+                   }
+               });
+
+               if(sopt) {
+                   sopt.set('selected',true);
+               }
+
+           }
+       }
+
+   };
+</code></pre>
+
+<p><strong>PLEASE NOTE:</strong> All other attributes from the <code>BaseViewClass</code> apply and can be included within the
+<code>editorConfig</code> object.</p>
+
+<h4>DEBUGGING</h4>
+
+<p>If your SELECT box contains "[object Object]" you probably forgot to define <code>propValue</code> and <code>propText</code>.</p>
 </div>
 
 
 
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-        
-            <p>This module provides the following classes:</p>
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
 
-            <ul class="module-classes">
-            
-                <li class="module-class">
-                    <a href="..&#x2F;classes/Y.PaginatorModel.html">
-                        Y.PaginatorModel
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="..&#x2F;classes/Y.PaginatorView.html">
-                        Y.PaginatorView
-                    </a>
-                </li>
-            
-            </ul>
         
-    </div>
+        
+        
+        
+    </ul>
 
-    <div class="yui3-u-1-2">
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+
+        
+
+        
+
         
     </div>
 </div>

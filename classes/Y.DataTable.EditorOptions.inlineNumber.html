@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>gallery-paginator-view</title>
+    <title>Y.DataTable.EditorOptions.inlineNumber</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -158,80 +158,189 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>gallery-paginator-view Module</h1>
-<div class="box clearfix meta">
+                        <h1>Y.DataTable.EditorOptions.inlineNumber Class</h1>
+<div class="box meta">
     
 
     
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;gallery-js_paginator-view.js.html#l328"><code>gallery-js&#x2F;paginator-view.js:328</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l915"><code>gallery-js&#x2F;datatable-celleditor-inline.js:915</code></a>
         </div>
     
 
     
-        <p>Available since 3.6.0</p>
+        
+            Module: <a href="../modules/gallery-datatable-celleditor-inline.html">gallery-datatable-celleditor-inline</a>
+        
+    
+
+    
+        <p>Available since 3.8.0</p>
     
 </div>
 
 
 
 <div class="box intro">
-    <p>A Model class extension to be used to track "pagination state" of a paged set of control elements.
-For example, can be used to track the pagination status of a DataTable where the user selects limited
-portions for display, against a larger data set.</p>
+    <h3>Inline Cell Editor "inlineNumber"</h3>
 
-<p>The primary tools for maintaining "page state" is through the following attributes;</p>
+<p>This View configuration is used to setup an editor referenced as "inlineNumber" as a simple inline-type
+cell editor.  It is identical to the "inline" textual editor but incorporates Numeric validation prior to
+saving to the DT.</p>
 
-<ul>
-<li><code>totalItems</code> &nbsp;&nbsp;  Which represents the "Total count of items of interest" (See attribute <a href="#attr_totalItems">totalItems</a> )</li>
-<li><code>itemsPerPage</code> &nbsp;&nbsp; Which represents the "Count of items on each page" (See attribute <a href="#attr_itemsPerPage">itemsPerPage</a> )</li>
-<li><code>page</code> &nbsp;&nbsp;  The currently selected page, within all pages required that encompass the above two attributes
-(See attribute <a href="#attr_page">page</a> )</li>
-</ul>
+<h5>Basic Usage:</h5>
 
-<h4>Usage</h4>
+<pre class="code"><code class="prettyprint">    // Column definition
+    { key:'unit_price', editor:"inlineNumber" }
 
-<pre class="code"><code class="prettyprint">// setup a paginator model for 500 'foo' items, paged at 50 per page ...
-var pagModel = new Y.PaginatorModel({
-   totalItems:     500,
-   itemsPerPage:   50
-});
-pagModel.get('totalPages');  // returns 10
-
-pagModel.set('page',3);
-pagModel.getAttrs(['lastPage','page','itemIndexStart','itemIndexEnd']);
-// returns ... { lastPage:1, page:3, itemIndexStart:100, itemIndexEnd:149 }
+    // Column definition ... to allow integers only
+    { key:'QuantityInStock', editor:"inlineNumber", editorConfig:{ keyFiltering: /\d/ }  }
 </code></pre>
+
+<h5>Standard Configuration</h5>
+
+<p>This inline editor creates a simple INPUT[type=text] control and positions it to match the underlying TD node.  A <code>saveFn</code>
+is defined that uses an ad-hoc attribute "validationRegEx" to test for validity prior to saving the data.  If the
+value passes validation it is converted to numeric form and returned.</p>
+
+<p>The configuration {Object} for this cell editor View is predefined as;</p>
+
+<pre class="code"><code class="prettyprint">     Y.DataTable.EditorOptions.inlineNumber = {
+         BaseViewClass:  Y.DataTable.BaseCellInlineEditor,
+         name:           'inlineNumber',
+         hideMouseLeave: false,
+
+         // Define a key filtering regex ... only allow digits, "-" or "."
+         keyFiltering:   /\.|\d|\-/,
+
+         // setup a RegExp to check for valid floating point input ....
+         validator: /^\s*(\+|-)?((\d+(\.\d*)?)|(\.\d*))\s*$/,
+
+         // Function to call after numeric editing is complete, prior to saving to DataTable ...
+         //  i.e. checks validation against ad-hoc attribute "validationRegExp" (if it exists)
+         //       and converts the value to numeric (or undefined if fails regexp);
+         saveFn: function(v){
+             var vre = this.get('validationRegExp'),
+                 value;
+             if(vre instanceof RegExp) {
+                 value = (vre.test(v)) ? +v : undefined;
+             } else {
+                 value = +v;
+             }
+             return value;
+         }
+     };
+</code></pre>
+
+<p><strong>PLEASE NOTE:</strong> All other attributes from the <code>BaseViewClass</code> apply and can be included within the
+ <code>editorConfig</code> object.</p>
 </div>
 
 
 
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-        
-            <p>This module provides the following classes:</p>
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
 
-            <ul class="module-classes">
+        
+        
+        
+            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
             
-                <li class="module-class">
-                    <a href="..&#x2F;classes/Y.PaginatorModel.html">
-                        Y.PaginatorModel
-                    </a>
-                </li>
+
             
-                <li class="module-class">
-                    <a href="..&#x2F;classes/Y.PaginatorView.html">
-                        Y.PaginatorView
-                    </a>
-                </li>
+
             
-            </ul>
+                <div class="index-section attrs">
+                    <h3>Attributes</h3>
+
+                    <ul class="index-list attrs">
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_validator">validator</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+        </div>
+
+        
+
+        
+
+        
+            <div id="attrs" class="api-class-tabpanel">
+                <h2 class="off-left">Attributes</h2>
+
+                
+                    <div id="attr_validator" class="attr item">
+    <a name="config_validator"></a> 
+    <h3 class="name"><code>validator</code></h3>
+    <span class="type">RegExp | Function</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l977"><code>gallery-js&#x2F;datatable-celleditor-inline.js:977</code></a>
+        
+        </p>
+
+        
+
         
     </div>
 
-    <div class="yui3-u-1-2">
+    <div class="description">
+        <p>A validation regular expression object used to check validity of the input floating point number.
+This can be defined by the user to accept other numeric input, or set to "null" to disable regex checks.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x2F;^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$&#x2F;</p>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
         
     </div>
 </div>

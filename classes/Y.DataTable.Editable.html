@@ -1,0 +1,4099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Y.DataTable.Editable</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/Y.Calendar.JumpNavView.html">Y.Calendar.JumpNavView</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.ContextMenuView.html">Y.ContextMenuView</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.BaseCellInlineEditor.html">Y.DataTable.BaseCellInlineEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.BaseCellPopupEditor.html">Y.DataTable.BaseCellPopupEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.CheckboxSelect.html">Y.DataTable.CheckboxSelect</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.Editable.html">Y.DataTable.Editable</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.html">Y.DataTable.EditorOptions</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.autocomplete.html">Y.DataTable.EditorOptions.autocomplete</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.calendar.html">Y.DataTable.EditorOptions.calendar</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.checkbox.html">Y.DataTable.EditorOptions.checkbox</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.date.html">Y.DataTable.EditorOptions.date</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.dropdown.html">Y.DataTable.EditorOptions.dropdown</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.inline.html">Y.DataTable.EditorOptions.inline</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.inlineAC.html">Y.DataTable.EditorOptions.inlineAC</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.inlineDate.html">Y.DataTable.EditorOptions.inlineDate</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.inlineNumber.html">Y.DataTable.EditorOptions.inlineNumber</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.number.html">Y.DataTable.EditorOptions.number</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.radio.html">Y.DataTable.EditorOptions.radio</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.text.html">Y.DataTable.EditorOptions.text</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.textarea.html">Y.DataTable.EditorOptions.textarea</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.Formatters.html">Y.DataTable.Formatters</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.Paginator.html">Y.DataTable.Paginator</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.Selection.html">Y.DataTable.Selection</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.FooterView.html">Y.FooterView</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.PaginatorModel.html">Y.PaginatorModel</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.PaginatorView.html">Y.PaginatorView</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.Plugin.Calendar.JumpNav.html">Y.Plugin.Calendar.JumpNav</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/contextmenu.html">contextmenu</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable.html">datatable</a></li>
+            
+                <li><a href="..&#x2F;modules/DataTable.html">DataTable</a></li>
+            
+                <li><a href="..&#x2F;modules/FooterView.html">FooterView</a></li>
+            
+                <li><a href="..&#x2F;modules/formatters.html">formatters</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-celleditor-inline.html">gallery-datatable-celleditor-inline</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-celleditor-popup.html">gallery-datatable-celleditor-popup</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-editable.html">gallery-datatable-editable</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-paginator.html">gallery-datatable-paginator</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-selection.html">gallery-datatable-selection</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-paginator-view.html">gallery-paginator-view</a></li>
+            
+                <li><a href="..&#x2F;modules/Selection.html">Selection</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1>Y.DataTable.Editable Class</h1>
+<div class="box meta">
+    
+
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l1"><code>gallery-js&#x2F;datatable-editable.js:1</code></a>
+        </div>
+    
+
+    
+        
+            Module: <a href="../modules/gallery-datatable-editable.html">gallery-datatable-editable</a>
+        
+    
+
+    
+</div>
+
+
+
+<div class="box intro">
+    <p>A DataTable class extension that configures a DT for "editing", current deployment supports cell editing
+(and planned near-term support for row editing).</p>
+
+<p>This module is essentially a base wrapper-class to setup DT for editing with the appropriate attributes and
+listener creation / detachment.  The real guts of "datatable-editing" is in the View class definitions, within
+the gallery-datatable-celleditor-inline and gallery-datatable-celleditor-inline modules (and possibly future
+editor View class modules).</p>
+
+<h4>Functionality</h4>
+
+<p>The module is basically intended to keep track of the editing state (via <a href="#attr_editable">editable</a> attribute) and
+housekeeping functions with regard to managing editor View instance creation, rendering and destruction.</p>
+
+<p>By design this module attempts to group common editor View instances wherever possible.  So for a DT with 14 columns
+all set with "inline" View classes only 1 View instance is created.
+<br/>Likewise if a DT uses 4 different "calendar" editor View types but each one as slightly different "editorConfig",
+then this module creates 4 different calendar View instances to handle the different configurations.</p>
+
+<p>Listeners are set for the "cellEditorSave" event and saved to the active "data" setting within this module.</p>
+
+<p>Additional capability is provided for cell editing situations to add CSS classes to TD's which are added to "editable"
+columns (e.g. cursor) to indicate they are "clickable".</p>
+
+<p>This module works sortable, scrollable (y-scrolling currently) to make changes to the client-side of the DT model
+(remote updates should be provided via ModelList sync or user-defined listeners.)</p>
+
+<h4>Attributes</h4>
+
+<p>Presently three attributes are provided;
+<a href="#attr_editable">editable</a>, <a href="#attr_editOpenType">editOpenType</a> and <a href="#attr_defaultEditor">defaultEditor</a>.</p>
+
+<p>The primary ATTR is the <a href="#attr_editable">editable</a>, which is used to toggle on/off the editing state of the DT
+instance.</p>
+
+<p>The <a href="#attr_defaultEditor">defaultEditor</a> attribute is used to setup a cell editor View instance to be used on all editable columns
+that don't already have an editor assigned.</p>
+
+<h5>Column Properties</h5>
+
+<p>In addition to a few new attributes the module also recognizes some new column properties in order to support
+cell-editing in particular;</p>
+
+<table>
+<tr><th>editable</th><td>{Boolean}</td><td>Flag to indicate if column is editable (set <code>editable:false</code> to exclude an
+individual column)</td></tr>
+<tr><th>editor</th><td>{String}</td><td>Name of the defined Y.DataTable.EditorOptions View configuration for this column.</td></tr>
+<tr><th>editorConfig</th><td>{Object}</td><td>Passed to the View editor class when instantiated, and Y.merge'ed in to become View class
+attributes.</td></tr>
+</table>
+
+<p>When this module is loaded and the "editable:true" attribute is set, it attempts to economize on the "instantiation cost"
+of creating View instances by identifying only editor Views that are required based upon column definitions and/or the
+defaultEditor attribute. (e.g. if all columns are "text" editors, only one "text" editor View is instantiated)</p>
+
+<h5>... More Info</h5>
+
+<p>The module fires the event <a href="#event_cellEditorSave">cellEditorSave</a>, which can be listened for to provide updating
+of remote data back to a server (assuming a ModelList "sync" layer is NOT used).  Haven't provided the equivalent to
+YUI 2.x's "asyncSubmitter" because I think this event could easily be listened to in order to provide follow-on
+updating to remote data stores.</p>
+
+<p>A new class Object (Y.DataTable.EditorOptions) is added to the DataTable namespace that serves as the
+datastore of the editor View configuration properties.  Each "key" (object property) within this object
+is an entrypoint to a specific editor configuration, which are defined in the separate View class extensions (presently
+gallery-datatable-celleditor-inline and gallery-datatable-celleditor-popup. Please see those for specifics.)</p>
+
+<h6>KNOWN ISSUES:</h6>
+
+<p><ul>
+  <li>Works minimally with "y" scrolling, "x" scrolling still needs work.</li>
+  <li>Initial editor invocation is limited to "mouse" actions on TD only (although keyboard navigation cell-to-cell is available).</li>
+  <li>An issue arises on "datatable.destroy()" in Chrome from time to time when using inline editors, still investigating why.</li>
+  </ul></p>
+
+<h6>FUTURE:</h6>
+
+<p>This module will be amended to add support for "row" editing, if required.</p>
+</div>
+
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+        
+        
+            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
+        
+        
+            <li class="api-class-tab events"><a href="#events">Events</a></li>
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method private">
+                                <a href="#method__afterEditableSort">_afterEditableSort</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__bindCellEditingListeners">_bindCellEditingListeners</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__bindEditable">_bindEditable</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__bindEditorScroll">_bindEditorScroll</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__buildColumnEditors">_buildColumnEditors</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__createCellEditorInstance">_createCellEditorInstance</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__destroyColumnEditors">_destroyColumnEditors</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__getAllCellEditors">_getAllCellEditors</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__handleCellClick">_handleCellClick</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__onCellEditorCancel">_onCellEditorCancel</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__onCellEditorSave">_onCellEditorSave</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__onKeyDirChange">_onKeyDirChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__onKeyEsc">_onKeyEsc</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__onScrollUpdateCellEditor">_onScrollUpdateCellEditor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__setDefaultEditor">_setDefaultEditor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__setEditable">_setEditable</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__setEditOpenType">_setEditOpenType</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__unbindCellEditingListeners">_unbindCellEditingListeners</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__unbindEditable">_unbindEditable</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__unsetEditor">_unsetEditor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__updateAllEditableColumnsCSS">_updateAllEditableColumnsCSS</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__updateEditableColumnCSS">_updateEditableColumnCSS</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public">
+                                <a href="#method_bindEditorListeners">bindEditorListeners</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method_destructor">destructor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getCellEditors">getCellEditors</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public">
+                                <a href="#method_getColumnByTd">getColumnByTd</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public">
+                                <a href="#method_getColumnNameByTd">getColumnNameByTd</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_hideAllCellEditors">hideAllCellEditors</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public">
+                                <a href="#method_hideCellEditor">hideCellEditor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method protected">
+                                <a href="#method_initializer">initializer</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public">
+                                <a href="#method_openCellEditor">openCellEditor</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                        
+                            <li class="index-item property private">
+                                <a href="#property__classColEditable">_classColEditable</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__columnEditors">_columnEditors</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__commonEditors">_commonEditors</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__openCell">_openCell</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__openColKey">_openColKey</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__openEditor">_openEditor</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__openRecord">_openRecord</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__openTd">_openTd</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__subscrCellEditors">_subscrCellEditors</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__subscrCellEditorScrolls">_subscrCellEditorScrolls</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__subscrEditable">_subscrEditable</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section attrs">
+                    <h3>Attributes</h3>
+
+                    <ul class="index-list attrs">
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_defaultEditor">defaultEditor</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_editable">editable</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_editOpenType">editOpenType</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events">
+                        
+                            <li class="index-item event">
+                                <a href="#event_cellEditorCancel">cellEditorCancel</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item event">
+                                <a href="#event_cellEditorSave">cellEditorSave</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__afterEditableSort" class="method item private">
+    <h3 class="name"><code>_afterEditableSort</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l862"><code>gallery-js&#x2F;datatable-editable.js:862</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Listener to the "sort" event, so we can hide any open editors and update the editable column CSS
+ after the UI refreshes</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__bindCellEditingListeners" class="method item private">
+    <h3 class="name"><code>_bindCellEditingListeners</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l350"><code>gallery-js&#x2F;datatable-editable.js:350</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Binds listeners to cell TD "open editing" events (i.e. either click or dblclick)
+as a result of DataTable setting "editable:true".</p>
+
+<p>Also sets a body listener for ESC key, to close the current open editor.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__bindEditable" class="method item private">
+    <h3 class="name"><code>_bindEditable</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l308"><code>gallery-js&#x2F;datatable-editable.js:308</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets up listeners for the DT editable module,</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__bindEditorScroll" class="method item private">
+    <h3 class="name"><code>_bindEditorScroll</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l408"><code>gallery-js&#x2F;datatable-editable.js:408</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets up listeners for DT scrollable "scroll" events</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__buildColumnEditors" class="method item private">
+    <h3 class="name"><code>_buildColumnEditors</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l659"><code>gallery-js&#x2F;datatable-editable.js:659</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Pre-scans the DT columns looking for column named editors and collects unique editors,
+instantiates them, and adds them to the  _columnEditors array.  This method only creates
+View instances that are required, through combination of _commonEditors and _columnEditors
+properties.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__createCellEditorInstance" class="method item private">
+    <h3 class="name"><code>_createCellEditorInstance</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>editorName</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>column</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">View</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l741"><code>gallery-js&#x2F;datatable-editable.js:741</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>This method takes the given editorName (i.e. 'textarea') and if the default editor
+configuration, adds in any column 'editorConfig' and creates the corresponding
+cell editor View instance.</p>
+
+<p>Makes shallow copies of editorConfig: { overlayConfig, widgetConfig, templateObject }</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">editorName</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Editor name</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">column</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Column object</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">View</span>:
+                    
+                    editorInstance  A newly created editor instance for the supplied editorname and column definitions
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__destroyColumnEditors" class="method item private">
+    <h3 class="name"><code>_destroyColumnEditors</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l792"><code>gallery-js&#x2F;datatable-editable.js:792</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Loops through the column editor instances, destroying them and resetting the collection to null object</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__getAllCellEditors" class="method item private">
+    <h3 class="name"><code>_getAllCellEditors</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l822"><code>gallery-js&#x2F;datatable-editable.js:822</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Utility method to combine "common" and "column-specific" cell editor instances and return them</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Array</span>:
+                    
+                    Of cell editor instances used for the current DT column configurations
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__handleCellClick" class="method item private">
+    <h3 class="name"><code>_handleCellClick</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l941"><code>gallery-js&#x2F;datatable-editable.js:941</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Listener to TD "click" events that hides a popup editor is not in the current cell</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onCellEditorCancel" class="method item private">
+    <h3 class="name"><code>_onCellEditorCancel</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>o</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l1071"><code>gallery-js&#x2F;datatable-editable.js:1071</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Listener to the cell editor View's "editorCancel" event.  The editorCancel event
+includes a return object with keys {td,cell,oldValue}</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">o</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Returned object from cell editor "editorCancel" event</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onCellEditorSave" class="method item private">
+    <h3 class="name"><code>_onCellEditorSave</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>o</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l1115"><code>gallery-js&#x2F;datatable-editable.js:1115</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Listener to the cell editor View's "editorSave" event, that when fired will
+update the Model's data value for the approrpriate column.</p>
+
+<p>The editorSave event includes a return object with keys {td,cell,newValue,oldValue}</p>
+
+<p>Note:  If a "sync" layer DOES NOT exist (i.e. DataSource), implementers can listen for
+the "saveCellEditing" event to send changes to a remote data store.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">o</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Returned object from cell editor "editorSave" event</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onKeyDirChange" class="method item private">
+    <h3 class="name"><code>_onKeyDirChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l1022"><code>gallery-js&#x2F;datatable-editable.js:1022</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Listens to changes to an Editor's "keyDir" event, which result from the user
+pressing "ctrl-" arrow key while in an editor to navigate to an cell.</p>
+
+<p>The value of "keyDir" is an Array of two elements, in [row,col] format which indicates
+the number of rows or columns to be changed to from the current TD location
+(See the base method .getCell)</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The attribute change event facade for the View's 'keyDir' attribute</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onKeyEsc" class="method item private">
+    <h3 class="name"><code>_onKeyEsc</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l849"><code>gallery-js&#x2F;datatable-editable.js:849</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Closes the active cell editor when a document ESC key is detected</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>key listener event facade</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onScrollUpdateCellEditor" class="method item private">
+    <h3 class="name"><code>_onScrollUpdateCellEditor</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l955"><code>gallery-js&#x2F;datatable-editable.js:955</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Listener that fires on a scrollable DT scrollbar "scroll" event, and updates the current XY position
+ of the currently open Editor.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__setDefaultEditor" class="method item private">
+    <h3 class="name"><code>_setDefaultEditor</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>v</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l624"><code>gallery-js&#x2F;datatable-editable.js:624</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Setter method for the <a href="#attr_defaultEditor">defaultEditor</a> attribute for this DT
+If the default editor is changed to a valid setting, we disable and re-enable
+editing on the DT to reset the column editors.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">v</code>
+                        <span class="type">String | Null</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Value to use for this attribute</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__setEditable" class="method item private">
+    <h3 class="name"><code>_setEditable</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>v</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l602"><code>gallery-js&#x2F;datatable-editable.js:602</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Setter method for the <a href="#attr_editable">editable</a> attribute for this DT</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">v</code>
+                        <span class="type">Boolean</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Flag to enable/disable editing mode for this DT instance</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__setEditOpenType" class="method item private">
+    <h3 class="name"><code>_setEditOpenType</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>v</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l644"><code>gallery-js&#x2F;datatable-editable.js:644</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Setter method for the <a href="#attr_editOpenType">editOpenType</a> attribute, specifies what
+TD event to listen to for initiating editing.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">v</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__unbindCellEditingListeners" class="method item private">
+    <h3 class="name"><code>_unbindCellEditingListeners</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l382"><code>gallery-js&#x2F;datatable-editable.js:382</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Unbinds the TD click delegated click listeners for initiating editing in TDs</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__unbindEditable" class="method item private">
+    <h3 class="name"><code>_unbindEditable</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l320"><code>gallery-js&#x2F;datatable-editable.js:320</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Unbinds ALL of the popup editor listeners and removes column editors.
+This should only be used when the DT is destroyed</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__unsetEditor" class="method item private">
+    <h3 class="name"><code>_unsetEditor</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l875"><code>gallery-js&#x2F;datatable-editable.js:875</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Re-initializes the static props to null</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__updateAllEditableColumnsCSS" class="method item private">
+    <h3 class="name"><code>_updateAllEditableColumnsCSS</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l889"><code>gallery-js&#x2F;datatable-editable.js:889</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Method to update all of the current TD's within the current DT to add/remove the editable CSS</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__updateEditableColumnCSS" class="method item private">
+    <h3 class="name"><code>_updateEditableColumnCSS</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>cname</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>opt</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l907"><code>gallery-js&#x2F;datatable-editable.js:907</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Method that adds/removes the CSS editable-column class from a DataTable column,
+based upon the setting of the boolean "opt"</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">cname</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Column key or name to alter</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">opt</code>
+                        <span class="type">Boolean</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>True of False to indicate if the CSS class should be added or removed</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_bindEditorListeners" class="method item public">
+    <h3 class="name"><code>bindEditorListeners</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l535"><code>gallery-js&#x2F;datatable-editable.js:535</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Over-rideable method that can be used to do other user bindings ?
+  (like hideEditor on mouseout, etc...)</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_destructor" class="method item protected">
+    <h3 class="name"><code>destructor</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l296"><code>gallery-js&#x2F;datatable-editable.js:296</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Cleans up ALL of the DT listeners and the editor View instances and generated private props</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_getCellEditors" class="method item">
+    <h3 class="name"><code>getCellEditors</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l545"><code>gallery-js&#x2F;datatable-editable.js:545</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns all cell editor View instances for the editable columns of the current DT instance</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Array</span>:
+                    
+                    editors  Array containing an Object as {columnKey, cellEditor, cellEditorName}
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getColumnByTd" class="method item public">
+    <h3 class="name"><code>getColumnByTd</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>cell</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l563"><code>gallery-js&#x2F;datatable-editable.js:563</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the Column object (from the original "columns") associated with the input TD Node.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">cell</code>
+                        <span class="type">Node</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Node of TD for which column object is desired</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    column The column object entry associated with the desired cell
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getColumnNameByTd" class="method item public">
+    <h3 class="name"><code>getColumnNameByTd</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>cell</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l576"><code>gallery-js&#x2F;datatable-editable.js:576</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the column "key" or "name" string for the requested TD Node</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">cell</code>
+                        <span class="type">Node</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Node of TD for which column name is desired</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                    colName Column name or key name
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_hideAllCellEditors" class="method item private">
+    <h3 class="name"><code>hideAllCellEditors</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l520"><code>gallery-js&#x2F;datatable-editable.js:520</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Utility method that scans through all editor instances and hides them</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_hideCellEditor" class="method item public">
+    <h3 class="name"><code>hideCellEditor</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l507"><code>gallery-js&#x2F;datatable-editable.js:507</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Cleans up a currently open cell editor View and unbinds any listeners that this DT had
+set on the View.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_initializer" class="method item protected">
+    <h3 class="name"><code>initializer</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag protected">protected</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l278"><code>gallery-js&#x2F;datatable-editable.js:278</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Initializer that sets up listeners for "editable" state and sets some CSS names</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_openCellEditor" class="method item public">
+    <h3 class="name"><code>openCellEditor</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l427"><code>gallery-js&#x2F;datatable-editable.js:427</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Opens the given TD eventfacade or Node with it's assigned cell editor.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade | Node</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Passed in object from an event OR a TD Node istance</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property__classColEditable" class="property item private">
+    <h3 class="name"><code>_classColEditable</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l232"><code>gallery-js&#x2F;datatable-editable.js:232</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Shortcut to the CSS class that is added to indicate a column is editable</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;yui3-datatable-col-editable&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__columnEditors" class="property item private">
+    <h3 class="name"><code>_columnEditors</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l257"><code>gallery-js&#x2F;datatable-editable.js:257</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Placeholder hash that stores cell editors keyed by column key (or column name) where the value
+for the associated key is either a (a) {String} which references an editor name in the <a href="#property__commonEditors">_commonEditors</a>
+hash or (b) {View} instance for a customized editor View instance (typically one with specified "editorConfig" in the
+column definition).</p>
+
+<p>The object is populated in method <a href="#method__buildColumnEditors">_buildColumnEditors</a>.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__commonEditors" class="property item private">
+    <h3 class="name"><code>_commonEditors</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l242"><code>gallery-js&#x2F;datatable-editable.js:242</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Placeholder hash that stores the "common" editors, i.e. standard editor names that occur
+within Y.DataTable.EditorOptions and are used in this DT.</p>
+
+<p>This object holds the View instances, keyed by the editor "name" for quick hash reference.
+The object is populated in method <a href="#method__buildColumnEditors">_buildColumnEditors</a>.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__openCell" class="property item private">
+    <h3 class="name"><code>_openCell</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l187"><code>gallery-js&#x2F;datatable-editable.js:187</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Holds the cell data for the actively edited TD, a complex object including the
+following;  {td, value, recClientId, colKey}</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__openColKey" class="property item private">
+    <h3 class="name"><code>_openColKey</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l167"><code>gallery-js&#x2F;datatable-editable.js:167</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Holds the column key (or name) of the TD cell being edited</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__openEditor" class="property item private">
+    <h3 class="name"><code>_openEditor</code></h3>
+    <span class="type">Y.View</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l146"><code>gallery-js&#x2F;datatable-editable.js:146</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Holds the View instance of the active cell editor currently displayed</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__openRecord" class="property item private">
+    <h3 class="name"><code>_openRecord</code></h3>
+    <span class="type">Model</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l156"><code>gallery-js&#x2F;datatable-editable.js:156</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Holds the current record (i.e. a Model class) of the TD being edited
+(Note: this may not always work, better to use "clientId" of the record, i.e. sorting, etc..)</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__openTd" class="property item private">
+    <h3 class="name"><code>_openTd</code></h3>
+    <span class="type">Node</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l177"><code>gallery-js&#x2F;datatable-editable.js:177</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Holds the TD Node currently being edited</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__subscrCellEditors" class="property item private">
+    <h3 class="name"><code>_subscrCellEditors</code></h3>
+    <span class="type">Array of EventHandles</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l210"><code>gallery-js&#x2F;datatable-editable.js:210</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Placeholder Array for TD editor invocation event handles (i.e. click or dblclick) that
+are set on the TBODY to initiate cellEditing.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__subscrCellEditorScrolls" class="property item private">
+    <h3 class="name"><code>_subscrCellEditorScrolls</code></h3>
+    <span class="type">Array of EventHandles</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l221"><code>gallery-js&#x2F;datatable-editable.js:221</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Placeholder for event handles for scrollable DT that listens to "scroll" events and repositions editor
+(we need two listeners, one for each of X or Y scroller)</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__subscrEditable" class="property item private">
+    <h3 class="name"><code>_subscrEditable</code></h3>
+    <span class="type">EventHandle</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l200"><code>gallery-js&#x2F;datatable-editable.js:200</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Placeholder for the DT level event listener for "editableChange" attribute.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="attrs" class="api-class-tabpanel">
+                <h2 class="off-left">Attributes</h2>
+
+                
+                    <div id="attr_defaultEditor" class="attr item">
+    <a name="config_defaultEditor"></a> 
+    <h3 class="name"><code>defaultEditor</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l119"><code>gallery-js&#x2F;datatable-editable.js:119</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Specifies a default editor name to respond to an editing event defined in <a href="#attr_editOpenType">_editOpenType</a>
+attribute.  The default editor is used if the DataTable is in editing mode (i.e. "editable:true") and if
+the column DOES NOT include a property editable:false in its definitions.</p>
+
+<p>Cell editors are typically assigned by setting a column property (i.e. editor:'text' or 'date') on each
+individual column.</p>
+
+<p>This attribute can be used to set a single editor to work on every column without having to define it on each
+column.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;none&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_editable" class="attr item">
+    <a name="config_editable"></a> 
+    <h3 class="name"><code>editable</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l89"><code>gallery-js&#x2F;datatable-editable.js:89</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>A boolean flag that sets the DataTable state to allow editing (either inline or popup cell editing).
+(Future may support row editing also)</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_editOpenType" class="attr item">
+    <a name="config_editOpenType"></a> 
+    <h3 class="name"><code>editOpenType</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l103"><code>gallery-js&#x2F;datatable-editable.js:103</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Defines the cell editing event type on the TD that initiates the editor, used to
+specify the listener that invokes an editor.</p>
+
+<p>Note: IMHO The only sensible options are 'click' or 'dblclick'</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;dblclick&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="events" class="api-class-tabpanel">
+                <h2 class="off-left">Events</h2>
+
+                
+                    <div id="event_cellEditorCancel" class="events item">
+    <h3 class="name"><code>cellEditorCancel</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l1102"><code>gallery-js&#x2F;datatable-editable.js:1102</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Fired when the open Cell Editor has sent an 'editorCancel' event, typically from
+a user cancelling editing via ESC key or "Cancel Button"</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">rtn</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Returned Object</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">td</code>
+                        <span class="type">Node</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The TD Node that was edited</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">cell</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The cell object container for the edited cell</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">record</code>
+                        <span class="type">Model</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Model instance of the record data for the edited cell</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">colKey</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Column key (or name) of the edited cell</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">newVal</code>
+                        <span class="type">String | Number | Date</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The old (last) value of the underlying data for the cell</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">editorName</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The name attribute of the editor that updated this cell</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+                
+                    <div id="event_cellEditorSave" class="events item">
+    <h3 class="name"><code>cellEditorSave</code></h3>
+    <span class="type"></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l1155"><code>gallery-js&#x2F;datatable-editable.js:1155</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Event fired after a Cell Editor has sent the 'editorSave' event closing an editing session.
+The event signature includes pertinent data on the cell, TD, record and column that was
+edited along with the prior and new values for the cell.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">rtn</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Returned Object</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">td</code>
+                        <span class="type">Node</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The TD Node that was edited</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">cell</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The cell object container for the edited cell</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">record</code>
+                        <span class="type">Model</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Model instance of the record data for the edited cell</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">colKey</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Column key (or name) of the edited cell</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">newVal</code>
+                        <span class="type">String | Number | Date</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The new (updated) value of the underlying data for the cell</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">newVal</code>
+                        <span class="type">String | Number | Date</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The old (last) value of the underlying data for the cell</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">editorName</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The name attribute of the editor that updated this cell</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+
+    
+</div>
+
+                
+            </div>
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

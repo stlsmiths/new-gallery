@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>gallery-paginator-view</title>
+    <title>gallery-datatable-celleditor-popup</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -158,7 +158,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>gallery-paginator-view Module</h1>
+                        <h1>gallery-datatable-celleditor-popup Module</h1>
 <div class="box clearfix meta">
     
 
@@ -166,44 +166,112 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;gallery-js_paginator-view.js.html#l328"><code>gallery-js&#x2F;paginator-view.js:328</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-popup.js.html#l2550"><code>gallery-js&#x2F;datatable-celleditor-popup.js:2550</code></a>
         </div>
     
 
     
-        <p>Available since 3.6.0</p>
+        <p>Available since 3.8.0</p>
     
 </div>
 
 
 
 <div class="box intro">
-    <p>A Model class extension to be used to track "pagination state" of a paged set of control elements.
-For example, can be used to track the pagination status of a DataTable where the user selects limited
-portions for display, against a larger data set.</p>
+    <p>This module defines an extension of View that includes a BASE Y.DataTable.BaseCellPopupEditor View class definition
+cell "pop-up" editor.  This view class includes an editor with HTML inserted into an Overlay widget directly over
+the TD cell.  Positioning, event management, creation/destruction and attribute changes are managed by this class.</p>
 
-<p>The primary tools for maintaining "page state" is through the following attributes;</p>
+<h5>Configuration</h5>
+
+<p>Y.DataTable.BaseCellPopupEditor by itself just creates an empty Overlay container, and really isn't meant to be used
+that way.  The view class includes a number of <a href="#attrs">attributes</a> that are the key to defining a workable popup editor
+and it's behaviors.</p>
+
+<p>The Y.DataTable.BaseCellPopupEditor View class communicates with the DataTable via the gallery-datatable-editable
+module, which sets up invocation and rendering of this View and establishes listeners for View events, thus the
+DataTable serves as a Controller.</p>
+
+<p>Since the generic View class permits ad-hoc attributes, the implementer can pass many properties in during instantiation
+that will become available as run-time View attributes.</p>
+
+<h5>View Construction / Rendering</h5>
+
+<p>HTML content that will be set to the Overlay's <code>bodyContent</code> is setup via the <a href="#attr_templateObject">templateObject</a> and
+it's <code>html</code> property.  The base view class uses the YUI Template module, and specifically the Template.Micro module to
+build out the HTML (Handlebars format is also available).  For many use cases you won't need a fancy "template", and
+in fact your templateObject.html may not include any "template parameters" at all -- which is perfectly fine.</p>
+
+<h5>Editing / Validation</h5>
+
+<p>This editor view creates the template'ed content, and attaches the <a href="#property__classInput">_inputClass</a> wherever the
+implementer assigns the class tag.  The editor can also be configured to listen to the base view's <a href="#event_editorCreated">editorCreated</a>
+in order to attach or configure a Widget or another UI component within the View container.</p>
+
+<p>Key listeners are provided to detect changes to the first Node within the container with <a href="#property__classInput">_inputClass</a>
+set.  These keylisteners can be used prohibit invalid keystrokes (via the <a href="#attr_keyFiltering">keyFiltering</a> setting) and
+to allow validation upon a "save" entry (keyboard RTN stroke) where a <a href="#attr_validator">validator</a> can be prescribed to
+allow/disallow changes based upon the overall "value" of the INPUT control.</p>
+
+<p>If the implementer has connected a Widget to this View, the widget should be configured by it's own "selection" mechanism
+to either call this View's <a href="#event_saveEditor">saveEditor</a> or<a href="#event_cancelEditor">cancelEditor</a> methods to ensure proper
+saving / closing of the Overlay.</p>
+
+<h5>Navigation</h5>
+
+<p>The editor provides the capability to navigate from TD cell via key listeners on the following key
+combinations;
+* CTRL-arrow keys
+* TAB goes to RIGHT, SHIFT-TAB goes to left
+* ESC cancels editing
+* RTN saves cell</p>
+
+<p>Key navigation can be disabled via the <a href="#attr_inputKeys">inputKeys</a> attribute set to <code>false</code>.</p>
+
+<p>When a "key navigation" request is received it is passed to the <a href="#attr_keyDir">keyDir</a> as a change
+in [row,col] that implementers can listen to "change" events on, to reposition and open editing on the
+new relative cell.  (NOTE: This view does not reposition, it simply fires a <code>keyDirChange</code> event.</p>
+
+<h5>Events</h5>
+
+<p>Several events are fired by this View;  which can be listened for and acted upon to achieve differing results.
+For example, the Y.DataTable.EditorOptions.inlineAC (inline autocompletion editor) listens for the
+<a href="#event_editorCreated">editorCreated</a> event and once received, it configures the autocomplete plugin onto the
+INPUT node.</p>
+
+<h5>Pre-Built Popup Editors</h5>
+
+<p>This Module includes several pre-defined editor configurations which are stored within the Y.DataTable.EditorOptions
+namespace (presently there are popup editors for "textbox", "textarea", "checkbox", "radio", "dropdown", "autocomplete",
+"calendar", "date", "number").  New popup editors can be created and added to this namespace at runtime,
+and by defining the <code>BaseViewClass:Y.DataTable.BaseCellPopupEditor</code> property.</p>
+
+<p>This Y.DataTable.BaseCellinlineEditor class is similar to (and compatible with ) the Y.DataTable.BaseCellPopupEditor
+in another gallery module.  Note that since the "inline" editor uses a simple INPUT[type=text] Node instead of an
+Overlay the codeline is quite a bit simpler.</p>
+
+<p>The pre-built configuration options are stored in an Object variable Y.DataTable.EditorOptions within
+the DataTable namespace.  The gallery-datatable-editable module uses the Y.DataTable.EditorOptions to
+create required editor View instances.</p>
+
+<p>For example, the pre-built configuration object for the <a href="Y.DataTable.EditorOptions.number.html">number</a> popup editor
+is stored as <code>Y.DataTable.EditorOptions.number</code>.</p>
+
+<p>To configure an editor on-the-fly (i.e within a DataTable column definition) just include the configuration object options
+within DT's column <code>editorConfig</code> object, which is Y.merge'ed with the pre-built configs;</p>
+
+<pre class="code"><code class="prettyprint">   // Column definition ... disabling keyfiltering and setting a CSS class
+   { key:'firstName',
+     editor:"text", editorConfig:{ className:'align-right', keyFiltering:null }
+   }
+</code></pre>
+
+<h6>KNOWN ISSUES:</h6>
 
 <ul>
-<li><code>totalItems</code> &nbsp;&nbsp;  Which represents the "Total count of items of interest" (See attribute <a href="#attr_totalItems">totalItems</a> )</li>
-<li><code>itemsPerPage</code> &nbsp;&nbsp; Which represents the "Count of items on each page" (See attribute <a href="#attr_itemsPerPage">itemsPerPage</a> )</li>
-<li><code>page</code> &nbsp;&nbsp;  The currently selected page, within all pages required that encompass the above two attributes
-(See attribute <a href="#attr_page">page</a> )</li>
+<li>In-cell key navigation with scrolling DT's can put the View out of the DT limits, no bounds checking is currently done!</li>
+<li>Some problems have been encountered after "datatable.destroy()" and then immediate re-building of the same DT without a page refresh.</li>
 </ul>
-
-<h4>Usage</h4>
-
-<pre class="code"><code class="prettyprint">// setup a paginator model for 500 'foo' items, paged at 50 per page ...
-var pagModel = new Y.PaginatorModel({
-   totalItems:     500,
-   itemsPerPage:   50
-});
-pagModel.get('totalPages');  // returns 10
-
-pagModel.set('page',3);
-pagModel.getAttrs(['lastPage','page','itemIndexStart','itemIndexEnd']);
-// returns ... { lastPage:1, page:3, itemIndexStart:100, itemIndexEnd:149 }
-</code></pre>
 </div>
 
 
@@ -216,14 +284,62 @@ pagModel.getAttrs(['lastPage','page','itemIndexStart','itemIndexEnd']);
             <ul class="module-classes">
             
                 <li class="module-class">
-                    <a href="..&#x2F;classes/Y.PaginatorModel.html">
-                        Y.PaginatorModel
+                    <a href="..&#x2F;classes/Y.DataTable.BaseCellPopupEditor.html">
+                        Y.DataTable.BaseCellPopupEditor
                     </a>
                 </li>
             
                 <li class="module-class">
-                    <a href="..&#x2F;classes/Y.PaginatorView.html">
-                        Y.PaginatorView
+                    <a href="..&#x2F;classes/Y.DataTable.EditorOptions.autocomplete.html">
+                        Y.DataTable.EditorOptions.autocomplete
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="..&#x2F;classes/Y.DataTable.EditorOptions.calendar.html">
+                        Y.DataTable.EditorOptions.calendar
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="..&#x2F;classes/Y.DataTable.EditorOptions.checkbox.html">
+                        Y.DataTable.EditorOptions.checkbox
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="..&#x2F;classes/Y.DataTable.EditorOptions.date.html">
+                        Y.DataTable.EditorOptions.date
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="..&#x2F;classes/Y.DataTable.EditorOptions.dropdown.html">
+                        Y.DataTable.EditorOptions.dropdown
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="..&#x2F;classes/Y.DataTable.EditorOptions.number.html">
+                        Y.DataTable.EditorOptions.number
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="..&#x2F;classes/Y.DataTable.EditorOptions.radio.html">
+                        Y.DataTable.EditorOptions.radio
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="..&#x2F;classes/Y.DataTable.EditorOptions.text.html">
+                        Y.DataTable.EditorOptions.text
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="..&#x2F;classes/Y.DataTable.EditorOptions.textarea.html">
+                        Y.DataTable.EditorOptions.textarea
                     </a>
                 </li>
             

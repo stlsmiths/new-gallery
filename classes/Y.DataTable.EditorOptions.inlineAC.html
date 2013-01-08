@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>gallery-paginator-view</title>
+    <title>Y.DataTable.EditorOptions.inlineAC</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -158,80 +158,217 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>gallery-paginator-view Module</h1>
-<div class="box clearfix meta">
+                        <h1>Y.DataTable.EditorOptions.inlineAC Class</h1>
+<div class="box meta">
     
 
     
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;gallery-js_paginator-view.js.html#l328"><code>gallery-js&#x2F;paginator-view.js:328</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l1087"><code>gallery-js&#x2F;datatable-celleditor-inline.js:1087</code></a>
         </div>
     
 
     
-        <p>Available since 3.6.0</p>
+        
+            Module: <a href="../modules/gallery-datatable-celleditor-inline.html">gallery-datatable-celleditor-inline</a>
+        
+    
+
+    
+        <p>Available since 3.8.0</p>
     
 </div>
 
 
 
 <div class="box intro">
-    <p>A Model class extension to be used to track "pagination state" of a paged set of control elements.
-For example, can be used to track the pagination status of a DataTable where the user selects limited
-portions for display, against a larger data set.</p>
+    <h3>Inline Cell Editor "inlineAC"</h3>
 
-<p>The primary tools for maintaining "page state" is through the following attributes;</p>
+<p>This View configuration is used to setup an inline editor referenced as "inlineAC" composed of a simple inline-type
+cell editor which has the AutoComplete plugin attached to the input node.</p>
 
-<ul>
-<li><code>totalItems</code> &nbsp;&nbsp;  Which represents the "Total count of items of interest" (See attribute <a href="#attr_totalItems">totalItems</a> )</li>
-<li><code>itemsPerPage</code> &nbsp;&nbsp; Which represents the "Count of items on each page" (See attribute <a href="#attr_itemsPerPage">itemsPerPage</a> )</li>
-<li><code>page</code> &nbsp;&nbsp;  The currently selected page, within all pages required that encompass the above two attributes
-(See attribute <a href="#attr_page">page</a> )</li>
-</ul>
+<h5>Basic Usage:</h5>
 
-<h4>Usage</h4>
+<pre class="code"><code class="prettyprint">   // Column definition
+   { key:'degreeProgram', editor:"inlineAC",
+     editorConfig:{
 
-<pre class="code"><code class="prettyprint">// setup a paginator model for 500 'foo' items, paged at 50 per page ...
-var pagModel = new Y.PaginatorModel({
-   totalItems:     500,
-   itemsPerPage:   50
-});
-pagModel.get('totalPages');  // returns 10
-
-pagModel.set('page',3);
-pagModel.getAttrs(['lastPage','page','itemIndexStart','itemIndexEnd']);
-// returns ... { lastPage:1, page:3, itemIndexStart:100, itemIndexEnd:149 }
+        // The following object is passed to "autocomplete" plugin when this
+        //   editor is instantiated
+        autocompleteConfig: {
+           source:  [ "Bachelor of Science", "Master of Science", "PhD" ]
+           on: {
+               select: function(r){
+                   var val = r.result.display;
+                   this.editor.saveEditor(val);
+               }
+           }
+        }
+      }
+   }
 </code></pre>
+
+<h5>Standard Configuration</h5>
+
+<p>This inline editor creates a simple INPUT[type=text] control and positions it to match the underlying TD node.
+When the editor is first instantiated, the Y.Plugin.AutoComplete is connected to the INPUT using the <code>autocompleteConfig</code>
+object passed in by the user.</p>
+
+<p>This editor View instance is attached to the autocomplete plugin as static property "editor".  An "on:select" listener
+is defined in the configs to take action on saving the selected item from the autocomplete.</p>
+
+<p>The configuration {Object} for this cell editor View is predefined as;</p>
+
+<pre class="code"><code class="prettyprint">    Y.DataTable.EditorOptions.inlineAC = {
+         BaseViewClass:  Y.DataTable.BaseCellInlineEditor,
+         name:           'inlineAC',
+         hideMouseLeave: false,
+
+         // Define listener to this editor View's events
+         after: {
+
+            //---------
+            //  After this View is instantiated and created,
+            //     configure the Y.Plugin.AutoComplete as a plugin to the editor INPUT node
+            //---------
+            editorCreated : function(o){
+               var inputNode = o.inputNode,
+                   // Get the users's editorConfig "autocompleteConfig" settings
+                   acConfig = this.get('autocompleteConfig') || {},
+                   editor = this;
+
+               if(inputNode &amp;&amp; Y.Plugin.AutoComplete) {
+                   // merge user settings with these required settings ...
+                   acConfig = Y.merge(acConfig,{
+                       alwaysShowList: true,
+                       render: true
+                   });
+                   // plug in the autocomplete and we're done ...
+                   inputNode.plug(Y.Plugin.AutoComplete, acConfig);
+
+                   // add this View class as a static prop on the ac plugin
+                   inputNode.ac.editor = editor;
+               }
+
+            }
+         }
+     };
+</code></pre>
+
+<p><strong>PLEASE NOTE:</strong> All other attributes from the <code>BaseViewClass</code> apply and can be included within the
+<code>editorConfig</code> object.</p>
 </div>
 
 
 
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-        
-            <p>This module provides the following classes:</p>
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
 
-            <ul class="module-classes">
+        
+        
+        
+            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
             
-                <li class="module-class">
-                    <a href="..&#x2F;classes/Y.PaginatorModel.html">
-                        Y.PaginatorModel
-                    </a>
-                </li>
+
             
-                <li class="module-class">
-                    <a href="..&#x2F;classes/Y.PaginatorView.html">
-                        Y.PaginatorView
-                    </a>
-                </li>
+
             
-            </ul>
+                <div class="index-section attrs">
+                    <h3>Attributes</h3>
+
+                    <ul class="index-list attrs">
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_autocompleteConfig">autocompleteConfig</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+        </div>
+
+        
+
+        
+
+        
+            <div id="attrs" class="api-class-tabpanel">
+                <h2 class="off-left">Attributes</h2>
+
+                
+                    <div id="attr_autocompleteConfig" class="attr item">
+    <a name="config_autocompleteConfig"></a> 
+    <h3 class="name"><code>autocompleteConfig</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l1168"><code>gallery-js&#x2F;datatable-celleditor-inline.js:1168</code></a>
+        
+        </p>
+
+        
+
         
     </div>
 
-    <div class="yui3-u-1-2">
+    <div class="description">
+        <p>A user-supplied set of configuration parameters to be passed into this View's Y.Plugin.AutoComplete
+configuration object.</p>
+
+<p>At a bare minimum, the user MUST provide the "source" of data for the AutoComplete !!</p>
+
+<p>For this control to save anything, the user needs to define an "on:select" listener in the AC's
+"autocompleteConfig" in order to saveEditor when the select action occurs.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> {}</p>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
         
     </div>
 </div>

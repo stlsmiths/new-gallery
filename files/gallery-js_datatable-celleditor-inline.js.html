@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>gallery-js&#x2F;datatable-celleditor-inline.js</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.5.1&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/Y.Calendar.JumpNavView.html">Y.Calendar.JumpNavView</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.ContextMenuView.html">Y.ContextMenuView</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.BaseCellInlineEditor.html">Y.DataTable.BaseCellInlineEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.BaseCellPopupEditor.html">Y.DataTable.BaseCellPopupEditor</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.CheckboxSelect.html">Y.DataTable.CheckboxSelect</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.Editable.html">Y.DataTable.Editable</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.html">Y.DataTable.EditorOptions</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.autocomplete.html">Y.DataTable.EditorOptions.autocomplete</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.calendar.html">Y.DataTable.EditorOptions.calendar</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.checkbox.html">Y.DataTable.EditorOptions.checkbox</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.date.html">Y.DataTable.EditorOptions.date</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.dropdown.html">Y.DataTable.EditorOptions.dropdown</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.inline.html">Y.DataTable.EditorOptions.inline</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.inlineAC.html">Y.DataTable.EditorOptions.inlineAC</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.inlineDate.html">Y.DataTable.EditorOptions.inlineDate</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.inlineNumber.html">Y.DataTable.EditorOptions.inlineNumber</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.number.html">Y.DataTable.EditorOptions.number</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.radio.html">Y.DataTable.EditorOptions.radio</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.text.html">Y.DataTable.EditorOptions.text</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.EditorOptions.textarea.html">Y.DataTable.EditorOptions.textarea</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.Formatters.html">Y.DataTable.Formatters</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.Paginator.html">Y.DataTable.Paginator</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.DataTable.Selection.html">Y.DataTable.Selection</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.FooterView.html">Y.FooterView</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.PaginatorModel.html">Y.PaginatorModel</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.PaginatorView.html">Y.PaginatorView</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.Plugin.Calendar.JumpNav.html">Y.Plugin.Calendar.JumpNav</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/contextmenu.html">contextmenu</a></li>
+            
+                <li><a href="..&#x2F;modules/datatable.html">datatable</a></li>
+            
+                <li><a href="..&#x2F;modules/DataTable.html">DataTable</a></li>
+            
+                <li><a href="..&#x2F;modules/FooterView.html">FooterView</a></li>
+            
+                <li><a href="..&#x2F;modules/formatters.html">formatters</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-celleditor-inline.html">gallery-datatable-celleditor-inline</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-celleditor-popup.html">gallery-datatable-celleditor-popup</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-editable.html">gallery-datatable-editable</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-paginator.html">gallery-datatable-paginator</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-selection.html">gallery-datatable-selection</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-paginator-view.html">gallery-paginator-view</a></li>
+            
+                <li><a href="..&#x2F;modules/Selection.html">Selection</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: gallery-js&#x2F;datatable-celleditor-inline.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;**
+ A View class that serves as the BASE View class for a TD Cell &quot;inline&quot; editor, i.e. an editor that
+ is a single INPUT node that completely overlies the TD cell.  This editor is intended to replicate
+ the familiar &quot;spreadsheet&quot; type of input.
+
+ ##### Editing &#x2F; Validation
+
+ This editor view creates a simple INPUT[type=text] control and repositions and resizes it to match the
+ underlying TD, set with a z-Index to visually appear over the TD cell.
+
+ Key listeners are provided to detect changes, prohibit invalid keystrokes (via the [keyFiltering](#attr_keyFiltering)
+  setting) and to allow validation upon a &quot;save&quot; entry (keyboard RTN stroke) where a [validator](#attr_validator) can
+ be prescribed to allow&#x2F;disallow changes based upon the overall &quot;value&quot; of the INPUT control.
+
+ ##### Navigation
+ The editor provides the capability to navigate from TD cell via key listeners on the following key
+ combinations;
+  * CTRL-arrow keys
+  * TAB goes to RIGHT, SHIFT-TAB goes to left
+  * ESC cancels editing
+  * RTN saves cell
+
+ Key navigation can be disabled via the [inputKeys](#attr_inputKeys) attribute set to &#x60;false&#x60;.
+
+ When a &quot;key navigation&quot; request is received it is passed to the [keyDir](#attr_keyDir) as a change
+ in [row,col] that implementers can listen to &quot;change&quot; events on, to reposition and open editing on the
+ new relative cell.  (NOTE: This view does not reposition, it simply fires a &#x60;keyDirChange&#x60; event.
+
+ ##### Events
+ Several events are fired by this View;  which can be listened for and acted upon to achieve differing results.
+ For example, the Y.DataTable.EditorOptions.inlineAC (inline autocompletion editor) listens for the
+ [editorCreated](#event_editorCreated) event and once received, it configures the autocomplete plugin onto the
+ INPUT node.
+
+ ##### Configuration
+ Ths Y.DataTable.BaseCellInlineEditor editor is intended to be configured by varying the configuration
+ parameters (i.e. attribute and related configuration) to permit a variety of editing features.
+
+ Since the View class permits ad-hoc attributes, the implementer can pass many properties in during instantiation
+ that will become available as run-time View attributes.
+
+ This Module includes several pre-defined editor configurations which are stored within the Y.DataTable.EditorOptions
+ namespace (presently there are &quot;inline&quot;, &quot;inlineNumber&quot;, &quot;inlineDate&quot;, &quot;inlineAC&quot;).  New inline editors can be
+ created and added to this namespace at runtime, and by defining the &#x60;BaseViewClass:Y.DataTable.BaseCellInlineEditor&#x60; property.
+
+ For example, the pre-built configuration object for the [inlineDate](Y.DataTable.EditorOptions.inlineDate.html) inline editor
+ is stored as &#x60;Y.DataTable.EditorOptions.inlineDate&#x60;.
+
+ To configure an editor on-the-fly (i.e. within a DataTable column definition) just include the configuration object options
+ within DT&#x27;s column &#x60;editorConfig&#x60; object, which is Y.merge&#x27;ed with the pre-built configs;
+
+        &#x2F;&#x2F; define an &#x27;inlineDate&#x27; editor with additional configs ...
+        { key:&#x27;date_of_claim&#x27;, editor:&quot;inlineDate&quot;, editorConfig:{ dateformat:&#x27;%Y-%m-%d&#x27;} }
+
+ This &#x60;Y.DataTable.BaseCellinlineEditor&#x60; class is similar to (and compatible with ) the &#x60;Y.DataTable.BaseCellPopupEditor&#x60;
+ in another gallery module.  Note that since the &quot;inline&quot; editor uses a simple INPUT[type=text] Node instead of an
+ Overlay the codeline is quite a bit simpler.
+
+ ###### KNOWN ISSUES:
+   &lt;ul&gt;
+   &lt;li&gt;This View doesn&#x27;t work well with scrolling DT&#x27;s, so I&#x27;ve disabled it currently.&lt;&#x2F;li&gt;
+   &lt;li&gt;Sometimes after a DT&#x27;s &#x60;editable&#x60; ATTR is toggled true&#x2F;false a &quot;cannot read &#x27;style&#x27;&quot; message occurs and editing failes
+        requiring a page refresh.&lt;&#x2F;li&gt;
+   &lt;&#x2F;ul&gt;
+
+ @module gallery-datatable-celleditor-inline
+ @class Y.DataTable.BaseCellInlineEditor
+ @extends Y.View
+ @author Todd Smith
+ @since 3.8.0
+ **&#x2F;
+var KEYC_ESC = 27,
+    KEYC_RTN = 13,
+    KEYC_TAB = 9,
+    KEYC_UP  = 38,
+    KEYC_DOWN  = 40,
+    KEYC_RIGHT  = 39,
+    KEYC_LEFT  = 37;
+
+Y.DataTable.BaseCellInlineEditor =  Y.Base.create(&#x27;celleditor&#x27;,Y.View,[],{
+
+    &#x2F;**
+     * Defines the INPUT HTML content &quot;template&quot; for this editor&#x27;s View container
+     * @property template
+     * @type String
+     * @default &#x27;&lt;input type=&quot;text&quot; class=&quot;{cssInput}&quot; &#x2F;&gt;&#x27;
+     * @static
+     *&#x2F;
+    template: &#x27;&lt;input type=&quot;text&quot; class=&quot;{cssInput}&quot; &#x2F;&gt;&#x27;,
+
+    &#x2F;**
+     * Defines the View container events and listeners used within this View
+     * @property events
+     * @type Object
+     * @default See Code
+     * @static
+     *&#x2F;
+    events : {
+        &#x27;input&#x27; : {
+            &#x27;keypress&#x27;:     &#x27;_onKeyPress&#x27;,      &#x2F;&#x2F; for key filtering and generic keys
+            &#x27;keydown&#x27;:      &#x27;_onKeyDown&#x27;,       &#x2F;&#x2F; for direction, ESC only
+            &#x27;click&#x27; :       &#x27;_onClick&#x27;,
+            &#x27;mouseleave&#x27; :  &#x27;_onMouseLeave&#x27;
+        }
+    },
+
+    &#x2F;**
+     * Array of detach handles to any listeners set on this View class
+     * @property _subscr
+     * @type Array of EventHandles
+     * @default null
+     * @protected
+     * @static
+     *&#x2F;
+    _subscr: null,
+
+    &#x2F;**
+     * CSS classname to identify the editor&#x27;s INPUT Node
+     * @property _classInput
+     * @type String
+     * @default &#x27;yui3-datatable-inline-input&#x27;
+     * @protected
+     * @static
+     *&#x2F;
+    _cssInput: &#x27;yui3-datatable-inline-input&#x27;,
+
+    &#x2F;**
+     * Placeholder for the created INPUT Node created within the View container
+     * @property _inputNode
+     * @type Node
+     * @default null
+     * @protected
+     * @static
+     *&#x2F;
+    _inputNode: false,
+
+&#x2F;&#x2F;======================   LIFECYCLE METHODS   ===========================
+
+    &#x2F;**
+     * Initialize and create the View contents
+     * @method initializer
+     * @public
+     * @return {*}
+     *&#x2F;
+    initializer: function(){
+        this._createUI();
+        this._bindUI();
+        return this;
+    },
+
+    &#x2F;**
+     * Cleans up the View after it is destroyed
+     * @method destructor
+     * @public
+     *&#x2F;
+    destructor: function(){
+        this._unbindUI();
+        this.fire(&#x27;editorDestroyed&#x27;);
+    },
+
+    &#x2F;**
+     * Event fired when the cell editor View is destroyed.
+     *
+     * Implementers can listen for this event to check if any sub-components &#x2F; widgets, etc.. they
+     * had created as part of this View need to be destroyed or listener unbound.
+     *
+     * @event editorDestroyed
+     *&#x2F;
+
+    &#x2F;**
+     * Adds a listener to this editor instance to reposition based on &quot;xy&quot; attribute changes
+     * @method _bindUI
+     * @private
+     *&#x2F;
+    _bindUI: function(){
+
+        this.publish({
+            editorSave: {
+                defaultFn:   this._defEditorSaveFn,
+                emitFacade:  true,
+                preventable: true
+            },
+            editorCancel: {
+                defaultFn:   this._defEditorCancelFn,
+                emitFacade:  true,
+                preventable: true
+            }
+        });
+
+        &#x2F;&#x2F; This is here to support &quot;scrolling&quot; of the underlying DT ...
+        this._subscr = [];
+        this._subscr.push( this.on(&#x27;xyChange&#x27;,this._setEditorXY) );
+    },
+
+    &#x2F;**
+     * Detaches any listener handles created by this view
+     * @method _unbindUI
+     * @private
+     *&#x2F;
+    _unbindUI: function(){
+        Y.Array.each(this._subscr,function(e){
+            if(e &amp;&amp; e.detach) {
+                e.detach();
+            }
+        });
+        this._subscr = null;
+    },
+
+    &#x2F;**
+     * The defaultFn for the &#x60;editorSave&#x60; event
+     * @method _defEditorSaveFn
+     * @param e {EventFacade} For editorSave event
+     * @private
+     *&#x2F;
+    _defEditorSaveFn: function(e){
+        this.set(&#x27;value&#x27;, e.newValue);
+        this.hideEditor();
+    },
+
+    &#x2F;**
+     * The defaultFn for the &#x60;editorCancel&#x60; event
+     * @method _defEditorCancelFn
+     * @private
+     *&#x2F;
+    _defEditorCancelFn: function(){
+        this.hideEditor();
+    },
+
+&#x2F;&#x2F;======================   PUBLIC METHODS   ===========================
+
+    &#x2F;**
+     * Displays the inline cell editor and positions &#x2F; resizes the INPUT to
+     * overlay the edited TD element.
+     *
+     * Set the initial value for the INPUT element, after preprocessing (if reqd)
+     *
+     * @method showEditor
+     * @param {Node} td The Node instance of the TD to begin editing on
+     * @public
+     *&#x2F;
+    showEditor: function(td) {
+        var cont = this.get(&#x27;container&#x27;),
+            cell = this.get(&#x27;cell&#x27;),
+            val  = cell.value || this.get(&#x27;value&#x27;),
+            xy,prepfn;
+
+        &#x2F;&#x2F;
+        &#x2F;&#x2F; Get the TD Node&#x27;s XY position, and resize&#x2F;position the container
+        &#x2F;&#x2F;   over the TD
+        &#x2F;&#x2F;
+        td = cell.td || td;
+        xy = td.getXY();
+
+        cont.show();
+        this._resizeCont(cont,td);
+        cont.setXY(xy);
+
+        &#x2F;&#x2F; focus the inner INPUT ...
+        this._inputNode.focus();
+
+        &#x2F;&#x2F; if there is a &quot;prep&quot; function ... call it to pre-process the editing
+        prepfn = this.get(&#x27;prepFn&#x27;);
+        val = (prepfn &amp;&amp; prepfn.call) ? prepfn.call(this,val) : val;
+
+        &#x2F;&#x2F; set the INPUT value
+        this._inputNode.set(&#x27;value&#x27;,val);
+        this.set(&#x27;lastValue&#x27;,val);
+
+        this._set(&#x27;visible&#x27;,true);
+        this._set(&#x27;hidden&#x27;,false);
+
+        this.fire(&#x27;editorShow&#x27;,{
+            td:         td,
+            cell:       cell,
+            inputNode:  this._inputNode,
+            value:      val
+        });
+
+    },
+
+    &#x2F;**
+     * Event fired when the cell editor is displayed and becomes visible.
+     *
+     * Implementers may listen for this event if they have configured complex View&#x27;s, that include
+     * other widgets or components, to update their UI upon displaying of the view.
+     *
+     * @event editorShow
+     * @param {Object} rtn Returned object
+     * @param {Node} rtn.td TD Node instance of the calling editor
+     * @param {Node} rtn.inputNode The editor&#x27;s INPUT &#x2F; TEXTAREA Node
+     * @param {String|Number|Date} rtn.value The current &quot;value&quot; setting
+     * @param {Object} rtn.cell object
+     *&#x2F;
+
+    &#x2F;**
+     * Saves the View&#x27;s &#x60;value&#x60; setting (usually after keyboard RTN or other means) and fires the
+     * [editorSave](#event_editorSave) event so consumers (i.e. DataTable) can make final changes to the
+     * Model or dataset.
+     *
+     * Thank you to **Satyam** for his guidance on configuring the event publishing, defaultFn related to this
+     * technique!
+
+     * @method saveEditor
+     * @param val {String|Number|Date} Raw value setting to be saved after editing
+     * @public
+     *&#x2F;
+    saveEditor: function(val){
+        &#x2F;&#x2F;
+        &#x2F;&#x2F;  Only save the edited data if it is valid ...
+        &#x2F;&#x2F;
+        if( val !== undefined &amp;&amp; val !== null ){
+
+            &#x2F;&#x2F; If a &quot;save&quot; function was defined, run thru it and update the &quot;value&quot; setting
+            var savefn = this.get(&#x27;saveFn&#x27;) ;
+            val = (savefn &amp;&amp; savefn.call) ? savefn.call(this,val) : val;
+
+            if(val === undefined) {
+                &#x2F;&#x2F;val = this.get(&#x27;lastValue&#x27;);
+                this.cancelEditor();
+                return;
+            }
+
+            this.fire(&quot;editorSave&quot;,{
+                td:         this.get(&#x27;cell&#x27;).td,
+                cell:       this.get(&#x27;cell&#x27;),
+                oldValue:   this.get(&#x27;lastValue&#x27;),
+                newValue:   val
+            });
+        }
+    },
+
+    &#x2F;**
+     * Event that is fired when the user has finished editing the View&#x27;s cell contents (signified by either
+     * a keyboard RTN entry or &quot;Save&quot; button, etc...).
+     *
+     * This event is intended to be the PRIMARY means for implementers to know that the editing has been
+     * completed and validated.  Consumers (i.e. DataTable) should listen to this event and process it&#x27;s results
+     * to save to the Model and or dataset for the DT.
+     *
+     * @event editorSave
+     * @param {Object} rtn Returned object
+     *  @param {Node} rtn.td TD Node for the edited cell
+     *  @param {Object} rtn.cell Current cell object
+     *  @param {String|Number|Date} rtn.oldValue Data value of this cell prior to editing
+     *  @param {String|Number|Date} rtn.newValue Data value of this cell after editing
+     *&#x2F;
+
+    &#x2F;**
+     * Hides the current editor View instance.  If the optional &#x60;hideMe&#x60; param is true this View will
+     * be temporarily &quot;hidden&quot; (used for scrolling DT&#x27;s when the TD is scrolled off&#x2F;on to the page)
+     *
+     * @method hideEditor
+     * @public
+     *&#x2F;
+    hideEditor: function(hideMe){
+        var cont  = this.get(&#x27;container&#x27;);
+        if(cont &amp;&amp; cont.hide) {
+            cont.hide();
+        }
+        if(hideMe===true) {
+            this._set(&#x27;hidden&#x27;,true);
+        }
+        this._set(&#x27;visible&#x27;,false);
+
+        this.fire(&#x27;editorHide&#x27;);
+
+    },
+
+    &#x2F;**
+     * Fired when the active cell editor is hidden
+     * @event editorHide
+     *&#x2F;
+
+    &#x2F;**
+     * Called when the user has requested to cancel, and abort any changes to the DT cell,
+     * usually signified by a keyboard ESC or &quot;Cancel&quot; button, etc..
+     *
+     * @method cancelEditor
+     * @public
+     *&#x2F;
+    cancelEditor: function(){
+      &#x2F;&#x2F;  this.hideEditor();
+        this.fire(&quot;editorCancel&quot;,{
+            td:         this.get(&#x27;cell&#x27;).td,
+            cell:       this.get(&#x27;cell&#x27;),
+            oldValue:   this.get(&#x27;lastValue&#x27;)
+        });
+    },
+
+    &#x2F;**
+     * Fired when editing is cancelled (without saving) on this cell editor
+     * @event editorCancel
+     * @param {Object} rtn Returned object
+     *  @param {Node} rtn.td TD Node for the edited cell
+     *  @param {Object} rtn.cell Current cell object
+     *  @param {String|Number|Date} rtn.oldValue Data value of this cell prior to editing
+     *&#x2F;
+
+&#x2F;&#x2F;======================   PRIVATE METHODS   ===========================
+
+    &#x2F;**
+     * Processes the initial container for this View, sets up the HTML content
+     *  and creates a listener for positioning changes
+     * @method _createUI
+     * @private
+     *&#x2F;
+    _createUI: function() {
+        var container = this.get(&#x27;container&#x27;),
+            html      = Y.Lang.sub(this.template, {cssInput:this._cssInput});
+
+        &#x2F;&#x2F; set the View container contents
+        container.setHTML(html);
+
+        &#x2F;&#x2F; Append the container element to the DOM if it&#x27;s not on the page already.
+        if (!container.inDoc()) {
+          Y.one(&#x27;body&#x27;).append(container);
+        }
+
+        container.setStyle(&#x27;zIndex&#x27;,999);
+
+        container.hide();
+
+        &#x2F;&#x2F; set a static placeholder for the input ...
+        this._inputNode = container.one(&#x27;input&#x27;);
+        if(this.get(&#x27;className&#x27;)) {
+            this._inputNode.addClass(this.get(&#x27;className&#x27;));
+        }
+
+        this.fire(&#x27;editorCreated&#x27;,{
+            inputNode:  this._inputNode,
+            container:  container
+        });
+
+    },
+
+    &#x2F;**
+     * View event fired when the inline editor has been initialized and ready for usage.
+     * This event can be listened to in order to add additional content or widgets, etc onto
+     * the View&#x27;s container.
+     *
+     * @event editorCreated
+     * @param {Object} rtn Returned object
+     *  @param {Node} rtn.inputNode The created INPUT[text] node
+     *  @param {Object} rtn.container The View container
+     *&#x2F;
+
+    &#x2F;**
+     * Resizes the view &quot;container&quot; to match the dimensions of the TD cell that is
+     *  being edited.
+     *
+     * @method _resizeCont
+     * @param {Node} cont The Node instance of the &quot;container&quot; of this view
+     * @param {Node} td The Node instance for the TD to match dimensions of
+     * @private
+     *&#x2F;
+    _resizeCont: function(cont,td) {
+        var w   = this._parseStyle(td,&#x27;width&#x27;),
+            h   = this._parseStyle(td,&#x27;height&#x27;),
+            pl  = this._parseStyle(td,&#x27;paddingLeft&#x27;),
+            pt  = this._parseStyle(td,&#x27;paddingTop&#x27;),
+            blw = this._parseStyle(td,&#x27;borderLeftWidth&#x27;);
+
+        &#x2F;&#x2F;  resize the INPUT width and height based upon the TD&#x27;s styles
+        w += pl + blw - 1;
+        h += pt;
+
+        cont.setStyle(&#x27;width&#x27;,w+&#x27;px&#x27;);
+        cont.setStyle(&#x27;height&#x27;,h+&#x27;px&#x27;);
+
+    },
+
+    &#x2F;**
+     * Helper method that returns the computed CSS style for the reference node as a parsed number
+     * @method _parseStyle
+     * @param el {Node} Node instance to check style on
+     * @param v {String} Style name to return
+     * @return {Number|String} Computed style with &#x27;px&#x27; removed
+     * @private
+     *&#x2F;
+    _parseStyle: function(el,v) {
+        return +(el.getComputedStyle(v).replace(&#x2F;px&#x2F;,&#x27;&#x27;));
+    },
+
+    &#x2F;**
+     * Listener to INPUT &quot;click&quot; events that will stop bubbling to the DT TD listener,
+     * to prevent closing editing while clicking within an INPUT.
+     * @method _onClick
+     * @param o {EventFacade}
+     * @private
+     *&#x2F;
+    _onClick: function(o) {
+        o.stopPropagation();
+    },
+
+    &#x2F;**
+     * Listener to mouseleave event that will hide the editor if attribute &quot;hideMouseLeave&quot; is true
+     * @method _onMouseLeave
+     * @private
+     *&#x2F;
+    _onMouseLeave : function() {
+        if(this.get(&#x27;hideMouseLeave&#x27;)){
+            this.hideEditor();
+        }
+    },
+
+    &#x2F;**
+     * This method can be used to quickly reset the current View editor&#x27;s position,
+     *  used for scrollable DataTables.
+     *
+     * NOTE: Scrollable inline editing is a little &quot;rough&quot; right now
+     *
+     * @method _setEditorXY
+     * @param e {EventFacade} The xy attribute change event facade
+     * @private
+     *&#x2F;
+    _setEditorXY: function() {
+
+        &#x2F;&#x2F;if(this._inputNode &amp;&amp; e.newVal) {
+        &#x2F;&#x2F;    this._inputNode.setXY(e.newVal);
+        &#x2F;&#x2F;}
+
+        &#x2F;&#x2F;TODO: Worst case, if this doesn&#x27;t work just hide this sucker on scrolling !
+        this.hideEditor();
+    },
+
+    &#x2F;**
+     * Provides a method to process keypress entries and validate or prevent invalid inputs.
+     * This method is meant to be overrideable by implementers.
+     *
+     * @method _onKeyPress
+     * @param e {EventFacade} Key press event object
+     * @public
+     *&#x2F;
+    _onKeyPress: function(e) {
+        var keyc    = e.keyCode,
+            inp     = e.target || this._inputNode,
+            value   = inp.get(&#x27;value&#x27;),
+            keyfilt = this.get(&#x27;keyFiltering&#x27;),
+         &#x2F;&#x2F;   keyvald = this.get(&#x27;keyValidator&#x27;),
+            kchar   = String.fromCharCode(keyc),
+            flagRE  = true,
+            krtn;
+
+        &#x2F;&#x2F;
+        &#x2F;&#x2F; If RTN, then prevent and save ...
+        &#x2F;&#x2F;
+        if(keyc === KEYC_RTN) {
+            e.preventDefault();
+            this.saveEditor(value);
+        }
+
+        &#x2F;&#x2F;
+        &#x2F;&#x2F; Check key filtering validation ... either a RegExp or a user-function
+        &#x2F;&#x2F;
+        if(keyfilt instanceof RegExp) {
+            flagRE = (!kchar.match(keyfilt)) ? false : flagRE;
+        } else if (Y.Lang.isFunction(keyfilt)) {
+            krtn = keyfilt.call(this,e);
+            flagRE = (krtn) ? true : false;
+        }
+
+        &#x2F;&#x2F; If key filtering returned false, prevent continuing
+        if(!flagRE) {
+            e.preventDefault();
+        }
+
+    },
+
+
+    &#x2F;**
+     * Key listener for the INPUT inline editor, &quot;keydown&quot; is checked for non-printing key
+     *  strokes, navigation or ESC
+     *
+     * @method _onKeyDown
+     * @param e {EventFacade} Keydown event facade
+     * @private
+     *&#x2F;
+    _onKeyDown : function(e){
+        var keyc    = e.keyCode,
+            dir;
+
+        switch(keyc) {
+
+            case KEYC_ESC:
+                e.preventDefault();
+                this.hideEditor();
+                break;
+
+            case KEYC_UP:
+                dir = (e.ctrlKey) ? [-1,0] : null;
+                break;
+
+            case KEYC_DOWN:
+                dir = (e.ctrlKey) ? [1,0] : null;
+                break;
+
+            case KEYC_LEFT:
+                dir = (e.ctrlKey) ? [0,-1] : null;
+                break;
+
+            case KEYC_RIGHT:
+                dir = (e.ctrlKey) ? [0,1] : null;
+                break;
+
+            case KEYC_TAB: &#x2F;&#x2F; tab
+                dir = (e.shiftKey) ? [0,-1] : [0,1] ;
+                break;
+        }
+
+        &#x2F;&#x2F;
+        &#x2F;&#x2F;  If dir is non-falsey, a navigation direction was set ...
+        &#x2F;&#x2F;
+        if(dir) {
+            &#x2F;&#x2F; set the key direction movement
+            if(this.get(&#x27;inputKeys&#x27;)===true) {
+                this._set(&#x27;keyDir&#x27;,dir);
+            }
+            e.preventDefault();
+        }
+
+    }
+
+},{
+    ATTRS:{
+
+        &#x2F;**
+         * Name for this View instance
+         * @attribute name
+         * @type String
+         * @default null
+         *&#x2F;
+        name :{
+            value:      null,
+            validator:  Y.Lang.isString
+        },
+
+        &#x2F;**
+         * A cell reference object populated by the calling DataTable, contains
+         * the following key properties: {td,value,recClientId,colKey}
+         * @attribute cell
+         * @type Object
+         * @default {}
+         *&#x2F;
+        cell: {
+            value:  {}
+        },
+
+        &#x2F;**
+         * Value that was saved in the Editor View and returned to the record
+         *
+         * @attribute value
+         * @type {String|Number|Date}
+         * @default null
+         *&#x2F;
+        value: {
+            value:  null
+        },
+
+        &#x2F;**
+         * Value that was contained in the cell when the Editor View was displayed
+         *
+         * @attribute lastValue
+         * @type {String|Number|Date}
+         * @default null
+         *&#x2F;
+        lastValue:{
+            value:  null
+        },
+
+        &#x2F;**
+         * Maintains a reference back to the calling DataTable instance
+         * @attribute hostDT
+         * @type Y.DataTable
+         * @default null
+         *&#x2F;
+        hostDT : {
+            value:  null,
+            validator:  function(v) { return v instanceof Y.DataTable; }
+        },
+
+        &#x2F;**
+         * Function to execute on the &quot;data&quot; contents just prior to displaying in the Editor&#x27;s main view
+         * (i.e. typically used for pre-formatting Date information from JS to mm&#x2F;dd&#x2F;YYYY format)
+         *
+         * This function will receive one argument &quot;value&quot; which is the data value from the record, and
+         *  the function runs in Editor scope.
+         *
+         * @attribute prepFn
+         * @type Function
+         * @default null
+         *&#x2F;
+        prepFn: {
+            value:      null,
+            validator:  Y.Lang.isFunction
+        },
+
+        &#x2F;**
+         * Function to execute when Editing is complete, prior to &quot;saving&quot; the data to the Record (Model)
+         * This function will receive one argument &quot;value&quot; which is the data value from the INPUT and within
+         * the scope of the current View instances.
+         *
+         * This method is intended to be used for input validation prior to saving.  **If the returned value
+         * is &quot;undefined&quot; the cancelEditor method is executed.**
+         *
+         * @attribute saveFn
+         * @type Function
+         * @default null
+         *&#x2F;
+        saveFn:{
+            value:      null,
+            validator:  Y.Lang.isFunction
+        },
+
+        &#x2F;**
+         * This flag dictates whether the View container is hidden when the mouse leaves
+         * the focus of the inline container.
+         * Typically we want this behavior, one example where we don&#x27;t would be an
+         * inline autocomplete editor.
+         * @attribute hideMouseLeave
+         * @type Boolean
+         * @default true
+         *&#x2F;
+        hideMouseLeave : {
+            value:      true,
+            validator:  Y.Lang.isBoolean
+        },
+
+        &#x2F;**
+         * Prescribes a CSS class name to be added to the editor&#x27;s INPUT node after creation.
+         * @attribute className
+         * @type String
+         * @default null
+         *&#x2F;
+        className: {
+            value:      null,
+            validator:  Y.Lang.isString
+        },
+
+        &#x2F;**
+         * A flag to indicate if cell-to-cell navigation should be implemented (currently setup for CTRL-arrow
+         * key, TAB and Shift-TAB) capability
+         * @attribute inputKeys
+         * @type Boolean
+         * @default true
+         *&#x2F;
+        inputKeys:{
+            value:      true,
+            validator:  Y.Lang.isBoolean
+        },
+
+        &#x2F;**
+         * Tracks navigation changes during keyboard input as relative [row,col] changes from the currently
+         * active cell TD.
+         *
+         * @attribute keyDir
+         * @type Array as [row,col] from current TD
+         * @readOnly
+         * @default []
+         *&#x2F;
+        keyDir: {
+            value:      [],
+            readOnly:   true,
+            validator:  Y.Lang.isArray
+        },
+
+        &#x2F;**
+         * Setting for checking the visibility status of this Editor
+         * @attribute visible
+         * @type Boolean
+         * @default false
+         * @readOnly
+         *&#x2F;
+        visible: {
+            value:      false,
+            readOnly:   true,
+            validator:  Y.Lang.isBoolean
+        },
+
+        &#x2F;**
+         * Setting to check if the editor is &quot;still open&quot; but just hidden, created in order to support
+         * scrolling datatables when an editor scrolls out of open window.
+         *
+         * @attribute hidden
+         * @type Boolean
+         * @default false
+         * @readOnly
+         *&#x2F;
+        hidden: {
+            value:      false,
+            readOnly:   true,
+            validator:  Y.Lang.isBoolean
+        },
+
+        &#x2F;**
+         * XY coordinate position of the editor View container (INPUT)
+         * @attribute xy
+         * @type Array
+         * @default null
+         *&#x2F;
+        xy : {
+            value:      null,
+            validator:  Y.Lang.isArray
+        },
+
+        &#x2F;**
+         * Provides a keystroke filtering capability to restrict input into the editing area checked during the
+         * &quot;keypress&quot; event.  This attribute is set to either a RegEx or a function that confirms if the keystroke
+         * was valid for this editor.  (TRUE meaning valid, FALSE meaning invalid)
+         *
+         * If a function is provided, the single argument is the keystroke event facade &#x60;e&#x60; and if
+         * the keystroke is valid it should return true, otherwise if invalid false;
+         *
+         *  @example
+         *      &#x2F;\d&#x2F;            &#x2F;&#x2F; for numeric digit-only input
+         *      &#x2F;\d|\-|\.&#x2F;      &#x2F;&#x2F; for floating point numeric input
+         *      &#x2F;\d|\&#x2F;&#x2F;         &#x2F;&#x2F; for Date field entry in MM&#x2F;DD&#x2F;YYYY format
+         *
+         * @attribute keyFiltering
+         * @type {RegExp|Function}
+         * @default null
+         *&#x2F;
+        keyFiltering:  {
+            value:  null
+        },
+
+        &#x2F;**
+         * Provides the capability to validate the final saved value after editing is finished.
+         * This attribute can be set to either a RegEx or a function, that operates on the entire
+         * &quot;value&quot; setting of the editor input (whereas [keyFiltering](#attr_keyFilter) performs
+         * validation checks on each key input).
+         *
+         * If a function is provided, the single argument is the value setting of the editor.
+         * the keystroke is valid it should return true, otherwise if invalid false;
+         *
+         *  @example
+         *      &#x2F;\d&#x2F;            &#x2F;&#x2F; for numeric digit-only input
+         *      &#x2F;\d|\-|\.|\+&#x2F;   &#x2F;&#x2F; for floating point numeric input
+         *      &#x2F;\d|\&#x2F;&#x2F;         &#x2F;&#x2F; for Date field entry in MM&#x2F;DD&#x2F;YYYY format
+         *
+         * @attribute validator
+         * @type {RegExp|Function}
+         * @default null
+         *&#x2F;
+        validator: {
+            value:      null
+        }
+
+        &#x2F;**
+          Concept for user-prescribed key mappings ... still incomplete
+
+            keyNav: { modifier:&#x27;ctrl+meta&#x27;, circular:true  }
+
+          OR, define ALL recognized key actions for navigation ...
+
+            keyNav:{
+
+               keydown:  {
+                    left:  [ {ctrlKey:37}, {shiftKey:9}
+                    right: [ {ctrlKey:39
+                    up:    [ 38
+                    down:  [ 40
+                    save:  [ 13
+                    cancel: [27
+               },
+
+               mouse: {
+                   open : [click, focus]
+                   close : [ blur ]
+               }
+            }
+
+         *&#x2F;
+
+    }
+});
+
+
+&#x2F;&#x2F;====================================================================================================================
+&#x2F;&#x2F;                   I N L I N E    C E L L    E D I T O R    D E F I N I T I O N S
+&#x2F;&#x2F;====================================================================================================================
+
+
+&#x2F;**
+### Inline Cell Editor &quot;inline&quot;
+This View configuration is used to setup an editor referenced as &quot;inline&quot; as a simple inline-type cell editor.
+
+##### Basic Usage:
+          &#x2F;&#x2F; Column definition
+          { key:&#x27;surName&#x27;, editor:&quot;inline&quot; }
+
+##### Standard Configuration
+This inline editor creates a simple INPUT[type=text] control and positions it to match the underlying TD node. It
+uses the default settings from the BaseViewClass&#x27;s attributes.
+
+The configuration {Object} for this cell editor View is predefined as;
+
+         Y.DataTable.EditorOptions.inline = {
+             BaseViewClass:  Y.DataTable.BaseCellInlineEditor,
+             name:           &#x27;inline&#x27;
+         };
+
+ **PLEASE NOTE:** All other attributes from the &#x60;BaseViewClass&#x60; apply and can be included within the
+ &#x60;editorConfig&#x60; object.
+
+@class Y.DataTable.EditorOptions.inline
+@since 3.8.0
+@public
+**&#x2F;
+Y.DataTable.EditorOptions.inline = {
+    BaseViewClass:  Y.DataTable.BaseCellInlineEditor,
+    name:           &#x27;inline&#x27;
+};
+
+
+&#x2F;**
+### Inline Cell Editor &quot;inlineNumber&quot;
+This View configuration is used to setup an editor referenced as &quot;inlineNumber&quot; as a simple inline-type
+cell editor.  It is identical to the &quot;inline&quot; textual editor but incorporates Numeric validation prior to
+saving to the DT.
+
+##### Basic Usage:
+        &#x2F;&#x2F; Column definition
+        { key:&#x27;unit_price&#x27;, editor:&quot;inlineNumber&quot; }
+
+        &#x2F;&#x2F; Column definition ... to allow integers only
+        { key:&#x27;QuantityInStock&#x27;, editor:&quot;inlineNumber&quot;, editorConfig:{ keyFiltering: &#x2F;\d&#x2F; }  }
+
+##### Standard Configuration
+This inline editor creates a simple INPUT[type=text] control and positions it to match the underlying TD node.  A &#x60;saveFn&#x60;
+is defined that uses an ad-hoc attribute &quot;validationRegEx&quot; to test for validity prior to saving the data.  If the
+value passes validation it is converted to numeric form and returned.
+
+The configuration {Object} for this cell editor View is predefined as;
+
+         Y.DataTable.EditorOptions.inlineNumber = {
+             BaseViewClass:  Y.DataTable.BaseCellInlineEditor,
+             name:           &#x27;inlineNumber&#x27;,
+             hideMouseLeave: false,
+
+             &#x2F;&#x2F; Define a key filtering regex ... only allow digits, &quot;-&quot; or &quot;.&quot;
+             keyFiltering:   &#x2F;\.|\d|\-&#x2F;,
+
+             &#x2F;&#x2F; setup a RegExp to check for valid floating point input ....
+             validator: &#x2F;^\s*(\+|-)?((\d+(\.\d*)?)|(\.\d*))\s*$&#x2F;,
+
+             &#x2F;&#x2F; Function to call after numeric editing is complete, prior to saving to DataTable ...
+             &#x2F;&#x2F;  i.e. checks validation against ad-hoc attribute &quot;validationRegExp&quot; (if it exists)
+             &#x2F;&#x2F;       and converts the value to numeric (or undefined if fails regexp);
+             saveFn: function(v){
+                 var vre = this.get(&#x27;validationRegExp&#x27;),
+                     value;
+                 if(vre instanceof RegExp) {
+                     value = (vre.test(v)) ? +v : undefined;
+                 } else {
+                     value = +v;
+                 }
+                 return value;
+             }
+         };
+
+ **PLEASE NOTE:** All other attributes from the &#x60;BaseViewClass&#x60; apply and can be included within the
+ &#x60;editorConfig&#x60; object.
+
+@class Y.DataTable.EditorOptions.inlineNumber
+@since 3.8.0
+@public
+**&#x2F;
+Y.DataTable.EditorOptions.inlineNumber = {
+    BaseViewClass:  Y.DataTable.BaseCellInlineEditor,
+    name:           &#x27;inlineNumber&#x27;,
+    hideMouseLeave: false,
+
+    &#x2F;&#x2F; Define a key filtering regex ...
+    keyFiltering:   &#x2F;\.|\d|\-&#x2F;,
+    &#x2F;&#x2F;keyValidator:   &#x2F;^\s*(\+|-)?((\d+(\.\d*)?)|(\.\d*))\s*$&#x2F;,
+
+    &#x2F;**
+     * A validation regular expression object used to check validity of the input floating point number.
+     * This can be defined by the user to accept other numeric input, or set to &quot;null&quot; to disable regex checks.
+     *
+     * @attribute validator
+     * @type {RegExp|Function}
+     * @default &#x2F;^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$&#x2F;
+     *&#x2F;
+    validator: &#x2F;^\s*(\+|-)?((\d+(\.\d*)?)|(\.\d*))\s*$&#x2F;,
+
+    &#x2F;&#x2F; Function to call after numeric editing is complete, prior to saving to DataTable ...
+    &#x2F;&#x2F;  i.e. checks validation against ad-hoc attribute &quot;validationRegExp&quot; (if it exists)
+    &#x2F;&#x2F;       and converts the value to numeric (or undefined if fails regexp);
+    saveFn: function(v){
+        var vre = this.get(&#x27;validator&#x27;),
+            value;
+        if(vre instanceof RegExp) {
+            value = (vre.test(v)) ? +v : undefined;
+        } else {
+            value = +v;
+        }
+        return value;
+    }
+
+};
+
+&#x2F;**
+### Inline Cell Editor &quot;inlineDate&quot;
+This View configuration is used to setup an editor referenced as &quot;inlineDate&quot; as a simple inline-type
+cell editor.  It is identical to the &quot;inline&quot; textual editor but incorporates Numeric validation prior to
+saving to the DT.
+
+##### Basic Usage:
+        &#x2F;&#x2F; Column definition
+        { key:&#x27;weddingDate&#x27;, editor:&quot;inlineDate&quot; }
+
+        &#x2F;&#x2F; Column definition with user-specified &#x27;dateFormat&#x27; to display Date in text box on display
+        { key:&#x27;date_of_claim&#x27;, editor:&quot;inlineDate&quot;, editorConfig:{ dateformat:&#x27;%Y-%m-%d&#x27;} }
+
+##### Standard Configuration
+This inline editor creates a simple INPUT[type=text] control and positions it to match the underlying TD node.  Since
+a JS Date object isn&#x27;t very pretty to display &#x2F; edit in a textbox, we use a &#x60;prepFn&#x60; to preformat the Date in a
+human-readable form within the textbox.  Also a &#x60;saveFn&#x60; is defined to convert the entered data using &#x60;Date.parse&#x60;
+back to a valid JS Date prior to saving to the DT.
+
+The configuration {Object} for this cell editor View is predefined as;
+
+        Y.DataTable.EditorOptions.inlineDate = {
+             BaseViewClass:  Y.DataTable.BaseCellInlineEditor,
+             name:           &#x27;inlineDate&#x27;,
+
+             &#x2F;&#x2F; Define default date format string to use
+             dateFormat: &quot;%D&quot;,
+
+             &#x2F;&#x2F; Setup input key filtering for only digits, &quot;-&quot; or &quot;&#x2F;&quot; characters
+             keyFiltering:   &#x2F;\&#x2F;|\d|\-&#x2F;,
+
+             &#x2F;&#x2F;  Function to call just prior to populating the INPUT text box,
+             &#x2F;&#x2F;   so we pre-format the textbox in &quot;human readable&quot; format here
+             prepFn: function(v){
+                 var dfmt =  this.get(&#x27;dateFormat&#x27;) || &quot;%m&#x2F;%d&#x2F;%Y&quot;;
+                 return Y.DataType.Date.format(v,{format:dfmt});
+             },
+
+             &#x2F;&#x2F; Function to call after Date editing is complete, prior to saving to DataTable ...
+             &#x2F;&#x2F;  i.e. converts back to &quot;Date&quot; format that DT expects ...
+             saveFn: function(v){
+                 return Y.DataType.Date.parse(v);
+             }
+        };
+
+ **PLEASE NOTE:** All other attributes from the &#x60;BaseViewClass&#x60; apply and can be included within the
+ &#x60;editorConfig&#x60; object.
+
+@class Y.DataTable.EditorOptions.inlineDate
+@since 3.8.0
+@public
+**&#x2F;
+Y.DataTable.EditorOptions.inlineDate = {
+    BaseViewClass:  Y.DataTable.BaseCellInlineEditor,
+    name:           &#x27;inlineDate&#x27;,
+
+    &#x2F;**
+     * A user-supplied Date format string to be used to display the date in the View&#x27;s container.
+     * (Must conform with date format strings from http:&#x2F;&#x2F;yuilibrary.com&#x2F;yui&#x2F;docs&#x2F;api&#x2F;classes&#x2F;Date.html#method_format,
+     * i.e. strftime format)
+     *
+     * @attribute dateFormat
+     * @type String
+     * @default &quot;%D&quot;
+     *&#x2F;
+    dateFormat: &quot;%D&quot;,
+
+    keyFiltering:   &#x2F;\&#x2F;|\d|\-&#x2F;,
+
+    &#x2F;&#x2F;  Function to call just prior to populating the INPUT text box,
+    &#x2F;&#x2F;   so we pre-format the textbox in &quot;human readable&quot; format here
+    prepFn: function(v){
+        var dfmt =  this.get(&#x27;dateFormat&#x27;) || &quot;%m&#x2F;%d&#x2F;%Y&quot;;
+        return Y.DataType.Date.format(v,{format:dfmt});
+    },
+
+    &#x2F;&#x2F; Function to call after Date editing is complete, prior to saving to DataTable ...
+    &#x2F;&#x2F;  i.e. converts back to &quot;Date&quot; format that DT expects ...
+    saveFn: function(v){
+        return Y.DataType.Date.parse(v) || undefined;
+    }
+};
+
+
+&#x2F;**
+### Inline Cell Editor &quot;inlineAC&quot;
+This View configuration is used to setup an inline editor referenced as &quot;inlineAC&quot; composed of a simple inline-type
+cell editor which has the AutoComplete plugin attached to the input node.
+
+##### Basic Usage:
+       &#x2F;&#x2F; Column definition
+       { key:&#x27;degreeProgram&#x27;, editor:&quot;inlineAC&quot;,
+         editorConfig:{
+
+            &#x2F;&#x2F; The following object is passed to &quot;autocomplete&quot; plugin when this
+            &#x2F;&#x2F;   editor is instantiated
+            autocompleteConfig: {
+               source:  [ &quot;Bachelor of Science&quot;, &quot;Master of Science&quot;, &quot;PhD&quot; ]
+               on: {
+                   select: function(r){
+                       var val = r.result.display;
+                       this.editor.saveEditor(val);
+                   }
+               }
+            }
+          }
+       }
+
+##### Standard Configuration
+This inline editor creates a simple INPUT[type=text] control and positions it to match the underlying TD node.
+When the editor is first instantiated, the Y.Plugin.AutoComplete is connected to the INPUT using the &#x60;autocompleteConfig&#x60;
+object passed in by the user.
+
+This editor View instance is attached to the autocomplete plugin as static property &quot;editor&quot;.  An &quot;on:select&quot; listener
+is defined in the configs to take action on saving the selected item from the autocomplete.
+
+The configuration {Object} for this cell editor View is predefined as;
+
+        Y.DataTable.EditorOptions.inlineAC = {
+             BaseViewClass:  Y.DataTable.BaseCellInlineEditor,
+             name:           &#x27;inlineAC&#x27;,
+             hideMouseLeave: false,
+
+             &#x2F;&#x2F; Define listener to this editor View&#x27;s events
+             after: {
+
+                &#x2F;&#x2F;---------
+                &#x2F;&#x2F;  After this View is instantiated and created,
+                &#x2F;&#x2F;     configure the Y.Plugin.AutoComplete as a plugin to the editor INPUT node
+                &#x2F;&#x2F;---------
+                editorCreated : function(o){
+                   var inputNode = o.inputNode,
+                       &#x2F;&#x2F; Get the users&#x27;s editorConfig &quot;autocompleteConfig&quot; settings
+                       acConfig = this.get(&#x27;autocompleteConfig&#x27;) || {},
+                       editor = this;
+
+                   if(inputNode &amp;&amp; Y.Plugin.AutoComplete) {
+                       &#x2F;&#x2F; merge user settings with these required settings ...
+                       acConfig = Y.merge(acConfig,{
+                           alwaysShowList: true,
+                           render: true
+                       });
+                       &#x2F;&#x2F; plug in the autocomplete and we&#x27;re done ...
+                       inputNode.plug(Y.Plugin.AutoComplete, acConfig);
+
+                       &#x2F;&#x2F; add this View class as a static prop on the ac plugin
+                       inputNode.ac.editor = editor;
+                   }
+
+                }
+             }
+         };
+
+**PLEASE NOTE:** All other attributes from the &#x60;BaseViewClass&#x60; apply and can be included within the
+&#x60;editorConfig&#x60; object.
+
+@class Y.DataTable.EditorOptions.inlineAC
+@since 3.8.0
+@public
+**&#x2F;
+Y.DataTable.EditorOptions.inlineAC = {
+    BaseViewClass:  Y.DataTable.BaseCellInlineEditor,
+    name:           &#x27;inlineAC&#x27;,
+    hideMouseLeave: false,
+
+    &#x2F;**
+     * A user-supplied set of configuration parameters to be passed into this View&#x27;s Y.Plugin.AutoComplete
+     * configuration object.
+     *
+     * At a bare minimum, the user MUST provide the &quot;source&quot; of data for the AutoComplete !!
+     *
+     * For this control to save anything, the user needs to define an &quot;on:select&quot; listener in the AC&#x27;s
+     * &quot;autocompleteConfig&quot; in order to saveEditor when the select action occurs.
+     *
+     * @attribute autocompleteConfig
+     * @type Object
+     * @default {}
+     *&#x2F;
+
+    &#x2F;&#x2F; Define listener to this editor View&#x27;s events
+    after: {
+
+       &#x2F;&#x2F;---------
+       &#x2F;&#x2F;  After this View is instantiated and created,
+       &#x2F;&#x2F;     configure the Y.Plugin.AutoComplete as a plugin to the editor INPUT node
+       &#x2F;&#x2F;---------
+       editorCreated : function(o){
+           var inputNode = o.inputNode,
+               &#x2F;&#x2F; Get the users&#x27;s editorConfig &quot;autocompleteConfig&quot; settings
+               acConfig = this.get(&#x27;autocompleteConfig&#x27;) || {},
+               editor = this;
+
+           if(inputNode &amp;&amp; Y.Plugin.AutoComplete) {
+               &#x2F;&#x2F; merge user settings with these required settings ...
+               acConfig = Y.merge(acConfig,{
+                   alwaysShowList: true,
+                   render: true
+               });
+               &#x2F;&#x2F; plug in the autocomplete and we&#x27;re done ...
+               inputNode.plug(Y.Plugin.AutoComplete, acConfig);
+
+               &#x2F;&#x2F; add this View class as a static prop on the ac plugin
+               inputNode.ac.editor = editor;
+           }
+
+       }
+    }
+
+};
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

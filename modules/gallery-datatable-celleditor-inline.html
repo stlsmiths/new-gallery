@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>gallery-paginator-view</title>
+    <title>gallery-datatable-celleditor-inline</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -158,7 +158,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>gallery-paginator-view Module</h1>
+                        <h1>gallery-datatable-celleditor-inline Module</h1>
 <div class="box clearfix meta">
     
 
@@ -166,44 +166,86 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;gallery-js_paginator-view.js.html#l328"><code>gallery-js&#x2F;paginator-view.js:328</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-inline.js.html#l1087"><code>gallery-js&#x2F;datatable-celleditor-inline.js:1087</code></a>
         </div>
     
 
     
-        <p>Available since 3.6.0</p>
+        <p>Available since 3.8.0</p>
     
 </div>
 
 
 
 <div class="box intro">
-    <p>A Model class extension to be used to track "pagination state" of a paged set of control elements.
-For example, can be used to track the pagination status of a DataTable where the user selects limited
-portions for display, against a larger data set.</p>
+    <p>A View class that serves as the BASE View class for a TD Cell "inline" editor, i.e. an editor that
+is a single INPUT node that completely overlies the TD cell.  This editor is intended to replicate
+the familiar "spreadsheet" type of input.</p>
 
-<p>The primary tools for maintaining "page state" is through the following attributes;</p>
+<h5>Editing / Validation</h5>
 
-<ul>
-<li><code>totalItems</code> &nbsp;&nbsp;  Which represents the "Total count of items of interest" (See attribute <a href="#attr_totalItems">totalItems</a> )</li>
-<li><code>itemsPerPage</code> &nbsp;&nbsp; Which represents the "Count of items on each page" (See attribute <a href="#attr_itemsPerPage">itemsPerPage</a> )</li>
-<li><code>page</code> &nbsp;&nbsp;  The currently selected page, within all pages required that encompass the above two attributes
-(See attribute <a href="#attr_page">page</a> )</li>
-</ul>
+<p>This editor view creates a simple INPUT[type=text] control and repositions and resizes it to match the
+underlying TD, set with a z-Index to visually appear over the TD cell.</p>
 
-<h4>Usage</h4>
+<p>Key listeners are provided to detect changes, prohibit invalid keystrokes (via the <a href="#attr_keyFiltering">keyFiltering</a>
+ setting) and to allow validation upon a "save" entry (keyboard RTN stroke) where a <a href="#attr_validator">validator</a> can
+be prescribed to allow/disallow changes based upon the overall "value" of the INPUT control.</p>
 
-<pre class="code"><code class="prettyprint">// setup a paginator model for 500 'foo' items, paged at 50 per page ...
-var pagModel = new Y.PaginatorModel({
-   totalItems:     500,
-   itemsPerPage:   50
-});
-pagModel.get('totalPages');  // returns 10
+<h5>Navigation</h5>
 
-pagModel.set('page',3);
-pagModel.getAttrs(['lastPage','page','itemIndexStart','itemIndexEnd']);
-// returns ... { lastPage:1, page:3, itemIndexStart:100, itemIndexEnd:149 }
+<p>The editor provides the capability to navigate from TD cell via key listeners on the following key
+combinations;
+ * CTRL-arrow keys
+ * TAB goes to RIGHT, SHIFT-TAB goes to left
+ * ESC cancels editing
+ * RTN saves cell</p>
+
+<p>Key navigation can be disabled via the <a href="#attr_inputKeys">inputKeys</a> attribute set to <code>false</code>.</p>
+
+<p>When a "key navigation" request is received it is passed to the <a href="#attr_keyDir">keyDir</a> as a change
+in [row,col] that implementers can listen to "change" events on, to reposition and open editing on the
+new relative cell.  (NOTE: This view does not reposition, it simply fires a <code>keyDirChange</code> event.</p>
+
+<h5>Events</h5>
+
+<p>Several events are fired by this View;  which can be listened for and acted upon to achieve differing results.
+For example, the Y.DataTable.EditorOptions.inlineAC (inline autocompletion editor) listens for the
+<a href="#event_editorCreated">editorCreated</a> event and once received, it configures the autocomplete plugin onto the
+INPUT node.</p>
+
+<h5>Configuration</h5>
+
+<p>Ths Y.DataTable.BaseCellInlineEditor editor is intended to be configured by varying the configuration
+parameters (i.e. attribute and related configuration) to permit a variety of editing features.</p>
+
+<p>Since the View class permits ad-hoc attributes, the implementer can pass many properties in during instantiation
+that will become available as run-time View attributes.</p>
+
+<p>This Module includes several pre-defined editor configurations which are stored within the Y.DataTable.EditorOptions
+namespace (presently there are "inline", "inlineNumber", "inlineDate", "inlineAC").  New inline editors can be
+created and added to this namespace at runtime, and by defining the <code>BaseViewClass:Y.DataTable.BaseCellInlineEditor</code> property.</p>
+
+<p>For example, the pre-built configuration object for the <a href="Y.DataTable.EditorOptions.inlineDate.html">inlineDate</a> inline editor
+is stored as <code>Y.DataTable.EditorOptions.inlineDate</code>.</p>
+
+<p>To configure an editor on-the-fly (i.e. within a DataTable column definition) just include the configuration object options
+within DT's column <code>editorConfig</code> object, which is Y.merge'ed with the pre-built configs;</p>
+
+<pre class="code"><code class="prettyprint">   // define an 'inlineDate' editor with additional configs ...
+   { key:'date_of_claim', editor:"inlineDate", editorConfig:{ dateformat:'%Y-%m-%d'} }
 </code></pre>
+
+<p>This <code>Y.DataTable.BaseCellinlineEditor</code> class is similar to (and compatible with ) the <code>Y.DataTable.BaseCellPopupEditor</code>
+in another gallery module.  Note that since the "inline" editor uses a simple INPUT[type=text] Node instead of an
+Overlay the codeline is quite a bit simpler.</p>
+
+<h6>KNOWN ISSUES:</h6>
+
+<p><ul>
+  <li>This View doesn't work well with scrolling DT's, so I've disabled it currently.</li>
+  <li>Sometimes after a DT's <code>editable</code> ATTR is toggled true/false a "cannot read 'style'" message occurs and editing failes
+       requiring a page refresh.</li>
+  </ul></p>
 </div>
 
 
@@ -216,14 +258,32 @@ pagModel.getAttrs(['lastPage','page','itemIndexStart','itemIndexEnd']);
             <ul class="module-classes">
             
                 <li class="module-class">
-                    <a href="..&#x2F;classes/Y.PaginatorModel.html">
-                        Y.PaginatorModel
+                    <a href="..&#x2F;classes/Y.DataTable.BaseCellInlineEditor.html">
+                        Y.DataTable.BaseCellInlineEditor
                     </a>
                 </li>
             
                 <li class="module-class">
-                    <a href="..&#x2F;classes/Y.PaginatorView.html">
-                        Y.PaginatorView
+                    <a href="..&#x2F;classes/Y.DataTable.EditorOptions.inline.html">
+                        Y.DataTable.EditorOptions.inline
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="..&#x2F;classes/Y.DataTable.EditorOptions.inlineAC.html">
+                        Y.DataTable.EditorOptions.inlineAC
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="..&#x2F;classes/Y.DataTable.EditorOptions.inlineDate.html">
+                        Y.DataTable.EditorOptions.inlineDate
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="..&#x2F;classes/Y.DataTable.EditorOptions.inlineNumber.html">
+                        Y.DataTable.EditorOptions.inlineNumber
                     </a>
                 </li>
             
