@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>datatable</title>
+    <title>DataTable</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -101,19 +101,17 @@
             
                 <li><a href="..&#x2F;modules/contextmenu.html">contextmenu</a></li>
             
-                <li><a href="..&#x2F;modules/datatable.html">datatable</a></li>
-            
                 <li><a href="..&#x2F;modules/DataTable.html">DataTable</a></li>
             
                 <li><a href="..&#x2F;modules/FooterView.html">FooterView</a></li>
-            
-                <li><a href="..&#x2F;modules/formatters.html">formatters</a></li>
             
                 <li><a href="..&#x2F;modules/gallery-datatable-celleditor-inline.html">gallery-datatable-celleditor-inline</a></li>
             
                 <li><a href="..&#x2F;modules/gallery-datatable-celleditor-popup.html">gallery-datatable-celleditor-popup</a></li>
             
                 <li><a href="..&#x2F;modules/gallery-datatable-editable.html">gallery-datatable-editable</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-formatters.html">gallery-datatable-formatters</a></li>
             
                 <li><a href="..&#x2F;modules/gallery-datatable-paginator.html">gallery-datatable-paginator</a></li>
             
@@ -158,7 +156,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>datatable Module</h1>
+                        <h1>DataTable Module</h1>
 <div class="box clearfix meta">
     
 
@@ -166,7 +164,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;gallery-js_datatable-formatters.js.html#l1"><code>gallery-js&#x2F;datatable-formatters.js:1</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;gallery-js_datatable-checkbox-select.js.html#l1"><code>gallery-js&#x2F;datatable-checkbox-select.js:1</code></a>
         </div>
     
 
@@ -189,8 +187,8 @@
             <ul class="module-classes">
             
                 <li class="module-class">
-                    <a href="..&#x2F;classes/Y.DataTable.Formatters.html">
-                        Y.DataTable.Formatters
+                    <a href="..&#x2F;classes/Y.DataTable.CheckboxSelect.html">
+                        Y.DataTable.CheckboxSelect
                     </a>
                 </li>
             
@@ -205,75 +203,40 @@
             <ul class="module-submodules">
             
                 <li class="module-submodule">
-                    <a href="..&#x2F;modules/formatters.html">
-                        formatters
+                    <a href="..&#x2F;modules/Selection.html">
+                        Selection
                     </a>
 
                     <div class="module-submodule-description">
-                        Define a "named" Column Formatters object and attach it to the Y.DataTable namespace.
-The named formatters are defined as a series of format strings that are typically used by the
-data formatting function Y.DataType.Number.format and Y.DataType.Date.format.
+                        A DataTable class extension that adds capability to provide a "checkbox" (INPUT[type=checkbox]) selection
+capability via a new column, which includes "select all" checkbox in the TH.  The class uses only a few
+defined attributes to add the capability.
 
-The function [<code>namedFormatter</code>](#method_namedFormatter) is defined that can be used to call as a column formatter which
-formats the column cell using the [<code>formatStrings</code>](#property_formatStrings) object.
+This extension works with sorted data and with paginated DataTable (via Y.DataTable.Paginator), by retaining
+a set of "primary keys" for the selected records.
 
-This module includes an override of the [Y.DataTable.BodyView._createRowHTML](#method_Y.DataTable.BodyView._createRowHTML) method.  Therefore implementers shouldn't call the <code>namedFormatter</code> method directly because the overridden method handles the call if the entered formatter string name is recognized.
- 
-###Usage
-The format string names can be used in a column configuration object as follows;
+Users define the "primary keys" by either setting a property flag of "primaryKey:true" in the DataTable
+column configuration OR by setting the [primaryKeys](#attr_primaryKeys) attribute.
 
-		var dt1 = new Y.DataTable({
-	        data: some_data,
-   	    columns: [
-       	    { key:"start_date", label:"Start", formatter:"fullDate" },
-           	{ key:"end_date", label:"End", formatter:"default",
-	                 formatOptions:{ type:'date', formatConfig:{ format:'%F' } }    },
-   	        { key:"qty", label:"Inventory Qty", formatter:"comma" },
-       	    { key:"cost", label:"Carried Cost", formatter:"currency",
-	                 formatConfig:{ prefix:'£', thousandsSeparator:","} }
-   	    ]
-		}).render();
+To enable the "checkbox" selection, set the attribute [checkboxSelectMode](#attr_checkboxSelectMode) to true,
+which will add a new column as the first column and sets listeners for checkbox selections.
 
-####Pre-Defined <code>formatStrings</code> settings; (specifically, Y.DataTable.Formatters.formatStrings)
-For "number" formatting, using [Y.DataType.Number](http://yuilibrary.com/yui/docs/api/classes/DataType.Number.html#method_format).
+To retrieve the "checkbox" selected records, the attribute [checkboxSelected](#attr_checkboxSelected) can be
+queried to return an array of objects of selected records (See method [_getCheckboxSelected](#method__getCheckboxSelected))
+for details.
 
-<table><tr><th>string</th><th>Formatter Object</th><th>Formatted Example</th></tr>
-<tr><td><code>general</code></td><td>{ decimalPlaces:0 }</td><td>123457</td></tr>
-<tr><td><code>general2</code></td><td>{ decimalPlaces:2 }</td><td>123456.79</td></tr>
-<tr><td><code>currency</code></td><td>{ prefix:'$', decimalPlaces:0, thousandsSeparator:',' }</td><td>$ 123,457</td></tr>
-<tr><td><code>currency2</code></td><td>{ prefix:'$', decimalPlaces:2, thousandsSeparator:',' }</td><td>$ 123,456.78</td></tr>
-<tr><td><code>currency3</code></td><td>{ prefix:'$', decimalPlaces:3, thousandsSeparator:',' }</td><td>$ 123,457.789</td></tr>
-<tr><td><code>comma</code></td><td>{ decimalPlaces:0, thousandsSeparator:','}</td><td>123,457</td></tr>
-<tr><td><code>comma2</code></td><td>{ decimalPlaces:2, thousandsSeparator:','}</td><td>123,456.78</td></tr>
-<tr><td><code>comma3</code></td><td>{ decimalPlaces:3, thousandsSeparator:','}</td><td>123,457.789</td></tr>
-</table>
-
-For "date" formatting, using [Y.DataType.Date](http://yuilibrary.com/yui/docs/api/classes/DataType.Date.html#method_format).
-<br/>(Please refer to the Date.format method above for the proper use of "strftime" format strings)
-<table><tr><th>string</th><th>Formatter Object</th><th>Formatted Example</th></tr>
-<tr><td><code>shortDate</code></td><td>{ format:'%D' }</td><td>03/12/92</td></tr>
-<tr><td><code>longDate</code></td><td>{ format:'%m/%d/%Y' }</td><td>03/12/1992</td></tr>
-<tr><td><code>fullDate</code></td><td>{ format:'%B %e, %Y' }</td><td>March 12, 1992</td></tr>
-<tr><td><code>isoDate</code></td><td>{ format:'%F'}</td><td>1992-03-12</td></tr>
-<tr><td><code>isoDateTime</code></td><td>{ format:'%FT%T'}</td><td>1992-03-12T22:11:07</td></tr>
-</table>
-
-####Replaceable Hash
-This utility can also replace the cell value with values from a data hash (i.e. JS simple object, consisting of key:value pairs).
-Access to this capability is by providing a <code>formatter</code> as any string not-recognizable in the <code>formatStrings</code> object
-**AND** by providing a <code>formatConfig</code> object (equal to the hash) in the column definition.
-
-####User-Defined <code>formatStrings</code>
-Implementers may add their "named" own formatting strings for their own use-cases simply by adding more named formatters to the <code>formatStrings</code> object as;
-
-	Y.DataTable.Formatters.formatStrings['myNumberFmtr'] = {
-		type:'number', 
-		formatConfig:{ thousandsSeparator:'x', decimalPlaces:11 } 
-	};
-	Y.DataTable.Formatters.formatStrings['myDateFmtr'] = {
-		type:'date', 
-		formatConfig:{ format:{ "At the tone the TIME will be %T" } 
-	};
+####Usage
+		var dtable = new Y.DataTable({
+		    columns: 	['port','pname', 'ptitle'],
+		    data: 		ports,
+		    scrollable: 'y',
+		    height: 	'250px',
+		
+		// define two primary keys and enable checkbox selection mode ...
+		    primaryKeys:		[ 'port', 'pname' ],
+		    checkboxSelectMode:	true
+		
+		}).render("#dtable");
                     </div>
                 </li>
             

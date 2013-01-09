@@ -101,19 +101,17 @@
             
                 <li><a href="..&#x2F;modules/contextmenu.html">contextmenu</a></li>
             
-                <li><a href="..&#x2F;modules/datatable.html">datatable</a></li>
-            
                 <li><a href="..&#x2F;modules/DataTable.html">DataTable</a></li>
             
                 <li><a href="..&#x2F;modules/FooterView.html">FooterView</a></li>
-            
-                <li><a href="..&#x2F;modules/formatters.html">formatters</a></li>
             
                 <li><a href="..&#x2F;modules/gallery-datatable-celleditor-inline.html">gallery-datatable-celleditor-inline</a></li>
             
                 <li><a href="..&#x2F;modules/gallery-datatable-celleditor-popup.html">gallery-datatable-celleditor-popup</a></li>
             
                 <li><a href="..&#x2F;modules/gallery-datatable-editable.html">gallery-datatable-editable</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-formatters.html">gallery-datatable-formatters</a></li>
             
                 <li><a href="..&#x2F;modules/gallery-datatable-paginator.html">gallery-datatable-paginator</a></li>
             
@@ -172,8 +170,7 @@
 
     
         
-            Module: <a href="../modules/formatters.html">formatters</a><br>
-            Parent Module: <a href="../modules/datatable.html">datatable</a>
+            Module: <a href="../modules/gallery-datatable-formatters.html">gallery-datatable-formatters</a>
         
     
 
@@ -190,21 +187,23 @@ data formatting function Y.DataType.Number.format and Y.DataType.Date.format.</p
 <p>The function <a href="#method_namedFormatter"><code>namedFormatter</code></a> is defined that can be used to call as a column formatter which
 formats the column cell using the <a href="#property_formatStrings"><code>formatStrings</code></a> object.</p>
 
-<p>This module includes an override of the <a href="#method_Y.DataTable.BodyView._createRowHTML">Y.DataTable.BodyView._createRowHTML</a> method.  Therefore implementers shouldn't call the <code>namedFormatter</code> method directly because the overridden method handles the call if the entered formatter string name is recognized.</p>
+<p>This module includes an override of the <a href="#method_Y.DataTable.BodyView._createRowHTML">Y.DataTable.BodyView._createRowHTML</a> method.
+Therefore implementers shouldn't call the <code>namedFormatter</code> method directly because the overridden method handles the call if the
+entered formatter string name is recognized.</p>
 
 <h3>Usage</h3>
 
 <p>The format string names can be used in a column configuration object as follows;</p>
 
 <pre class="code"><code class="prettyprint">    var dt1 = new Y.DataTable({
-        data: some_data,
+       data: some_data,
        columns: [
            { key:"start_date", label:"Start", formatter:"fullDate" },
-           { key:"end_date", label:"End", formatter:"default",
-                 formatOptions:{ type:'date', formatConfig:{ format:'%F' } }    },
+           { key:"end_date", label:"End", formatter:"default", 
+             formatOptions:{ type:'date', formatConfig:{ format:'%F' } } },
            { key:"qty", label:"Inventory Qty", formatter:"comma" },
            { key:"cost", label:"Carried Cost", formatter:"currency",
-                 formatConfig:{ prefix:'£', thousandsSeparator:","} }
+             formatConfig:{ prefix:'£', thousandsSeparator:","} }
        ]
     }).render();
 </code></pre>
@@ -243,15 +242,16 @@ Access to this capability is by providing a <code>formatter</code> as any string
 
 <h4>User-Defined <code>formatStrings</code></h4>
 
-<p>Implementers may add their "named" own formatting strings for their own use-cases simply by adding more named formatters to the <code>formatStrings</code> object as;</p>
+<p>Implementers may add their own "named" formatting strings for their own use-cases simply by adding more named formatters to
+the <code>formatStrings</code> object as;</p>
 
 <pre class="code"><code class="prettyprint">Y.DataTable.Formatters.formatStrings['myNumberFmtr'] = {
-    type:'number', 
-    formatConfig:{ thousandsSeparator:'x', decimalPlaces:11 } 
+    type:'number',
+    formatConfig:{ thousandsSeparator:'x', decimalPlaces:11 }
 };
 Y.DataTable.Formatters.formatStrings['myDateFmtr'] = {
-    type:'date', 
-    formatConfig:{ format:{ "At the tone the TIME will be %T" } 
+    type:'date',
+    formatConfig:{ format:{ "At the tone the TIME will be %T" }
 };
 </code></pre>
 </div>
@@ -379,7 +379,7 @@ Y.DataTable.Formatters.formatStrings['myDateFmtr'] = {
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-formatters.js.html#l103"><code>gallery-js&#x2F;datatable-formatters.js:103</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-formatters.js.html#l112"><code>gallery-js&#x2F;datatable-formatters.js:112</code></a>
         
         </p>
 
@@ -515,7 +515,7 @@ function.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-formatters.js.html#l131"><code>gallery-js&#x2F;datatable-formatters.js:131</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-formatters.js.html#l182"><code>gallery-js&#x2F;datatable-formatters.js:182</code></a>
         
         </p>
 
@@ -640,7 +640,7 @@ as column configuration "formatConfig" (o.column.formatConfig).</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-formatters.js.html#l75"><code>gallery-js&#x2F;datatable-formatters.js:75</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-formatters.js.html#l78"><code>gallery-js&#x2F;datatable-formatters.js:78</code></a>
         
         </p>
 

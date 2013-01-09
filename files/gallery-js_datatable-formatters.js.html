@@ -101,19 +101,17 @@
             
                 <li><a href="..&#x2F;modules/contextmenu.html">contextmenu</a></li>
             
-                <li><a href="..&#x2F;modules/datatable.html">datatable</a></li>
-            
                 <li><a href="..&#x2F;modules/DataTable.html">DataTable</a></li>
             
                 <li><a href="..&#x2F;modules/FooterView.html">FooterView</a></li>
-            
-                <li><a href="..&#x2F;modules/formatters.html">formatters</a></li>
             
                 <li><a href="..&#x2F;modules/gallery-datatable-celleditor-inline.html">gallery-datatable-celleditor-inline</a></li>
             
                 <li><a href="..&#x2F;modules/gallery-datatable-celleditor-popup.html">gallery-datatable-celleditor-popup</a></li>
             
                 <li><a href="..&#x2F;modules/gallery-datatable-editable.html">gallery-datatable-editable</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-formatters.html">gallery-datatable-formatters</a></li>
             
                 <li><a href="..&#x2F;modules/gallery-datatable-paginator.html">gallery-datatable-paginator</a></li>
             
@@ -170,23 +168,25 @@
  The function [&#x60;namedFormatter&#x60;](#method_namedFormatter) is defined that can be used to call as a column formatter which
  formats the column cell using the [&#x60;formatStrings&#x60;](#property_formatStrings) object.
 
- This module includes an override of the [Y.DataTable.BodyView._createRowHTML](#method_Y.DataTable.BodyView._createRowHTML) method.  Therefore implementers shouldn&#x27;t call the &#x60;namedFormatter&#x60; method directly because the overridden method handles the call if the entered formatter string name is recognized.
-  
+ This module includes an override of the [Y.DataTable.BodyView._createRowHTML](#method_Y.DataTable.BodyView._createRowHTML) method.
+ Therefore implementers shouldn&#x27;t call the &#x60;namedFormatter&#x60; method directly because the overridden method handles the call if the
+ entered formatter string name is recognized.
+
  ###Usage
  The format string names can be used in a column configuration object as follows;
 
 		var dt1 = new Y.DataTable({
-	        data: some_data,
-    	    columns: [
-        	    { key:&quot;start_date&quot;, label:&quot;Start&quot;, formatter:&quot;fullDate&quot; },
-            	{ key:&quot;end_date&quot;, label:&quot;End&quot;, formatter:&quot;default&quot;,
-	                 formatOptions:{ type:&#x27;date&#x27;, formatConfig:{ format:&#x27;%F&#x27; } }    },
-    	        { key:&quot;qty&quot;, label:&quot;Inventory Qty&quot;, formatter:&quot;comma&quot; },
-        	    { key:&quot;cost&quot;, label:&quot;Carried Cost&quot;, formatter:&quot;currency&quot;,
-	                 formatConfig:{ prefix:&#x27;£&#x27;, thousandsSeparator:&quot;,&quot;} }
+            data: some_data,
+            columns: [
+                { key:&quot;start_date&quot;, label:&quot;Start&quot;, formatter:&quot;fullDate&quot; },
+                { key:&quot;end_date&quot;, label:&quot;End&quot;, formatter:&quot;default&quot;, 
+                  formatOptions:{ type:&#x27;date&#x27;, formatConfig:{ format:&#x27;%F&#x27; } } },
+                { key:&quot;qty&quot;, label:&quot;Inventory Qty&quot;, formatter:&quot;comma&quot; },
+                { key:&quot;cost&quot;, label:&quot;Carried Cost&quot;, formatter:&quot;currency&quot;,
+                  formatConfig:{ prefix:&#x27;£&#x27;, thousandsSeparator:&quot;,&quot;} }
     	    ]
 		}).render();
- 
+
  ####Pre-Defined &#x60;formatStrings&#x60; settings; (specifically, Y.DataTable.Formatters.formatStrings)
  For &quot;number&quot; formatting, using [Y.DataType.Number](http:&#x2F;&#x2F;yuilibrary.com&#x2F;yui&#x2F;docs&#x2F;api&#x2F;classes&#x2F;DataType.Number.html#method_format).
 
@@ -217,22 +217,23 @@
  **AND** by providing a &#x60;formatConfig&#x60; object (equal to the hash) in the column definition.
 
  ####User-Defined &#x60;formatStrings&#x60;
- Implementers may add their &quot;named&quot; own formatting strings for their own use-cases simply by adding more named formatters to the &#x60;formatStrings&#x60; object as;
+ Implementers may add their own &quot;named&quot; formatting strings for their own use-cases simply by adding more named formatters to
+ the &#x60;formatStrings&#x60; object as;
 
 	Y.DataTable.Formatters.formatStrings[&#x27;myNumberFmtr&#x27;] = {
-		type:&#x27;number&#x27;, 
-		formatConfig:{ thousandsSeparator:&#x27;x&#x27;, decimalPlaces:11 } 
+		type:&#x27;number&#x27;,
+		formatConfig:{ thousandsSeparator:&#x27;x&#x27;, decimalPlaces:11 }
 	};
 	Y.DataTable.Formatters.formatStrings[&#x27;myDateFmtr&#x27;] = {
-		type:&#x27;date&#x27;, 
-		formatConfig:{ format:{ &quot;At the tone the TIME will be %T&quot; } 
+		type:&#x27;date&#x27;,
+		formatConfig:{ format:{ &quot;At the tone the TIME will be %T&quot; }
 	};
 
 
- @module datatable
- @submodule formatters
+ @module gallery-datatable-formatters
  @class Y.DataTable.Formatters
- @type {Object}
+ @extends DataTable
+ @since 3.6.0
  **&#x2F;
 Y.DataTable.Formatters = {
 
@@ -252,14 +253,20 @@ Y.DataTable.Formatters = {
         comma2:    { type:&#x27;number&#x27;, formatConfig:{ decimalPlaces:2, thousandsSeparator:&#x27;,&#x27; } },
         comma3:    { type:&#x27;number&#x27;, formatConfig:{ decimalPlaces:3, thousandsSeparator:&#x27;,&#x27; } },
 
+      &#x2F;&#x2F;  &#x27;date&#x27;:    { type:&#x27;date&#x27;,  formatConfig:{ format:&#x27;%D&#x27; } },
         shortDate: { type:&#x27;date&#x27;,  formatConfig:{ format:&#x27;%D&#x27; } },
         longDate:  { type:&#x27;date&#x27;,  formatConfig:{ format:&#x27;%m&#x2F;%d&#x2F;%Y&#x27; } },
         fullDate:  { type:&#x27;date&#x27;,  formatConfig:{ format:&#x27;%B %e, %Y&#x27; } },
         isoDate:   { type:&#x27;date&#x27;,  formatConfig:{ format:&#x27;%F&#x27;} },
         isoDateTime:  { type:&#x27;date&#x27;,  formatConfig:{ format:&#x27;%FT%T&#x27;} },
 
-        link : { type:&#x27;html&#x27;, formatConfig:{}},  &#x2F;&#x2F; incomplete
+        &#x27;array&#x27; :  { type:&#x27;array&#x27;, formatConfig:{ value:&#x27;value&#x27;, text:&#x27;text&#x27;} },
+        &#x27;object&#x27; : { type:&#x27;object&#x27;, formatConfig:null },
+        hash :     { type:&#x27;hash&#x27;, formatConfig:null },
 
+      &#x2F;&#x2F;  link : { type:&#x27;html&#x27;, formatConfig:{}},  &#x2F;&#x2F; incomplete
+
+      &#x2F;&#x2F;  custom:    {},
         &#x27;default&#x27;: {}
 
     },
@@ -276,19 +283,61 @@ Y.DataTable.Formatters = {
      * @return {Mixed} value
      *&#x2F;
     namedFormatter: function(fmtrName,o) {
-        var fmtObj  = o.column.formatOptions || Y.DataTable.Formatters.formatStrings[fmtrName] || null,
-            fmtType,fmtConf,value;
+        var fmtObj  =  Y.DataTable.Formatters.formatStrings[fmtrName] || null,
+            fmtOptions = o.column.formatOptions || o.column.formatConfig,
+            value   = o.value,
+            fmtType,fmtConf,akey,aval,isStr,kl;
 
-        fmtType = ( o.column.type ) ? o.column.type : (fmtObj) ? fmtObj.type : null;
-        fmtConf = ( o.column.formatConfig ) ? o.column.formatConfig : (fmtObj) ? fmtObj.formatConfig :  null;
+        &#x2F;&#x2F;
+        &#x2F;&#x2F;  Pre-process the entered &#x27;formatConfig&#x27; or &#x27;formatOptions&#x27; column properties
+        &#x2F;&#x2F;
+        fmtType = o.column.type || ( (fmtObj) ? fmtObj.type : null );
+        if(!fmtType) {
+            fmtType = (fmtOptions &amp;&amp; fmtOptions.type) ? fmtOptions.type : null;
+        }
+        fmtConf = o.column.formatConfig || ( (fmtObj) ? fmtObj.formatConfig : null);
 
-        if ( fmtType &amp;&amp; fmtConf &amp;&amp; fmtType === &quot;date&quot;)
-           value = Y.DataType.Date.format(o.value,fmtConf);
-        else if ( fmtType &amp;&amp; fmtConf &amp;&amp; fmtType === &quot;number&quot;)
-           value = Y.DataType.Number.format(o.value,fmtConf);
+        &#x2F;&#x2F;
+        &#x2F;&#x2F;  Switch over the formatter &quot;type&quot;
+        &#x2F;&#x2F;
+        if(fmtType) {
+            switch(fmtType) {
+                case &#x27;date&#x27;:
+                    value = Y.DataType.Date.format(o.value,fmtConf);
+                    break;
+
+                case &#x27;number&#x27;:
+                    value = Y.DataType.Number.format(o.value,fmtConf);
+                    break;
+
+                case &#x27;array&#x27;:
+                    akey = (fmtConf) ? fmtConf.value : &#x27;value&#x27;;
+                    aval = (fmtConf) ? fmtConf.text : &#x27;text&#x27;;
+
+                    Y.Array.each(fmtOptions,function(r){
+                        if( r[akey] === o.value ) {
+                            value = r[aval];
+                        }
+                    });
+                    break;
+
+                case &#x27;object&#x27;:
+                case &#x27;hash&#x27;:
+                    isStr = Y.Lang.isString(o.value);
+                    Y.Object.each(fmtOptions,function(v,k){
+                        kl = (isStr) ? k : (+k);
+                        if( kl === o.value ) {
+                            value = v;
+                        }
+                    });
+                    break;
+
+            }
+        }
 
         return value;
     }
+
 
 };
 
@@ -351,14 +400,13 @@ Y.DataTable.BodyView.prototype._createRowHTML = function (model, index, columns)
                     &#x2F;&#x2F; TODO: look for known formatters by string name
 
                 &#x2F;&#x2F; ADDED: by T. Smith, following for named formatters ... i.e. {key:&#x27;foo&#x27;, formatter:&#x27;comma2&#x27; ...}
-                    if ( Y.DataTable.Formatters.namedFormatter &amp;&amp; Y.DataTable.Formatters.formatStrings[col.formatter] )
+                    if ( Y.DataTable.Formatters.namedFormatter &amp;&amp; Y.DataTable.Formatters.formatStrings[col.formatter] ) {
                         value = Y.DataTable.Formatters.namedFormatter.call(host,col.formatter,formatterData);
-
-                    else if ( col.formatConfig )    &#x2F;&#x2F; do string replacement of values from col.formatConfig
+                    } else if ( col.formatConfig ) {    &#x2F;&#x2F; do string replacement of values from col.formatConfig
                         value = fromTemplate(&quot;{&quot; + value + &quot;}&quot;, col.formatConfig );
-
-                    else
+                    } else {
                         value = fromTemplate(col.formatter, formatterData);
+                    }
                 }
             } else {
                 &#x2F;&#x2F; Formatters can either return a value
@@ -384,7 +432,8 @@ Y.DataTable.BodyView.prototype._createRowHTML = function (model, index, columns)
     }
 
     return fromTemplate(this._rowTemplate, values);
-}
+};
+
 
     </pre>
 </div>
