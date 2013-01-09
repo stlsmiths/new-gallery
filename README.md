@@ -1,4 +1,4 @@
-YUI3 Gallery Modules
+YUI3 Gallery Modules:
 ========================
 
 As of January 2012, the following are my current deployments to YUI Gallery;
