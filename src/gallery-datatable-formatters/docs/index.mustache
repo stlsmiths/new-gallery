@@ -1,0 +1,113 @@
+Provides a new object attached as Y.DataTable.Formatters that includes some pre-defined numeric formatters 
+that can be used within column definitions.
+
+Provides a simple technique for using easily remembered "named" custom formatters within DataTable column definitions.   This object extension adds a new static property to DataTable (as Y.DataTable.Formatters) that includes a variety of pre-defined formatters, such as;
+
+* '''(numeric)''' :   "general", "currency", "currency2", "currency3", "comma", "comma2", "comma3" 
+* '''(date)''': "shortDate", "longDate", "fullDate", "isoDate"
+
+Please see the [http://stlsmiths.github.com/yui3-gallery/docs/classes/Y.DataTable.Formatters.html Formatters Docs]  link below for a full listing of recognized format strings.
+
+====Example DataTable column entries====
+
+{ key:"bdate", label:"DOB", '''formatter:"longDate"''', ....}  // outputs as mm/dd/yyyy
+{ key:"salary", label:"Salary", '''formatter:"currency2"''' }   // outputs as $ xx,xxx.xx
+
+Additionally a `formatConfig` configuration object can be added which is recognized by the column formatter to create a "one-off" variation for a column. 
+
+Another element of the formatters allows using a formatter named "custom" where a formatConfig is defined as an object hash, then any values of the cell are replaced by the corresponding value from the hash (see example). 
+
+Implementers can add their own formatStrings to enforce their own business rules and/or usage requirements (see example).
+
+This module includes a method over-ride of a DT method _createRowHTML that enables use of these formatters.
+
+
+
+
+
+The code sample below shows two datatable applications using these formatters.  The first one being a simple normal-use case and the second a more detailed application.
+
+By defining the formatter as '''"custom"''' (or any other non-recognized name string) AND by defining an object hash in '''formatConfig''', the formatter will use Y.Lang.sub to substitute for the data cell value from the hash match setting. 
+
+'''Example:'''
+For a column with  {key:'backordered', formatter:'custom', formatConfig:{'false':'No','true':'Yes'} }
+
+any data in the field 'backordered' which is boolean false, will display as string "No", conversely true will display as "Yes".   This can come in very handy for situations using a custom-defined hash mapping between a key to value setting.
+
+
+YUI().use('datatable','gallery-datatable-formatters', function(Y) {
+
+//------------------   B A S I C   U S A G E   ---------------------
+
+//
+//  Use "standard" named formatters within a DT ...
+//
+   var dt1 = new Y.DataTable({
+      data: some_data,
+      columns: [
+        { key:"start_date", label:"Start", formatter:"fullDate" },
+        { key:"end_date", label:"End", formatter:"default",
+             formatOptions:{ type:'date', formatConfig:{ format:'%F' } }    },
+        { key:"qty", label:"Inventory Qty", formatter:"comma" },
+        { key:"cost", label:"Carried Cost", formatter:"currency", 
+             formatConfig:{ prefix:'£', thousandsSeparator:","} }
+      ]
+   });
+
+//------------------   A D V A N C E D     U S A G E   ---------------------
+
+//
+//  Define a custom status code hash ... used on column "estatus"
+// 
+   var estatusCodes = {
+      1: "Furloughed",
+      2: "Sick Leave",
+      3: "TDY",
+      4: "Field Office",
+      5: "Headquarters"
+   };
+   // used in a Column as;
+   // { key:"estatus", formatter:"custom", formatConfig:estatusCodes  } 
+
+
+   // Add a "named" formatter to the standard names ... 
+   Y.DataTable.Formatters.formatStrings['sterling'] = {
+      type:'number',
+      formatConfig:{ prefix:'£', thousandsSeparator:","}
+   };
+
+//
+//  Define columns for a more detailed DataTable, using custom format codes ...
+//
+   var cols = [
+     // four columns of same key, different Date formatting ...
+     { key:"edate", label:"Start Date", formatter:"shortDate" },
+     { key:"edate", label:"Start Date", formatter:"longDate" },
+     { key:"edate", label:"Start Date", formatter:"fullDate" },
+     { key:"edate", label:"Start Date", formatter:"default",
+         formatOptions:{ type:'date', formatConfig:{ format:'%F' } }
+      },
+
+     { key:"esalary", label:"esalary 1", formatter:"currency" },
+     { key:"esalary", label:"esalary 2", formatter:"general2" },
+     { key:"esalary", label:"esalary 3", formatter:"currency", 
+         formatConfig:{ prefix:'£', thousandsSeparator:","} },
+     { key:"esalary", label:"esalary 4", formatter:"sterling" },
+
+     { key:"estatus", label:"Emp Status", formatter:"custom", formatConfig:estatusCodes  },
+
+     { key:"emarried", label:"Marital Status", 
+       formatter:"custom", 
+       formatConfig:{ s:"Single", m:"Married", d:"Divorced",  w:"Widowed", u:"Unknown" } 
+     }
+   ];
+
+//
+// Create the DataTable and render it
+//
+   var myDTf = new Y.DataTable({
+      columns: cols,
+      data:   jsData
+    }).render("#dtable_formatted");
+
+});

@@ -1,0 +1,15 @@
+{
+    "gallery-datatable-formatters": {
+        "supersedes": [
+            ""
+        ],
+        "requires": [
+            "datatype-date-format",
+            "datatype-number-format",
+            "datatable-base"
+        ],
+        "optional": [
+            ""
+        ]
+    }
+}

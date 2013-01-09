@@ -1,0 +1,10 @@
+{
+    "name": "gallery-datatable-formatters",
+    "builds": {
+        "gallery-datatable-formatters": {
+            "jsfiles": [
+                "datatable-formatters.js"
+            ]
+        }
+    }
+}
