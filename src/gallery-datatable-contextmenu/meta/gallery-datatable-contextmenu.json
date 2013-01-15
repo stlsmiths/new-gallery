@@ -1,6 +1,6 @@
 {
     "gallery-datatable-contextmenu": {
-        "skinnable": false,
+        "skinnable": "false",
         "requires": [
             "plugin",
             "gallery-contextmenu-view"

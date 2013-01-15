@@ -332,4 +332,4 @@ Y.extend(DtContextMenu, Y.Plugin.Base, {
 Y.namespace("Plugin").DataTableContextMenu = DtContextMenu;
 
 
-}, '@VERSION@', {"skinnable": false, "requires": ["plugin", "gallery-contextmenu-view"]});
+}, '@VERSION@', {"skinnable": "false", "requires": ["plugin", "gallery-contextmenu-view"]});

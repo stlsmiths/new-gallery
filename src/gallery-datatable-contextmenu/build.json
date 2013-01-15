@@ -2,7 +2,7 @@
     "name": "gallery-datatable-contextmenu",
     "builds": {
         "gallery-datatable-contextmenu": {
-            "skinnable": false,
+            "skinnable": "false",
             "jsfiles": [
                 "datatable-contextmenu.js"
             ],
