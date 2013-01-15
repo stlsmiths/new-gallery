@@ -1,0 +1,15 @@
+{
+    "gallery-datatable-contextmenu": {
+        "supersedes": [
+            ""
+        ],
+        "skinnable": false,
+        "requires": [
+            "plugin",
+            "gallery-contextmenu-view"
+        ],
+        "optional": [
+            ""
+        ]
+    }
+}

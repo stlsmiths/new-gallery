@@ -10,8 +10,9 @@ As of January 2013, the following are my current deployments to YUI Gallery;
 * gallery-datatable-celleditor-inline  &nbsp;&nbsp;&nbsp;  ([source](https://github.com/stlsmiths/new-gallery/tree/master/src/gallery-datatable-celleditor-inline) | [API Docs](http://stlsmiths.github.com/new-gallery/modules/gallery-datatable-celleditor-inline.html) | [YUI Gallery Page](http://yuilibrary.com/gallery/show/datatable-celleditor-inline))
 * gallery-datatable-formatters  &nbsp;&nbsp;&nbsp; ([source](https://github.com/stlsmiths/new-gallery/tree/master/src/gallery-datatable-formatters) | [API Docs](http://stlsmiths.github.com/new-gallery/modules/gallery-datatable-formatters.html) | [YUI Gallery Page](http://yuilibrary.com/gallery/show/datatable-formatters))
 * gallery-contextmenu-view &nbsp;&nbsp;&nbsp; ([source](https://github.com/stlsmiths/new-gallery/tree/master/src/gallery-contextmenu-view) | [API Docs](http://stlsmiths.github.com/new-gallery/modules/gallery-contextmenu-view.html) | [YUI Gallery Page](http://yuilibrary.com/gallery/show/contextmenu-view))
+* gallery-datatable-contextmenu &nbsp;&nbsp;&nbsp; ([source](https://github.com/stlsmiths/new-gallery/tree/master/src/gallery-datatable-contextmenu) | [API Docs](http://stlsmiths.github.com/new-gallery/modules/gallery-datatable-contextmenu.html) | [YUI Gallery Page](http://yuilibrary.com/gallery/show/datatable-contextmenu))
 
-Please see each module's README or HISTORY file within the src/ path for info and related change history
+Please refer to each module's README or HISTORY file within the src/ path for info and related change history
 
 NOTE: I'm in the process of moving my old YUI Gallery modules (http://yuilibrary.com/gallery/stlsmiths) from the old gihub yui3-gallery repo (https://github.com/stlsmiths/yui3-gallery) over to the new yogi build / Gallery system.
 
