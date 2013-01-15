@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Y.DataTable.EditorOptions.number</title>
+    <title>gallery-datatable-contextmenu</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.1&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -164,22 +164,16 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>Y.DataTable.EditorOptions.number Class</h1>
-<div class="box meta">
+                        <h1>gallery-datatable-contextmenu Module</h1>
+<div class="box clearfix meta">
     
 
     
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-popup.js.html#l1469"><code>gallery-js&#x2F;datatable-celleditor-popup.js:1469</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;gallery-js_datatable-contextmenu.js.html#l1"><code>gallery-js&#x2F;datatable-contextmenu.js:1</code></a>
         </div>
-    
-
-    
-        
-            Module: <a href="../modules/gallery-datatable-celleditor-popup.html">gallery-datatable-celleditor-popup</a>
-        
     
 
     
@@ -190,182 +184,64 @@
 
 
 <div class="box intro">
-    <h3>Popup Cell Editor "number"</h3>
+    <p>This module defines a plugin that creates up to three gallery-contextmenu-view instances on a single DataTable, each
+delegated to the contextmenu event on the THEAD, TBODY and TFOOT containers.</p>
 
-<p>This View configuration is used to setup a basic numeric editor as a popup-type cell editor.
-A <code>saveFn</code> is prescribed that handles validation and converting the input text to numeric format.</p>
+<p>A typical use case might be as follows;</p>
 
-<h5>Basic Usage</h5>
+<pre class="code"><code class="prettyprint">   // Create a DT with local data ...
+   var myDT = new Y.DataTable({
+       data: mydata,
+       columns: mycolumns
+   }).render();
 
-<pre class="code"><code class="prettyprint">   // Column definition
-   { key:'salary', editor:"number" }
-
-   // Column definition ... disabling keyfiltering and setting a CSS class
-   { key:'firstName',
-     editor:"text", editorConfig:{ className:'align-right', keyFiltering:null }
-   }
-</code></pre>
-
-<h5>Standard Configuration</h5>
-
-<p>This editor creates a simple INPUT[text] internally within the popup Editor View container positioned
-directly over the TD element. Configuration is almost identical to <a href="/api/classes/Y.DataTable.EditorOptions.text.html#index">text</a>
-editor except for the pre-selection of contents and conversion of saved value to numeric format in saveFn.</p>
-
-<p>The configuration {Object} for this cell editor View is predefined as;</p>
-
-<pre class="code"><code class="prettyprint">   Y.DataTable.EditorOptions.number = {
-       BaseViewClass:  Y.DataTable.BaseCellPopupEditor,
-       name:           'number',
-       templateObject:{
-           // Template.Micro template
-           html: '&lt;input type="text" title="inline cell editor" class="&lt;%= this.classInput %&gt;"  /&gt;'
-       },
-       inputKeys: true,
-
-       // only permit digit, '.' and '-' keys in the input, reject others ...
-       keyFiltering:   /\.|\d|\-/,
-
-       // Set a flaoting point number validation RegEx expression
-       validator:  /^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$/,
-
-       // Function to call after numeric editing is complete, prior to saving to DataTable ...
-       //  i.e. checks validation against ad-hoc attribute "validationRegExp" (if it exists)
-       //       and converts the value to numeric (or undefined if fails regexp);
-       saveFn: function(v){
-           var vre = this.get('validator'),
-               value;
-           if(vre instanceof RegExp) {
-               value = (vre.test(v)) ? +v : undefined;
-           } else {
-               value = +v;
+   // plugin this module to give a right-click menu on the TBODY and the THEAD
+   //    tdMenuChange and thMenuSelect are functions defined to respond to
+   //    context menu choices (not shown ... see examples)
+   myDT.plug(Y.Plugin.DataTableContextMenu,{
+       // This is a contextmenu on the TD nodes ...
+       tbodyMenu:{
+           menuItems: [
+               {label:"Edit",  value:"e" },
+               {label:"Update", value:"u"},
+               {label:"Delete Record", value:"d"}
+           ],
+           after:{
+             'selectedMenuChange': tdMenuChange
            }
-           return value;
        },
 
-       // Set an after listener to this View's instance
-       after: {
-
-           //---------
-           // After this view is displayed,
-           //   focus and "select" all content of the input (for quick typeover)
-           //---------
-           editorShow : function(o){
-               // initially set focus / select entire INPUT
-               o.inputNode.focus();
-               o.inputNode.select();
+       // and this is a contextmenu on the header TH nodes ...
+       theadMenu:{
+           menuItems:  [ "Sort A-Z",  "Sort Z-A",  "Hide" ],
+           after: {
+               'selectedMenuChange': thMenuSelect
            }
        }
-   };
+   });
 </code></pre>
-
-<p><strong>PLEASE NOTE:</strong> All other attributes from the <code>BaseViewClass</code> apply and can be included within the
-<code>editorConfig</code> object.</p>
 </div>
 
 
 
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
+<div class="yui3-g">
+    <div class="yui3-u-1-2">
+        
+            <p>This module provides the following classes:</p>
 
-        
-        
-        
-            <li class="api-class-tab attrs"><a href="#attrs">Attributes</a></li>
-        
-        
-    </ul>
-
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
-
+            <ul class="module-classes">
             
-
+                <li class="module-class">
+                    <a href="..&#x2F;classes/Y.Plugin.DataTableContextMenu.html">
+                        Y.Plugin.DataTableContextMenu
+                    </a>
+                </li>
             
-
-            
-                <div class="index-section attrs">
-                    <h3>Attributes</h3>
-
-                    <ul class="index-list attrs">
-                        
-                            <li class="index-item attr">
-                                <a href="#attr_validator">validator</a>
-                            </li>
-                        
-                    </ul>
-                </div>
-            
-
-            
-        </div>
-
-        
-
-        
-
-        
-            <div id="attrs" class="api-class-tabpanel">
-                <h2 class="off-left">Attributes</h2>
-
-                
-                    <div id="attr_validator" class="attr item">
-    <a name="config_validator"></a> 
-    <h3 class="name"><code>validator</code></h3>
-    <span class="type">RegExp</span>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-celleditor-popup.js.html#l1551"><code>gallery-js&#x2F;datatable-celleditor-popup.js:1551</code></a>
-        
-        </p>
-
-        
-
+            </ul>
         
     </div>
 
-    <div class="description">
-        <p>A validation regular expression object used to check validity of the input floating point number.
-This can be defined by the user to accept other numeric input, or set to "null" to disable regex checks.</p>
-    </div>
-
-    
-        <p><strong>Default:</strong> &#x2F;^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$&#x2F;</p>
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
-        
-
+    <div class="yui3-u-1-2">
         
     </div>
 </div>

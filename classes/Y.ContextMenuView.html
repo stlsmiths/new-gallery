@@ -41,6 +41,8 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
+                <li><a href="..&#x2F;classes/PickList.html">PickList</a></li>
+            
                 <li><a href="..&#x2F;classes/Y.Calendar.JumpNavView.html">Y.Calendar.JumpNavView</a></li>
             
                 <li><a href="..&#x2F;classes/Y.ContextMenuView.html">Y.ContextMenuView</a></li>
@@ -95,19 +97,23 @@
             
                 <li><a href="..&#x2F;classes/Y.Plugin.Calendar.JumpNav.html">Y.Plugin.Calendar.JumpNav</a></li>
             
+                <li><a href="..&#x2F;classes/Y.Plugin.DataTableContextMenu.html">Y.Plugin.DataTableContextMenu</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
-            
-                <li><a href="..&#x2F;modules/contextmenu.html">contextmenu</a></li>
             
                 <li><a href="..&#x2F;modules/DataTable.html">DataTable</a></li>
             
                 <li><a href="..&#x2F;modules/FooterView.html">FooterView</a></li>
             
+                <li><a href="..&#x2F;modules/gallery-contextmenu-view.html">gallery-contextmenu-view</a></li>
+            
                 <li><a href="..&#x2F;modules/gallery-datatable-celleditor-inline.html">gallery-datatable-celleditor-inline</a></li>
             
                 <li><a href="..&#x2F;modules/gallery-datatable-celleditor-popup.html">gallery-datatable-celleditor-popup</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-contextmenu.html">gallery-datatable-contextmenu</a></li>
             
                 <li><a href="..&#x2F;modules/gallery-datatable-editable.html">gallery-datatable-editable</a></li>
             
@@ -118,6 +124,8 @@
                 <li><a href="..&#x2F;modules/gallery-datatable-selection.html">gallery-datatable-selection</a></li>
             
                 <li><a href="..&#x2F;modules/gallery-paginator-view.html">gallery-paginator-view</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-picklist.html">gallery-picklist</a></li>
             
                 <li><a href="..&#x2F;modules/Selection.html">Selection</a></li>
             
@@ -170,7 +178,7 @@
 
     
         
-            Module: <a href="../modules/contextmenu.html">contextmenu</a>
+            Module: <a href="../modules/gallery-contextmenu-view.html">gallery-contextmenu-view</a>
         
     
 
@@ -182,7 +190,7 @@
 <div class="box intro">
     <p>This module includes a Y.View class extension that attaches to an existing "trigger" Node and uses event delegation to listen
 for "contextmenu" requests (i.e. right-click). When the context menu is invoked, a Y.Overlay object is rendered and displayed
-that includes user-defined menu items that are related to the context where the menu was invoked.</p>
+as a popup that includes user-defined menu items that are related to the context where the menu was invoked.</p>
 
 <p>This view utilizes several attributes and fires several events that users can listen to in order to take specific actions based
 on the "trigger target" node.</p>
@@ -203,7 +211,8 @@ on the "trigger target" node.</p>
 
 <p>});</p>
 
-<p>The <code>menuItems</code> can be simple entries or Objects, if they are Objects the "label" property will be used to fill the visible Menu (See <a href="#attr_menuItems">menuItems</a>).</p>
+<p>The <code>menuItems</code> can be simple entries or Objects, if they are Objects the "label" property will be used to fill the visible Menu
+(See <a href="#attr_menuItems">menuItems</a>).</p>
 
 <h5>Attributes / Events</h5>
 
@@ -246,6 +255,13 @@ on the "trigger target" node.</p>
                     <h3>Methods</h3>
 
                     <ul class="index-list methods">
+                        
+                            <li class="index-item method private">
+                                <a href="#method__buildOverlayContent">_buildOverlayContent</a>
+
+                                
+                                
+                            </li>
                         
                             <li class="index-item method private">
                                 <a href="#method__clearDOMSelection">_clearDOMSelection</a>
@@ -303,6 +319,13 @@ on the "trigger target" node.</p>
                                 
                             </li>
                         
+                            <li class="index-item method public">
+                                <a href="#method_showOverlay">showOverlay</a>
+
+                                
+                                
+                            </li>
+                        
                     </ul>
                 </div>
             
@@ -348,6 +371,13 @@ on the "trigger target" node.</p>
                                 
                             </li>
                         
+                            <li class="index-item property public">
+                                <a href="#property_templateMicro">templateMicro</a>
+
+                                
+                                
+                            </li>
+                        
                     </ul>
                 </div>
             
@@ -372,6 +402,14 @@ on the "trigger target" node.</p>
                         
                             <li class="index-item attr">
                                 <a href="#attr_menuItemTemplate">menuItemTemplate</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_menuTemplate">menuTemplate</a>
+                            </li>
+                        
+                            <li class="index-item attr">
+                                <a href="#attr_offsetXY">offsetXY</a>
                             </li>
                         
                             <li class="index-item attr">
@@ -427,6 +465,80 @@ on the "trigger target" node.</p>
                 <h2 class="off-left">Methods</h2>
 
                 
+                    <div id="method__buildOverlayContent" class="method item private">
+    <h3 class="name"><code>_buildOverlayContent</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">HTML</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l231"><code>gallery-js&#x2F;contextmenu-view.js:231</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Method that is used to create the <code>bodyContent</code> for the Overlay instance of this popup menu.
+Can be used via the <em>old</em> method of defining ATTR <code>menuItemTemplate</code> or the <strong>new</strong> method
+that uses Y.Template to render the content (See ATTR <a href="#attr_menuTemplate">menuTemplate</a> for details).</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">HTML</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
                     <div id="method__clearDOMSelection" class="method item private">
     <h3 class="name"><code>_clearDOMSelection</code></h3>
 
@@ -461,7 +573,7 @@ on the "trigger target" node.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l267"><code>gallery-js&#x2F;contextmenu-view.js:267</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l365"><code>gallery-js&#x2F;contextmenu-view.js:365</code></a>
         
         </p>
 
@@ -527,7 +639,7 @@ on the "trigger target" node.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l194"><code>gallery-js&#x2F;contextmenu-view.js:194</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l295"><code>gallery-js&#x2F;contextmenu-view.js:295</code></a>
         
         </p>
 
@@ -616,7 +728,7 @@ on the "trigger target" node.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l229"><code>gallery-js&#x2F;contextmenu-view.js:229</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l326"><code>gallery-js&#x2F;contextmenu-view.js:326</code></a>
         
         </p>
 
@@ -699,7 +811,7 @@ on the "trigger target" node.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l154"><code>gallery-js&#x2F;contextmenu-view.js:154</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l191"><code>gallery-js&#x2F;contextmenu-view.js:191</code></a>
         
         </p>
 
@@ -767,7 +879,7 @@ on the "trigger target" node.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l110"><code>gallery-js&#x2F;contextmenu-view.js:110</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l125"><code>gallery-js&#x2F;contextmenu-view.js:125</code></a>
         
         </p>
 
@@ -823,7 +935,7 @@ on the "trigger target" node.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l142"><code>gallery-js&#x2F;contextmenu-view.js:142</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l178"><code>gallery-js&#x2F;contextmenu-view.js:178</code></a>
         
         </p>
 
@@ -879,7 +991,7 @@ on the "trigger target" node.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l90"><code>gallery-js&#x2F;contextmenu-view.js:90</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l107"><code>gallery-js&#x2F;contextmenu-view.js:107</code></a>
         
         </p>
 
@@ -941,7 +1053,7 @@ on the "trigger target" node.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l130"><code>gallery-js&#x2F;contextmenu-view.js:130</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l149"><code>gallery-js&#x2F;contextmenu-view.js:149</code></a>
         
         </p>
 
@@ -968,6 +1080,96 @@ on the "trigger target" node.</p>
                 
             </div>
         </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_showOverlay" class="method item public">
+    <h3 class="name"><code>showOverlay</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l160"><code>gallery-js&#x2F;contextmenu-view.js:160</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Displays the View container (i.e. overlay) with the event target from the on "contextmenu"
+ event</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Passed in event facade for the "contextmenu" event</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
     
 
     
@@ -1007,7 +1209,7 @@ on the "trigger target" node.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l72"><code>gallery-js&#x2F;contextmenu-view.js:72</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l89"><code>gallery-js&#x2F;contextmenu-view.js:89</code></a>
         
         </p>
 
@@ -1055,7 +1257,7 @@ on the "trigger target" node.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l81"><code>gallery-js&#x2F;contextmenu-view.js:81</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l98"><code>gallery-js&#x2F;contextmenu-view.js:98</code></a>
         
         </p>
 
@@ -1103,7 +1305,7 @@ on the "trigger target" node.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l61"><code>gallery-js&#x2F;contextmenu-view.js:61</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l78"><code>gallery-js&#x2F;contextmenu-view.js:78</code></a>
         
         </p>
 
@@ -1151,7 +1353,7 @@ on the "trigger target" node.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l39"><code>gallery-js&#x2F;contextmenu-view.js:39</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l40"><code>gallery-js&#x2F;contextmenu-view.js:40</code></a>
         
         </p>
 
@@ -1198,7 +1400,7 @@ container that are the MenuItem nodes.                    *</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l52"><code>gallery-js&#x2F;contextmenu-view.js:52</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l53"><code>gallery-js&#x2F;contextmenu-view.js:53</code></a>
         
         </p>
 
@@ -1208,11 +1410,60 @@ container that are the MenuItem nodes.                    *</p>
     </div>
 
     <div class="description">
-        <p>Default HTML template for the container's content         *</p>
+        <p>Default HTML template for the container's content (the outer DIV) for the Y.Overlay</p>
     </div>
 
     
         <p><strong>Default:</strong> &#x27;&lt;div class=&quot;yui3-contextmenu-overlay&quot;&gt;&lt;&#x2F;div&gt;&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_templateMicro" class="property item public">
+    <h3 class="name"><code>templateMicro</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l62"><code>gallery-js&#x2F;contextmenu-view.js:62</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Defines the Overlay's <code>bodyContent</code> template, i.e. the popup menu HTML, as a series of DIV's
+wrapped in an outer DIV</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> See Code</p>
     
 
     
@@ -1257,7 +1508,7 @@ container that are the MenuItem nodes.                    *</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l281"><code>gallery-js&#x2F;contextmenu-view.js:281</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l383"><code>gallery-js&#x2F;contextmenu-view.js:383</code></a>
         
         </p>
 
@@ -1312,7 +1563,7 @@ wish to utilize.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l326"><code>gallery-js&#x2F;contextmenu-view.js:326</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l429"><code>gallery-js&#x2F;contextmenu-view.js:429</code></a>
         
         </p>
 
@@ -1364,7 +1615,7 @@ wish to utilize.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l352"><code>gallery-js&#x2F;contextmenu-view.js:352</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l455"><code>gallery-js&#x2F;contextmenu-view.js:455</code></a>
         
         </p>
 
@@ -1390,10 +1641,9 @@ wish to utilize.</p>
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code"><code class="prettyprint">menuItems: [ "one", "two", "three", "four" ]
-menuItems: [ "Insert", "Update", {label:"Delete", confirm:true}, "... More" ]
-menuItems: [ {label:"Foo", value:100}, {label:"Bar", value:105}, {label:"Baz", value:200} ]
-</code></pre>
+                <p>menuItems: [ "one", "two", "three", "four" ]
+  menuItems: [ "Insert", "Update", {label:"Delete", confirm:true}, "... More" ]
+  menuItems: [ {label:"Foo", value:100}, {label:"Bar", value:105}, {label:"Baz", value:200} ]</p>
             </div>
         </div>
     
@@ -1428,7 +1678,7 @@ menuItems: [ {label:"Foo", value:100}, {label:"Bar", value:105}, {label:"Baz", v
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l340"><code>gallery-js&#x2F;contextmenu-view.js:340</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l443"><code>gallery-js&#x2F;contextmenu-view.js:443</code></a>
         
         </p>
 
@@ -1444,6 +1694,136 @@ Must include "data-cmenu"</p>
 
     
         <p><strong>Default:</strong> &#x27;&lt;div class=&quot;{menuClass}&quot; data-cmenu=&quot;{menuIndex}&quot;&gt;{menuContent}&lt;&#x2F;div&gt;&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="attr_menuTemplate" class="attr item">
+    <a name="config_menuTemplate"></a> 
+    <h3 class="name"><code>menuTemplate</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l473"><code>gallery-js&#x2F;contextmenu-view.js:473</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Defines a Y.Template structure to process and prepare the Overlay's <code>bodyContent</code> HTML.
+The <strong>REQUIRED</strong> properties within this Object are <code>template</code> and <code>options</code>.  Implementers
+can define whatever other properties they like that work with the <code>template</code> they define.
+Optional properties that are recognized include <code>menuClass</code>, <code>menuItemClass</code> and <code>menuItemText</code>.</p>
+
+<p>Custom implementers are advised to review the <a href="#property_templateMicro">templateMicro</a> default
+property and <a href="#method__buildOverlayContent">_buildOverlayContent</a> methods carefully.  As a minimum,
+this View expects the <code>data-cmenu</code> HTML attribute to be set on each item and listens for click events
+on the <code>yui3-contextmenu-menuitem</code> CSS class.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code"><code class="prettyprint">  // Define contents as UL items ... rendered using Template.Micro
+  menuTemplate:{
+      template: '&lt;ul class="myCMenu"&gt;'
+              + '&lt;% Y.Array.each( this.options, function(r,i){ %&gt;'
+              + '&lt;li class="&lt;%= this.menuItemClass %&gt;" data-cmenu="&lt;%= i %&gt;" &gt;&lt;%= r.label %&gt;&lt;/li&gt;'
+              + '&lt;% },this); %&gt;&lt;/ul&gt;',
+      options: [
+       { label:'Menu 1', value:'m1' }, { label:'Menu 2', value:'m2' },{ label:'Menu 3', value:'m3' }
+      ],
+      menuItemClass:'yui3-contextmenu-menuitem'
+  }
+</code></pre>
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="attr_offsetXY" class="attr item">
+    <a name="config_offsetXY"></a> 
+    <h3 class="name"><code>offsetXY</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l518"><code>gallery-js&#x2F;contextmenu-view.js:518</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets the XY position offset that the Overlay will be positioned to relative to the contextmenu
+click XY coordinate.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> [5,11]</p>
     
 
     
@@ -1480,7 +1860,7 @@ Must include "data-cmenu"</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l370"><code>gallery-js&#x2F;contextmenu-view.js:370</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l505"><code>gallery-js&#x2F;contextmenu-view.js:505</code></a>
         
         </p>
 
@@ -1531,7 +1911,7 @@ Must include "data-cmenu"</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l383"><code>gallery-js&#x2F;contextmenu-view.js:383</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l531"><code>gallery-js&#x2F;contextmenu-view.js:531</code></a>
         
         </p>
 
@@ -1564,12 +1944,12 @@ menuitem and menuindex that corresponds to the selection.</p>
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code"><code class="prettyprint">// If the 'selectedMenu' was set to the 2nd item from the following menuItems setting ...
-myCmenu.set('menuItems',[ {label:"Foo", value:100}, {label:"Bar", value:105}, {label:"Baz", value:200} ]);
+                <pre class="code"><code class="prettyprint"> // If the 'selectedMenu' was set to the 2nd item from the following menuItems setting ...
+ myCmenu.set('menuItems',[ {label:"Foo", value:100}, {label:"Bar", value:105}, {label:"Baz", value:200} ]);
 
-// ... user clicks 2nd item,
-myCmenu.get('selectedMenu')
-// returns {evt:'event stuff object', menuItem:{label:"Bar", value:105}, menuIndex:1 }
+ // ... user clicks 2nd item,
+  myCmenu.get('selectedMenu')
+  // returns {evt:'event stuff object', menuItem:{label:"Bar", value:105}, menuIndex:1 }
 </code></pre>
             </div>
         </div>
@@ -1605,7 +1985,7 @@ myCmenu.get('selectedMenu')
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l296"><code>gallery-js&#x2F;contextmenu-view.js:296</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l398"><code>gallery-js&#x2F;contextmenu-view.js:398</code></a>
         
         </p>
 
@@ -1621,7 +2001,8 @@ myCmenu.get('selectedMenu')
 <ul>
   <li><code>node</code> {Node} the Node instance that will have a delegated "contextmenu" listener
        attached to it</li>
-           <li><code>target</code> {String} A CSS selector for the "target" sub-element (child of trigger.node) that will be used for the delegation and will be returned from attribute "contextTarget"</li>
+           <li><code>target</code> {String} A CSS selector for the "target" sub-element (child of trigger.node) that
+            will be used for the delegation and will be returned from attribute "contextTarget"</li>
 </ul>
     </div>
 
@@ -1680,7 +2061,7 @@ myCmenu.get('selectedMenu')
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l261"><code>gallery-js&#x2F;contextmenu-view.js:261</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l359"><code>gallery-js&#x2F;contextmenu-view.js:359</code></a>
         
         </p>
 
@@ -1746,7 +2127,7 @@ myCmenu.get('selectedMenu')
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l222"><code>gallery-js&#x2F;contextmenu-view.js:222</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l319"><code>gallery-js&#x2F;contextmenu-view.js:319</code></a>
         
         </p>
 
@@ -1812,7 +2193,7 @@ myCmenu.get('selectedMenu')
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l253"><code>gallery-js&#x2F;contextmenu-view.js:253</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_contextmenu-view.js.html#l351"><code>gallery-js&#x2F;contextmenu-view.js:351</code></a>
         
         </p>
 

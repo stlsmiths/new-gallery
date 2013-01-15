@@ -41,6 +41,8 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
+                <li><a href="..&#x2F;classes/PickList.html">PickList</a></li>
+            
                 <li><a href="..&#x2F;classes/Y.Calendar.JumpNavView.html">Y.Calendar.JumpNavView</a></li>
             
                 <li><a href="..&#x2F;classes/Y.ContextMenuView.html">Y.ContextMenuView</a></li>
@@ -95,19 +97,23 @@
             
                 <li><a href="..&#x2F;classes/Y.Plugin.Calendar.JumpNav.html">Y.Plugin.Calendar.JumpNav</a></li>
             
+                <li><a href="..&#x2F;classes/Y.Plugin.DataTableContextMenu.html">Y.Plugin.DataTableContextMenu</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
-            
-                <li><a href="..&#x2F;modules/contextmenu.html">contextmenu</a></li>
             
                 <li><a href="..&#x2F;modules/DataTable.html">DataTable</a></li>
             
                 <li><a href="..&#x2F;modules/FooterView.html">FooterView</a></li>
             
+                <li><a href="..&#x2F;modules/gallery-contextmenu-view.html">gallery-contextmenu-view</a></li>
+            
                 <li><a href="..&#x2F;modules/gallery-datatable-celleditor-inline.html">gallery-datatable-celleditor-inline</a></li>
             
                 <li><a href="..&#x2F;modules/gallery-datatable-celleditor-popup.html">gallery-datatable-celleditor-popup</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-datatable-contextmenu.html">gallery-datatable-contextmenu</a></li>
             
                 <li><a href="..&#x2F;modules/gallery-datatable-editable.html">gallery-datatable-editable</a></li>
             
@@ -118,6 +124,8 @@
                 <li><a href="..&#x2F;modules/gallery-datatable-selection.html">gallery-datatable-selection</a></li>
             
                 <li><a href="..&#x2F;modules/gallery-paginator-view.html">gallery-paginator-view</a></li>
+            
+                <li><a href="..&#x2F;modules/gallery-picklist.html">gallery-picklist</a></li>
             
                 <li><a href="..&#x2F;modules/Selection.html">Selection</a></li>
             
@@ -253,7 +261,6 @@ Y.DataTable.Formatters = {
         comma2:    { type:&#x27;number&#x27;, formatConfig:{ decimalPlaces:2, thousandsSeparator:&#x27;,&#x27; } },
         comma3:    { type:&#x27;number&#x27;, formatConfig:{ decimalPlaces:3, thousandsSeparator:&#x27;,&#x27; } },
 
-      &#x2F;&#x2F;  &#x27;date&#x27;:    { type:&#x27;date&#x27;,  formatConfig:{ format:&#x27;%D&#x27; } },
         shortDate: { type:&#x27;date&#x27;,  formatConfig:{ format:&#x27;%D&#x27; } },
         longDate:  { type:&#x27;date&#x27;,  formatConfig:{ format:&#x27;%m&#x2F;%d&#x2F;%Y&#x27; } },
         fullDate:  { type:&#x27;date&#x27;,  formatConfig:{ format:&#x27;%B %e, %Y&#x27; } },
@@ -266,7 +273,6 @@ Y.DataTable.Formatters = {
 
       &#x2F;&#x2F;  link : { type:&#x27;html&#x27;, formatConfig:{}},  &#x2F;&#x2F; incomplete
 
-      &#x2F;&#x2F;  custom:    {},
         &#x27;default&#x27;: {}
 
     },
