@@ -28,7 +28,8 @@ YUI({
     coverage: ['gallery-contextmenu-view'],
     filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw'
 }).use('test-console', 'test', 'module-tests-cmenu',  'node-event-simulate',
-		'gallery-contextmenu-view',
+		'node', 'event',
+	   'gallery-contextmenu-view',
        // 'module-contextmenu-view',
         function(Y) {
     
