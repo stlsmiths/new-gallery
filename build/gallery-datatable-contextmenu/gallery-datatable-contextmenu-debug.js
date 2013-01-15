@@ -106,6 +106,7 @@ Y.extend(DtContextMenu, Y.Plugin.Base, {
      * @property theadCMenu
      * @type View
      * @default null
+     * @static
      */
     theadCMenu: null,
 
@@ -114,6 +115,7 @@ Y.extend(DtContextMenu, Y.Plugin.Base, {
      * @property tbodyCMenu
      * @type View
      * @default null
+     * @static
      */
     tbodyCMenu: null,
 
@@ -122,6 +124,7 @@ Y.extend(DtContextMenu, Y.Plugin.Base, {
      * @property tfootCMenu
      * @type View
      * @default null
+     * @static
      */
     tfootCMenu: null,
 
@@ -129,6 +132,7 @@ Y.extend(DtContextMenu, Y.Plugin.Base, {
      * @property _menuItemTemplate
      * @type String
      * @default See Code
+     * @static
      * @deprecated
      */
     _menuItemTemplate:  '<div class="yui3-contextmenu-menuitem" data-cmenu="{menuIndex}">{menuContent}</div>',
