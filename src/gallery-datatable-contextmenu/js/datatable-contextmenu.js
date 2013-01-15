@@ -2,6 +2,39 @@
  This module defines a plugin that creates up to three gallery-contextmenu-view instances on a single DataTable, each
  delegated to the contextmenu event on the THEAD, TBODY and TFOOT containers.
 
+ A typical use case might be as follows;
+
+        // Create a DT with local data ...
+        var myDT = new Y.DataTable({
+            data: mydata,
+            columns: mycolumns
+        }).render();
+
+        // plugin this module to give a right-click menu on the TBODY and the THEAD
+        //    tdMenuChange and thMenuSelect are functions defined to respond to
+        //    context menu choices (not shown ... see examples)
+        myDT.plug(Y.Plugin.DataTableContextMenu,{
+            // This is a contextmenu on the TD nodes ...
+            tbodyMenu:{
+                menuItems: [
+                    {label:"Edit",  value:"e" },
+                    {label:"Update", value:"u"},
+                    {label:"Delete Record", value:"d"}
+                ],
+                after:{
+                  'selectedMenuChange': tdMenuChange
+                }
+            },
+
+            // and this is a contextmenu on the header TH nodes ...
+            theadMenu:{
+                menuItems:  [ "Sort A-Z",  "Sort Z-A",  "Hide" ],
+                after: {
+                    'selectedMenuChange': thMenuSelect
+                }
+            }
+        });
+
  @module gallery-datatable-contextmenu
  @class Y.Plugin.DataTableContextMenu
  @since 3.8.0

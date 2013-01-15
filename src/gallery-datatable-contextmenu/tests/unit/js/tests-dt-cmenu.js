@@ -145,6 +145,9 @@ YUI.add('mod-tests-dtcmenu', function(Y) {
 
     }));
 
+
+
+
     Y.Test.Runner.add(suite);
 
 },'', { requires: [ 'test' ] });
