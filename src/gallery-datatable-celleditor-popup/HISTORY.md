@@ -1,6 +1,21 @@
 Change History :  gallery-datatable-celleditor-popup
 ======================================
 
+1/16/13:
+-------
+* Renamed _onKeyPress/Down to processKeyPress/Down to allow users to override key handling
+* Added new ATTR saveKeyRTN (boolean/default false) that when false will not detect key RTN as meaning to "saveEditor"
+* Defined saveKeyRTN:true by default on "textarea"
+
+1/8/13:
+------
+* modified the published event structure (per advice of **Satyam** via issues he raised ... Thank you!)
+* added events `editorSave` and `editorCancel` as preventable events (still untested)
+* streamlined the keyboard filtering and validation coding
+* converted messy "inputCollection" HTML definition to streamlined Y.Template usage (default `Y.Template.Micro`) for HTML generation within the Overlay
+* proposed for initial CDN push to YUI Gallery 
+
+
 1/2/13
 ------
 * initial module creation / push to gh
@@ -17,10 +32,3 @@ Change History :  gallery-datatable-celleditor-popup
  * `select` / `dropdown` / `combobox`
  * `autocomplete`
 
-1/8/13:
-------
-* modified the published event structure (per advice of **Satyam** via issues he raised ... Thank you!)
-* added events `editorSave` and `editorCancel` as preventable events (still untested)
-* streamlined the keyboard filtering and validation coding
-* converted messy "inputCollection" HTML definition to streamlined Y.Template usage (default `Y.Template.Micro`) for HTML generation within the Overlay
-* proposed for initial CDN push to YUI Gallery 

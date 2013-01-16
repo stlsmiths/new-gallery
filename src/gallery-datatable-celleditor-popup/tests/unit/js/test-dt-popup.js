@@ -1,6 +1,6 @@
 YUI.add('module-tests-dtpopup', function(Y) {
 
-    var suite = new Y.Test.Suite('gallery-datatable-popup'),
+    var suite = new Y.Test.Suite('gallery-datatable-celleditor-popup'),
         Assert = Y.Test.Assert;
 
     // a blocking sleep function ... easier than Y.later or timeout crap
@@ -11,7 +11,31 @@ YUI.add('module-tests-dtpopup', function(Y) {
     }
 
 
-    function makeDT( colChoice ) {
+    var fireKey = function(ceditor, key) {
+        //var inst = editor.getInstance();
+        inst = Y.one('body');
+
+        ceditor.simulate('keydown', {
+            keyCode: key
+        });
+
+        ceditor.simulate('keypress', {
+            keyCode: key
+        });
+
+        ceditor.simulate('keyup', {
+            keyCode: key
+        });
+    };
+
+    var inputKey = function(ceditor,value,key) {
+        ceditor.focus();
+        ceditor.set('value',value);
+        fireKey(ceditor,key);
+    };
+
+    function makeDT( colChoice, config_arg ) {
+        config_arg = config_arg || {};
 
         var someData = [
             {sid:10, sname:'Sneakers', sopen:0, stype:0, stock:0, sprice:59.93, shipst:'s', sdate:new Date(2009,3,11) },
@@ -55,34 +79,29 @@ YUI.add('module-tests-dtpopup', function(Y) {
     //   in some cases, editorConfig are added to provide stuff to pass to the editor Instance ...
 
        var colsNoediting = [
-            { key:'sid',    label:"sID", editable:false },
-            { key:'sopen',  label:"Open?" },
-            { key:'sname',  label:"Item Name" },
-            { key:'sdesc',  label:"Description"},
-            { key:'stype',  label:"Condition" },
-            { key:'stock',  label:"In Stock?" },
-            { key:'sprice', label:"Retail Price" },
-            { key:'sdate',  label:"Trans Date" }
+            { key:'sid',  editable:false },
+            { key:'sopen' },
+            { key:'sname' },
+            { key:'sdesc' },
+            { key:'stype' },
+            { key:'stock' },
+            { key:'sprice' },
+            { key:'sdate' }
         ];
 
-        var colsEditing = [
+        var colsPopup = [
                 { key:'sid',    label:"sID", editable:false },
-
                 { key:'sopen',  label:"Open?",
-              //    formatter:"custom", formatConfig:sopen,
                   editor:"checkbox", editorConfig:{
                     checkboxHash:{ 'true':1, 'false':0 }
                   }
                 },
 
-                { key:'sname',  label:"Item Name"
-                  //editor:"text", editorConfig:{ offsetXY: [5,5] }
-                },
+                { key:'sname',  label:"Item Name" },
 
                 { key:'sdesc',  label:"Description",  editor:"textarea" },
 
                 { key:'stype',  label:"Condition",
-              //    formatter:"custom", formatConfig:stypesObj,
                   editor:"select",
                   editorConfig:{
                       selectOptions:  stypesObj, //stypes,
@@ -91,7 +110,6 @@ YUI.add('module-tests-dtpopup', function(Y) {
                 },
 
                 { key:'stock',  label:"In Stock?",
-              //    formatter:"custom", formatConfig:stock,
                   editor:"radio",
                   editorConfig:{
                       radioOptions:stock,
@@ -100,31 +118,22 @@ YUI.add('module-tests-dtpopup', function(Y) {
                   }
                 },
 
-                { key:'sprice', label:"Retail Price"
-             //     formatter:"currency2", className:'align-right'
-                 // editor:"number"
-                 // editor: 'inlineNumber'
-                },
+                { key:'sprice', label:"Retail Price", editor:'number'  },
 
-                { key:'sdate',  label:"Trans Date",
-              //    formatter:"shortDate", className:'align-right',
-                  editor:"calendar"
-                 // editor:"date", editorConfig:{ keyFiltering:null, inputKeys:false }
-                }
+                { key:'sdate',  label:"Trans Date", editor:'calendar'  }
             ];
 
-        var cols = [ colsNoediting, colsEditing ];
 
-        var localDT = new Y.DataTable({
+        var cols = [ colsNoediting, colsPopup ];
+
+        var basic_config = {
             columns: cols[colChoice],
-            data: someData
+            data:    someData
+        };
 
-         //   editOpenType: 'click',
-         //   defaultEditor: 'text',
-         //   editable: true
+        var dt = new Y.DataTable(Y.merge(basic_config,config_arg)).render('#dtable');
 
-        }).render('#dtable');
-        return localDT;
+        return dt;
     }
 
 
@@ -144,7 +153,7 @@ YUI.add('module-tests-dtpopup', function(Y) {
         },
 
         'should be a class': function() {
-            //Assert.isFunction(Y.DataTable.Editable);
+            Assert.isFunction(Y.DataTable.Editable);
         },
 
         'should instantiate as a Model': function() {
@@ -153,7 +162,158 @@ YUI.add('module-tests-dtpopup', function(Y) {
 
         'listeners are set' : function(){
             //Assert.areSame( 3, this.m._subscr.length, "Didn't find 3 listeners" );
+        },
+
+        'check ATTR default values' : function(){
+            Assert.isFalse( this.dt.get('editable'), "editable default not false" );
+            Assert.areSame( null, this.dt.get('defaultEditor'), "default editor not 'none'" );
+            Assert.areSame( 'dblclick', this.dt.get('editOpenType'), "default editOpenType not 'dblclick'" );
         }
+
+    }));
+
+
+
+    suite.add(new Y.Test.Case({
+        name: 'Gallery DataTable-Celleditor-Popup : all columns editable (except 1) with "text"',
+
+        setUp : function () {
+            this.dt = makeDT(0,{
+                editable: true,
+                defaultEditor: 'text'
+            });
+
+        },
+
+        tearDown : function () {
+            this.dt.destroy();
+            delete this.dt;
+        },
+
+        'check all editors set as "text" except first col' : function(){
+
+            Assert.isTrue( this.dt.get('editable'), "set editable to true" );
+            Assert.areSame( 'text', this.dt.get('defaultEditor'), "defaultEditor not text" );
+
+            var ed = this.dt._commonEditors[this.dt.get('defaultEditor')];
+            Assert.areSame( 'text', ed.get('name'), "common editor 0 should be text");
+
+            var ces = this.dt.getCellEditors();
+            Assert.areSame( 7, ces.length,'there are not 7 columns editable');
+
+            Assert.isNull( this.dt.getCellEditor('sid'));
+        },
+
+        'editor on col 0 doesn\'t come up' : function(){
+            var dt = this.dt,
+                tr3 = dt.getRow(3),
+                oe;
+
+            tr3.all('td').item(0).simulate('click');
+            oe = dt._openEditor;
+            Assert.isNull(oe,'col 0 is not editable');
+
+            tr3.all('td').item(0).simulate('dblclick');
+            oe = dt._openEditor;
+            Assert.isNull(oe,'col 0 is not editable');
+        },
+
+        'row index 3 popup editor on col 1 come up' : function(){
+            var dt = this.dt,
+                tr3 = dt.getRow(3),
+                oe;
+
+            tr3.all('td').item(1).simulate('click');
+            oe = dt._openEditor;
+            Assert.isNull(oe,'col 1 opened on click');
+
+            tr3.all('td').item(1).simulate('dblclick');
+            oe = dt._openEditor;
+            Assert.isObject(oe,'col 1 not open on dblclick');
+            Assert.isTrue(oe.get('visible'),'col 1 not open on dblclick');
+
+        },
+
+        'row index 3 popup "text" editor checks' : function(){
+            var dt = this.dt,
+                tr3 = dt.getRow(3),
+                oe;
+
+            tr3.all('td').item(1).simulate('dblclick');
+            oe = dt._openEditor;
+            Assert.isObject(oe,'col 1 not open on dblclick');
+            Assert.isTrue(oe.get('visible'),'col 1 not open on dblclick');
+
+            Assert.isInstanceOf(Y.View,oe);
+            Assert.isInstanceOf(Y.Node,oe._inputNode);
+
+            oe.destroy({remove:true});
+
+            Assert.isTrue(oe.get('destroyed'),'destroyed flag not set');
+
+        },
+
+        'row index 3 col 1 - enter data in text' : function(){
+            var dt = this.dt,
+                tr3 = dt.getRow(3),
+                oe,inp;
+
+            tr3.all('td').item(1).simulate('dblclick');
+            oe = dt._openEditor;
+            inp = oe._inputNode;
+
+            Assert.isObject(oe,'col 1 not open on dblclick');
+            Assert.isTrue(oe.get('visible'),'col 1 not open on dblclick');
+
+            inputKey(inp,"hi",13);
+            Assert.isFalse(oe.get('visible'),'col 1 not open on dblclick');
+            Assert.areSame('hi',oe.get('value'));
+            Assert.areSame(1,oe.get('lastValue'));
+
+        },
+
+        'row index 3 col 1 - enter data in text ~ cancel with ESC' : function(){
+            var dt = this.dt,
+                tr3 = dt.getRow(3),
+                oe,inp;
+
+            tr3.all('td').item(1).simulate('dblclick');
+            oe = dt._openEditor;
+            inp = oe._inputNode;
+
+            Assert.isObject(oe,'col 1 not open on dblclick');
+            Assert.isTrue(oe.get('visible'),'col 1 not open on dblclick');
+
+            inputKey(inp,"hi",27);
+            Assert.isFalse(oe.get('visible'),'col 1 not open on dblclick');
+            Assert.areSame(1,oe.get('value'));
+        },
+
+        'row index 3 col 1 : tab to next cell' : function(){
+            var dt = this.dt,
+                tr3 = dt.getRow(3),
+                td1 = tr3.all('td').item(1),
+                td2 = tr3.all('td').item(2),
+                tds = tr3.all('td'),
+                oe,inp;
+
+            td1.simulate('dblclick');
+            oe = dt._openEditor;
+            inp = oe._inputNode;
+
+            Assert.isObject(oe,'col 1 not open on dblclick');
+            Assert.isTrue(oe.get('visible'),'col 1 not open on dblclick');
+
+            inputKey(inp,"hi",9);
+            Assert.isTrue(oe.get('visible'),'col 1 not open on dblclick');
+            Assert.areSame(oe.get('cell').td,td2);
+            Assert.areSame("1",td1.getHTML(),'old cell should not have saved')
+
+            inputKey(inp,"hi",9);
+            Assert.isTrue(oe.get('visible'),'col 1 not open on dblclick');
+            Assert.areSame(oe.get('cell').td,tds.item(3));
+
+        },
 
     }));
 
@@ -162,4 +322,3 @@ YUI.add('module-tests-dtpopup', function(Y) {
 
 
 },'', { requires: [ 'test' ] });
-

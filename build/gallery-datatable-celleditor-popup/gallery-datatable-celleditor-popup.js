@@ -272,15 +272,10 @@ Y.DataTable.BaseCellPopupEditor =  Y.Base.create('celleditor',Y.View,[],{
 
         // Set a key listener on inputnode
         if(this._inputNode ) {
-            this._subscr.push( this._inputNode.on('keydown',this._onKeyDown, this)  );
-            this._subscr.push( this._inputNode.on('keypress',this._onKeyPress, this)  );
-
-         // add bubble target
-         //   if(this._inputNode && this.overlay) {
-         //       this._inputNode.addTarget(this.overlay);
-         //       this.overlay.addTarget(this._inputNode);
-         //   }
-
+            this._subscr.push(
+                this._inputNode.on('keydown',this.processKeyDown, this),
+                this._inputNode.on('keypress',this.processKeyPress, this)
+            );
         }
 
         // This is here to support "scrolling" of the underlying DT ...
@@ -577,6 +572,104 @@ Y.DataTable.BaseCellPopupEditor =  Y.Base.create('celleditor',Y.View,[],{
      * @event editorHide
      */
 
+    /**
+     * Provides a method to process keypress entries and validate or prevent invalid inputs.
+     * This method is meant to be overrideable by implementers to customize behaviors.
+     *
+     * @method processKeyPress
+     * @param e {EventFacade} Key press event object
+     * @public
+     */
+    processKeyPress: function(e) {
+        var keyc    = e.keyCode,
+            inp     = e.target || this._inputNode,
+            value   = inp.get('value'),
+            keyfilt = this.get('keyFiltering'),
+         //   keyvald = this.get('keyValidator'),
+            kchar   = String.fromCharCode(keyc),
+            flagRE  = true,
+            krtn;
+
+        //
+        // If RTN, then prevent and save ...
+        //
+        if(keyc === KEYC_RTN && this.get('saveKeyRTN')) {
+            e.preventDefault();
+            this.saveEditor(value);
+        }
+
+        //
+        // Check key filtering validation ... either a RegExp or a user-function
+        //
+        if(keyfilt instanceof RegExp) {
+            flagRE = (!kchar.match(keyfilt)) ? false : flagRE;
+        } else if (Y.Lang.isFunction(keyfilt)) {
+            krtn = keyfilt.call(this,e);
+            flagRE = (krtn) ? true : false;
+        }
+
+        // If key filtering returned false, prevent continuing
+        if(!flagRE) {
+            e.preventDefault();
+        }
+
+    },
+
+    /**
+     * Key listener for the INPUT inline editor, "keydown" is checked for non-printing key
+     *  strokes, navigation or ESC.
+     *
+     *  This method is intended to overridden by implementers in order to customize behaviors.
+     *
+     * @method processKeyDown
+     * @param e {EventFacade} Keydown event facade
+     * @public
+     */
+    processKeyDown : function(e){
+        var keyc    = e.keyCode,
+            dir;
+
+        switch(keyc) {
+
+            case KEYC_ESC:
+                e.preventDefault();
+                this.hideEditor();
+                break;
+
+            case KEYC_UP:
+                dir = (e.ctrlKey) ? [-1,0] : null;
+                break;
+
+            case KEYC_DOWN:
+                dir = (e.ctrlKey) ? [1,0] : null;
+                break;
+
+            case KEYC_LEFT:
+                dir = (e.ctrlKey) ? [0,-1] : null;
+                break;
+
+            case KEYC_RIGHT:
+                dir = (e.ctrlKey) ? [0,1] : null;
+                break;
+
+            case KEYC_TAB: // tab
+                dir = (e.shiftKey) ? [0,-1] : [0,1] ;
+                break;
+        }
+
+        //
+        //  If dir is non-falsey, a navigation direction was set ...
+        //
+        if(dir) {
+            // set the key direction movement
+            if(this.get('inputKeys')===true) {
+                this._set('keyDir',dir);
+            }
+            e.preventDefault();
+        }
+
+    },
+
 
 //======================   PRIVATE METHODS   ===========================
 
@@ -799,103 +892,6 @@ Y.DataTable.BaseCellPopupEditor =  Y.Base.create('celleditor',Y.View,[],{
     },
 
     /**
-     * Provides a method to process keydown entries and validate or prevent invalid inputs.
-     * This method is meant to be overrideable by implementers.
-     *
-     * @method _onKeyPress
-     * @param e {EventFacade} Key press event object
-     * @public
-     */
-    _onKeyPress: function(e) {
-        var keyc    = e.keyCode,
-            inp     = e.target || this._inputNode,
-            value   = inp.get('value'),
-            keyfilt = this.get('keyFiltering'),
-         //   keyvald = this.get('keyValidator'),
-            kchar   = String.fromCharCode(keyc),
-            flagRE  = true,
-            krtn;
-
-        //
-        // If RTN, then prevent and save ...
-        //
-        if(keyc === KEYC_RTN) {
-            e.preventDefault();
-            this.saveEditor(value);
-        }
-
-        //
-        // Check key filtering validation ... either a RegExp or a user-function
-        //
-        if(keyfilt instanceof RegExp) {
-            flagRE = (!kchar.match(keyfilt)) ? false : flagRE;
-        } else if (Y.Lang.isFunction(keyfilt)) {
-            krtn = keyfilt.call(this,e);
-            flagRE = (krtn) ? true : false;
-        }
-
-        // If key filtering returned false, prevent continuing
-        if(!flagRE) {
-            e.preventDefault();
-        }
-
-    },
-
-
-    /**
-     * Key listener for the INPUT inline editor, "keydown" is checked for non-printing key
-     *  strokes, navigation or ESC
-     *
-     * @method _onKeyDown
-     * @param e {EventFacade} Keydown event facade
-     * @private
-     */
-    _onKeyDown : function(e){
-        var keyc    = e.keyCode,
-            dir;
-
-        switch(keyc) {
-
-            case KEYC_ESC:
-                e.preventDefault();
-                this.cancelEditor();
-                break;
-
-            case KEYC_UP:
-                dir = (e.ctrlKey) ? [-1,0] : null;
-                break;
-
-            case KEYC_DOWN:
-                dir = (e.ctrlKey) ? [1,0] : null;
-                break;
-
-            case KEYC_LEFT:
-                dir = (e.ctrlKey) ? [0,-1] : null;
-                break;
-
-            case KEYC_RIGHT:
-                dir = (e.ctrlKey) ? [0,1] : null;
-                break;
-
-            case KEYC_TAB: // tab
-                dir = (e.shiftKey) ? [0,-1] : [0,1] ;
-                break;
-        }
-
-        //
-        //  If dir is non-falsey, a navigation direction was set ...
-        //
-        if(dir) {
-            // set the key direction movement
-            if(this.get('inputKeys')===true) {
-                this._set('keyDir',dir);
-            }
-            e.preventDefault();
-        }
-
-    },
-
-    /**
      * Utility method that checks if a value (include ZERO!!) is defined and
      * not null  (there's probably a much better way to do this)
      *
@@ -1053,7 +1049,7 @@ Y.DataTable.BaseCellPopupEditor =  Y.Base.create('celleditor',Y.View,[],{
          * @default Y.Template.Micro
          */
         templateEngine: {
-            value:  Y.Template.Micro
+            value:  null //Y.Template.Micro
         },
 
         /**
@@ -1232,6 +1228,21 @@ Y.DataTable.BaseCellPopupEditor =  Y.Base.create('celleditor',Y.View,[],{
         },
 
         /**
+         * A flag to signify whether the editor View should be "saved" upon detecting the RTN keystroke
+         * within the INPUT area.
+         *
+         * For example, textarea typically will not, to allow a newline to be added.
+         *
+         * @attribute saveKeyRTN
+         * @type boolean
+         * @default true
+         */
+        saveKeyRTN: {
+            value:      true,
+            validator:  Y.Lang.isBoolean
+        },
+
+        /**
          * Provides a keystroke filtering capability to restrict input into the editing area checked during the
          * "keypress" event.  This attribute is set to either a RegEx or a function that confirms if the keystroke
          * was valid for this editor.  (TRUE meaning valid, FALSE meaning invalid)
@@ -1399,6 +1410,9 @@ Y.DataTable.EditorOptions.text = {
             // allow inter-cell navigation
             inputKeys: true,
 
+            // don't save editor when KEY RTN is detected (must use Save button to save)
+            saveKeyRTN: false,
+
             // setup two buttons "Save" and "Cancel" for the containing overlay
             overlayConfig:{
                 buttons:   [
@@ -1439,6 +1453,8 @@ Y.DataTable.EditorOptions.textarea = {
     },
 
     inputKeys: true,
+    saveKeyRTN: false,
+
     // setup two buttons "Save" and "Cancel" for the containing overlay
     overlayConfig:{
         buttons:   [

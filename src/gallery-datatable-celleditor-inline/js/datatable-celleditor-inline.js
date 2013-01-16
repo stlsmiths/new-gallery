@@ -314,8 +314,8 @@ Y.DataTable.BaseCellInlineEditor =  Y.Base.create('celleditor',Y.View,[],{
             var savefn = this.get('saveFn') ;
             val = (savefn && savefn.call) ? savefn.call(this,val) : val;
 
+            // So value was initially okay, but didn't pass saveFn validation call ...
             if(val === undefined) {
-                //val = this.get('lastValue');
                 this.cancelEditor();
                 return;
             }

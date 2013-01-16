@@ -1180,7 +1180,7 @@ Y.mix( DtEditable.prototype, {
      *  @param {Object} cell The cell object container for the edited cell
      *  @param {Model} record Model instance of the record data for the edited cell
      *  @param {String} colKey Column key (or name) of the edited cell
-     *  @param {String|Number|Date} newVal The old (last) value of the underlying data for the cell
+     *  @param {String|Number|Date} prevVal The old (last) value of the underlying data for the cell
      *  @param {String} editorName The name attribute of the editor that updated this cell
      */
 
@@ -1235,7 +1235,7 @@ Y.mix( DtEditable.prototype, {
      *  @param {Model} record Model instance of the record data for the edited cell
      *  @param {String} colKey Column key (or name) of the edited cell
      *  @param {String|Number|Date} newVal The new (updated) value of the underlying data for the cell
-     *  @param {String|Number|Date} newVal The old (last) value of the underlying data for the cell
+     *  @param {String|Number|Date} prevVal The old (last) value of the underlying data for the cell
      *  @param {String} editorName The name attribute of the editor that updated this cell
      */
 
