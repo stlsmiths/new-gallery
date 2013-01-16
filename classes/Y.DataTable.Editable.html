@@ -259,7 +259,6 @@ gallery-datatable-celleditor-inline and gallery-datatable-celleditor-popup. Plea
 <p><ul>
   <li>Works minimally with "y" scrolling, "x" scrolling still needs work.</li>
   <li>Initial editor invocation is limited to "mouse" actions on TD only (although keyboard navigation cell-to-cell is available).</li>
-  <li>An issue arises on "datatable.destroy()" in Chrome from time to time when using inline editors, still investigating why.</li>
   </ul></p>
 
 <h6>FUTURE:</h6>
@@ -375,6 +374,20 @@ gallery-datatable-celleditor-inline and gallery-datatable-celleditor-popup. Plea
                             </li>
                         
                             <li class="index-item method private">
+                                <a href="#method__onDefaultEditorChange">_onDefaultEditorChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__onEditableChange">_onEditableChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
                                 <a href="#method__onKeyDirChange">_onKeyDirChange</a>
 
                                 
@@ -390,20 +403,6 @@ gallery-datatable-celleditor-inline and gallery-datatable-celleditor-popup. Plea
                         
                             <li class="index-item method private">
                                 <a href="#method__onScrollUpdateCellEditor">_onScrollUpdateCellEditor</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__setDefaultEditor">_setDefaultEditor</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__setEditable">_setEditable</a>
 
                                 
                                 
@@ -460,6 +459,13 @@ gallery-datatable-celleditor-inline and gallery-datatable-celleditor-popup. Plea
                         
                             <li class="index-item method protected">
                                 <a href="#method_destructor">destructor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public">
+                                <a href="#method_getCellEditor">getCellEditor</a>
 
                                 
                                 
@@ -623,6 +629,15 @@ gallery-datatable-celleditor-inline and gallery-datatable-celleditor-popup. Plea
                                 
                             </li>
                         
+                            <li class="index-item property private">
+                                <a href="#property__subscrEditOpen">_subscrEditOpen</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
                     </ul>
                 </div>
             
@@ -713,7 +728,7 @@ gallery-datatable-celleditor-inline and gallery-datatable-celleditor-popup. Plea
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l862"><code>gallery-js&#x2F;datatable-editable.js:862</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l934"><code>gallery-js&#x2F;datatable-editable.js:934</code></a>
         
         </p>
 
@@ -770,7 +785,7 @@ gallery-datatable-celleditor-inline and gallery-datatable-celleditor-popup. Plea
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l350"><code>gallery-js&#x2F;datatable-editable.js:350</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l608"><code>gallery-js&#x2F;datatable-editable.js:608</code></a>
         
         </p>
 
@@ -829,7 +844,7 @@ as a result of DataTable setting "editable:true".</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l308"><code>gallery-js&#x2F;datatable-editable.js:308</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l524"><code>gallery-js&#x2F;datatable-editable.js:524</code></a>
         
         </p>
 
@@ -885,7 +900,7 @@ as a result of DataTable setting "editable:true".</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l408"><code>gallery-js&#x2F;datatable-editable.js:408</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l652"><code>gallery-js&#x2F;datatable-editable.js:652</code></a>
         
         </p>
 
@@ -941,7 +956,7 @@ as a result of DataTable setting "editable:true".</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l659"><code>gallery-js&#x2F;datatable-editable.js:659</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l731"><code>gallery-js&#x2F;datatable-editable.js:731</code></a>
         
         </p>
 
@@ -1020,7 +1035,7 @@ properties.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l741"><code>gallery-js&#x2F;datatable-editable.js:741</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l813"><code>gallery-js&#x2F;datatable-editable.js:813</code></a>
         
         </p>
 
@@ -1131,7 +1146,7 @@ cell editor View instance.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l792"><code>gallery-js&#x2F;datatable-editable.js:792</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l864"><code>gallery-js&#x2F;datatable-editable.js:864</code></a>
         
         </p>
 
@@ -1191,7 +1206,7 @@ cell editor View instance.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l822"><code>gallery-js&#x2F;datatable-editable.js:822</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l894"><code>gallery-js&#x2F;datatable-editable.js:894</code></a>
         
         </p>
 
@@ -1270,7 +1285,7 @@ cell editor View instance.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l941"><code>gallery-js&#x2F;datatable-editable.js:941</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l1013"><code>gallery-js&#x2F;datatable-editable.js:1013</code></a>
         
         </p>
 
@@ -1359,7 +1374,7 @@ cell editor View instance.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l1071"><code>gallery-js&#x2F;datatable-editable.js:1071</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l1143"><code>gallery-js&#x2F;datatable-editable.js:1143</code></a>
         
         </p>
 
@@ -1449,7 +1464,7 @@ includes a return object with keys {td,cell,oldValue}</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l1115"><code>gallery-js&#x2F;datatable-editable.js:1115</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l1187"><code>gallery-js&#x2F;datatable-editable.js:1187</code></a>
         
         </p>
 
@@ -1485,6 +1500,187 @@ the "saveCellEditing" event to send changes to a remote data store.</p>
 
                     <div class="param-description">
                         <p>Returned object from cell editor "editorSave" event</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onDefaultEditorChange" class="method item private">
+    <h3 class="name"><code>_onDefaultEditorChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>o</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l697"><code>gallery-js&#x2F;datatable-editable.js:697</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Listener for changes on <a href="#attr_defaultEditor">defaultEditor</a> attribute for this DT.
+If the default editor is changed to a valid setting, we disable and re-enable
+editing on the DT to reset the column editors.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">o</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Change eventfacade for "defaultEditor" attribute</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onEditableChange" class="method item private">
+    <h3 class="name"><code>_onEditableChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>o</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l669"><code>gallery-js&#x2F;datatable-editable.js:669</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Listener that toggles the DT editable state, setting/unsetting the listeners associated with
+cell editing.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">o</code>
+                        <span class="type">EventFacade</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Change event facade for "editable" attribute</p>
                     </div>
 
                     
@@ -1544,7 +1740,7 @@ the "saveCellEditing" event to send changes to a remote data store.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l1022"><code>gallery-js&#x2F;datatable-editable.js:1022</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l1094"><code>gallery-js&#x2F;datatable-editable.js:1094</code></a>
         
         </p>
 
@@ -1638,7 +1834,7 @@ the number of rows or columns to be changed to from the current TD location
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l849"><code>gallery-js&#x2F;datatable-editable.js:849</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l921"><code>gallery-js&#x2F;datatable-editable.js:921</code></a>
         
         </p>
 
@@ -1717,7 +1913,7 @@ the number of rows or columns to be changed to from the current TD location
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l955"><code>gallery-js&#x2F;datatable-editable.js:955</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l1027"><code>gallery-js&#x2F;datatable-editable.js:1027</code></a>
         
         </p>
 
@@ -1732,186 +1928,6 @@ the number of rows or columns to be changed to from the current TD location
  of the currently open Editor.</p>
     </div>
 
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__setDefaultEditor" class="method item private">
-    <h3 class="name"><code>_setDefaultEditor</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>v</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l624"><code>gallery-js&#x2F;datatable-editable.js:624</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Setter method for the <a href="#attr_defaultEditor">defaultEditor</a> attribute for this DT
-If the default editor is changed to a valid setting, we disable and re-enable
-editing on the DT to reset the column editors.</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">v</code>
-                        <span class="type">String | Null</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Value to use for this attribute</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__setEditable" class="method item private">
-    <h3 class="name"><code>_setEditable</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>v</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l602"><code>gallery-js&#x2F;datatable-editable.js:602</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Setter method for the <a href="#attr_editable">editable</a> attribute for this DT</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">v</code>
-                        <span class="type">Boolean</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Flag to enable/disable editing mode for this DT instance</p>
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
     
 
     
@@ -1964,7 +1980,7 @@ editing on the DT to reset the column editors.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l644"><code>gallery-js&#x2F;datatable-editable.js:644</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l716"><code>gallery-js&#x2F;datatable-editable.js:716</code></a>
         
         </p>
 
@@ -2044,7 +2060,7 @@ TD event to listen to for initiating editing.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l382"><code>gallery-js&#x2F;datatable-editable.js:382</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l636"><code>gallery-js&#x2F;datatable-editable.js:636</code></a>
         
         </p>
 
@@ -2100,7 +2116,7 @@ TD event to listen to for initiating editing.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l320"><code>gallery-js&#x2F;datatable-editable.js:320</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l560"><code>gallery-js&#x2F;datatable-editable.js:560</code></a>
         
         </p>
 
@@ -2157,7 +2173,7 @@ This should only be used when the DT is destroyed</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l875"><code>gallery-js&#x2F;datatable-editable.js:875</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l947"><code>gallery-js&#x2F;datatable-editable.js:947</code></a>
         
         </p>
 
@@ -2213,7 +2229,7 @@ This should only be used when the DT is destroyed</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l889"><code>gallery-js&#x2F;datatable-editable.js:889</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l961"><code>gallery-js&#x2F;datatable-editable.js:961</code></a>
         
         </p>
 
@@ -2285,7 +2301,7 @@ This should only be used when the DT is destroyed</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l907"><code>gallery-js&#x2F;datatable-editable.js:907</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l979"><code>gallery-js&#x2F;datatable-editable.js:979</code></a>
         
         </p>
 
@@ -2380,7 +2396,7 @@ based upon the setting of the boolean "opt"</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l535"><code>gallery-js&#x2F;datatable-editable.js:535</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l426"><code>gallery-js&#x2F;datatable-editable.js:426</code></a>
         
         </p>
 
@@ -2437,7 +2453,7 @@ based upon the setting of the boolean "opt"</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l296"><code>gallery-js&#x2F;datatable-editable.js:296</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l305"><code>gallery-js&#x2F;datatable-editable.js:305</code></a>
         
         </p>
 
@@ -2453,6 +2469,115 @@ based upon the setting of the boolean "opt"</p>
 
     
 
+    
+
+    
+</div>
+
+                
+                    <div id="method_getCellEditor" class="method item public">
+    <h3 class="name"><code>getCellEditor</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>col</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">View</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l454"><code>gallery-js&#x2F;datatable-editable.js:454</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Utility method to return the cell editor View instance associated with a particular column of the
+Datatable.</p>
+
+<p>Returns null if the given column is not editable.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">col</code>
+                        <span class="type">Object | String | Integer</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Column identifier, either the Column object, column key or column index</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">View</span>:
+                    
+                    Cell editor instance, or null if no editor for given column
+                
+            </div>
+        </div>
     
 
     
@@ -2495,7 +2620,7 @@ based upon the setting of the boolean "opt"</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l545"><code>gallery-js&#x2F;datatable-editable.js:545</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l436"><code>gallery-js&#x2F;datatable-editable.js:436</code></a>
         
         </p>
 
@@ -2578,7 +2703,7 @@ based upon the setting of the boolean "opt"</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l563"><code>gallery-js&#x2F;datatable-editable.js:563</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l484"><code>gallery-js&#x2F;datatable-editable.js:484</code></a>
         
         </p>
 
@@ -2626,7 +2751,7 @@ based upon the setting of the boolean "opt"</p>
                     
                         <span class="type">Object</span>:
                     
-                    column The column object entry associated with the desired cell
+                    column  The column object entry associated with the desired cell
                 
             </div>
         </div>
@@ -2684,7 +2809,7 @@ based upon the setting of the boolean "opt"</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l576"><code>gallery-js&#x2F;datatable-editable.js:576</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l497"><code>gallery-js&#x2F;datatable-editable.js:497</code></a>
         
         </p>
 
@@ -2732,7 +2857,7 @@ based upon the setting of the boolean "opt"</p>
                     
                         <span class="type">String</span>:
                     
-                    colName Column name or key name
+                    colName  Column key or name
                 
             </div>
         </div>
@@ -2776,7 +2901,7 @@ based upon the setting of the boolean "opt"</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l520"><code>gallery-js&#x2F;datatable-editable.js:520</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l411"><code>gallery-js&#x2F;datatable-editable.js:411</code></a>
         
         </p>
 
@@ -2832,7 +2957,7 @@ based upon the setting of the boolean "opt"</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l507"><code>gallery-js&#x2F;datatable-editable.js:507</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l398"><code>gallery-js&#x2F;datatable-editable.js:398</code></a>
         
         </p>
 
@@ -2889,7 +3014,7 @@ set on the View.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l278"><code>gallery-js&#x2F;datatable-editable.js:278</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l284"><code>gallery-js&#x2F;datatable-editable.js:284</code></a>
         
         </p>
 
@@ -2955,7 +3080,7 @@ set on the View.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l427"><code>gallery-js&#x2F;datatable-editable.js:427</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l318"><code>gallery-js&#x2F;datatable-editable.js:318</code></a>
         
         </p>
 
@@ -3035,7 +3160,7 @@ set on the View.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l232"><code>gallery-js&#x2F;datatable-editable.js:232</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l238"><code>gallery-js&#x2F;datatable-editable.js:238</code></a>
         
         </p>
 
@@ -3085,7 +3210,7 @@ set on the View.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l257"><code>gallery-js&#x2F;datatable-editable.js:257</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l263"><code>gallery-js&#x2F;datatable-editable.js:263</code></a>
         
         </p>
 
@@ -3140,7 +3265,7 @@ column definition).</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l242"><code>gallery-js&#x2F;datatable-editable.js:242</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l248"><code>gallery-js&#x2F;datatable-editable.js:248</code></a>
         
         </p>
 
@@ -3194,7 +3319,7 @@ The object is populated in method <a href="#method__buildColumnEditors">_buildCo
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l187"><code>gallery-js&#x2F;datatable-editable.js:187</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l183"><code>gallery-js&#x2F;datatable-editable.js:183</code></a>
         
         </p>
 
@@ -3245,7 +3370,7 @@ following;  {td, value, recClientId, colKey}</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l167"><code>gallery-js&#x2F;datatable-editable.js:167</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l163"><code>gallery-js&#x2F;datatable-editable.js:163</code></a>
         
         </p>
 
@@ -3295,7 +3420,7 @@ following;  {td, value, recClientId, colKey}</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l146"><code>gallery-js&#x2F;datatable-editable.js:146</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l142"><code>gallery-js&#x2F;datatable-editable.js:142</code></a>
         
         </p>
 
@@ -3345,7 +3470,7 @@ following;  {td, value, recClientId, colKey}</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l156"><code>gallery-js&#x2F;datatable-editable.js:156</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l152"><code>gallery-js&#x2F;datatable-editable.js:152</code></a>
         
         </p>
 
@@ -3396,7 +3521,7 @@ following;  {td, value, recClientId, colKey}</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l177"><code>gallery-js&#x2F;datatable-editable.js:177</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l173"><code>gallery-js&#x2F;datatable-editable.js:173</code></a>
         
         </p>
 
@@ -3446,7 +3571,7 @@ following;  {td, value, recClientId, colKey}</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l210"><code>gallery-js&#x2F;datatable-editable.js:210</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l216"><code>gallery-js&#x2F;datatable-editable.js:216</code></a>
         
         </p>
 
@@ -3497,7 +3622,7 @@ are set on the TBODY to initiate cellEditing.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l221"><code>gallery-js&#x2F;datatable-editable.js:221</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l227"><code>gallery-js&#x2F;datatable-editable.js:227</code></a>
         
         </p>
 
@@ -3548,7 +3673,7 @@ are set on the TBODY to initiate cellEditing.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l200"><code>gallery-js&#x2F;datatable-editable.js:200</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l196"><code>gallery-js&#x2F;datatable-editable.js:196</code></a>
         
         </p>
 
@@ -3559,6 +3684,56 @@ are set on the TBODY to initiate cellEditing.</p>
 
     <div class="description">
         <p>Placeholder for the DT level event listener for "editableChange" attribute.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__subscrEditOpen" class="property item private">
+    <h3 class="name"><code>_subscrEditOpen</code></h3>
+    <span class="type">EventHandle</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l206"><code>gallery-js&#x2F;datatable-editable.js:206</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Placeholder for the DT event listener to begin editing a cell (based on editOpenType ATTR)</p>
     </div>
 
     
@@ -3582,7 +3757,7 @@ are set on the TBODY to initiate cellEditing.</p>
                     <div id="attr_defaultEditor" class="attr item">
     <a name="config_defaultEditor"></a> 
     <h3 class="name"><code>defaultEditor</code></h3>
-    <span class="type">String</span>
+    <span class="type">String | Null</span>
 
     
 
@@ -3607,7 +3782,7 @@ are set on the TBODY to initiate cellEditing.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l119"><code>gallery-js&#x2F;datatable-editable.js:119</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l116"><code>gallery-js&#x2F;datatable-editable.js:116</code></a>
         
         </p>
 
@@ -3629,7 +3804,7 @@ column.</p>
     </div>
 
     
-        <p><strong>Default:</strong> &#x27;none&#x27;</p>
+        <p><strong>Default:</strong> null</p>
     
 
     
@@ -3666,7 +3841,7 @@ column.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l89"><code>gallery-js&#x2F;datatable-editable.js:89</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l88"><code>gallery-js&#x2F;datatable-editable.js:88</code></a>
         
         </p>
 
@@ -3677,7 +3852,7 @@ column.</p>
 
     <div class="description">
         <p>A boolean flag that sets the DataTable state to allow editing (either inline or popup cell editing).
-(Future may support row editing also)</p>
+(May support row editing in future also)</p>
     </div>
 
     
@@ -3693,7 +3868,7 @@ column.</p>
                     <div id="attr_editOpenType" class="attr item">
     <a name="config_editOpenType"></a> 
     <h3 class="name"><code>editOpenType</code></h3>
-    <span class="type">String</span>
+    <span class="type">String | Null</span>
 
     
 
@@ -3718,7 +3893,7 @@ column.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l103"><code>gallery-js&#x2F;datatable-editable.js:103</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l101"><code>gallery-js&#x2F;datatable-editable.js:101</code></a>
         
         </p>
 
@@ -3775,7 +3950,7 @@ specify the listener that invokes an editor.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l1102"><code>gallery-js&#x2F;datatable-editable.js:1102</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l1174"><code>gallery-js&#x2F;datatable-editable.js:1174</code></a>
         
         </p>
 
@@ -3872,7 +4047,7 @@ a user cancelling editing via ESC key or "Cancel Button"</p>
             
                 <li class="param">
                     
-                        <code class="param-name">newVal</code>
+                        <code class="param-name">prevVal</code>
                         <span class="type">String | Number | Date</span>
                     
 
@@ -3932,7 +4107,7 @@ a user cancelling editing via ESC key or "Cancel Button"</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l1155"><code>gallery-js&#x2F;datatable-editable.js:1155</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-editable.js.html#l1227"><code>gallery-js&#x2F;datatable-editable.js:1227</code></a>
         
         </p>
 
@@ -4045,7 +4220,7 @@ edited along with the prior and new values for the cell.</p>
             
                 <li class="param">
                     
-                        <code class="param-name">newVal</code>
+                        <code class="param-name">prevVal</code>
                         <span class="type">String | Number | Date</span>
                     
 
