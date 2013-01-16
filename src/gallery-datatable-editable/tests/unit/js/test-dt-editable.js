@@ -11,7 +11,8 @@ YUI.add('module-tests-dteditable', function(Y) {
     }
 
 
-    function makeDT( colChoice ) {
+    function makeDT( colChoice, config_arg ) {
+        config_arg = config_arg || {};
 
         var someData = [
             {sid:10, sname:'Sneakers', sopen:0, stype:0, stock:0, sprice:59.93, shipst:'s', sdate:new Date(2009,3,11) },
@@ -55,15 +56,53 @@ YUI.add('module-tests-dteditable', function(Y) {
     //   in some cases, editorConfig are added to provide stuff to pass to the editor Instance ...
 
        var colsNoediting = [
-            { key:'sid',    label:"sID", editable:false },
-            { key:'sopen',  label:"Open?" },
-            { key:'sname',  label:"Item Name" },
-            { key:'sdesc',  label:"Description"},
-            { key:'stype',  label:"Condition" },
-            { key:'stock',  label:"In Stock?" },
-            { key:'sprice', label:"Retail Price" },
-            { key:'sdate',  label:"Trans Date" }
+            { key:'sid',  editable:false },
+            { key:'sopen' },
+            { key:'sname' },
+            { key:'sdesc' },
+            { key:'stype' },
+            { key:'stock' },
+            { key:'sprice' },
+            { key:'sdate' }
         ];
+
+        var colsBasicEditing = [
+            { key:'sid',    label:"sID", editable:false },
+            { key:'sopen',  label:"Open?",
+                  editor:"checkbox", editorConfig:{
+                    checkboxHash:{ 'true':1, 'false':0 }
+                  }
+                },
+
+                { key:'sname',  label:"Item Name"
+                  //editor:"text", editorConfig:{ offsetXY: [5,5] }
+                },
+
+                { key:'sdesc',  label:"Description",  editor:"textarea" },
+
+                { key:'stype',  label:"Condition",
+              //    formatter:"custom", formatConfig:stypesObj,
+                  editor:"select",
+                  editorConfig:{
+                      selectOptions:  stypesObj, //stypes,
+                      templateEngine:Y.Handlebars
+                  }
+                },
+
+                { key:'stock',  label:"In Stock?",
+              //    formatter:"custom", formatConfig:stock,
+                  editor:"radio",
+                  editorConfig:{
+                      radioOptions:stock,
+                      overlayWidth: 260,
+                      templateEngine:Y.Handlebars
+                  }
+                },
+
+                { key:'sprice', label:"Retail Price"  },
+
+                { key:'sdate',  label:"Trans Date"         }
+            ];
 
         var colsEditing = [
                 { key:'sid',    label:"sID", editable:false },
@@ -100,31 +139,21 @@ YUI.add('module-tests-dteditable', function(Y) {
                   }
                 },
 
-                { key:'sprice', label:"Retail Price"
-             //     formatter:"currency2", className:'align-right'
-                 // editor:"number"
-                 // editor: 'inlineNumber'
-                },
+                { key:'sprice', label:"Retail Price"  },
 
-                { key:'sdate',  label:"Trans Date",
-              //    formatter:"shortDate", className:'align-right',
-                  editor:"calendar"
-                 // editor:"date", editorConfig:{ keyFiltering:null, inputKeys:false }
-                }
+                { key:'sdate',  label:"Trans Date"         }
             ];
 
-        var cols = [ colsNoediting, colsEditing ];
+        var cols = [ colsNoediting, colsBasicEditing, colsEditing ];
 
-        var localDT = new Y.DataTable({
+        var basic_config = {
             columns: cols[colChoice],
-            data: someData
+            data:    someData
+        };
 
-         //   editOpenType: 'click',
-         //   defaultEditor: 'text',
-         //   editable: true
+        var dt = new Y.DataTable(Y.merge(basic_config,config_arg)).render('#dtable');
 
-        }).render('#dtable');
-        return localDT;
+        return dt;
     }
 
 
@@ -132,22 +161,22 @@ YUI.add('module-tests-dteditable', function(Y) {
         name: 'Gallery DataTable-Editable : basic setup and instance',
 
         setUp : function () {
-            // cols
             // {sid: sname: sdesc: sopen:0, stype:0, stock:0, sprice:, shipst:'s', sdate: },
             this.dt = makeDT(0);
-
         },
 
         tearDown : function () {
-            this.dt.destroy();
-            delete this.dt;
+            if(this.dt) {
+                this.dt.destroy();
+                delete this.dt;
+            }
         },
 
         'should be a class': function() {
             Assert.isFunction(Y.DataTable.Editable);
         },
 
-        'should instantiate as a Model': function() {
+        'should instantiate as a DT instance': function() {
             Assert.isInstanceOf( Y.DataTable, this.dt, 'Not an instanceof Y.DataTable');
         },
 
@@ -157,7 +186,7 @@ YUI.add('module-tests-dteditable', function(Y) {
 
         'check ATTR default values' : function(){
             Assert.isFalse( this.dt.get('editable'), "editable default not false" );
-            Assert.areSame( 'none', this.dt.get('defaultEditor'), "default editor not 'none'" );
+            Assert.isNull( this.dt.get('defaultEditor'), "default editor not null" );
             Assert.areSame( 'dblclick', this.dt.get('editOpenType'), "default editOpenType not 'dblclick'" );
         },
 
@@ -185,13 +214,13 @@ YUI.add('module-tests-dteditable', function(Y) {
             this.dt.set('editable',true);
             Assert.isTrue( this.dt.get('editable'), "set editable to true" );
 
-            Assert.areSame( 'dblclick', this.dt.get('editOpenType'), "default editOpenType not dblclick" );
+            Assert.areSame('dblclick', this.dt.get('editOpenType'), "default editOpenType not dblclick" );
 
             this.dt.set('editOpenType',null);
-            Assert.areSame( 'dblclick', this.dt.get('editOpenType'), "set editOpenType failed on null" );
+            Assert.areSame( null, this.dt.get('editOpenType'), "set editOpenType failed on null" );
 
             this.dt.set('editOpenType',1);
-            Assert.areSame( 'dblclick', this.dt.get('editOpenType'), "set editOpenType failed on 1" );
+            Assert.areSame( null, this.dt.get('editOpenType'), "set editOpenType failed on 1" );
 
             this.dt.set('editOpenType','click');
             Assert.areSame( 'click', this.dt.get('editOpenType'), "set editOpenType to click failed" );
@@ -200,10 +229,9 @@ YUI.add('module-tests-dteditable', function(Y) {
 
         'check ATTR defaultEditor setting' : function(){
             Assert.isFalse( this.dt.get('editable'), "editable not initially false" );
-            Assert.areSame( 'none', this.dt.get('defaultEditor'), "default defaultEditor not none" );
+            Assert.areSame( null, this.dt.get('defaultEditor'), "default defaultEditor not none" );
 
             this.dt.set('editable',true);
-            Assert.isTrue( this.dt.get('editable'), "set editable to true" );
 
             this.dt.set('defaultEditor',null);
             Assert.isNull( this.dt.get('defaultEditor'), "set defaultEditor not null" );
@@ -212,10 +240,10 @@ YUI.add('module-tests-dteditable', function(Y) {
             Assert.areSame( 'inline', this.dt.get('defaultEditor'), "set defaultEditor failed on inline" );
 
             var ce = this.dt.getCellEditors();
-         //   Assert.areSame( 7, ce.length, "setup default editors count not 7" );
+            Assert.areSame( 7, ce.length, "setup default editors count not 7" );
 
             var inl = this.dt._commonEditors.inline;
-         //   Assert.areSame( 'inline', inl.get('name'), "common editor 0 should be inline");
+            Assert.areSame( 'inline', inl.get('name'), "common editor 0 should be inline");
 
         },
 
@@ -235,8 +263,138 @@ YUI.add('module-tests-dteditable', function(Y) {
         
     }));
 
+
+    suite.add(new Y.Test.Case({
+        name: 'Gallery DataTable-Editable : check public methods ~ default as inline',
+
+        setUp : function () {
+            // {sid: sname: sdesc: sopen:0, stype:0, stock:0, sprice:, shipst:'s', sdate: },
+            this.dt = makeDT(0,{
+                defaultEditor:  'inline',
+                editOpenType:   'click',
+                editable:       true
+            });
+
+        },
+
+        tearDown : function () {
+            if(this.dt) {
+                this.dt.destroy();
+                delete this.dt;
+            }
+        },
+
+        'check editor counts' : function(){
+            var dt = this.dt;
+
+            Assert.isTrue( dt.get('editable'), "set editable to true" );
+
+            var ces = dt.getCellEditors();
+            Assert.areSame(7, ces.length, 'there should be 7 cell editors');
+
+            Assert.isNull( dt.getCellEditor('sid'),'column 0 (sid) editor should be null');
+            Assert.areSame( 'inline', dt.getCellEditor('sopen').get('name'),'column 1 (sopen) editor name should be inline');
+
+        },
+
+        'check public methods - open/hide cell editors' : function(){
+            var dt = this.dt,
+                tr0 = dt.getRow(0);
+
+            // on column 1, open an editor, then hide it
+            tr0.all('td').item(1).simulate('click');
+            Assert.isTrue(dt._openEditor.get('visible'),'cell editor col 1 should be visible');
+            dt.hideCellEditor();
+            Assert.isNull(dt._openEditor,'cell editor col 1 should be closed');
+            Assert.isFalse(dt.getCellEditor('sopen').get('visible'),'cell editor col 1 should be closed');
+
+            // open column 1 again, then click another cell ... col 1 should hide, col 6 should be visible
+            tr0.all('td').item(1).simulate('click');
+            Assert.isTrue(dt._openEditor.get('visible'),'cell editor col 1 should be visible');
+            var ce = dt.getCellEditor('sopen');
+            Assert.isTrue(ce.get('visible'),'cell editor col 1 should be visible');
+
+            tr0.all('td').item(6).simulate('click');
+            Assert.isTrue(dt._openEditor.get('visible'),'cell editor col 6 should be visible');
+            Assert.areSame(59.93, dt._openEditor.get('value'),'cell editor col 6 value should be 59.93');
+
+            // check hideallcelleditors
+            dt.hideAllCellEditors();
+            Assert.isFalse(dt.getCellEditor('sdesc').get('visible'),'cell editor col 3 should be closed');
+            Assert.isNull(dt._openEditor,'open editor should be null');
+            Assert.isFalse(dt.getCellEditor('sprice').get('visible'),'cell editor col 3 should be closed');
+
+            // select row 3, column 4 ... stype value=30
+            dt.set('editable',false);
+
+            dt.set('editable',true);
+
+            var tr3 = dt.getRow(3);
+            var td4 = tr3.all('td').item(4);
+
+            td4.simulate('click');
+            Assert.areSame('30',td4.getHTML(),'row 3, col 4 should be "30"');
+            Assert.areSame(td4.get('text'),dt._openCell.td.getHTML());
+
+            // check getColumnXXX methods
+            Assert.areSame('stype',dt.getColumnByTd(td4).key,'getColumnByTd should be sdesc');
+            Assert.areSame(Y.Object.size(dt.get('columns')[4]),
+                Y.Object.size(dt.getColumnByTd(td4)),'getColumnByTd should be same as columns def');
+            Assert.areSame('stype',dt.getColumnNameByTd(td4),'getColumnByTd should be sdesc');
+
+
+        },
+
+
+
+
+        'check initial setup - inline row 0' : function(){
+            var dt = this.dt,
+                tr0 = this.dt.getRow(0);
+
+            // column 0 of any row is uneditable, make sure ...
+            tr0.all('td').item(0).simulate('click');
+            Assert.isNull(dt._openEditor,'cell editor col 0 should be null');
+
+            // column 1 of row 0 should open ...
+            tr0.all('td').item(1).simulate('click');
+            Assert.isNotNull(dt._openEditor,'cell editor col 1 should be open');
+            Assert.isTrue(dt._openEditor.get('visible'),'cell editor col 1 should be visible');
+
+            Assert.areSame(0,dt._openEditor.get('value'),'initial editor value of col 1 should be 0');
+
+            // ESC should close
+            dt._openEditor._inputNode.simulate('keydown',{keyCode:27});
+            Assert.isNull(dt._openEditor,'cell editor col 1 should be closed');
+
+        },
+
+        'check ATTR editOpenType setting' : function(){
+            var  tr0 = this.dt.getRow(0);
+
+            Assert.isTrue( this.dt.get('editable'), "set editable to true" );
+
+
+        },
+
+        'check destructor' : function(){
+            this.dt.set('editable',true);
+            Assert.isTrue( this.dt.get('editable'), "set editable to true" );
+
+            this.dt.destroy();
+            Assert.isFalse( this.dt.get('editable'), "editable not false" );
+
+            Assert.areSame(0, Y.Object.size(this.dt._commonEditors), "_commonEditors not {}" );
+            Assert.areSame(0, Y.Object.size(this.dt._columnEditors), "_columnEditors not {}" );
+            Assert.isNull( this.dt._openEditor, "_openEditor not null" );
+            Assert.isNull( this.dt._openTd, "_openTd not null" );
+
+        }
+
+    }));
+
+
     Y.Test.Runner.add(suite);
 
 
 },'', { requires: [ 'test' ] });
-

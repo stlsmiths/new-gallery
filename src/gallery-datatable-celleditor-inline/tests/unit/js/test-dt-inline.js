@@ -1,17 +1,10 @@
 YUI.add('module-tests-dtinline', function(Y) {
 
-    var suite = new Y.Test.Suite('gallery-datatable-inline'),
+    var suite = new Y.Test.Suite('gallery-datatable-celleditor-inline'),
         Assert = Y.Test.Assert;
 
-    // a blocking sleep function ... easier than Y.later or timeout crap
-    function sleep(msecs){
-        var tstart = new Date().getTime();
-        while( new Date().getTime() < tstart + msecs );
-        return;
-    }
-
-
-    function makeDT( colChoice ) {
+    function makeDT( colChoice, config_arg ) {
+        config_arg = config_arg || {};
 
         var someData = [
             {sid:10, sname:'Sneakers', sopen:0, stype:0, stock:0, sprice:59.93, shipst:'s', sdate:new Date(2009,3,11) },
@@ -55,111 +48,219 @@ YUI.add('module-tests-dtinline', function(Y) {
     //   in some cases, editorConfig are added to provide stuff to pass to the editor Instance ...
 
        var colsNoediting = [
-            { key:'sid',    label:"sID", editable:false },
-            { key:'sopen',  label:"Open?" },
-            { key:'sname',  label:"Item Name" },
-            { key:'sdesc',  label:"Description"},
-            { key:'stype',  label:"Condition" },
-            { key:'stock',  label:"In Stock?" },
-            { key:'sprice', label:"Retail Price" },
-            { key:'sdate',  label:"Trans Date" }
+            { key:'sid',  editable:false },
+            { key:'sopen' },
+            { key:'sname' },
+            { key:'sdesc' },
+            { key:'stype' },
+            { key:'stock' },
+            { key:'sprice' },
+            { key:'sdate' }
         ];
 
-        var colsEditing = [
-                { key:'sid',    label:"sID", editable:false },
+        //var cols = [ colsNoediting, colsBasicEditing, colsEditing ];
 
-                { key:'sopen',  label:"Open?",
-              //    formatter:"custom", formatConfig:sopen,
-                  editor:"checkbox", editorConfig:{
-                    checkboxHash:{ 'true':1, 'false':0 }
-                  }
-                },
+        var basic_config = {
+            columns: colsNoediting,
+            data:    someData,
+            defaultEditor:  'inline',
+            editOpenType:   'click',
+            editable:       true
+        };
 
-                { key:'sname',  label:"Item Name"
-                  //editor:"text", editorConfig:{ offsetXY: [5,5] }
-                },
+        var dt = new Y.DataTable(Y.merge(basic_config,config_arg)).render('#dtable');
 
-                { key:'sdesc',  label:"Description",  editor:"textarea" },
-
-                { key:'stype',  label:"Condition",
-              //    formatter:"custom", formatConfig:stypesObj,
-                  editor:"select",
-                  editorConfig:{
-                      selectOptions:  stypesObj, //stypes,
-                      templateEngine:Y.Handlebars
-                  }
-                },
-
-                { key:'stock',  label:"In Stock?",
-              //    formatter:"custom", formatConfig:stock,
-                  editor:"radio",
-                  editorConfig:{
-                      radioOptions:stock,
-                      overlayWidth: 260,
-                      templateEngine:Y.Handlebars
-                  }
-                },
-
-                { key:'sprice', label:"Retail Price"
-             //     formatter:"currency2", className:'align-right'
-                 // editor:"number"
-                 // editor: 'inlineNumber'
-                },
-
-                { key:'sdate',  label:"Trans Date",
-              //    formatter:"shortDate", className:'align-right',
-                  editor:"calendar"
-                 // editor:"date", editorConfig:{ keyFiltering:null, inputKeys:false }
-                }
-            ];
-
-        var cols = [ colsNoediting, colsEditing ];
-
-        var localDT = new Y.DataTable({
-            columns: cols[colChoice],
-            data: someData
-
-         //   editOpenType: 'click',
-         //   defaultEditor: 'text',
-         //   editable: true
-
-        }).render('#dtable');
-        return localDT;
+        return dt;
     }
 
 
     suite.add(new Y.Test.Case({
-        name: 'Gallery DataTable-Celleditor-inline : basic setup and instance',
+        name: 'Gallery DataTable-Celleditor-Inline : basic setup and configuration of inlines',
 
         setUp : function () {
-            // cols
+            // {sid: sname: sdesc: sopen:0, stype:0, stock:0, sprice:, shipst:'s', sdate: },
+            this.dt = makeDT(0);
+        },
+
+        tearDown : function () {
+            if(this.dt) {
+                this.dt.destroy();
+                delete this.dt;
+            }
+        },
+
+        'should be a class': function() {
+            Assert.isFunction(Y.DataTable.Editable);
+        },
+
+        'each inline should be an object': function() {
+            Assert.isObject(Y.DataTable.EditorOptions);
+            Assert.isObject(Y.DataTable.EditorOptions.inline);
+            Assert.isObject(Y.DataTable.EditorOptions.inlineNumber);
+            Assert.isObject(Y.DataTable.EditorOptions.inlineDate);
+            Assert.isObject(Y.DataTable.EditorOptions.inlineAC);
+        },
+
+        'inline editor should be a View': function() {
+            var dt = this.dt,
+                ce = dt.getCellEditor('sopen');
+
+            Assert.isInstanceOf( Y.View, ce, 'editor is not an instanceof Y.View');
+        },
+
+
+        'check ATTR defaults' : function(){
+
+        },
+
+        'check destructor' : function(){
+            var dt = this.dt,
+                ce = dt.getCellEditor('sopen');
+
+            ce.destroy();
+
+            Assert.isNull(ce._subscr,'subscribers should be null');
+
+        }
+
+    }));
+
+
+    suite.add(new Y.Test.Case({
+        name: 'Gallery DataTable-Celleditor-Inline : basic functioning of the editor',
+
+        setUp : function () {
             // {sid: sname: sdesc: sopen:0, stype:0, stock:0, sprice:, shipst:'s', sdate: },
             this.dt = makeDT(0);
 
         },
 
         tearDown : function () {
-            this.dt.destroy();
-            delete this.dt;
+            if(this.dt) {
+                this.dt.destroy();
+                delete this.dt;
+            }
         },
 
-        'should be a class': function() {
-            //Assert.isFunction(Y.DataTable.Editable);
+        'check editor counts' : function(){
+            var dt = this.dt;
+
+            Assert.isTrue( dt.get('editable'), "set editable to true" );
+
+            var ces = dt.getCellEditors();
+            Assert.areSame(7, ces.length, 'there should be 7 cell editors');
+
+            Assert.isNull( dt.getCellEditor('sid'),'column 0 (sid) editor should be null');
+            Assert.areSame( 'inline', dt.getCellEditor('sopen').get('name'),'column 1 (sopen) editor name should be inline');
+
         },
 
-        'should instantiate as a Model': function() {
-            Assert.isInstanceOf( Y.DataTable, this.dt, 'Not an instanceof Y.DataTable');
+        'check inline editor - row 0 column 6 (sprice)' : function(){
+            var dt = this.dt,
+                tr0 = dt.getRow(0),
+                td6 = tr0.all('td').item(6),
+                oe,val,inp;
+
+            // open the editor
+            td6.simulate('click');
+            oe = dt._openEditor;
+            Assert.isTrue(oe.get('visible'),'cell editor col 6 should be visible');
+
+            // hideEditor
+            oe.hideEditor();
+            Assert.isFalse(oe.get('visible'),'cell editor col 1 should be closed');
+            Assert.isFalse(dt.getCellEditor('sprice').get('visible'),'cell editor col 1 should be closed');
+
+            // showEditor
+            oe.showEditor(td6);
+            inp = oe._inputNode;
+
+            // ESC cancelEditor
+            td6.simulate('click');
+            //inp.focus();
+            inp.simulate('keypress',{charCode:72}); //  4:52     H:72   i:105
+            inp.simulate('keypress',{charCode:52}); //  4:52     H:72   i:105
+            inp.simulate('keydown',{keyCode:27});
+            Assert.isFalse(oe.get('visible'),'cell editor col 1 should be closed');
+            Assert.isFalse(dt.getCellEditor('sprice').get('visible'),'cell editor col 1 should be closed');
+
+            // cancelEditor
+            td6.simulate('click');
+            oe = dt._openEditor;
+            oe.cancelEditor();
+            Assert.isFalse(oe.get('visible'),'cell editor col 1 should be closed');
+            Assert.isFalse(dt.getCellEditor('sprice').get('visible'),'cell editor col 1 should be closed');
+
+            // saveEditor
+            td6.simulate('click');
+            oe = dt._openEditor;
+            oe.saveEditor('abcdefg');
+            Assert.isFalse(oe.get('visible'),'cell editor col 1 should be closed');
+            Assert.areSame('abcdefg', oe.get('value'),'after save lastvalue should be abcdefg');
+            Assert.areSame(59.93, oe.get('lastValue'),'after save lastvalue should be 59.93');
+
+
+            // saveEditor with undefined
+            //oe.saveEditor(undefined);
+            //Assert.isFalse(oe.get('visible'),'cell editor col 1 should be closed');
+            //Assert.areSame('abcdefg', oe.get('value'),'after save lastvalue should be abcdefg');
+
+            td6.simulate('click');
+            oe = dt._openEditor;
+            oe.hideEditor(true);
+            Assert.isFalse(oe.get('visible'),'cell editor col 1 should be closed');
+            Assert.isTrue(oe.get('hidden'),'cell editor col 1 should be hidden');
+
+
+            inp.simulate('click');
+            Assert.isFalse(oe.get('visible'),'cell editor col 1 should be closed');
+
+            td6.simulate('click');
+            oe = dt._openEditor;
+            oe.saveEditor('abcdefg');
+
+
+
+            //inp.focus();
+            Y.one('body').simulate('keypress',{charCode:52}); //  4:52     -:45   .:46
+            inp.simulate('keypress',{charCode:53}); //
+            inp.simulate('keypress',{charCode:54}); //
+            inp.simulate('keypress',{charCode:46}); //
+            inp.simulate('keypress',{charCode:55}); //    456.7 ?
+            inp.simulate('keydown',{keyCode:13});
+
+        //    Assert.isFalse(oe.get('visible'),'cell editor col 1 should be closed');
+        //    Assert.areSame(59.93, oe.get('lastValue'),'after save lastvalue should be 59.93');
+        //    Assert.areSame(456.7, oe.get('value'),'after save lastvalue should be 59.93');
+
+
         },
 
-        'listeners are set' : function(){
-            //Assert.areSame( 3, this.m._subscr.length, "Didn't find 3 listeners" );
+
+        'check initial setup - inline row 0' : function(){
+            var dt = this.dt,
+                tr0 = this.dt.getRow(0);
+
+            // column 0 of any row is uneditable, make sure ...
+            tr0.all('td').item(0).simulate('click');
+            Assert.isNull(dt._openEditor,'cell editor col 0 should be null');
+
+            // column 1 of row 0 should open ...
+            tr0.all('td').item(1).simulate('click');
+            Assert.isNotNull(dt._openEditor,'cell editor col 1 should be open');
+            Assert.isTrue(dt._openEditor.get('visible'),'cell editor col 1 should be visible');
+
+            Assert.areSame(0,dt._openEditor.get('value'),'initial editor value of col 1 should be 0');
+
+            // ESC should close
+            dt._openEditor._inputNode.simulate('keydown',{keyCode:27});
+            Assert.isNull(dt._openEditor,'cell editor col 1 should be closed');
+
         }
+
 
     }));
 
-
     Y.Test.Runner.add(suite);
 
-
 },'', { requires: [ 'test' ] });
-
