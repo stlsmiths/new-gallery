@@ -344,6 +344,13 @@ Implementers may override this method for more complex sorting needs.</p>
                             </li>
                         
                             <li class="index-item method private">
+                                <a href="#method__afterSortByChange">_afterSortByChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
                                 <a href="#method__afterSortPaginator">_afterSortPaginator</a>
 
                                 
@@ -373,6 +380,13 @@ Implementers may override this method for more complex sorting needs.</p>
                         
                             <li class="index-item method private">
                                 <a href="#method__gefPagState">_gefPagState</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__initSortFn">_initSortFn</a>
 
                                 
                                 
@@ -737,7 +751,7 @@ Implementers may override this method for more complex sorting needs.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l886"><code>gallery-js&#x2F;datatable-paginator.js:886</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l888"><code>gallery-js&#x2F;datatable-paginator.js:888</code></a>
         
         </p>
 
@@ -826,7 +840,7 @@ Implementers may override this method for more complex sorting needs.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l922"><code>gallery-js&#x2F;datatable-paginator.js:922</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l924"><code>gallery-js&#x2F;datatable-paginator.js:924</code></a>
         
         </p>
 
@@ -915,7 +929,7 @@ Implementers may override this method for more complex sorting needs.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l763"><code>gallery-js&#x2F;datatable-paginator.js:763</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l765"><code>gallery-js&#x2F;datatable-paginator.js:765</code></a>
         
         </p>
 
@@ -1014,7 +1028,7 @@ data, or for local data the assigned "data" attribute is used as the initial dat
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1037"><code>gallery-js&#x2F;datatable-paginator.js:1037</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1143"><code>gallery-js&#x2F;datatable-paginator.js:1143</code></a>
         
         </p>
 
@@ -1104,7 +1118,7 @@ the response object, including {results:, meta:} properties.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1049"><code>gallery-js&#x2F;datatable-paginator.js:1049</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1155"><code>gallery-js&#x2F;datatable-paginator.js:1155</code></a>
         
         </p>
 
@@ -1260,7 +1274,7 @@ a custom "response" event including {results:, meta:} properties.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l989"><code>gallery-js&#x2F;datatable-paginator.js:989</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1095"><code>gallery-js&#x2F;datatable-paginator.js:1095</code></a>
         
         </p>
 
@@ -1355,6 +1369,68 @@ is over-ridden to provide the custom "response" event including {results:, meta:
 </div>
 
                 
+                    <div id="method__afterSortByChange" class="method item private">
+    <h3 class="name"><code>_afterSortByChange</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l960"><code>gallery-js&#x2F;datatable-paginator.js:960</code></a>
+        
+        </p>
+
+
+        
+
+        
+            <p>Available since 3.8.0</p>
+        
+    </div>
+
+    <div class="description">
+        <p>This is an OVERRIDE of the dt-scroll afterSortByChange event, which in the case of pagination
+needs to be amended to remove the ModelList comparator and sort method.</p>
+
+<p>Added by T.Smith on 1/13/2013 to resolve sorting error on remote sortBy pagination
+(Thanks to blicksky on GitHub for raising this issue)</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="method__afterSortPaginator" class="method item private">
     <h3 class="name"><code>_afterSortPaginator</code></h3>
 
@@ -1389,7 +1465,7 @@ is over-ridden to provide the custom "response" event including {results:, meta:
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l958"><code>gallery-js&#x2F;datatable-paginator.js:958</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1064"><code>gallery-js&#x2F;datatable-paginator.js:1064</code></a>
         
         </p>
 
@@ -1451,7 +1527,7 @@ local data array ...</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l749"><code>gallery-js&#x2F;datatable-paginator.js:749</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l751"><code>gallery-js&#x2F;datatable-paginator.js:751</code></a>
         
         </p>
 
@@ -1512,7 +1588,7 @@ where a DataSource is used (which is hard to track when it is plugged in ...)</p
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1164"><code>gallery-js&#x2F;datatable-paginator.js:1164</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1270"><code>gallery-js&#x2F;datatable-paginator.js:1270</code></a>
         
         </p>
 
@@ -1586,7 +1662,7 @@ the defaults are simply the member names.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1195"><code>gallery-js&#x2F;datatable-paginator.js:1195</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1301"><code>gallery-js&#x2F;datatable-paginator.js:1301</code></a>
         
         </p>
 
@@ -1659,7 +1735,7 @@ object with all of PaginatorModel ATTRS and the <code>sortBy</code> setting.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1212"><code>gallery-js&#x2F;datatable-paginator.js:1212</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1318"><code>gallery-js&#x2F;datatable-paginator.js:1318</code></a>
         
         </p>
 
@@ -1687,6 +1763,64 @@ object with all of PaginatorModel ATTRS and the <code>sortBy</code> setting.</p>
                 
             </div>
         </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method__initSortFn" class="method item private">
+    <h3 class="name"><code>_initSortFn</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1001"><code>gallery-js&#x2F;datatable-paginator.js:1001</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>PATCH : This is an override of the DT _initSortFn from DT to help with a sorting problem
+Added by T.Smith on 1/13/2013 to resolve sorting error on remote sortBy pagination
+(Thanks to blicksky on GitHub for raising this issue)</p>
+    </div>
+
+    
+
     
 
     
@@ -1727,7 +1861,7 @@ object with all of PaginatorModel ATTRS and the <code>sortBy</code> setting.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1275"><code>gallery-js&#x2F;datatable-paginator.js:1275</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1381"><code>gallery-js&#x2F;datatable-paginator.js:1381</code></a>
         
         </p>
 
@@ -1794,7 +1928,7 @@ the DataTable has finished rendering.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1069"><code>gallery-js&#x2F;datatable-paginator.js:1069</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1175"><code>gallery-js&#x2F;datatable-paginator.js:1175</code></a>
         
         </p>
 
@@ -1888,7 +2022,7 @@ object and then makes the appropriate processPageRequest call.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1228"><code>gallery-js&#x2F;datatable-paginator.js:1228</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1334"><code>gallery-js&#x2F;datatable-paginator.js:1334</code></a>
         
         </p>
 
@@ -1989,7 +2123,7 @@ object and then makes the appropriate processPageRequest call.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l852"><code>gallery-js&#x2F;datatable-paginator.js:852</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l854"><code>gallery-js&#x2F;datatable-paginator.js:854</code></a>
         
         </p>
 
@@ -2089,7 +2223,7 @@ is not set, then the current DT "data" attribute is used.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1255"><code>gallery-js&#x2F;datatable-paginator.js:1255</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1361"><code>gallery-js&#x2F;datatable-paginator.js:1361</code></a>
         
         </p>
 
@@ -2195,7 +2329,7 @@ attribute value.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1181"><code>gallery-js&#x2F;datatable-paginator.js:1181</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1287"><code>gallery-js&#x2F;datatable-paginator.js:1287</code></a>
         
         </p>
 
@@ -2307,7 +2441,7 @@ attribute value.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1131"><code>gallery-js&#x2F;datatable-paginator.js:1131</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1237"><code>gallery-js&#x2F;datatable-paginator.js:1237</code></a>
         
         </p>
 
@@ -2430,7 +2564,7 @@ property, including if it is nested as "toServer" or "fromServer" subattribute.
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1102"><code>gallery-js&#x2F;datatable-paginator.js:1102</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1208"><code>gallery-js&#x2F;datatable-paginator.js:1208</code></a>
         
         </p>
 
@@ -2511,7 +2645,7 @@ property, including if it is nested as "toServer" or "fromServer" subattribute.
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1083"><code>gallery-js&#x2F;datatable-paginator.js:1083</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1189"><code>gallery-js&#x2F;datatable-paginator.js:1189</code></a>
         
         </p>
 
@@ -2607,7 +2741,7 @@ if a zero list of items is returns it fires the "paginatorZeroItems" custom even
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l645"><code>gallery-js&#x2F;datatable-paginator.js:645</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l647"><code>gallery-js&#x2F;datatable-paginator.js:647</code></a>
         
         </p>
 
@@ -2720,7 +2854,7 @@ the new record (in o.newVal) to the internal buffer and refreshing the Paginator
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l708"><code>gallery-js&#x2F;datatable-paginator.js:708</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l710"><code>gallery-js&#x2F;datatable-paginator.js:710</code></a>
         
         </p>
 
@@ -2818,7 +2952,7 @@ via either "data:add" or .addRow.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l328"><code>gallery-js&#x2F;datatable-paginator.js:328</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l330"><code>gallery-js&#x2F;datatable-paginator.js:330</code></a>
         
         </p>
 
@@ -2878,7 +3012,7 @@ via either "data:add" or .addRow.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l633"><code>gallery-js&#x2F;datatable-paginator.js:633</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l635"><code>gallery-js&#x2F;datatable-paginator.js:635</code></a>
         
         </p>
 
@@ -3032,7 +3166,7 @@ Note: This only applies to client-side pagination</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l494"><code>gallery-js&#x2F;datatable-paginator.js:494</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l496"><code>gallery-js&#x2F;datatable-paginator.js:496</code></a>
         
         </p>
 
@@ -3135,7 +3269,7 @@ include additional information in their remote request.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l509"><code>gallery-js&#x2F;datatable-paginator.js:509</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l511"><code>gallery-js&#x2F;datatable-paginator.js:511</code></a>
         
         </p>
 
@@ -3255,7 +3389,7 @@ takes care of slicing and resetting the "local data" array and re-syncing the Da
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l479"><code>gallery-js&#x2F;datatable-paginator.js:479</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l481"><code>gallery-js&#x2F;datatable-paginator.js:481</code></a>
         
         </p>
 
@@ -3338,7 +3472,7 @@ to the ModelList's "load" method (assuming ModelSync.REST or other handling is p
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l573"><code>gallery-js&#x2F;datatable-paginator.js:573</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l575"><code>gallery-js&#x2F;datatable-paginator.js:575</code></a>
         
         </p>
 
@@ -3420,7 +3554,7 @@ methods (i.e. string, number, date)</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l367"><code>gallery-js&#x2F;datatable-paginator.js:367</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l369"><code>gallery-js&#x2F;datatable-paginator.js:369</code></a>
         
         </p>
 
@@ -3557,7 +3691,7 @@ or sends a new request to a remote source to populate the DT (remote data)</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l468"><code>gallery-js&#x2F;datatable-paginator.js:468</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l470"><code>gallery-js&#x2F;datatable-paginator.js:470</code></a>
         
         </p>
 
@@ -3630,7 +3764,7 @@ or sends a new request to a remote source to populate the DT (remote data)</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l683"><code>gallery-js&#x2F;datatable-paginator.js:683</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l685"><code>gallery-js&#x2F;datatable-paginator.js:685</code></a>
         
         </p>
 
@@ -3743,7 +3877,7 @@ the new record (in o.newVal) to the internal buffer and refreshing the Paginator
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l726"><code>gallery-js&#x2F;datatable-paginator.js:726</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l728"><code>gallery-js&#x2F;datatable-paginator.js:728</code></a>
         
         </p>
 
@@ -3857,7 +3991,7 @@ via either "data:remove" or .removeRow.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l550"><code>gallery-js&#x2F;datatable-paginator.js:550</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l552"><code>gallery-js&#x2F;datatable-paginator.js:552</code></a>
         
         </p>
 
@@ -3947,7 +4081,7 @@ via either "data:remove" or .removeRow.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l531"><code>gallery-js&#x2F;datatable-paginator.js:531</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l533"><code>gallery-js&#x2F;datatable-paginator.js:533</code></a>
         
         </p>
 
@@ -4640,7 +4774,7 @@ or returned (incoming response) meta data back to PaginatorModel attributes.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l909"><code>gallery-js&#x2F;datatable-paginator.js:909</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l911"><code>gallery-js&#x2F;datatable-paginator.js:911</code></a>
         
         </p>
 
@@ -4740,7 +4874,7 @@ ModelList.add's event payload.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l945"><code>gallery-js&#x2F;datatable-paginator.js:945</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l947"><code>gallery-js&#x2F;datatable-paginator.js:947</code></a>
         
         </p>
 
@@ -4840,7 +4974,7 @@ the ModelList.remove's event payload.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l460"><code>gallery-js&#x2F;datatable-paginator.js:460</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l462"><code>gallery-js&#x2F;datatable-paginator.js:462</code></a>
         
         </p>
 
@@ -4932,7 +5066,7 @@ the ModelList.remove's event payload.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1124"><code>gallery-js&#x2F;datatable-paginator.js:1124</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1230"><code>gallery-js&#x2F;datatable-paginator.js:1230</code></a>
         
         </p>
 
@@ -4976,7 +5110,7 @@ to be set true</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1096"><code>gallery-js&#x2F;datatable-paginator.js:1096</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1202"><code>gallery-js&#x2F;datatable-paginator.js:1202</code></a>
         
         </p>
 
@@ -5020,7 +5154,7 @@ due to a null response froma remote request or a null Array or ModelList being s
             
         
         
-        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1289"><code>gallery-js&#x2F;datatable-paginator.js:1289</code></a>
+        <a href="..&#x2F;files&#x2F;gallery-js_datatable-paginator.js.html#l1395"><code>gallery-js&#x2F;datatable-paginator.js:1395</code></a>
         
         </p>
 

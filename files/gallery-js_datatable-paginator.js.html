@@ -470,15 +470,17 @@ Y.mix( DtPaginator.prototype, {
             &#x2F;&#x2F; If PaginatorModel exists, set listeners for &quot;change&quot; events ...
             if ( this.paginator.get(&#x27;model&#x27;) ) {
                 this.pagModel = this.get(&#x27;paginator&#x27;).get(&#x27;model&#x27;);
-                this._evtHandlesPag.push( this.pagModel.after(&#x27;pageChange&#x27;, Y.bind(this._pageChangeListener,this) ) );
-                this._evtHandlesPag.push( this.pagModel.after(&#x27;itemsPerPageChange&#x27;, Y.bind(this._pageChangeListener,this)) );
-                this._evtHandlesPag.push( this.pagModel.after(&#x27;totalItemsChange&#x27;, Y.bind(this._totalItemsListener,this)) );
+                this._evtHandlesPag.push(
+                    this.pagModel.after(&#x27;pageChange&#x27;, Y.bind(this._pageChangeListener,this) ),
+                    this.pagModel.after(&#x27;itemsPerPageChange&#x27;, Y.bind(this._pageChangeListener,this)),
+                    this.pagModel.after(&#x27;totalItemsChange&#x27;, Y.bind(this._totalItemsListener,this))
+                 );
             }
 
             &#x2F;&#x2F; Define listeners to the &quot;data&quot; change events ....
-            this._evtHandlesPag.push( this.data.after(&quot;reset&quot;, Y.bind(this._afterDataReset,this)) );
-            this._evtHandlesPag.push( this.data.after(&quot;add&quot;, Y.bind(this._afterDataAdd,this)) );
-            this._evtHandlesPag.push( this.data.after(&quot;remove&quot;, Y.bind(this._afterDataRemove,this)) );
+            this._evtHandlesPag.push( this.data.after([&quot;reset&quot;,&quot;add&quot;,&quot;remove&quot;], Y.bind(this._afterDataReset,this)) );
+          &#x2F;&#x2F;  this._evtHandlesPag.push( this.data.after(&quot;add&quot;, Y.bind(this._afterDataAdd,this)) );
+          &#x2F;&#x2F;  this._evtHandlesPag.push( this.data.after(&quot;remove&quot;, Y.bind(this._afterDataRemove,this)) );
 
             &#x2F;&#x2F; Added listener to sniff for DataSource existence, for its binding
             this._evtHandlesPag.push( Y.Do.after( this._afterSyncUI, this, &#x27;_syncUI&#x27;, this) );
@@ -755,14 +757,15 @@ Y.mix( DtPaginator.prototype, {
     paginatorSortLocalData: function(){
         var rdata  = [], &#x2F;&#x2F;this._mlistArray,
             sortBy = this.get(&#x27;sortBy&#x27;),
+         &#x2F;&#x2F;   sortBy = this._pagSortBy || this.get(&#x27;sortBy&#x27;),
             sortObj,sortKey,sortDir;
 
         if(Y.Lang.isArray(sortBy)) {
 
             Y.Array.each(this._mlistArray, function(r){ rdata.push(r); });
 
-            sortObj = sortBy[0],
-            sortKey = Y.Object.keys(sortObj)[0],
+            sortObj = sortBy[0];
+            sortKey = Y.Object.keys(sortObj)[0];
             sortDir = sortObj[sortKey];
 
         &#x2F;&#x2F;
@@ -771,19 +774,19 @@ Y.mix( DtPaginator.prototype, {
         &#x2F;&#x2F;
             rdata.sort(function(a,b){
                 var rtn,atime,btime;
-                if(Y.Lang.isString(a[sortKey])) {
 
-                    rtn = ( a[sortKey]&lt;b[sortKey] ) ? -sortDir : sortDir;
-
-                } else if(Y.Lang.isNumber(a[sortKey])){
+                if(Y.Lang.isNumber(a[sortKey])) {
 
                     rtn = (a[sortKey]-b[sortKey]&lt;0) ? -sortDir : sortDir;
 
+                } else if(Y.Lang.isString(a[sortKey])){
+
+                    rtn = ( a[sortKey]&lt;b[sortKey] ) ? -sortDir : sortDir;
+
                 } else if(Y.Lang.isDate(a[sortKey]) ){
 
-                    &#x2F;&#x2F;rtn = ((a[sortKey].getTime() - b[sortKey].getTime())&lt;0) ? -sortDir : sortDir;
-                    atime = a[sortKey], &#x2F;&#x2F;.getTime(),
-                    btime = b[sortKey]; &#x2F;&#x2F;.getTime();
+                    atime = a[sortKey];
+                    btime = b[sortKey];
                     rtn = (sortDir === -1) ? (btime - atime) : (atime - btime);
 
                 }
@@ -796,7 +799,6 @@ Y.mix( DtPaginator.prototype, {
         }
 
         this.refreshPaginator();
-
     },
 
 
@@ -1124,6 +1126,110 @@ Y.mix( DtPaginator.prototype, {
      *  @param {Object} oPayload Event payload from ModelList.remove
      *  @param {Number} pagIndex Calculated absolute index of the record within the entire dataset
      *&#x2F;
+
+    &#x2F;**
+     * This is an OVERRIDE of the dt-scroll afterSortByChange event, which in the case of pagination
+     * needs to be amended to remove the ModelList comparator and sort method.
+     *
+     * Added by T.Smith on 1&#x2F;13&#x2F;2013 to resolve sorting error on remote sortBy pagination
+     * (Thanks to blicksky on GitHub for raising this issue)
+     *
+     * @method _afterSortByChange
+     * @since 3.8.0
+     * @private
+     *&#x2F;
+    _afterSortByChange: function() {
+        &#x2F;&#x2F; Can&#x27;t use a setter because it&#x27;s a chicken and egg problem. The
+        &#x2F;&#x2F; columns need to be set up to translate, but columns are initialized
+        &#x2F;&#x2F; from Core&#x27;s initializer.  So construction-time assignment would
+        &#x2F;&#x2F; fail.
+        this._setSortBy();
+
+        &#x2F;&#x2F; Don&#x27;t sort unless sortBy has been set
+        if (this._sortBy.length) {
+
+            &#x2F;&#x2F; Added by T. Smith - for gallery-datatable-paginator
+            if(this.get(&#x27;paginator&#x27;) &amp;&amp; this._pagDataSrc) {
+                 delete this.data.comparator;
+                 this.data.sort = function() {
+                     return this;
+                 };
+
+            } else {
+            &#x2F;&#x2F;----- END ADD ------
+
+                if (!this.data.comparator) {
+                     this.data.comparator = this._sortComparator;
+                }
+
+                this.data.sort();
+            }  &#x2F;&#x2F; Also added endif }
+        }
+
+    },
+
+    &#x2F;**
+     * PATCH : This is an override of the DT _initSortFn from DT to help with a sorting problem
+     * Added by T.Smith on 1&#x2F;13&#x2F;2013 to resolve sorting error on remote sortBy pagination
+     * (Thanks to blicksky on GitHub for raising this issue)
+     *
+     * @method _initSortFn
+     * @private
+     *&#x2F;
+    _initSortFn: function () {
+
+        if(this.get(&#x27;paginator&#x27;) &amp;&amp; this._pagDataSrc) {
+
+            delete this.data.comparator;
+
+        } else {
+            &#x2F;&#x2F; This is the original _initSortFn
+
+            var self = this;
+
+            &#x2F;&#x2F; TODO: This should be a ModelList extension.
+            &#x2F;&#x2F; FIXME: Modifying a component of the host seems a little smelly
+            &#x2F;&#x2F; FIXME: Declaring inline override to leverage closure vs
+            &#x2F;&#x2F; compiling a new function for each column&#x2F;sortable change or
+            &#x2F;&#x2F; binding the _compare implementation to this, resulting in an
+            &#x2F;&#x2F; extra function hop during sorting. Lesser of three evils?
+            this.data._compare = function (a, b) {
+                var cmp = 0,
+                    i, len, col, dir, aa, bb;
+
+                for (i = 0, len = self._sortBy.length; !cmp &amp;&amp; i &lt; len; ++i) {
+                    col = self._sortBy[i];
+                    dir = col.sortDir;
+
+                    if (col.sortFn) {
+                        cmp = col.sortFn(a, b, (dir === -1));
+                    } else {
+                        &#x2F;&#x2F; FIXME? Requires columns without sortFns to have key
+                        aa = a.get(col.key) || &#x27;&#x27;;
+                        bb = b.get(col.key) || &#x27;&#x27;;
+
+                        cmp = (aa &gt; bb) ? dir : ((aa &lt; bb) ? -dir : 0);
+                    }
+                }
+
+                return cmp;
+            };
+
+            if (this._sortBy.length) {
+                this.data.comparator = this._sortComparator;
+
+                &#x2F;&#x2F; TODO: is this necessary? Should it be elsewhere?
+                this.data.sort();
+            } else {
+                &#x2F;&#x2F; Leave the _compare method in place to avoid having to set it
+                &#x2F;&#x2F; up again.  Mistake?
+                delete this.data.comparator;
+            }
+
+        }
+
+    },
+
 
     &#x2F;**
      * Listener that fires after the DT &quot;sort&quot; event processes.  The Paginator must be
