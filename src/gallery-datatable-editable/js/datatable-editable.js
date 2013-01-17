@@ -17,7 +17,7 @@
  <br/>Likewise if a DT uses 4 different "calendar" editor View types but each one as slightly different "editorConfig",
  then this module creates 4 different calendar View instances to handle the different configurations.
 
- Listeners are set for the "cellEditorSave" event and saved to the active "data" setting within this module.
+ Listeners are set for the "celleditor:save" event and saved to the active "data" setting within this module.
 
  Additional capability is provided for cell editing situations to add CSS classes to TD's which are added to "editable"
  columns (e.g. cursor) to indicate they are "clickable".
@@ -55,7 +55,7 @@
 
  ##### ... More Info
 
- The module fires the event [cellEditorSave](#event_cellEditorSave), which can be listened for to provide updating
+ The module fires the event [celleditor:save](#event_celleditor:save), which can be listened for to provide updating
  of remote data back to a server (assuming a ModelList "sync" layer is NOT used).  Haven't provided the equivalent to
  YUI 2.x's "asyncSubmitter" because I think this event could easily be listened to in order to provide follow-on
  updating to remote data stores.
@@ -285,7 +285,7 @@ Y.mix( DtEditable.prototype, {
      //   if(this.get('editable')===true) {
      //       this._setEditableMode(true);
      //   }
-
+     console.log('it is this');
         this._classColEditable = this.getClassName('col','editable');
 
         this._bindEditable();
@@ -370,12 +370,14 @@ Y.mix( DtEditable.prototype, {
         );
 
         // Add a ESC key listener on the body (hate doing this!) to close editor if open ...
-        this._subscrCellEditors.push( Y.one('body').after('keydown', Y.bind(this._onKeyEsc,this) ) );
+        this._subscrCellEditors.push( Y.one('body').after('keydown', this._onKeyEsc,this ) );
 
         // Add listeners to all 'celleditors'
-        this.on('celleditor:editorSave',this._onCellEditorSave);
-        this.on('celleditor:editorCancel',this._onCellEditorCancel);
-        this.on('celleditor:keyDirChange',this._onKeyDirChange);
+        this.on('celleditor:save',this._onCellEditorSave);
+        this.after('celleditor:save',this._afterCellEditorSave);
+        this.on('celleditor:cancel',this._onCellEditorCancel);
+        this.after('celleditor:cancel',this._afterCellEditorCancel);
+        this.after('celleditor:keyDirChange',this._afterKeyDirChange);
 
     },
 
@@ -1027,11 +1029,11 @@ Y.mix( DtEditable.prototype, {
      * the number of rows or columns to be changed to from the current TD location
      * (See the base method .getCell)
      *
-     * @method _onKeyDirChange
+     * @method _afterKeyDirChange
      * @param e {EventFacade} The attribute change event facade for the View's 'keyDir' attribute
      * @private
      */
-    _onKeyDirChange : function(e) {
+    _afterKeyDirChange : function(e) {
         var dir     = e.newVal,
             recIndex = this.data.indexOf(this._openRecord),
             col      = this.getColumn(this._openColKey),
@@ -1069,102 +1071,105 @@ Y.mix( DtEditable.prototype, {
     },
 
     /**
-     * Listener to the cell editor View's "editorCancel" event.  The editorCancel event
-     * includes a return object with keys {td,cell,oldValue}
+     * Listener to the cell editor View's `cancel` event.  The cancel event
+     * includes a return object with keys {td,cell,oldValue}.
+     * This method fills it up with extra information.
      *
      * @method _onCellEditorCancel
-     * @param o {Object} Returned object from cell editor "editorCancel" event
+     * @param ev {Event Facade} As provided by the celleditor:cancel event
      * @private
      */
-    _onCellEditorCancel: function(o){
-        if(o.cell && this._openRecord && this._openColKey) {
-            var cell   = o.cell,
-                colKey = cell.colKey || this._openColKey,
-                record = this.data.getByClientId(cell.recClientId) || this._openRecord,
-                ename  = this._openEditor.get('name');
+    _onCellEditorCancel: function(ev){
+        var cell   = ev.cell;
+        if(cell && this._openRecord && this._openColKey) {
 
-            if(!this._openEditor.get('hidden')) {
-                this.hideCellEditor();
-            }
-
-            this.fire('cellEditorCancel',{
-                td:         o.td,
-                cell:       cell,
-                record:     record,
-                colKey:     colKey,
-                prevVal:    o.oldValue,
-                editorName: ename
-            });
+            ev.record = this.data.getByClientId(cell.recClientId) || this._openRecord;
+            ev.colKey = cell.colKey || this._openColKey;
+            ev.editorName = this._openEditor.get('name');
+        } else {
+            ev.halt();
         }
 
+    },
+    /**
+     * After listener for the cell editor `cancel` event. If no other listener
+     * has halted the event, this method will finally hide the editor.
+     * @method _afterCellEditorCancel
+     * @private
+     */
+    _afterCellEditorCancel: function(){
+        if(!this._openEditor.get('hidden')) {
+            this.hideCellEditor();
+        }
     },
 
     /**
      * Fired when the open Cell Editor has sent an 'editorCancel' event, typically from
      * a user cancelling editing via ESC key or "Cancel Button"
-     * @event cellEditorCancel
-     * @param {Object} rtn Returned Object
-     *  @param {Node} td The TD Node that was edited
-     *  @param {Object} cell The cell object container for the edited cell
-     *  @param {Model} record Model instance of the record data for the edited cell
-     *  @param {String} colKey Column key (or name) of the edited cell
-     *  @param {String|Number|Date} newVal The old (last) value of the underlying data for the cell
-     *  @param {String} editorName The name attribute of the editor that updated this cell
+     * @event celleditor:cancel
+     * @param ev {Event Facade} Event facade, including:
+     *  @param ev.td {Node} The TD Node that was edited
+     *  @param ev.cell {Object} The cell object container for the edited cell
+     *  @param ev.record {Model} Model instance of the record data for the edited cell
+     *  @param ev.colKey {String} Column key (or name) of the edited cell
+     *  @param ev.newVal {String|Number|Date} The old (last) value of the underlying data for the cell
+     *  @param ev.editorName {String} The name attribute of the editor that updated this cell
      */
 
     /**
-     * Listener to the cell editor View's "editorSave" event, that when fired will
+     * Listener to the cell editor View's "save" event, that when fired will
      * update the Model's data value for the approrpriate column.
      *
-     * The editorSave event includes a return object with keys {td,cell,newValue,oldValue}
+     * The editorSave event includes a return object with keys {td,cell,newValue,oldValue}.
+     *
+     * It fills the event facade for the event with extra information.
      *
      * Note:  If a "sync" layer DOES NOT exist (i.e. DataSource), implementers can listen for
      * the "saveCellEditing" event to send changes to a remote data store.
      *
      * @method _onCellEditorSave
-     * @param o {Object} Returned object from cell editor "editorSave" event
+     * @param ev {Event Facade} As provided by the cell editor "save" event
      * @private
      */
-    _onCellEditorSave: function(o){
-        if(o.cell && this._openRecord && this._openColKey) {
-            var cell   = o.cell,
-                colKey = cell.colKey || this._openColKey,
-                record = this.data.getByClientId(cell.recClientId) || this._openRecord,
-                ename  = this._openEditor.get('name');
+    _onCellEditorSave: function (ev) {
+        var cell   = ev.cell;
+        if(cell && this._openRecord && this._openColKey) {
 
-            if(record){
-                record.set(this._openColKey, o.newValue);
-            }
-
-            this.hideCellEditor();
-
-            this.fire('cellEditorSave',{
-                td:         o.td,
-                cell:       cell,
-                record:     record,
-                colKey:     colKey,
-                newVal:     o.newValue,
-                prevVal:    o.oldValue,
-                editorName: ename
-            });
-
+            ev.cell = cell;
+            ev.record = this.data.getByClientId(cell.recClientId) || this._openRecord;
+            ev.colKey = cell.colKey || this._openColKey;
+            ev.editorName = this._openEditor.get('name');
+        } else {
+            ev.halt();
         }
 
+    },
+    /**
+     * After listener for the cell editor `save` event. If no other listener
+     * has halted the event, this method will finally save the new value
+     * and hide the editor.
+     * @method _afterCellEditorSave
+     * @private
+     */
+    _afterCellEditorSave: function (ev) {
+        if(ev.record){
+            ev.record.set(ev.colKey, ev.newValue);
+        }
+
+        this.hideCellEditor();
     }
 
     /**
-     * Event fired after a Cell Editor has sent the 'editorSave' event closing an editing session.
-     * The event signature includes pertinent data on the cell, TD, record and column that was
-     * edited along with the prior and new values for the cell.
-     * @event cellEditorSave
-     * @param {Object} rtn Returned Object
-     *  @param {Node} td The TD Node that was edited
-     *  @param {Object} cell The cell object container for the edited cell
-     *  @param {Model} record Model instance of the record data for the edited cell
-     *  @param {String} colKey Column key (or name) of the edited cell
-     *  @param {String|Number|Date} newVal The new (updated) value of the underlying data for the cell
-     *  @param {String|Number|Date} newVal The old (last) value of the underlying data for the cell
-     *  @param {String} editorName The name attribute of the editor that updated this cell
+     * Event fired after a Cell Editor has sent the 'save' event closing an editing session.
+     * @event celleditor:save
+     * @param ev {Event Facade} including:
+     *  @param ev.td {Node} The TD Node that was edited
+     *  @param ev.cell {Object} The cell object container for the edited cell
+     *  @param ev.record {Model} Model instance of the record data for the edited cell
+     *  @param ev.colKey {String} Column key (or name) of the edited cell
+     *  @param ev.newVal {String|Number|Date} The new (updated) value of the underlying data for the cell
+     *  @param ev.prevVal {String|Number|Date} The old (last) value of the underlying data for the cell
+     *  @param ev.editorName {String} The name attribute of the editor that updated this cell
      */
 
 });

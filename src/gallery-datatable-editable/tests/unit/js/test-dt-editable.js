@@ -232,7 +232,7 @@ YUI.add('module-tests-dteditable', function(Y) {
             Assert.isNull( this.dt._openTd, "_openTd not null" );
 
         }
-        
+
     }));
 
     Y.Test.Runner.add(suite);

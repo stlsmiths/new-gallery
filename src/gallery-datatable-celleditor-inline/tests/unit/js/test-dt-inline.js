@@ -83,7 +83,7 @@ YUI.add('module-tests-dtinline', function(Y) {
 
                 { key:'stype',  label:"Condition",
               //    formatter:"custom", formatConfig:stypesObj,
-                  editor:"select",
+                  editor:"inlineAC",
                   editorConfig:{
                       selectOptions:  stypesObj, //stypes,
                       templateEngine:Y.Handlebars
@@ -108,7 +108,7 @@ YUI.add('module-tests-dtinline', function(Y) {
 
                 { key:'sdate',  label:"Trans Date",
               //    formatter:"shortDate", className:'align-right',
-                  editor:"calendar"
+                  editor:"inlineDate"
                  // editor:"date", editorConfig:{ keyFiltering:null, inputKeys:false }
                 }
             ];
@@ -117,11 +117,11 @@ YUI.add('module-tests-dtinline', function(Y) {
 
         var localDT = new Y.DataTable({
             columns: cols[colChoice],
-            data: someData
+            data: someData,
 
-         //   editOpenType: 'click',
-         //   defaultEditor: 'text',
-         //   editable: true
+            editOpenType: 'click',
+            defaultEditor: 'inline',
+            editable: true
 
         }).render('#dtable');
         return localDT;
@@ -157,9 +157,34 @@ YUI.add('module-tests-dtinline', function(Y) {
 
     }));
 
+    suite.add(new Y.Test.Case({
+        name: 'Gallery DataTable-Celleditor-inline : satyam',
+
+        setUp : function () {
+            // cols
+            // {sid: sname: sdesc: sopen:0, stype:0, stock:0, sprice:, shipst:'s', sdate: },
+            this.dt = makeDT(1);
+
+        },
+
+        tearDown : function () {
+//            this.dt.destroy();
+//            delete this.dt;
+        },
+        'show editor': function () {
+            this.dt.getCell([1,1]).simulate('click');
+        }
+    }));
+
 
     Y.Test.Runner.add(suite);
 
 
-},'', { requires: [ 'test' ] });
+},'', { requires: [
+        'test',
+        "node-event-simulate",
+        'datatable',
+        'gallery-datatable-editable',
+        'gallery-datatable-celleditor-inline'
+]});
 

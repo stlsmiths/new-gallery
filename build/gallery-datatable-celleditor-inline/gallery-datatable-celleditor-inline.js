@@ -178,14 +178,13 @@ Y.DataTable.BaseCellInlineEditor =  Y.Base.create('celleditor',Y.View,[],{
 
         this.publish({
             editorSave: {
-                defaultFn:   this._defEditorSaveFn,
-                emitFacade:  true,
-                preventable: true
+                defaultFn:   this._defEditorSaveFn
             },
             editorCancel: {
-                defaultFn:   this._defEditorCancelFn,
-                emitFacade:  true,
-                preventable: true
+                defaultFn:   this._defEditorCancelFn
+            },
+            editorShow: {
+                defaultFn: this._defEditorShowFn
             }
         });
 
@@ -228,6 +227,33 @@ Y.DataTable.BaseCellInlineEditor =  Y.Base.create('celleditor',Y.View,[],{
         this.hideEditor();
     },
 
+    /**
+     */
+    _defEditorShowFn: function (ev) {
+        var cont = this.get('container'),
+            cell = ev.cell,
+            td = cell.td || ev.td,
+            xy = td.getXY(),
+            val = ev.value;
+        //
+        // Get the TD Node's XY position, and resize/position the container
+        //   over the TD
+        //
+
+        cont.show();
+        this._resizeCont(cont,td);
+        cont.setXY(xy);
+
+        // focus the inner INPUT ...
+        this._inputNode.focus();
+        // set the INPUT value
+        this._inputNode.set('value',val);
+        this.set('lastValue',val);
+
+        this._set('visible',true);
+        this._set('hidden',false);
+    },
+
 //======================   PUBLIC METHODS   ===========================
 
     /**
@@ -241,35 +267,16 @@ Y.DataTable.BaseCellInlineEditor =  Y.Base.create('celleditor',Y.View,[],{
      * @public
      */
     showEditor: function(td) {
-        var cont = this.get('container'),
-            cell = this.get('cell'),
+        var cell = this.get('cell'),
             val  = cell.value || this.get('value'),
-            xy,prepfn;
+            prepfn;
 
-        //
-        // Get the TD Node's XY position, and resize/position the container
-        //   over the TD
-        //
-        td = cell.td || td;
-        xy = td.getXY();
 
-        cont.show();
-        this._resizeCont(cont,td);
-        cont.setXY(xy);
-
-        // focus the inner INPUT ...
-        this._inputNode.focus();
 
         // if there is a "prep" function ... call it to pre-process the editing
         prepfn = this.get('prepFn');
         val = (prepfn && prepfn.call) ? prepfn.call(this,val) : val;
 
-        // set the INPUT value
-        this._inputNode.set('value',val);
-        this.set('lastValue',val);
-
-        this._set('visible',true);
-        this._set('hidden',false);
 
         this.fire('editorShow',{
             td:         td,
