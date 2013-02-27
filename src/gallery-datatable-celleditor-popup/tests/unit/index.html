@@ -1,9 +1,8 @@
 <!doctype html>
 <html>
 <head>
-    <title>gallery-datatable-popup</title>
+    <title>gallery-datatable-celleditor-popup</title>
     <script src="/build/yui/yui.js"></script>
-  <!--  <script src="js/tests-pagview.js"></script>   -->
 </head>
 <body class="yui3-skin-sam">
 
@@ -11,38 +10,20 @@
 <div id="logger"></div>
 
 <script src="js/test-dt-popup.js"></script>
+<script src="/build/gallery-datatable-editable/gallery-datatable-editable.js"></script>
 
 <script>
 YUI({
-    coverage: ['gallery-datatable-popup'],
- /*   modules:{
-        'module-dt-edit' : {
-            fullpath: '../module-dt-editNEW.js',
-            type:     'js',
-            requires: [ "datatable-base", "datatype" ]
-        },
-
-        'module-dt-edit-popup' : {
-            fullpath: '../module-dt-edit-popupNEW.js',
-            type:     'js',
-            requires: [ "base-build", "view", "cssbutton", 'event-outside', "overlay",
-                        "dd-plugin", "template"  ]
-        }
-    },  */
+    coverage: ['gallery-datatable-celleditor-popup'],
     filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw'
-}).use( 'test-console', 'test', 'module-tests-dtpopup', "node-event-simulate",
-       // these were my old modules from my test system ... each has YUI.add on them
-       // 'module-dt-edit',
-       // "module-dt-edit-popup",
-        'datatable', 
-        //'template',
-        'gallery-datatable-editable', 
- 	   // 'gallery-datatable-celleditor-popup',
+}).use( 'test-console', 'test', 'module-tests-dtpopup',  "node-event-simulate",
+        "gallery-datatable-editable",  "datatable", "template",
+        "gallery-datatable-celleditor-popup", 
         function(Y) {
 
     (new Y.Test.Console()).render('#logger');
 
-    Y.Test.Runner.setName('gallery-datatable-popup');
+    Y.Test.Runner.setName('gallery-datatable-celleditor-popup');
 
     Y.Test.Runner.run();
 });

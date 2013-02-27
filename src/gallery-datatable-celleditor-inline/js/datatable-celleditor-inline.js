@@ -97,8 +97,8 @@ Y.DataTable.BaseCellInlineEditor =  Y.Base.create('celleditor',Y.View,[],{
      */
     events : {
         'input' : {
-            'keypress':     '_onKeyPress',      // for key filtering and generic keys
-            'keydown':      '_onKeyDown',       // for direction, ESC only
+            'keypress':     'processKeyPress',      // for key filtering and charCode keys
+            'keydown':      'processKeyDown',           // for direction, ESC only, keyCode
             'click' :       '_onClick',
             'mouseleave' :  '_onMouseLeave'
         }
@@ -321,8 +321,8 @@ Y.DataTable.BaseCellInlineEditor =  Y.Base.create('celleditor',Y.View,[],{
                 val = savefn.call(this,val);
             }
 
+            // So value was initially okay, but didn't pass saveFn validation call ...
             if (val === undefined) {
-                //val = this.get('lastValue');
                 this.cancelEditor();
                 return;
             }
@@ -402,6 +402,104 @@ Y.DataTable.BaseCellInlineEditor =  Y.Base.create('celleditor',Y.View,[],{
      *  @param {Object} rtn.cell Current cell object
      *  @param {String|Number|Date} rtn.oldValue Data value of this cell prior to editing
      */
+
+    /**
+     * Provides a method to process keypress entries and validate or prevent invalid inputs.
+     * This method is meant to be overrideable by implementers to customize behaviors.
+     *
+     * @method processKeyPress
+     * @param e {EventFacade} Key press event object
+     * @public
+     */
+    processKeyPress: function(e) {
+        var keyc    = e.keyCode,
+            inp     = e.target || this._inputNode,
+            value   = inp.get('value'),
+            keyfilt = this.get('keyFiltering'),
+         //   keyvald = this.get('keyValidator'),
+            kchar   = String.fromCharCode(keyc),
+            flagRE  = true,
+            krtn;
+
+        //
+        // If RTN, then prevent and save ...
+        //
+        if(keyc === KEYC_RTN) {
+            e.preventDefault();
+            this.saveEditor(value);
+        }
+
+        //
+        // Check key filtering validation ... either a RegExp or a user-function
+        //
+        if(keyfilt instanceof RegExp) {
+            flagRE = (!kchar.match(keyfilt)) ? false : flagRE;
+        } else if (Y.Lang.isFunction(keyfilt)) {
+            krtn = keyfilt.call(this,e);
+            flagRE = (krtn) ? true : false;
+        }
+
+        // If key filtering returned false, prevent continuing
+        if(!flagRE) {
+            e.preventDefault();
+        }
+
+    },
+
+    /**
+     * Key listener for the INPUT inline editor, "keydown" is checked for non-printing key
+     *  strokes, navigation or ESC.
+     *
+     *  This method is intended to overridden by implementers in order to customize behaviors.
+     *
+     * @method processKeyDown
+     * @param e {EventFacade} Keydown event facade
+     * @public
+     */
+    processKeyDown : function(e){
+        var keyc    = e.keyCode,
+            dir;
+
+        switch(keyc) {
+
+            case KEYC_ESC:
+                e.preventDefault();
+                this.hideEditor();
+                break;
+
+            case KEYC_UP:
+                dir = (e.ctrlKey) ? [-1,0] : null;
+                break;
+
+            case KEYC_DOWN:
+                dir = (e.ctrlKey) ? [1,0] : null;
+                break;
+
+            case KEYC_LEFT:
+                dir = (e.ctrlKey) ? [0,-1] : null;
+                break;
+
+            case KEYC_RIGHT:
+                dir = (e.ctrlKey) ? [0,1] : null;
+                break;
+
+            case KEYC_TAB: // tab
+                dir = (e.shiftKey) ? [0,-1] : [0,1] ;
+                break;
+        }
+
+        //
+        //  If dir is non-falsey, a navigation direction was set ...
+        //
+        if(dir) {
+            // set the key direction movement
+            if(this.get('inputKeys')===true) {
+                this._set('keyDir',dir);
+            }
+            e.preventDefault();
+        }
+
+    },
 
 //======================   PRIVATE METHODS   ===========================
 
@@ -528,104 +626,8 @@ Y.DataTable.BaseCellInlineEditor =  Y.Base.create('celleditor',Y.View,[],{
 
         //TODO: Worst case, if this doesn't work just hide this sucker on scrolling !
         this.hideEditor();
-    },
-
-    /**
-     * Provides a method to process keypress entries and validate or prevent invalid inputs.
-     * This method is meant to be overrideable by implementers.
-     *
-     * @method _onKeyPress
-     * @param e {EventFacade} Key press event object
-     * @public
-     */
-    _onKeyPress: function(e) {
-        var keyc    = e.keyCode,
-            inp     = e.target || this._inputNode,
-            value   = inp.get('value'),
-            keyfilt = this.get('keyFiltering'),
-         //   keyvald = this.get('keyValidator'),
-            kchar   = String.fromCharCode(keyc),
-            flagRE  = true,
-            krtn;
-
-        //
-        // If RTN, then prevent and save ...
-        //
-        if(keyc === KEYC_RTN) {
-            e.preventDefault();
-            this.saveEditor(value);
-        }
-
-        //
-        // Check key filtering validation ... either a RegExp or a user-function
-        //
-        if(keyfilt instanceof RegExp) {
-            flagRE = (!kchar.match(keyfilt)) ? false : flagRE;
-        } else if (Y.Lang.isFunction(keyfilt)) {
-            krtn = keyfilt.call(this,e);
-            flagRE = (krtn) ? true : false;
-        }
-
-        // If key filtering returned false, prevent continuing
-        if(!flagRE) {
-            e.preventDefault();
-        }
-
-    },
-
-
-    /**
-     * Key listener for the INPUT inline editor, "keydown" is checked for non-printing key
-     *  strokes, navigation or ESC
-     *
-     * @method _onKeyDown
-     * @param e {EventFacade} Keydown event facade
-     * @private
-     */
-    _onKeyDown : function(e){
-        var keyc    = e.keyCode,
-            dir;
-
-        switch(keyc) {
-
-            case KEYC_ESC:
-                e.preventDefault();
-                this.hideEditor();
-                break;
-
-            case KEYC_UP:
-                dir = (e.ctrlKey) ? [-1,0] : null;
-                break;
-
-            case KEYC_DOWN:
-                dir = (e.ctrlKey) ? [1,0] : null;
-                break;
-
-            case KEYC_LEFT:
-                dir = (e.ctrlKey) ? [0,-1] : null;
-                break;
-
-            case KEYC_RIGHT:
-                dir = (e.ctrlKey) ? [0,1] : null;
-                break;
-
-            case KEYC_TAB: // tab
-                dir = (e.shiftKey) ? [0,-1] : [0,1] ;
-                break;
-        }
-
-        //
-        //  If dir is non-falsey, a navigation direction was set ...
-        //
-        if(dir) {
-            // set the key direction movement
-            if(this.get('inputKeys')===true) {
-                this._set('keyDir',dir);
-            }
-            e.preventDefault();
-        }
-
     }
+
 
 },{
     ATTRS:{

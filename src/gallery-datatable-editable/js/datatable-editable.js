@@ -69,7 +69,6 @@
    <ul>
    <li>Works minimally with "y" scrolling, "x" scrolling still needs work.</li>
    <li>Initial editor invocation is limited to "mouse" actions on TD only (although keyboard navigation cell-to-cell is available).</li>
-   <li>An issue arises on "datatable.destroy()" in Chrome from time to time when using inline editors, still investigating why.</li>
    </ul>
 
  ###### FUTURE:
@@ -88,15 +87,14 @@ DtEditable.ATTRS = {
 
     /**
      * A boolean flag that sets the DataTable state to allow editing (either inline or popup cell editing).
-     * (Future may support row editing also)
+     * (May support row editing in future also)
      *
      * @attribute editable
      * @type boolean
      * @default false
      */
     editable: {
-        valueFn:    function(){ return false;},
-        setter:     '_setEditable',
+        value:      false,
         validator:  Y.Lang.isBoolean
     },
 
@@ -107,13 +105,12 @@ DtEditable.ATTRS = {
      * Note: IMHO The only sensible options are 'click' or 'dblclick'
      *
      * @attribute editOpenType
-     * @type string
+     * @type {String|Null}
      * @default 'dblclick'
      */
     editOpenType: {
         value:      'dblclick',
-        setter:     '_setEditOpenType',
-        validator:  Y.Lang.isString
+        validator:  function(v){ return Y.Lang.isString(v) || v===null; }
     },
 
     /**
@@ -128,12 +125,11 @@ DtEditable.ATTRS = {
      * column.
      *
      * @attribute defaultEditor
-     * @type string
-     * @default 'none'
+     * @type {String|Null}
+     * @default null
      */
     defaultEditor : {
-        value:      'none',
-        setter:     '_setDefaultEditor',
+        value:      null,
         validator:  function(v){ return Y.Lang.isString(v) || v === null; }
     }
 };
@@ -206,6 +202,16 @@ Y.mix( DtEditable.prototype, {
      @static
      **/
     _subscrEditable:     null,
+
+    /**
+     Placeholder for the DT event listener to begin editing a cell (based on editOpenType ATTR)
+     @property _subscrEditOpen
+     @type EventHandle
+     @default null
+     @private
+     @static
+     **/
+    _subscrEditOpen: null,
 
     /**
      Placeholder Array for TD editor invocation event handles (i.e. click or dblclick) that
@@ -282,11 +288,14 @@ Y.mix( DtEditable.prototype, {
      */
     initializer: function(){
 
-     //   if(this.get('editable')===true) {
-     //       this._setEditableMode(true);
-     //   }
-     console.log('it is this');
         this._classColEditable = this.getClassName('col','editable');
+
+        // Hacky, but works ...
+        if(this.get('editable')) {
+            this._onEditableChange(true);
+        }
+
+        this.after('editableChange',this._onEditableChange);
 
         this._bindEditable();
 
@@ -304,126 +313,8 @@ Y.mix( DtEditable.prototype, {
         this._unbindEditable();
     },
 
-
-    /**
-     * Sets up listeners for the DT editable module,
-     * @method _bindEditable
-     * @private
-     */
-    _bindEditable: function(){
-
-        Y.Do.after(this._updateAllEditableColumnsCSS,this,'syncUI');
-
-        this.after('sort', this._afterEditableSort);
-    },
-
-    /**
-     * Unbinds ALL of the popup editor listeners and removes column editors.
-     * This should only be used when the DT is destroyed
-     * @method _unbindEditable
-     * @private
-     */
-    _unbindEditable: function() {
-
-        // destroy any currently open editor
-        if(this._openEditor && this._openEditor.destroy) {
-            this._openEditor.destroy();
-            //this._openEditor.destroy({remove:true});
-        }
-
-        if(this._subscrCellEditorScrolls && Y.Lang.isArray(this._subscrCellEditorScrolls) ) {
-            Y.Array.each(this._subscrCellEditorScroll, function(dh){
-                if(dh && dh.detach) {
-                    dh.detach();
-                }
-            });
-            this._subscrCellEditorScrolls = [];
-        }
-
-        this._unsetEditor();
-
-        // run through all instantiated editors and destroy them
-        this._destroyColumnEditors();
-
-    },
-
-    /**
-     * Binds listeners to cell TD "open editing" events (i.e. either click or dblclick)
-     * as a result of DataTable setting "editable:true".
-     *
-     * Also sets a body listener for ESC key, to close the current open editor.
-     *
-     * @method _bindCellEditingListeners
-     * @private
-     */
-    _bindCellEditingListeners: function(){
-
-        // clear up previous listeners, if any ...
-        if(this._subscrCellEditors) {
-            this._unbindCellEditingListeners();
-        }
-
-        // create listeners
-        this._subscrCellEditors = [];
-        this._subscrCellEditors.push(
-            this.delegate( this.get('editOpenType'), this.openCellEditor,"tbody." + this.getClassName('data') + " td",this)
-        );
-
-        // Add a ESC key listener on the body (hate doing this!) to close editor if open ...
-        this._subscrCellEditors.push( Y.one('body').after('keydown', this._onKeyEsc,this ) );
-
-        // Add listeners to all 'celleditors'
-        this.on('celleditor:save',this._onCellEditorSave);
-        this.after('celleditor:save',this._afterCellEditorSave);
-        this.on('celleditor:cancel',this._onCellEditorCancel);
         this.after('celleditor:cancel',this._afterCellEditorCancel);
         this.after('celleditor:keyDirChange',this._afterKeyDirChange);
-
-    },
-
-    /**
-     * Unbinds the TD click delegated click listeners for initiating editing in TDs
-     * @method _unbindCellEditingListeners
-     * @private
-     */
-    _unbindCellEditingListeners: function(){
-
-        if(!this._subscrCellEditors) {
-            return;
-        }
-
-        // this._subscrCellEditors
-        if (this._subscrCellEditors) {
-            Y.Array.each(this._subscrCellEditors,function(e){
-                if(e && e.detach) {
-                    e.detach();
-                }
-            });
-        }
-
-        this._subscrCellEditors = null;
-
-        this.detach('celleditor:*');
-
-    },
-
-    /**
-     * Sets up listeners for DT scrollable "scroll" events
-     * @method _bindEditorScroll
-     * @private
-     */
-    _bindEditorScroll: function() {
-        this._subscrCellEditorScrolls = [];
-        if(this._xScroll && this._xScrollNode) {
-            this._subscrCellEditorScrolls.push( this._xScrollNode.on('scroll', this._onScrollUpdateCellEditor, this ) );
-        }
-        if(this._yScroll && this._yScrollNode) {
-            this._subscrCellEditorScrolls.push( this._yScrollNode.on('scroll', this._onScrollUpdateCellEditor, this ) );
-        }
-
-    },
-
-
 //==========================  PUBLIC METHODS  =============================
 
     /**
@@ -563,10 +454,40 @@ Y.mix( DtEditable.prototype, {
     },
 
     /**
+     * Utility method to return the cell editor View instance associated with a particular column of the
+     * Datatable.
+     *
+     * Returns null if the given column is not editable.
+     *
+     * @method getCellEditor
+     * @param col {Object|String|Integer} Column identifier, either the Column object, column key or column index
+     * @returns {View} Cell editor instance, or null if no editor for given column
+     * @public
+     */
+    getCellEditor: function(col) {
+        var ce = this._columnEditors,
+            column = (col && typeof col !== "object") ? this.getColumn(col) : null,
+            colKey = (column) ? column.key || column.name : null,
+            rtn = null;
+
+        if(colKey && ce[colKey]) {
+            if(Y.Lang.isString(ce[colKey])) {
+                // ce[colKey] is a common editor name, like "textarea", etc..
+                rtn = this._commonEditors[ ce[colKey] ];
+            } else {
+                rtn = ce[colKey];
+            }
+        }
+
+        return rtn;
+
+    },
+
+    /**
      * Returns the Column object (from the original "columns") associated with the input TD Node.
      * @method getColumnByTd
-     * @param {Node} cell Node of TD for which column object is desired
-     * @return {Object} column The column object entry associated with the desired cell
+     * @param cell {Node} Node of TD for which column object is desired
+     * @return column {Object} The column object entry associated with the desired cell
      * @public
      */
     getColumnByTd:  function(cell){
@@ -578,8 +499,8 @@ Y.mix( DtEditable.prototype, {
     /**
      * Returns the column "key" or "name" string for the requested TD Node
      * @method getColumnNameByTd
-     * @param {Node} cell Node of TD for which column name is desired
-     * @return {String} colName Column name or key name
+     * @param cell {Node} Node of TD for which column name is desired
+     * @return colName {String} Column key or name
      * @public
      */
     getColumnNameByTd: function(cell){
@@ -601,45 +522,196 @@ Y.mix( DtEditable.prototype, {
 
 //==========================  PRIVATE METHODS  =============================
 
+
     /**
-     * Setter method for the [editable](#attr_editable) attribute for this DT
-     * @method _setEditable
-     * @param v {Boolean} Flag to enable/disable editing mode for this DT instance
+     * Sets up listeners for the DT editable module,
+     * @method _bindEditable
      * @private
      */
-    _setEditable: function(v){
-        if( v ) {
+    _bindEditable: function(){
+        var eotype = this.get('editOpenType');
+
+        if(this._subscrEditable) {
+            Y.Array.each(this._subscrEditable,function(eh){
+                if(eh && eh.detach) {
+                    eh.detach();
+                }
+            });
+        }
+
+        this._subscrEditable = [];
+
+        // Check the editing open type setting ...
+        eotype = (eotype && Y.Lang.isString(eotype) && eotype.search(/none/i)===-1 ) ? eotype : null;
+        if(eotype) {
+            if(this._subscrEditOpen) {
+                this._subscrEditOpen.detach();
+            }
+            this._subscrEditOpen = this.delegate( eotype, this.openCellEditor,"tbody." + this.getClassName('data') + " td",this);
+        }
+
+        this._subscrEditable.push(
+            Y.Do.after(this._updateAllEditableColumnsCSS,this,'syncUI'),
+            this.after('sort', this._afterEditableSort),
+            this.after('editOpenTypeChange',this._onEditOpenTypeChange),
+            this.after('defaultEditorChange',this._onDefaultEditorChange)
+        );
+
+    },
+
+    /**
+     * Unbinds ALL of the popup editor listeners and removes column editors.
+     * This should only be used when the DT is destroyed
+     * @method _unbindEditable
+     * @private
+     */
+    _unbindEditable: function() {
+
+        // Detach 'editable' related listeners
+        if(this._subscrEditable) {
+            Y.Array.each(this._subscrEditable,function(eh){
+                if(eh && eh.detach) {
+                    eh.detach();
+                }
+            });
+        }
+        this._subscrEditable = null;
+
+        // Detach edit opening ...
+        if(this._subscrEditOpen) {
+            this._subscrEditOpen.detach();
+        }
+        this._subscrEditOpen = null;
+
+        // destroy any currently open editor
+        if(this._openEditor && this._openEditor.destroy) {
+            this._openEditor.destroy();
+        }
+
+        // Detach scrolling listeners
+        if(this._subscrCellEditorScrolls && Y.Lang.isArray(this._subscrCellEditorScrolls) ) {
+            Y.Array.each(this._subscrCellEditorScroll, function(dh){
+                if(dh && dh.detach) {
+                    dh.detach();
+                }
+            });
+            this._subscrCellEditorScrolls = [];
+        }
+
+        this.detach('celleditor:*');
+
+        this._unsetEditor();
+
+        // run through all instantiated editors and destroy them
+        this._destroyColumnEditors();
+
+    },
+
+    /**
+     * Binds listeners to cell TD "open editing" events (i.e. either click or dblclick)
+     * as a result of DataTable setting "editable:true".
+     *
+     * Also sets a body listener for ESC key, to close the current open editor.
+     *
+     * @method _bindCellEditingListeners
+     * @private
+     */
+    _bindCellEditingListeners: function(){
+
+        // clear up previous listeners, if any ...
+        if(this._subscrCellEditors) {
+            this._unbindCellEditingListeners();
+        }
+
+        // create listeners
+        this._subscrCellEditors = [];
+
+        // Add a ESC key listener on the body (hate doing this!) to close editor if open ...
+        this._subscrCellEditors.push(
+            Y.one('body').after('keydown', Y.bind(this._onKeyEsc,this) ),
+            this.on('celleditor:editorSave',this._onCellEditorSave),
+            this.on('celleditor:editorCancel',this._onCellEditorCancel),
+            this.on('celleditor:keyDirChange',this._onKeyDirChange)
+        );
+    },
+
+    /**
+     * Unbinds the TD click delegated click listeners for initiating editing in TDs
+     * @method _unbindCellEditingListeners
+     * @private
+     */
+    _unbindCellEditingListeners: function(){
+        if(this._subscrCellEditors) {
+            Y.Array.each(this._subscrCellEditors,function(e){
+                if(e && e.detach) {
+                    e.detach();
+                }
+            });
+            this._subscrCellEditors = null;
+        }
+    },
+
+    /**
+     * Sets up listeners for DT scrollable "scroll" events
+     * @method _bindEditorScroll
+     * @private
+     */
+    _bindEditorScroll: function() {
+        this._subscrCellEditorScrolls = [];
+        if(this._xScroll && this._xScrollNode) {
+            this._subscrCellEditorScrolls.push( this._xScrollNode.on('scroll', this._onScrollUpdateCellEditor, this ) );
+        }
+        if(this._yScroll && this._yScrollNode) {
+            this._subscrCellEditorScrolls.push( this._yScrollNode.on('scroll', this._onScrollUpdateCellEditor, this ) );
+        }
+
+    },
+
+
+    /**
+     * Listener that toggles the DT editable state, setting/unsetting the listeners associated with
+     * cell editing.
+     * @method _onEditableChange
+     * @param o {EventFacade} Change event facade for "editable" attribute
+     * @private
+     */
+    _onEditableChange: function(o) {
+        if(o.newVal || o===true ) {
+
+            this._bindEditable();
+
             // call overrideable method .... simple return by default
             this.bindEditorListeners();
+
             this._bindCellEditingListeners();
             this._buildColumnEditors();
 
-        } else  {
-            //if(this.get('editable')===true) {
-                this._unbindCellEditingListeners();
-                this._destroyColumnEditors();
-            //}
+        } else {
+
+            this._unbindEditable();
+            this._unbindCellEditingListeners();
+            this._destroyColumnEditors();
+
         }
 
     },
 
     /**
-     * Setter method for the [defaultEditor](#attr_defaultEditor) attribute for this DT
+     * Listener for changes on [defaultEditor](#attr_defaultEditor) attribute for this DT.
      * If the default editor is changed to a valid setting, we disable and re-enable
      * editing on the DT to reset the column editors.
      *
-     * @method _setDefaultEditor
-     * @param v {String|Null} Value to use for this attribute
+     * @method _onDefaultEditorChange
+     * @param o {EventFacade} Change eventfacade for "defaultEditor" attribute
      * @private
      */
-    _setDefaultEditor: function(v) {
-      //  if ( (v && Y.DataTable.EditorOptions[v]) || v === null) {
-        if ( v  || v === null ) {
-            if(this.get('editable')) {
-                this.set('editable',false);
-                this._set('defaultEditor',v);
-                this.set('editable',true);
-            }
+    _onDefaultEditorChange: function(o) {
+        var defeditor = o.newVal;
+
+        // if a valid editor is given AND we are in editing mode, toggle off/on ...
+        if ( defeditor && defeditor.search(/none/i)===-1 && this.get('editable') ) {
+            this.set('editable',false);
+            this.set('editable',true);
         }
     },
 
@@ -650,11 +722,11 @@ Y.mix( DtEditable.prototype, {
      * @param v {String}
      * @private
      */
-    _setEditOpenType: function(v) {
-        if(this._subscrCellEditors && this._subscrCellEditors[0] && this._subscrCellEditors[0].detach) {
-            this.hideAllCellEditors();
-            this._subscrCellEditors[0].detach();
-            this._subscrCellEditors[0] = this.delegate( v, this.openCellEditor,"tbody." + this.getClassName('data') + " td",this);
+    _onEditOpenTypeChange: function() {
+        //var eotype = o.newVal || o;
+        if(this.get('editable')) {
+            this.set('editable',false);
+            this.set('editable',true);
         }
     },
 
@@ -881,7 +953,7 @@ Y.mix( DtEditable.prototype, {
      */
     _unsetEditor: function(){
         // Finally, null out static props on this extension
-        //this._openEditor = null;
+        this._openEditor = null;
         this._openRecord = null;
         this._openColKey = null;
         this._openCell = null;
@@ -920,11 +992,11 @@ Y.mix( DtEditable.prototype, {
             col   = (cname) ? this.getColumn(cname) : null,
             colEditable = col && col.editable !== false,
             tdCol;
-        if(!cname || !col) {
+        if(!cname || !col || !colEditable) {
             return;
         }
 
-        colEditable = (colEditable && col.editor || (this.get('defaultEditor')!==null
+        colEditable = ( col.editor || (this.get('defaultEditor')!==null
             && this.get('defaultEditor').search(/none/i)!==0) ) ? true : false;
 
         if(!tbody || !colEditable) {
@@ -1112,7 +1184,7 @@ Y.mix( DtEditable.prototype, {
      *  @param ev.cell {Object} The cell object container for the edited cell
      *  @param ev.record {Model} Model instance of the record data for the edited cell
      *  @param ev.colKey {String} Column key (or name) of the edited cell
-     *  @param ev.newVal {String|Number|Date} The old (last) value of the underlying data for the cell
+     *  @param {String|Number|Date} prevVal The old (last) value of the underlying data for the cell
      *  @param ev.editorName {String} The name attribute of the editor that updated this cell
      */
 
@@ -1170,6 +1242,7 @@ Y.mix( DtEditable.prototype, {
      *  @param ev.newVal {String|Number|Date} The new (updated) value of the underlying data for the cell
      *  @param ev.prevVal {String|Number|Date} The old (last) value of the underlying data for the cell
      *  @param ev.editorName {String} The name attribute of the editor that updated this cell
+     *  @param {String|Number|Date} prevVal The old (last) value of the underlying data for the cell
      */
 
 });
