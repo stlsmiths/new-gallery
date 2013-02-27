@@ -313,8 +313,6 @@ Y.mix( DtEditable.prototype, {
         this._unbindEditable();
     },
 
-        this.after('celleditor:cancel',this._afterCellEditorCancel);
-        this.after('celleditor:keyDirChange',this._afterKeyDirChange);
 //==========================  PUBLIC METHODS  =============================
 
     /**

@@ -290,7 +290,6 @@ Y.mix( DtEditable.prototype, {
      */
     initializer: function(){
 
-
         this._classColEditable = this.getClassName('col','editable');
 
         // Hacky, but works ...
@@ -316,12 +315,6 @@ Y.mix( DtEditable.prototype, {
         this._unbindEditable();
     },
 
-        this._subscrCellEditors.push( Y.one('body').after('keydown', Y.bind(this._onKeyEsc,this) ) );
-        this.on('celleditor:editorSave',this._onCellEditorSave);
-        this.on('celleditor:editorCancel',this._onCellEditorCancel);
-        this.on('celleditor:keyDirChange',this._onKeyDirChange);
-        this.after('celleditor:cancel',this._afterCellEditorCancel);
-        this.after('celleditor:keyDirChange',this._afterKeyDirChange);
 //==========================  PUBLIC METHODS  =============================
 
     /**
@@ -1191,7 +1184,7 @@ Y.mix( DtEditable.prototype, {
      *  @param ev.cell {Object} The cell object container for the edited cell
      *  @param ev.record {Model} Model instance of the record data for the edited cell
      *  @param ev.colKey {String} Column key (or name) of the edited cell
-     *  @param {String|Number|Date} newVal The old (last) value of the underlying data for the cell
+     *  @param {String|Number|Date} prevVal The old (last) value of the underlying data for the cell
      *  @param ev.editorName {String} The name attribute of the editor that updated this cell
      */
 
@@ -1249,7 +1242,7 @@ Y.mix( DtEditable.prototype, {
      *  @param ev.newVal {String|Number|Date} The new (updated) value of the underlying data for the cell
      *  @param ev.prevVal {String|Number|Date} The old (last) value of the underlying data for the cell
      *  @param ev.editorName {String} The name attribute of the editor that updated this cell
-     *  @param {String|Number|Date} newVal The old (last) value of the underlying data for the cell
+     *  @param {String|Number|Date} prevVal The old (last) value of the underlying data for the cell
      */
 
 });
