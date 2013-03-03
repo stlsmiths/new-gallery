@@ -629,8 +629,10 @@ Y.mix( DtEditable.prototype, {
         // Add a ESC key listener on the body (hate doing this!) to close editor if open ...
         this._subscrCellEditors.push(
             Y.one('body').after('keydown', Y.bind(this._onKeyEsc,this) ),
-            this.on('celleditor:editorSave',this._onCellEditorSave),
-            this.on('celleditor:editorCancel',this._onCellEditorCancel),
+            this.on('celleditor:save',this._onCellEditorSave),
+            this.after('celleditor:save',this._afterCellEditorSave),
+            this.on('celleditor:cancel',this._onCellEditorCancel),
+            this.after('celleditor:cancel',this._afterCellEditorCancel),
             this.on('celleditor:keyDirChange',this._onKeyDirChange)
         );
     },
@@ -876,8 +878,8 @@ Y.mix( DtEditable.prototype, {
         var ces = this._getAllCellEditors();
         Y.Array.each(ces,function(ce){
             if(ce && ce.destroy) {
-                ce.destroy();
-              //  ce.destroy({remove:true});
+              //   ce.destroy();
+                ce.destroy({remove:true});
             }
         });
 
@@ -1101,11 +1103,11 @@ Y.mix( DtEditable.prototype, {
      * the number of rows or columns to be changed to from the current TD location
      * (See the base method .getCell)
      *
-     * @method _afterKeyDirChange
+     * @method _onKeyDirChange
      * @param e {EventFacade} The attribute change event facade for the View's 'keyDir' attribute
      * @private
      */
-    _afterKeyDirChange : function(e) {
+    _onKeyDirChange : function(e) {
         var dir     = e.newVal,
             recIndex = this.data.indexOf(this._openRecord),
             col      = this.getColumn(this._openColKey),
@@ -1207,7 +1209,6 @@ Y.mix( DtEditable.prototype, {
         var cell   = ev.cell;
         if(cell && this._openRecord && this._openColKey) {
 
-            ev.cell = cell;
             ev.record = this.data.getByClientId(cell.recClientId) || this._openRecord;
             ev.colKey = cell.colKey || this._openColKey;
             ev.editorName = this._openEditor.get('name');

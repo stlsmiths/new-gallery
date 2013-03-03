@@ -466,7 +466,7 @@ Y.DataTable.BaseCellInlineEditor =  Y.Base.create('celleditor',Y.View,[],{
 
             case KEYC_ESC:
                 e.preventDefault();
-                this.hideEditor();
+                this.cancelEditor();
                 break;
 
             case KEYC_UP:
