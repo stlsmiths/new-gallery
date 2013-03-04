@@ -10,7 +10,6 @@
 <div id="logger"></div>
 
 <script src="js/test-dt-editable.js"></script>
-<script src="/build/gallery-datatable-celleditor-popup/gallery-datatable-celleditor-popup.js"></script>
 <script src="/build/gallery-datatable-celleditor-inline/gallery-datatable-celleditor-inline.js"></script>
 
 <script>
@@ -18,10 +17,8 @@ YUI({
     coverage: ['gallery-datatable-editable'],
     filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw'
 }).use( 'test-console', 'test', 'module-tests-dteditable',  "node-event-simulate",
-        //   "handlebars",
-        //'module-dt-edit', 'module-dt-edit-inline', "module-dt-edit-popup",
-        "gallery-datatable-editable",  "datatable",
-        "gallery-datatable-celleditor-popup", "gallery-datatable-celleditor-inline",
+        "gallery-datatable-editable",  "datatable",'datatable-scroll',
+        "gallery-datatable-celleditor-inline",
         function(Y) {
 
     (new Y.Test.Console()).render('#logger');

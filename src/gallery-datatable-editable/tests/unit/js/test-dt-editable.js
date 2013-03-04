@@ -370,7 +370,7 @@ YUI.add('module-tests-dteditable', function(Y) {
             var ed = Y.one('.yui3-datatable-inline-input'),
                 regEd = ed.get('region'),
                 regTd = td.get('region');
-            areSame('block', ed.ancestor().getComputedStyle('display'), 'Editor should be visible.');
+            areSame('block', ed.ancestor().getStyle('display'), 'Editor should be visible.');
 
             areSame(regEd.top, regTd.top, 'tops should match');
             areSame(regEd.left, regTd.left, 'lefts should match');
@@ -526,6 +526,34 @@ YUI.add('module-tests-dteditable', function(Y) {
             areSame('abc', dt.getCell([0,1]).getHTML(), 'check cell after saving');
             areSame('none', ed.ancestor().getStyle('display') ,'editor should be hidden');
         },
+        'check editing canceled via event': function () {
+            var td =  dt.getCell([0,1]);
+            td.simulate('click');
+            var ed = Y.one('.yui3-datatable-inline-input');
+            dt.on('celleditor:save', function (ev) {
+                areSame('sopen',ev.colKey, 'ev.colKey');
+                areSame(td,ev.td,'ev.td');
+                areSame('inline',ev.editorName,'ev.editorName');
+                areSame(0,ev.oldValue,'ev.oldValue');
+                areSame('abc',ev.newValue,'ev.newValue');
+                ev.halt();
+            });
+            dt.after('celleditor:cancel', function (ev) {
+                Assert.fail('should never fire');
+            });
+
+            areSame('0', ed.get('value'), 'check input box');
+            areSame('0', td.getHTML(), 'check current cell');
+            areSame(0, dt.getRecord(0).get('sopen'), 'check value on record');
+
+            ed.set('value','abc');
+            areSame('abc', ed.get('value'), 'check changed input');
+
+            ed.simulate('keypress', {keyCode:13});
+            areSame(0, dt.getRecord(0).get('sopen'), 'record should not have changed');
+            areSame('0', dt.getCell([0,1]).getHTML(), 'check cell remains the same');
+            areSame('block', ed.ancestor().getStyle('display') ,'editor should remain visible');
+        },
 
         'check canceled editing': function () {
             var td =  dt.getCell([0,1]);
@@ -570,6 +598,66 @@ YUI.add('module-tests-dteditable', function(Y) {
 
     }));
 
+    suite.add(new Y.Test.Case({
+        name: "Scroll",
+
+
+
+        setUp: function () {
+            var data = [], i;
+
+            for (i = 0; i < 100; ++i) {
+                data.push({ a: i * 1000 , b: i * 1000, c: i * 1000, d: i * 1000, e: i * 1000});
+            }
+
+            dt = new Y.DataTable({
+                columns: ['a','b','c','d','e'],
+                data: data,
+                scrollable: 'xy',
+                width: '100px',
+                height: '150px',
+                defaultEditor:  'inline',
+                editOpenType:   'click',
+                editable:       true
+            }).render();
+        },
+
+        tearDown: function () {
+            if (dt) {
+                dt.destroy();
+            }
+        },
+
+        "test scroll": function () {
+
+            var checkPosition = function (row, col) {
+                var td;
+
+                td = dt.getCell([row, col]);
+                td.simulate('click');
+
+                isTrue(dt._openEditor.get('visible'),'cell editor col 1 should be visible: [' + row + ':' + col + ']')
+                areSame(1, Y.all('.yui3-datatable-inline-input').size(),'There should be one editor: [' + row + ':' + col + ']');
+
+                var ed = Y.one('.yui3-datatable-inline-input'),
+                    regEd = ed.get('region'),
+                    regTd = td.get('region');
+                areSame('block', ed.ancestor().getStyle('display'), 'Editor should be visible.: [' + row + ':' + col + ']')
+
+                areSame(regEd.top, regTd.top, 'tops should match: [' + row + ':' + col + ']');
+                areSame(regEd.left, regTd.left, 'lefts should match: [' + row + ':' + col + ']');
+                regTd = dt.getCell(td,[1,1]).get('region');
+                areSame(regEd.bottom, regTd.top, 'bottom should match top of next: [' + row + ':' + col + ']');
+                areSame(regEd.right, regTd.left, 'right edge should match left edge of next: [' + row + ':' + col + ']');
+            };
+            dt.scrollTo([0,2]);
+            checkPosition(0,2);
+            dt.scrollTo([10,2]);
+            checkPosition(8,2);
+            dt.scrollTo([10,0]);
+            checkPosition(8,0);
+       }
+    }));
 
     Y.Test.Runner.add(suite);
 
