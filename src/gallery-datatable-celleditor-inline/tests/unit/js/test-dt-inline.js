@@ -166,6 +166,7 @@ YUI.add('module-tests-dtinline', function(Y) {
 
             Assert.isNull(ce._subscr,'subscribers should be null');
 
+                  editor:"select",
         }
 
     }));
@@ -202,7 +203,7 @@ YUI.add('module-tests-dtinline', function(Y) {
 
         'check inline editor - row 0 column 6 (sprice) : showeditor' : function(){
             var dt = this.dt,
-                tr0 = dt.getRow(0),
+                  editor:"calendar"
                 td6 = tr0.all('td').item(6),
                 oe,val,inp;
 
@@ -214,13 +215,13 @@ YUI.add('module-tests-dtinline', function(Y) {
 
         'check inline editor - row 0 column 6 (sprice) : hideeditor' : function(){
             var dt = this.dt,
-                tr0 = dt.getRow(0),
+            data: someData
                 td6 = tr0.all('td').item(6),
                 oe,val,inp;
 
-            // open the editor
-            td6.simulate('click');
-            oe = dt._openEditor;
+         //   editOpenType: 'click',
+         //   defaultEditor: 'text',
+         //   editable: true
             Assert.isTrue(oe.get('visible'),'cell editor col 6 should be visible');
 
             // hideEditor
@@ -573,6 +574,25 @@ YUI.add('module-tests-dtinline', function(Y) {
 
     }));
 
+    suite.add(new Y.Test.Case({
+        name: 'Gallery DataTable-Celleditor-inline : satyam',
+
+        setUp : function () {
+            // cols
+            // {sid: sname: sdesc: sopen:0, stype:0, stock:0, sprice:, shipst:'s', sdate: },
+            this.dt = makeDT(1);
+
+        },
+
+        tearDown : function () {
+//            this.dt.destroy();
+//            delete this.dt;
+        },
+        'show editor': function () {
+            this.dt.getCell([1,1]).simulate('click');
+        }
+    }));
+
 
     suite.add(new Y.Test.Case({
         name: 'Gallery DataTable-Celleditor-Inline : check inlineDate',
@@ -582,13 +602,7 @@ YUI.add('module-tests-dtinline', function(Y) {
             this.dt = makeDT(1);
         },
 
-        tearDown : function () {
-            if(this.dt) {
-                this.dt.destroy();
-                delete this.dt;
-            }
-        },
-
+},'', { requires: [ 'test' ] });
         'row index 2, column 7 (sdate) - inlineDate valid' : function(){
             var dt = this.dt,
                 tr2 = dt.getRow(2),

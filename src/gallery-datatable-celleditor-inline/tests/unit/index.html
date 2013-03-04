@@ -5,7 +5,7 @@
     <script src="/build/yui/yui.js"></script>
 </head>
 <body class="yui3-skin-sam">
-
+<script src="/build/gallery-datatable-editable/gallery-datatable-editable.js"></script>
 <div id="dtable"></div>
 <div id="logger"></div>
 
@@ -19,6 +19,8 @@ YUI({
 }).use( 'test-console', 'test', 'module-tests-dtinline',  "node-event-simulate",
         "gallery-datatable-editable",  "datatable",
         "gallery-datatable-celleditor-inline", 
+        'datatable', 
+        'gallery-datatable-editable', 
         function(Y) {
 
     (new Y.Test.Console()).render('#logger');

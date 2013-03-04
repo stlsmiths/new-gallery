@@ -177,15 +177,14 @@ Y.DataTable.BaseCellInlineEditor =  Y.Base.create('celleditor',Y.View,[],{
     _bindUI: function(){
 
         this.publish({
-            editorSave: {
-                defaultFn:   this._defEditorSaveFn,
-                emitFacade:  true,
-                preventable: true
+            save: {
+                defaultFn:   this._defSaveFn
             },
-            editorCancel: {
-                defaultFn:   this._defEditorCancelFn,
-                emitFacade:  true,
-                preventable: true
+            cancel: {
+                defaultFn:   this._defCancelFn
+            },
+            show: {
+                defaultFn: this._defShowFn
             }
         });
 
@@ -209,23 +208,50 @@ Y.DataTable.BaseCellInlineEditor =  Y.Base.create('celleditor',Y.View,[],{
     },
 
     /**
-     * The defaultFn for the `editorSave` event
-     * @method _defEditorSaveFn
-     * @param e {EventFacade} For editorSave event
+     * The defaultFn for the `save` event
+     * @method _defSaveFn
+     * @param e {EventFacade} For save event
      * @private
      */
-    _defEditorSaveFn: function(e){
+    _defSaveFn: function(e){
         this.set('value', e.newValue);
         this.hideEditor();
     },
 
     /**
-     * The defaultFn for the `editorCancel` event
-     * @method _defEditorCancelFn
+     * The defaultFn for the `cancel` event
+     * @method _defCancelFn
      * @private
      */
-    _defEditorCancelFn: function(){
+    _defCancelFn: function(){
         this.hideEditor();
+    },
+
+    /**
+     */
+    _defShowFn: function (ev) {
+        var cont = this.get('container'),
+            cell = ev.cell,
+            td = cell.td || ev.td,
+            xy = td.getXY(),
+            val = ev.value;
+        //
+        // Get the TD Node's XY position, and resize/position the container
+        //   over the TD
+        //
+
+        cont.show();
+        this._resizeCont(cont,td);
+        cont.setXY(xy);
+
+        // focus the inner INPUT ...
+        this._inputNode.focus();
+        // set the INPUT value
+        this._inputNode.set('value',val);
+        this.set('lastValue',val);
+
+        this._set('visible',true);
+        this._set('hidden',false);
     },
 
 //======================   PUBLIC METHODS   ===========================
@@ -241,37 +267,16 @@ Y.DataTable.BaseCellInlineEditor =  Y.Base.create('celleditor',Y.View,[],{
      * @public
      */
     showEditor: function(td) {
-        var cont = this.get('container'),
-            cell = this.get('cell'),
+        var cell = this.get('cell'),
             val  = cell.value || this.get('value'),
-            xy,prepfn;
+            prepfn = this.get('prepFn');
 
-        //
-        // Get the TD Node's XY position, and resize/position the container
-        //   over the TD
-        //
-        td = cell.td || td;
-        xy = td.getXY();
 
-        cont.show();
-        this._resizeCont(cont,td);
-        cont.setXY(xy);
+        if (prepfn) { // you have already checked it is a function
+            val = prepfn.call(this, val);
+        }
 
-        // focus the inner INPUT ...
-        this._inputNode.focus();
-
-        // if there is a "prep" function ... call it to pre-process the editing
-        prepfn = this.get('prepFn');
-        val = (prepfn && prepfn.call) ? prepfn.call(this,val) : val;
-
-        // set the INPUT value
-        this._inputNode.set('value',val);
-        this.set('lastValue',val);
-
-        this._set('visible',true);
-        this._set('hidden',false);
-
-        this.fire('editorShow',{
+        this.fire('show',{
             td:         td,
             cell:       cell,
             inputNode:  this._inputNode,
@@ -286,7 +291,7 @@ Y.DataTable.BaseCellInlineEditor =  Y.Base.create('celleditor',Y.View,[],{
      * Implementers may listen for this event if they have configured complex View's, that include
      * other widgets or components, to update their UI upon displaying of the view.
      *
-     * @event editorShow
+     * @event show
      * @param {Object} rtn Returned object
      * @param {Node} rtn.td TD Node instance of the calling editor
      * @param {Node} rtn.inputNode The editor's INPUT / TEXTAREA Node
@@ -296,7 +301,7 @@ Y.DataTable.BaseCellInlineEditor =  Y.Base.create('celleditor',Y.View,[],{
 
     /**
      * Saves the View's `value` setting (usually after keyboard RTN or other means) and fires the
-     * [editorSave](#event_editorSave) event so consumers (i.e. DataTable) can make final changes to the
+     * [save](#event_editorSave) event so consumers (i.e. DataTable) can make final changes to the
      * Model or dataset.
      *
      * Thank you to **Satyam** for his guidance on configuring the event publishing, defaultFn related to this
@@ -314,15 +319,17 @@ Y.DataTable.BaseCellInlineEditor =  Y.Base.create('celleditor',Y.View,[],{
 
             // If a "save" function was defined, run thru it and update the "value" setting
             var savefn = this.get('saveFn') ;
-            val = (savefn && savefn.call) ? savefn.call(this,val) : val;
+            if (savefn) {
+                val = savefn.call(this,val);
+            }
 
             // So value was initially okay, but didn't pass saveFn validation call ...
-            if(val === undefined) {
+            if (val === undefined) {
                 this.cancelEditor();
                 return;
             }
 
-            this.fire("editorSave",{
+            this.fire("save",{
                 td:         this.get('cell').td,
                 cell:       this.get('cell'),
                 oldValue:   this.get('lastValue'),
@@ -339,7 +346,7 @@ Y.DataTable.BaseCellInlineEditor =  Y.Base.create('celleditor',Y.View,[],{
      * completed and validated.  Consumers (i.e. DataTable) should listen to this event and process it's results
      * to save to the Model and or dataset for the DT.
      *
-     * @event editorSave
+     * @event save
      * @param {Object} rtn Returned object
      *  @param {Node} rtn.td TD Node for the edited cell
      *  @param {Object} rtn.cell Current cell object
@@ -382,7 +389,7 @@ Y.DataTable.BaseCellInlineEditor =  Y.Base.create('celleditor',Y.View,[],{
      */
     cancelEditor: function(){
       //  this.hideEditor();
-        this.fire("editorCancel",{
+        this.fire("cancel",{
             td:         this.get('cell').td,
             cell:       this.get('cell'),
             oldValue:   this.get('lastValue')
@@ -391,7 +398,7 @@ Y.DataTable.BaseCellInlineEditor =  Y.Base.create('celleditor',Y.View,[],{
 
     /**
      * Fired when editing is cancelled (without saving) on this cell editor
-     * @event editorCancel
+     * @event cancel
      * @param {Object} rtn Returned object
      *  @param {Node} rtn.td TD Node for the edited cell
      *  @param {Object} rtn.cell Current cell object
@@ -459,7 +466,7 @@ Y.DataTable.BaseCellInlineEditor =  Y.Base.create('celleditor',Y.View,[],{
 
             case KEYC_ESC:
                 e.preventDefault();
-                this.hideEditor();
+                this.cancelEditor();
                 break;
 
             case KEYC_UP:
@@ -646,7 +653,9 @@ Y.DataTable.BaseCellInlineEditor =  Y.Base.create('celleditor',Y.View,[],{
          * @default {}
          */
         cell: {
-            value:  {}
+            valueFn: function () {
+                return {};  // otherwise you get all of them pointing exactly to the same static object.
+            }
         },
 
         /**
