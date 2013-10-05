@@ -1,6 +1,8 @@
 YUI3 Gallery Modules
 ========================
 
+PLEASE NOTE:  I am no longer developing using YUI since around February 2013.  You are welcome to fork this repo and make changes, but I an unable to maintain this repo in the future.
+
 As of January 2013, the following are my current deployments to YUI Gallery;
 * gallery-paginator-view  &nbsp;&nbsp;&nbsp;  ([source](https://github.com/stlsmiths/new-gallery/tree/master/src/gallery-paginator-view) | [API Docs](http://stlsmiths.github.com/new-gallery/modules/gallery-paginator-view.html) | [YUI Gallery Page](http://yuilibrary.com/gallery/show/paginator-view))
 * gallery-datatable-paginator  &nbsp;&nbsp;&nbsp; ([source](https://github.com/stlsmiths/new-gallery/tree/master/src/gallery-datatable-paginator) | [API Docs](http://stlsmiths.github.com/new-gallery/modules/gallery-datatable-paginator.html) | [YUI Gallery Page](http://yuilibrary.com/gallery/show/datatable-paginator))
