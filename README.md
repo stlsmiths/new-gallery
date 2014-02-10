@@ -1,9 +1,9 @@
 YUI3 Gallery Modules
 ========================
 
-PLEASE NOTE:  I am no longer developing using YUI since around February 2013.  You are welcome to fork this repo and make changes, but I an unable to maintain this repo in the future.
+**PLEASE NOTE:  As-of February 2013 I am no longer developing using YUI.  You are welcome to fork this repo and make changes, but I an unable to maintain this repo in the future.**
 
-As of January 2013, the following are my current deployments to YUI Gallery;
+The following are my module deployments to the "yogi-based" YUI Gallery as of January 2013;
 * gallery-paginator-view  &nbsp;&nbsp;&nbsp;  ([source](https://github.com/stlsmiths/new-gallery/tree/master/src/gallery-paginator-view) | [API Docs](http://stlsmiths.github.com/new-gallery/modules/gallery-paginator-view.html) | [YUI Gallery Page](http://yuilibrary.com/gallery/show/paginator-view))
 * gallery-datatable-paginator  &nbsp;&nbsp;&nbsp; ([source](https://github.com/stlsmiths/new-gallery/tree/master/src/gallery-datatable-paginator) | [API Docs](http://stlsmiths.github.com/new-gallery/modules/gallery-datatable-paginator.html) | [YUI Gallery Page](http://yuilibrary.com/gallery/show/datatable-paginator))
 * gallery-datatable-selection  &nbsp;&nbsp;&nbsp;  ([source](https://github.com/stlsmiths/new-gallery/tree/master/src/gallery-datatable-selection) | [API Docs](http://stlsmiths.github.com/new-gallery/modules/gallery-datatable-selection.html) | [YUI Gallery Page](http://yuilibrary.com/gallery/show/datatable-selection))
@@ -16,5 +16,4 @@ As of January 2013, the following are my current deployments to YUI Gallery;
 
 Please refer to each module's README or HISTORY file within the src/ path for info and related change history
 
-NOTE: I'm in the process of moving my old YUI Gallery modules (http://yuilibrary.com/gallery/stlsmiths) from the old gihub yui3-gallery repo (https://github.com/stlsmiths/yui3-gallery) over to the new yogi build / Gallery system.
-
+**Older YUI Gallery modules which pre-date the above but were in the YUI Gallery prior to 2012 http://yuilibrary.com/gallery/user/stlsmiths are located at https://github.com/stlsmiths/yui3-gallery.**
