@@ -16,4 +16,4 @@ The following are my module deployments to the "yogi-based" YUI Gallery as of Ja
 
 Please refer to each module's README or HISTORY file within the src/ path for info and related change history
 
-**Older YUI Gallery modules which pre-date the above but were in the YUI Gallery prior to 2012 http://yuilibrary.com/gallery/user/stlsmiths are located at https://github.com/stlsmiths/yui3-gallery.**
+If you don't see a YUI Gallery module listed above (for example, one from http://yuilibrary.com/gallery/user/stlsmiths) it is probably a module from the older version of YUI-Gallery (pre-2013) and is possibly located at https://github.com/stlsmiths/yui3-gallery.
